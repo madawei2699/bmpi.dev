@@ -3,6 +3,51 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/tags/etf/</loc>
+    <lastmod>2021-06-06T01:34:27+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/money/passive-income-protfolio/202105/</loc>
+    <lastmod>2021-06-06T01:34:27+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/series/%E6%8A%95%E8%B5%84%E5%AE%9E%E8%AF%81/</loc>
+    <lastmod>2021-06-06T01:34:27+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
+    <lastmod>2021-06-06T01:34:27+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%AE%9A%E6%8A%95/</loc>
+    <lastmod>2021-06-06T01:34:27+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/</loc>
+    <lastmod>2021-06-06T01:34:27+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/categories/%E8%A2%AB%E5%8A%A8%E6%94%B6%E5%85%A5%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
+    <lastmod>2021-06-06T01:34:27+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/tags/clojure/</loc>
     <lastmod>2021-05-25T07:52:10+08:00</lastmod>
   </url>
@@ -25,21 +70,6 @@
   <url>
     <loc>https://www.bmpi.dev/series/%E6%8A%80%E6%9C%AF%E6%B4%9E%E8%A7%81/</loc>
     <lastmod>2021-05-25T07:52:10+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2021-05-25T07:52:10+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/"
-                />
   </url>
 
   <url>
@@ -88,32 +118,7 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/etf/</loc>
-    <lastmod>2021-05-05T18:16:12+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/money/passive-income-protfolio/202104/</loc>
-    <lastmod>2021-05-05T18:16:12+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/series/%E6%8A%95%E8%B5%84%E5%AE%9E%E8%AF%81/</loc>
-    <lastmod>2021-05-05T18:16:12+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
-    <lastmod>2021-05-05T18:16:12+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%AE%9A%E6%8A%95/</loc>
-    <lastmod>2021-05-05T18:16:12+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/categories/%E8%A2%AB%E5%8A%A8%E6%94%B6%E5%85%A5%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
     <lastmod>2021-05-05T18:16:12+08:00</lastmod>
   </url>
 
