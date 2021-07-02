@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>国际化与本地化</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/i18n-l10n/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/i18n-l10n\/",
+          "name": "i18n-l10n"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>国际化与本地化</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2021-06-27T00:00:00Z'>
+                2021-06-27
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E4%BB%80%E4%B9%88%E6%98%AFx/">什么是X</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/i18n/">i18n</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/l10n/">l10n</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#%E5%9B%BD%E9%99%85%E5%8C%96i18n">国际化（i18N）</a>
+<ul>
+<li><a href="#%E5%9B%BD%E9%99%85%E5%8C%96%E9%9C%80%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98">国际化需解决的问题</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E7%BC%96%E7%A0%81">文本编码</a></li>
+<li><a href="#locale">locale</a></li>
+<li><a href="#%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%9B%BD%E5%AE%B6%E4%BB%A3%E7%A0%81">语言与国家代码</a></li>
+<li><a href="#gettext">gettext</a></li>
+<li><a href="#%E5%9B%BD%E9%99%85%E5%8C%96%E6%B5%81%E7%A8%8B">国际化流程</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8C%96l10n">本地化（L10N）</a>
+<ul>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8C%96%E6%B5%81%E7%A8%8B">本地化流程</a></li>
+<li><a href="#%E5%88%B6%E5%AE%9A%E6%9C%AC%E5%9C%B0%E5%8C%96%E7%AD%96%E7%95%A5">制定本地化策略</a>
+<ul>
+<li><a href="#%E5%9C%B0%E5%9F%9F%E4%B8%8E%E8%AF%AD%E8%A8%80">地域与语言</a></li>
+<li><a href="#%E6%96%B0%E5%A2%9E%E5%9C%B0%E5%9F%9F%E8%AF%AD%E8%A8%80%E6%9C%8D%E5%8A%A1">新增地域/语言/服务</a></li>
+<li><a href="#%E5%A2%9E%E9%87%8F%E6%9C%AC%E5%9C%B0%E5%8C%96">增量本地化</a></li>
+<li><a href="#%E7%BF%BB%E8%AF%91%E7%9A%84%E7%AE%A1%E7%90%86">翻译的管理</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8C%96%E7%9A%84%E5%AE%9E%E6%96%BD%E6%96%B9%E5%BC%8F">本地化的实施方式</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%A4%9A%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F">本地化多语言的实现方式</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8C%96%E7%9A%84%E6%8C%91%E6%88%98">本地化的挑战</a></li>
+<li><a href="#%E6%98%AF%E5%90%A6%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91seo">是否需要考虑SEO</a></li>
+<li><a href="#%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96">产品设计的本地化</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%8B%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96">微服务下的本地化</a>
+<ul>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8C%96%E7%9A%84%E6%8A%80%E6%9C%AF%E6%88%96%E4%B8%9A%E5%8A%A1%E6%A0%87%E5%87%86%E5%88%B6%E5%AE%9A">本地化的技术或业务标准制定</a></li>
+<li><a href="#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%B8%8E%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B">开发环境与业务流程</a></li>
+<li><a href="#%E9%9D%99%E6%80%81%E6%96%87%E6%9C%AC%E7%9A%84%E5%A4%84%E7%90%86">静态文本的处理</a></li>
+<li><a href="#%E6%98%AF%E5%90%A6%E5%AD%98%E5%82%A8%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%9C%B0%E5%8C%BA%E8%AE%BE%E7%BD%AE">是否存储语言与地区设置</a></li>
+<li><a href="#%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96">后端服务的本地化</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E4%B8%8E%E8%B5%84%E6%BA%90%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96">第三方服务与资源的本地化</a></li>
+<li><a href="#%E5%8F%91%E5%B8%83%E6%B5%81%E7%A8%8B">发布流程</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BE%AE%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84%E4%B8%8B%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%8C%96">微前端架构下的本地化</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8C%96%E7%9A%84%E6%B5%8B%E8%AF%95">本地化的测试</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8C%96%E5%B9%B3%E5%8F%B0">本地化平台</a></li>
+</ul>
+</li>
+</ul>
+<p>一个成功的产品要走向全球需要经历很多环节，从软件开发的视角主要有国际化和本地化两个流程：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/53875fc9-00ac-e8e2-8d91-06399755dcba.png" alt="" layout="fill"></amp-img></div></p>
+<p>语言环境是在某个国家或地域内使用特定的语言或语言变体，其决定了日期、时间、数字和货币的格式和解析方式，以及各种测量单位和时区、语言、国家与地区的翻译名称。国际化使一个软件能够处理多个语言环境，本地化使一个软件处理一个特定的语言环境。</p>
+<blockquote>
+<p>基于他们的英文单字长度过长，常被分别简称成i18n（18意味着在“internationalization”这个单字中，i和n之间有18个字母）及L10n。使用大写的L以利区分i18n中的i和易于分辨小写l与1。(<a href="https://zh.wikipedia.org/wiki/%E5%9B%BD%E9%99%85%E5%8C%96%E4%B8%8E%E6%9C%AC%E5%9C%B0%E5%8C%96">Wikipedia</a>)</p>
+</blockquote>
+<h2 id="国际化i18n">国际化（i18N）</h2>
+<h3 id="国际化需解决的问题">国际化需解决的问题</h3>
+<ul>
+<li>能够以用户本地的语言显示文本；</li>
+<li>能够以用户本地的语言输入文本；</li>
+<li>能够处理以特定编码的用户本地语言的文本。</li>
+</ul>
+<h3 id="文本编码">文本编码</h3>
+<p>不同编码有着可以表示不同字符集合的区别，比如我们无法用  ASCII 编码来表示汉字。Unicode 字符集可以用从 0 到 10FFFF （十六进制）范围的码点来显示几乎所有人类已知的字符。它的存储至少需要 21 位。文本编码系统 UTF-8 将 Unicode 码点适配到一个合理的 8 位数据流，并兼容 ASCII 数据处理系统。UTF 表示 Unicode 转换格式（Unicode Transformation Format）。</p>
+<p>自 2009 年以来，UTF-8 一直是万维网的最主要的编码形式。截止到 2019 年 11 月， 在所有网页中，UTF-8 编码应用率高达 94.3%（其中一些仅是 ASCII 编码，因为它是 UTF-8 的子集），而在排名最高的 1000 个网页中占 96％。所以在国际化中推荐采用 UTF-8 编码。</p>
+<p>这篇 <a href="https://mp.weixin.qq.com/s/j5hfWOBsOMYcQuMG36zqNA">IT产品的国际化，绝不是“支持英文”就足够</a> 文章提到一些 GBK 编码的文本中有许多“看起来一样”的文字，其实有细微差别。但是，为了节省 Unicode 中的空间，给它们指定了同样的 Code Point。</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/274d1394-df55-c0cb-331c-635979581c65.png" alt="" layout="fill"></amp-img></div></p>
+<p>如何区分这些同样码位（用不同字形显示一个字符，即同一字位）的同位异字？这就需要 locale 的帮助了。</p>
+<blockquote>
+<p>计算汉字数量时，通常是按照字形来计算的，即将一个代表相同语音语义的字的简化，繁体，异体，新字形，旧字形等等分别进行计算。这种计算方式实为是在计算变体。所以，长期以来错误地把大型字典里收入的字形数看作是汉字系统的规模。(<a href="https://zh.wikipedia.org/wiki/%E5%AD%97%E4%BD%8D">Wikipedia</a>)</p>
+</blockquote>
+<h3 id="locale">locale</h3>
+<p>locale 是软件在运行时的语言环境, 它包括语言（Language）, 地域（Territory）和字符集（Codeset）。一个 locale 的书写格式为: 语言[_地域[.字符集]]，如美国英文是 en_US.UTF8。在 Linux 中 locale 包括以下几个部分：</p>
+<ul>
+<li>LC_COLLATE：控制字符排序。</li>
+<li>LC_CTYPE：控制字符处理函数在处理大、小写或判断是否是字符。</li>
+<li>LC_MESSAGES：提示信息的格式。</li>
+<li>LC_MONETARY：货币的格式。</li>
+<li>LC_NUMERIC：数字的格式。</li>
+<li>LC_TIME：时间的格式。</li>
+</ul>
+<p>如果你的 locale 是 en_US.UTF8，那么必须将其修改为 zh_CN.UTF8 才能正确显示中文。在 macOS 操作系统的 <code>/usr/share/locale</code> 目录中存放着全部支持的 locale：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/b40d3f61-046a-df48-735f-b27ec188a3e8.png" alt="" layout="fill"></amp-img></div></p>
+<h3 id="语言与国家代码">语言与国家代码</h3>
+<p>同一种语言在不同国家地区可能有一些细微的差异，比如美国英语和英国英语就有一些差异。同一个国家可能也有多种语言，比如中国有简体与繁体语言。在上述 locale 的介绍我们看到了使用<code>语言_地域</code>的方式来确切的表达一个国家的语言。</p>
+<p>对于国家和语言 ISO 制定了相应的标准代码：<a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a> 与 <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1</a>。</p>
+<p>浏览器使用语言代码来在 <code>Accept-Language</code> HTTP 头里发送浏览器接受的语言名。比如：it, de-at, es, pt-br 。</p>
+<h3 id="gettext">gettext</h3>
+<p>GNU gettext 是 GNU 国际化与本地化（i18n）函数库，它常被用于编写多语言（multilingualization，缩写为 M17N）程序。许多编程语言如 C、C++、Python、PHP、Rust、Elixir 等都在语言内部支持了 gettext 的使用。</p>
+<p>以下是 Java 调用 gettext 完成国际化的流程：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/4a7179b3-ccae-ca0e-8554-1cb19a753e7d.png" alt="" layout="fill"></amp-img></div></p>
+<ul>
+<li>xgettext 扫描源代码抽取出 tr()、trc() 和 trn() 这些 i18n 函数的输入字符串并创建一个包含所有源语言字符串的 pot 文件。翻译者需要工作的对象是.po文件，它是由 msginit 程序从 .pot 模板文件生成的。</li>
+<li>msgmerge 将字符串合并到一个包含单个语言环境翻译的 po 文件中。</li>
+<li>msgfmt 用于生成继承 Java <code>ResourceBundle</code> 类的 Java 类文件。</li>
+</ul>
+<p>如下图是 PHP 使用 gettext 实现国际化的流程图：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/5da7482c-d121-958e-606e-ff36aded4a1f.png" alt="" layout="fill"></amp-img></div></p>
+<p>Elixir 使用 gettext 实现 i18n 的目录结构：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">priv/gettext
+└─ en_US
+|  └─ LC_MESSAGES
+|     ├─ default.po
+|     └─ errors.po
+└─ it
+   └─ LC_MESSAGES
+      ├─ default.po
+      └─ errors.po
+</code></pre></div><h3 id="国际化流程">国际化流程</h3>
+<p>gettext 的使用流程就是一个典型的使应用支持 i18n 国际化的过程：</p>
+<ol>
+<li>先抽取硬编码的源语言文本，在硬编码的地方调用 i18n 函数。对于这部分可以人工抽取，也可以通过程序或者插件（如 Javascript 的 I18next 国际化框架有 I18next-scanner）自动抽取。</li>
+<li>之后翻译（可通过人工或机器翻译，也有相关的翻译平台可以集成）这些抽取出来的要支持的国家语言文件。</li>
+<li>i18n 框架通过系统或者浏览器（如果是 Web 应用）的语言标识自动获取相关的语言文件。如 gettext 使用的是 .mo 后缀的文件，而 Javascript 一般是 .json 文件，Java 是 .properties 文件。</li>
+</ol>
+<h2 id="本地化l10n">本地化（L10N）</h2>
+<h3 id="本地化流程">本地化流程</h3>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/9adbc2f4-7fa4-0f67-046b-f135c4b117b7.png" alt="" layout="fill"></amp-img></div></p>
+<p>如上图是一个典型的本地化流程图。其中参与方有：</p>
+<ul>
+<li>开发团队（Dev Team）：开发人员使系统具备国际化的能力，并将机器翻译版的多语言版本部署到集成环境供测试人员测试，能搭建自动化的翻译集成流水线。</li>
+<li>市场团队（Market Team）：整理产品涉及到的术语表，并购买专业翻译服务，确定最终多语言翻译的版本。如果是大公司的话，可能有专门的全球化团队完成此工作。</li>
+<li>翻译管理平台（TMS）：完成翻译语言的管理，一般都有特定的 API 接口或 SDK 开发工具包，可以集成到 CI/CD 环境，能自动化源语言和翻译语言文件的上传和下载。并具备管理界面，供翻译人员修改和确定翻译的最终版本。能提供多个机器翻译服务，也能提供人工翻译的购买或以开源协作的方式完成人工翻译。</li>
+</ul>
+<h3 id="制定本地化策略">制定本地化策略</h3>
+<h4 id="地域与语言">地域与语言</h4>
+<p>这块首先要考虑这些基本的前置问题：</p>
+<ul>
+<li>地域的业务含义</li>
+<li>用户的默认地域</li>
+<li>地域的默认语言</li>
+<li>不同地域是否使用同一套系统</li>
+<li>是否支持用户切换地域</li>
+<li>用户能否属于多个地域</li>
+<li>地域与国家是否一对一关系</li>
+<li>地域与语言的映射关系</li>
+<li>地域与语言有无联动关系（用户是否能看到所有地域支持的所有语言）</li>
+<li>语言切换是否需要保存到用户个人信息中</li>
+<li>是否需要通过用户环境语言标识（操作系统或浏览器）设置用户默认语言</li>
+</ul>
+<h4 id="新增地域语言服务">新增地域/语言/服务</h4>
+<ul>
+<li>系统是否可以支持新增地域及新增地域的流程</li>
+<li>系统是否可以支持新增语言及新增语言的流程</li>
+<li>系统新增子服务时本地化的流程</li>
+</ul>
+<h4 id="增量本地化">增量本地化</h4>
+<ul>
+<li>当实施本地化时新页面或组件出现时的本地化流程</li>
+</ul>
+<h4 id="翻译的管理">翻译的管理</h4>
+<ul>
+<li>是否需要翻译管理平台（TMS）</li>
+<li>翻译管理平台的选型</li>
+<li>翻译管理平台的集成</li>
+<li>是否需要订购专业翻译服务</li>
+<li>开发与翻译团队的协作流程</li>
+</ul>
+<h4 id="本地化的实施方式">本地化的实施方式</h4>
+<ul>
+<li>系统各服务是否由各自开发团队做本地化</li>
+<li>是否有专门的本地化团队做本地化</li>
+<li>本地化团队与各服务开发团队的协作模式
+<ul>
+<li>是否通过代码 Open PR 的方式做本地化</li>
+<li>各服务开发团队如何做增量本地化</li>
+<li>各团队关于本地化的知识同步</li>
+</ul>
+</li>
+<li>本地化技术标准的制定与组织内部推广
+<ul>
+<li>针对日期、时间、时区、数字和货币的特定语言格式使用行业标准库（例如 Unicode Common Locale Data Repository <a href="http://cldr.unicode.org/">CLDR</a>）</li>
+<li>locale 标识采用<code>语言_地域</code>格式，如 en_US 代表美国英语语言。</li>
+</ul>
+</li>
+</ul>
+<h4 id="本地化多语言的实现方式">本地化多语言的实现方式</h4>
+<ul>
+<li>通过子域名（gTLDS）或国家顶级域名（如 ccTLDs）区分多语言。如：https://en.wikipedia.org/</li>
+<li>通过 URL 路径区分多语言。如：https://localizejs.com/de/</li>
+<li>通过 URL 查询参数区分多语言（对 SEO 不友好）。如：https://locize.com/?lng=de</li>
+<li>通过用户语言设置区分多语言。如：https://myaccount.google.com/language</li>
+<li>通过浏览器本地存储区分多语言。如：https://www.instagram.com/</li>
+</ul>
+<h4 id="本地化的挑战">本地化的挑战</h4>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/f655798a-fd23-5828-1b72-b6ecd6d83b7a.png" alt="" layout="fill"></amp-img></div></p>
+<p>本地化的挑战主要有不同地域的语言、文化、书写习惯及法律方面的差异带来的问题，具体有以下类别：</p>
+<ul>
+<li>文本编码：对于大多数西欧语言的文本，ASCII 字符编码就足够了。但是，使用非拉丁字母的语言（例如俄语、中文、印地语和韩语）需要更大的字符编码，例如 Unicode 编码。</li>
+<li>单复数：不同语言有着不同的单复数形式。复数是用来表示一个“不是一”的数。单复数的变化型态在每个语言里面都不一样，最普遍的复数型态用来表示二或更大的数字。在某些语言中，也有用来表示分数、零、负数或者二。</li>
+<li>图片翻译：有文字的图片需要被翻译。</li>
+<li>动态数据（来自 API 的数据）：后端传给前端的被显示在界面上的数据都需要本地化。但是如何区分这些数据的来源是个难题，比如虽然数据是来源自后端的，但可能来自数据库，可能来自文件，可能来自内部其他服务，也可能来自第三方依赖的服务。</li>
+<li>图标：一些在某个地区识别度很高的图标在其他地区用户看起来可能是完全不认识的或者是其他东西。</li>
+<li>姓名/地址：姓和名的先后次序，地址书写的先后次序。比如中文都是先姓后名。</li>
+<li>性别：有些语言比如法语很强调性别。</li>
+<li>电话：不同国家的电话格式也不相同。</li>
+<li>声音：不适当的声音或提示可能会引起人的反感，有些国家对声音性别很敏感。</li>
+<li>颜色：颜色和色调与地域或市场有关，比如红色在美股标示下跌，在 A 股标示上涨。</li>
+<li>计量单位
+<ul>
+<li>货币：货币格式设置必须考虑货币符号、货币符号位置和负号的位置。大多数货币使用与区域性或区域设置中的数字相同的小数点分隔符和千位分隔符。但是，在一些地方并不是这样，比如在瑞士，瑞士法郎的小数点分隔符是句点。</li>
+<li>日期和时间：日期/时间的国际化，不仅涉及到地理位置（比如星期、月份等日历本地化表示），还涉及到时区（TimeZone，针对UTC/GMT的偏移量）。时区不仅是地理位置规定，更是政治规定，比如中国从地理位置上跨 5 个时区，但只使用一个统一时区。另许多国家都有“夏令时”的规定，柏林时间和北京时间的差距是会变化的。有时候是7小时（冬令时），有时候是6小时（夏令时）。</li>
+<li>数字：不同国家和地区数字表示方式也存在着区别。影响数字表现的因素包括数字字符的表示、数字符号的表示、数字的类型等。</li>
+<li>重量/长度/物理单位：因为单位的不同，同一套数据多地域版本需要做转换。</li>
+</ul>
+</li>
+<li>句子长度：德语通常比英语长，阿拉伯语需要更多的垂直空间。</li>
+<li>书写方向：许多语言是从左到右，但在希伯来语和阿拉伯语中是从右到左，在某些亚洲语言中是垂直的。</li>
+<li>标点符号：例如英语中的引号 (&quot;&quot;)、德语中的低引号 (,,&quot;) 和法语中的引号 (&laquo;&raquo;)。</li>
+<li>换行/分词：亚洲 CJK(Chinese、Japanese、Korean) 字元集语言的规则与西方语言的规则完全不同。例如，与大多数西方书面语言不同，中文、日语、朝鲜语和泰语不一定使用空格将一个字同下一个字区分开。泰语甚至不使用标点符号。</li>
+<li>大小写转换：英文中有大小写的转换，而中文没有大小写的区别。</li>
+<li>法律相关：例如使用欧盟公民个人数据的 GDPR。</li>
+<li>政治相关：比如本地化中涉及国旗和地图的显示，处理不好很容易造成大的事故。</li>
+<li>排序方法：比如英文是按字母顺序排序的，而中文可以用拼音排序。</li>
+</ul>
+<h4 id="是否需要考虑seo">是否需要考虑SEO</h4>
+<p>如果是 toC 的网站做本地化，需要考虑一些和搜索引擎优化 (SEO) 的事情，如这篇 <a href="https://marketfinder.thinkwithgoogle.com/intl/en/guide/how-to-approach-i18n/#make-languages-easily-discoverable">How to approach an international strategy</a> 提到的一些关键点：</p>
+<ul>
+<li>如果您以多种语言提供您的网站，请在每个页面上使用单一语言进行内容和导航，并避免并排翻译；</li>
+<li>将每种语言的内容保留在单独的 URL 上，并在 URL 中标记语言。例如，URL <code>www.mysite.com/de/</code> 会告诉用户页面是德语的；</li>
+<li>通过 hreflang 元标记向 Google 显示您要定位的语言。如<code>&lt;link rel=&quot;alternate&quot; href=&quot;http://example.com&quot; hreflang=&quot;en-us&quot; /&gt;</code>；</li>
+<li>不要只翻译模版文本，还需要翻译模版内的内容；</li>
+<li>不要完全使用自动翻译，这会影响用户体验；</li>
+<li>不要使用 cookies 或脚本技术来切换语言，Google 爬虫无法正常索引这些内容。</li>
+</ul>
+<h4 id="产品设计的本地化">产品设计的本地化</h4>
+<p>同一内容在不同地域使用更贴合本地内容的设计会带来更好的效果，如 <a href="http://www.woshipm.com/pd/4404611.html">产品设计的国际化与本地化</a> 这篇文章中提到 Spotify 的歌单封面在不同国家的差异呈现形式：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/165e3e02-74a9-a776-cc5a-cf8ef85f8f46.png" alt="" layout="fill"></amp-img></div></p>
+<h3 id="微服务下的本地化">微服务下的本地化</h3>
+<p>从架构的角度看单体应用的本地化流程比较简单。但现在很多应用都是微服务架构，多个团队协作开发的模式。如果是各自团队负责各自服务的本地化，必须有统一的本地化委员会制定本地化技术标准：</p>
+<ul>
+<li>语言标识的确定；</li>
+<li>语言切换在前后端的方案设计；</li>
+<li>翻译自动化流程的设计等。</li>
+</ul>
+<p>或者有专门的本地化团队实施本地化，前面这些问题将由这个团队负责解决。笔者参与的项目就属于后者，我们的团队完成整个大系统近十几套微服务子系统的本地化，这十几套系统又由几个大组多个团队负责，这类跨功能需求（CFR）在多个团队中的协作流程是个复杂的工作。</p>
+<h4 id="本地化的技术或业务标准制定">本地化的技术或业务标准制定</h4>
+<p>在实施本地化之前，确定相关技术或业务标准是重要的事情，一些技术或业务标准有：</p>
+<ul>
+<li>前后端不同技术栈的国际化实现标准。由于微服务中技术栈可能有多种，每种技术栈都有其各自的国际化实现方式，制定不同技术栈的实现标准有助于在不同服务间使用同样的实现方式；</li>
+<li>locale 标识的确定。
+<ul>
+<li>前端或后端静态文本抽取中，可以将和语言相关的文本存放至语言标识命名的文件中，如 en.json 存放英语的静态文本，而 en_US.json 存放和美国英语相关的文本（如计量单位、日期、数字和货币等）；</li>
+<li>在远程服务调用（前端调用后端或后端调用其他内部或外部服务）中统一采用<code>语言_地域</code>格式，如 en_US 代表获取美国地区英语语言的本地化版本。</li>
+</ul>
+</li>
+<li>日期、时间、时区、数字和货币的特定语言格式使用行业标准库。比如使用实现 <a href="https://en.wikipedia.org/wiki/Common_Locale_Data_Repository">CLDR</a> 标准的库；</li>
+<li>动态数据类型的识别。比如识别出哪些数据是来自内部系统（数据库或文件）；哪些来自外部系统；这些动态数据是否具备国际化能力；如何分阶段本地化这些数据；</li>
+<li>文档的本地化。后台系统生成的电子文档（PDF）或电子邮件的本地化。如果这些文档是发给客户的，还需要考虑是否生成客户语言偏好的文档；</li>
+<li>支持的地区与语言列表。比如出现不支持的国家或语言时进入错误页还是显示默认的地区或语言本地化版本；</li>
+<li>默认地区与默认语言；</li>
+<li>地区与语言是否具备绑定关系；</li>
+<li>语言切换是否需保存至用户个人信息中。</li>
+</ul>
+<h4 id="开发环境与业务流程">开发环境与业务流程</h4>
+<p>实际上我们团队在做本地化最耗费时间的就是本地环境的启动。因为涉及的服务众多，不同服务启动的方式又有着细微的差异，甚至指导文档也是错误的，需要不断的踩坑才能完成环境的搭建。最终我们的处理方式是联系各开发团队，每次在做某个服务的本地化前期，会找开发团队帮助我们设置本地的环境。</p>
+<p>另外一个难点在于我们对业务的不了解。由于每个服务都有大量的组件和页面，包括后端服务不同来源的动态数据，光靠我们自己摸索很难搞清楚。最终我们在做这个服务的本地化前期，会找开发团队的业务分析师帮助我们介绍这个服务涉及的业务流程。</p>
+<h4 id="静态文本的处理">静态文本的处理</h4>
+<ul>
+<li>梳理前后端的静态文本，识别哪些系统有国际化能力（初始语言版本已经抽取 locale 文件并设置好国际化库）；</li>
+<li>找出日期、货币、数字格式出现的地方，并在这些地方调用本地化技术标准确定的行业标准库；</li>
+<li>增量静态文本翻译流程的确定，当系统已经被本地化之后有新的文本添加时需要使用本地化的流程对其进行处理；</li>
+<li>翻译平台的自动化集成，开发团队使用脚本或 CI/CD 流水线自动上传和下载原语言和翻译语言的文件。</li>
+</ul>
+<h4 id="是否存储语言与地区设置">是否存储语言与地区设置</h4>
+<p>一些国际化站点的语言或地区切换设计成超链接，用户可以通过链接访问不同语言地区版本的站点，这类站点并不需要存储语言或地区的配置。</p>
+<p>具备用户个人信息配置的站点一般会提供在个人信息设置中设置偏好语言和地区，这样用户在切换设备的时候可以同步上次设置的语言或地区。</p>
+<p>如果你的站点用户切换设备并不频繁，简单的处理可以将这些配置存入浏览器存储中。当用户切换设备后，自动恢复默认设置。这样的设计好处在于简单，后期要过度到其他方案也会容易一些。具体选择什么设计，需要结合具体业务来选择。</p>
+<h4 id="后端服务的本地化">后端服务的本地化</h4>
+<p>后端服务的本地化涉及以下四部分：</p>
+<ul>
+<li>静态文本。这类可以通过走读代码的方式去查找相关字符串；</li>
+<li>数据库、缓存或文件。通过走读数据库初始化脚本可以查找到不满足本地化需求的初始数据，但对于动态存储的数据，还需要设计满足多语言存储的表。对于一些资源文件有必要翻译的也需要提供多语言版本并改造使用文件的代码；</li>
+<li>远程调用其他内部服务（RPC）。内部服务调用的 locale 标识属于本地化技术标准制定的。比如可使用 <code>locale = en_US</code> HTTP 头代表请求美国地区英语语言的页面。</li>
+<li>生成文档（PDF 或 Email）。生成的文档包括模版静态文本与动态数据渲染的最终语言版本。尤其是这些文档和电子邮件需要发送给用户的时候，需要生成和用户语言相符的语言版本。</li>
+</ul>
+<p>如果后端服务的技术栈不同，还需要本地化团队总结后端服务不同技术栈的国际化流程，并在组织内部同步给其他开发团队。</p>
+<h4 id="第三方服务与资源的本地化">第三方服务与资源的本地化</h4>
+<p>在后台服务远程调用中存在调用外部服务的情况，如果调用外部服务需要先确认外部服务是否支持多语言版本，如果支持的话可以按照对接文档来集成。如果不支持需要与外部服务供应商联系确定支持计划。</p>
+<h4 id="发布流程">发布流程</h4>
+<p>由于本地化的实施涉及十几个子服务的改造，可通过 <a href="https://martinfowler.com/articles/feature-toggles.html">Feature Toggles</a> 控制本地化在不同环境的开启或关闭。本地化影响的测试（单元测试、集成测试与 UI 测试）也需要通过 Feature Toggles 来控制，这样可以最小影响原服务的测试套件。</p>
+<p>一旦所有服务都完成了本地化实施，则可以打开所有服务的本地化 Feature Toggles 将最终版本上线。</p>
+<p>关于本地化的 Feature Toggles 有两种设计可以选择：</p>
+<ul>
+<li>集中式 Feature Toggles。比如可以搭建一个集中的特性配置服务，所有本地化相关的服务通过请求此服务来获取配置开关状态。好处在于无需重新上线即可实时开关本地化的特性。坏处在于没法灵活控制每个服务的本地化特性的开关。</li>
+<li>独立 Feature Toggles。与集中式相反，每个服务设置自己的本地化 Feature Toggles 可以做到灵活解耦，坏处在于每次开关都需要重新发布上线单个服务。</li>
+</ul>
+<h3 id="微前端架构下的本地化">微前端架构下的本地化</h3>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/f57bbd44-f288-c81a-9f26-a55b767c6044.png" alt="" layout="fill"></amp-img></div></p>
+<p>如上图是一个微前端架构的网站，整个网站的界面是由 A/B/C/D/E 五个服务的页面组成的。语言切换按钮在服务 A 上，当用户切换英文到中文，其他服务 B/C/D/E 需要将各自的界面切换成中文语言版本。</p>
+<p>一种方法是在浏览器加载页面的时候将国际化（i18n）库的实例统一由服务 A 来初始化并挂载到浏览器窗口（window）对象上，服务 B/C/D/E 使用服务 A 初始化的国际化库实例对象。当语言切换时，统一由服务 A 的国际化实例对象切换所有服务的语言。</p>
+<p>每个服务的 locale 语言文件加载可以统一由服务 A 来加载到浏览器中，这种做法的好处在于可以知道最后一个语言文件加载完毕的时机，这意味着整个页面所有服务的本地化都初始化完毕，用户可以正常切换语言了。</p>
+<h3 id="本地化的测试">本地化的测试</h3>
+<p>本地化测试验证应用程序或网站内容是否符合特定国家或地区的语言、文化和地域要求。</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/972d1ca1-ab5f-d0bd-25ed-bb13b11fc46d.png" alt="" layout="fill"></amp-img></div></p>
+<p>如上图是本地化测试需重点关注的点，更多详见这篇 <a href="https://levelup.gitconnected.com/localization-testing-9b8db20fb62f">Localization testing: why and how to do it</a> 文章。</p>
+<h3 id="本地化平台">本地化平台</h3>
+<p>本地化中很重要的一块是选择合适的翻译管理平台（TMS），一般这类平台都有如下功能点：</p>
+<ul>
+<li>术语表（Glossary）：专用品牌术语或领域术语表，可以帮助翻译人员更准确的翻译和产品或市场相关的专用语言；</li>
+<li>翻译记忆库（Translation Memory）：TM 是一个数据库，用于存储之前翻译过的内容字符串。对相同或相似内容重复使用翻译。这样可保证翻译的一致性；</li>
+<li>上下文编辑器（In-Context Editor）：这种编辑器可以抓取网站页面，让翻译人员了解整个页面的上下文，有助于提高翻译质量；</li>
+<li>机器翻译（Machine Translations）：大多 TMS 平台都对接了一些机器翻译平台（如 Google 翻译），可以自动翻译目标语言，适合开发人员使用；</li>
+<li>人工翻译（Human Translations）：可在 TMS 平台订购专业人工翻译服务。但也有如 Crowdin 提供了开源项目本地化翻译协作的功能，任何人都可以参与到这个项目上免费翻译，得票高的翻译文本将优先使用。</li>
+</ul>
+<p>主要的本地化平台：</p>
+<ul>
+<li><a href="https://crowdin.com/">Crowdin</a></li>
+<li><a href="https://lokalise.com/">Lokalise</a></li>
+<li><a href="https://localizejs.com">localizejs</a></li>
+<li><a href="https://phrase.com/">Phrase</a></li>
+</ul>
+<p>一些对国际化以及本地化的基本流程的介绍就到此为止了。本地化是个复杂的工作，最大的难点在于<strong>对目标语言和文化的了解不足</strong>。不过当你读完这篇文章后，我希望能给你更多的自信去做本地化相关的工作。</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>
