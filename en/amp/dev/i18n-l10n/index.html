@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>International(i18n) and Localization(L10n)</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/en/dev/i18n-l10n/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Build My Passive Income",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/",
+          "name": "en"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/dev\/i18n-l10n\/",
+          "name": "i18n-l10n"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>International(i18n) and Localization(L10n)</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2021-07-22T00:00:00Z'>
+                2021-07-22
+              </time>
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/en/tags/i18n/">i18n</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/l10n/">l10n</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#internationalizationi18n">internationalization(i18N)</a>
+<ul>
+<li><a href="#problems-to-be-solved-for-internationalization">Problems to be solved for internationalization</a></li>
+<li><a href="#text-encoding">Text Encoding</a></li>
+<li><a href="#locale">locale</a></li>
+<li><a href="#language-and-country-codes">Language and Country Codes</a></li>
+<li><a href="#gettext">gettext</a></li>
+<li><a href="#internationalization-process">Internationalization Process</a></li>
+</ul>
+</li>
+<li><a href="#localizationl10n">Localization(L10N)</a>
+<ul>
+<li><a href="#localization-process">Localization Process</a></li>
+<li><a href="#develop-a-localization-strategy">Develop a localization strategy</a>
+<ul>
+<li><a href="#region-and-language">Region and Language</a></li>
+<li><a href="#add-new-regionlanguageservice">Add new region/language/service</a></li>
+<li><a href="#incremental-localization">Incremental Localization</a></li>
+<li><a href="#management-of-translation">Management of translation</a></li>
+<li><a href="#localized-implementation">Localized implementation</a></li>
+<li><a href="#localized-multilingual-implementation">Localized multilingual implementation</a></li>
+<li><a href="#the-challenges-of-localization">The Challenges of Localization</a></li>
+<li><a href="#do-you-need-to-consider-seo">Do you need to consider SEO</a></li>
+<li><a href="#localization-of-product-design">Localization of product design</a></li>
+</ul>
+</li>
+<li><a href="#localization-under-microservices">Localization under Microservices</a>
+<ul>
+<li><a href="#localized-technical-or-business-standards-development">Localized technical or business standards development</a></li>
+<li><a href="#development-environment-and-business-processes">Development Environment and Business Processes</a></li>
+<li><a href="#static-text-processing">Static text processing</a></li>
+<li><a href="#whether-to-store-language-and-region-settings">Whether to store language and region settings</a></li>
+<li><a href="#localization-of-back-end-services">Localization of back-end services</a></li>
+<li><a href="#localization-of-third-party-services-and-resources">Localization of third-party services and resources</a></li>
+<li><a href="#release-process">Release Process</a></li>
+</ul>
+</li>
+<li><a href="#localization-under-micro-front-end-architecture">Localization under micro front-end architecture</a></li>
+<li><a href="#localized-testing">Localized testing</a></li>
+<li><a href="#localization-platform">Localization Platform</a></li>
+</ul>
+</li>
+</ul>
+<p>A successful product needs to go global through many stages, from the perspective of software development there are two main processes: internationalization and localization.</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/53875fc9-00ac-e8e2-8d91-06399755dcba.png" alt="" layout="fill"></amp-img></div></p>
+<p>A language environment is the use of a specific language or language variant within a country or geographic region, which determines the format and parsing of dates, times, numbers and currencies, as well as the various measurement units and translated names of time zones, languages, countries and regions. <strong>Internationalization enables a piece of software to handle multiple language environments, localization enables a piece of software to support a specific regional language environment</strong>. This means that the process of globalization is to first make the software internationalized, and then to do the localization implementation so that it can support a specific language environment in a specific region.</p>
+<blockquote>
+<p>They are often abbreviated as i18n (18 means that there are 18 letters between i and n in the word &ldquo;internationalization&rdquo;) and L10n, respectively, due to the length of their single words, using a capital L to distinguish the i in i18n and to make it easy to distinguish the lowercase l from the 1.(<a href="https://en.wikipedia.org/wiki/Internationalization_and_localization">Wikipedia</a>)</p>
+</blockquote>
+<h2 id="internationalizationi18n">internationalization(i18N)</h2>
+<h3 id="problems-to-be-solved-for-internationalization">Problems to be solved for internationalization</h3>
+<ul>
+<li>The ability to display text in the user&rsquo;s native language.</li>
+<li>Ability to enter text in the user&rsquo;s native language.</li>
+<li>Ability to process text in the user&rsquo;s native language in a specific encoding.</li>
+</ul>
+<h3 id="text-encoding">Text Encoding</h3>
+<p>The Unicode character set can display almost every character known to man in code points ranging from 0 to 10FFFF (hexadecimal). It requires at least 21 bits for storage. The text encoding system UTF-8 adapts Unicode code points to a reasonable 8-bit data stream and is compatible with the ASCII data processing system.UTF stands for Unicode Transformation Format.</p>
+<p>Since 2009, UTF-8 has been the dominant encoding form on the World Wide Web. As of November 2019, UTF-8 is used in 94.3% of all web pages (some of which are ASCII only, as it is a subset of UTF-8), and 96% of the top 1000 pages. Therefore, UTF-8 encoding is recommended for internationalization.</p>
+<p>This article <a href="https://mp.weixin.qq.com/s/j5hfWOBsOMYcQuMG36zqNA">Internationalization of IT products is never enough to &ldquo;support English&rdquo;</a> mentions that some GBK-encoded texts have many The text that &ldquo;looks the same&rdquo; is actually slightly different. However, in order to save space in Unicode, the same Code Point is assigned to them.</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/274d1394-df55-c0cb-331c-635979581c65.png" alt="" layout="fill"></amp-img></div></p>
+<p>How can we distinguish these identical characters with the same code (displaying a character in a different glyph, i.e. the same character)? This requires the help of locale.</p>
+<blockquote>
+<p>When calculating the number of Chinese characters, it is usually done by character form, i.e., simplified, traditional, variant, new, old, etc., of a character representing the same phonetic meaning. This way of counting is in fact counting variants. Therefore, the number of glyphs included in large dictionaries has long been wrongly regarded as the size of the Chinese character system.(<a href="https://en.wikipedia.org/wiki/Grapheme">Wikipedia</a>)</p>
+</blockquote>
+<h3 id="locale">locale</h3>
+<p>A locale is the language environment of the software at runtime, which includes Language, Territory and Codeset. A locale is written in the following format: Language[_Territory[. UTF8. In Linux, a locale consists of the following parts.</p>
+<ul>
+<li>LC_COLLATE: Controls character sorting.</li>
+<li>LC_CTYPE: controls the character handling function in handling upper and lower case or determining if it is a character.</li>
+<li>LC_MESSAGES: format of prompt messages.</li>
+<li>LC_MONETARY: format of currency.</li>
+<li>LC_NUMERIC: the format of the number.</li>
+<li>LC_TIME: the format of time.</li>
+</ul>
+<p>If your locale is en_US.UTF8, you must change it to zh_CN.UTF8 to display Chinese correctly. All supported locales are stored in the <code>/usr/share/locale</code> directory of the macOS operating system.</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/b40d3f61-046a-df48-735f-b27ec188a3e8.png" alt="" layout="fill"></amp-img></div></p>
+<h3 id="language-and-country-codes">Language and Country Codes</h3>
+<p>The same language may have some subtle differences in different countries and regions, for example, there are some differences between American English and British English. The same country may also have multiple languages, for example, China has simplified and traditional languages. In the introduction to locale above we saw the use of <code>language_region</code> to express the exact language of a country.</p>
+<p>For countries and languages ISO has developed corresponding standard codes <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a> and <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1</a>.</p>
+<p>The browser uses the language code to send the name of the language accepted by the browser in the <code>Accept-Language</code> HTTP header. For example: it, de-at, es, pt-br.</p>
+<h3 id="gettext">gettext</h3>
+<p>GNU gettext is the GNU Internationalization and Localization (i18n) library, which is often used to write multilingualization (M17N) programs. Many programming languages such as C, C++, Python, PHP, Rust, Elixir, etc. support the use of gettext from within the language.</p>
+<p>The following is the flow of how Java calls gettext to complete internationalization.</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/4a7179b3-ccae-ca0e-8554-1cb19a753e7d.png" alt="" layout="fill"></amp-img></div></p>
+<ul>
+<li>xgettext scans the source code to extract the input strings for the i18n functions tr(), trc(), and trn() and creates a pot file containing all the source language strings. The object that the translator needs to work with is the .po file, which is generated by the msginit program from the .pot template file.</li>
+<li>msgmerge merges the strings into a po file containing the translations for a single locale.</li>
+<li>msgfmt is used to generate Java class files that inherit from the Java <code>ResourceBundle</code> class.</li>
+</ul>
+<p>The following diagram shows the flow of internationalization in PHP using gettext.</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/5da7482c-d121-958e-606e-ff36aded4a1f.png" alt="" layout="fill"></amp-img></div></p>
+<p>Elixir implements i18n&rsquo;s directory structure using gettext.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">priv/gettext
+└─ en_US
+|  └─ LC_MESSAGES
+|     ├─ default.po
+|     └─ errors.po
+└─ it
+   └─ LC_MESSAGES
+      ├─ default.po
+      └─ errors.po
+</code></pre></div><h3 id="internationalization-process">Internationalization Process</h3>
+<p>The process of using gettext is a typical process of making an application support i18n internationalization.</p>
+<ol>
+<li>Configure the i18n framework. i18n framework automatically obtains the relevant language files by the language identifier of the system or browser (in the case of web applications). For example, gettext uses a file with .mo suffix, while Javascript is usually a .json file and Java is a .properties file.</li>
+<li>extract the hard-coded source language text. Call the i18n function at the hard-coded place. For this part can be extracted manually, or automatically through a program or plugin (e.g. i18next internationalization framework for Javascript has i18next-scanner).</li>
+<li>finally implement <strong>localization</strong>. Translate (either manually or by machine translation, there are also relevant translation platforms that can be integrated) these extracted files in the language of the country to be supported.</li>
+</ol>
+<h2 id="localizationl10n">Localization(L10N)</h2>
+<h3 id="localization-process">Localization Process</h3>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/9adbc2f4-7fa4-0f67-046b-f135c4b117b7.png" alt="" layout="fill"></amp-img></div></p>
+<p>A typical localization flow chart is shown in the figure above. Among the parties involved are.</p>
+<ul>
+<li>Dev Team: Developers make the system internationalized and deploy the machine-translated version of the multilingual version to the integration environment for testers to test, and can build an automated translation integration pipeline.</li>
+<li>Market Team: Confirm the market and supported languages of the product, organize the glossary of terms involved in the product, and purchase professional translation services to determine the final multilingual translated version. In the case of large companies, there may be a dedicated globalization team to do this work.</li>
+<li>Translation management platform (TMS): completes the management of translation languages, generally with specific API interfaces or SDK development kits that can be integrated into CI/CD environments and can automate the upload and download of source and translation language files. It also has a management interface for translators to modify and determine the final version of the translation. Can provide multiple machine translation services, as well as provide human translation for purchase or complete human translation in an open source collaborative manner.</li>
+</ul>
+<h3 id="develop-a-localization-strategy">Develop a localization strategy</h3>
+<h4 id="region-and-language">Region and Language</h4>
+<p>This piece begins with these basic antecedent considerations.</p>
+<ul>
+<li>Business implications of region</li>
+<li>Default region of the user</li>
+<li>Default language of the locale</li>
+<li>Whether different regions use the same system</li>
+<li>Whether to support users to switch locales</li>
+<li>Whether the user can belong to multiple locales</li>
+<li>Whether there is a one-to-one relationship between locale and country</li>
+<li>Mapping between locale and language</li>
+<li>Is there a linkage between locale and language (can the user see all languages supported by all locales)</li>
+<li>Whether language switching needs to be saved to the user&rsquo;s personal information</li>
+<li>Whether the user&rsquo;s default language needs to be set by the user&rsquo;s environment language identifier (OS or browser)</li>
+<li>Whether the <strong>service is deployed in multiple geographies and whether the data is isolated in multiple geographies</strong></li>
+</ul>
+<h4 id="add-new-regionlanguageservice">Add new region/language/service</h4>
+<ul>
+<li>Whether the system can support the process of adding new regions and new regions</li>
+<li>Whether the system can support the process of adding new languages and the process of adding new languages</li>
+<li>The process of localization when adding subservices to the system</li>
+</ul>
+<h4 id="incremental-localization">Incremental Localization</h4>
+<ul>
+<li>Localization process when new pages or components appear when localization is implemented</li>
+</ul>
+<h4 id="management-of-translation">Management of translation</h4>
+<ul>
+<li>Whether you need a translation management platform (TMS)</li>
+<li>Selection of Translation Management Platform</li>
+<li>Integration of translation management platform</li>
+<li>Whether to subscribe to professional translation services</li>
+<li>Development of collaborative processes with translation teams</li>
+</ul>
+<h4 id="localized-implementation">Localized implementation</h4>
+<ul>
+<li>Whether each service of the system is localized by its own development team</li>
+<li>Whether there is a dedicated localization team to do localization</li>
+<li>The collaboration mode between localization team and each service development team
+<ul>
+<li>Whether localization is done by code Open PR</li>
+<li>How each service development team does incremental localization</li>
+<li>Synchronization of knowledge on localization among teams</li>
+</ul>
+</li>
+<li>Development of technical standards for localization and promotion within the organization
+<ul>
+<li>Use of industry standard libraries (e.g. Unicode Common Locale Data Repository <a href="http://cldr.unicode.org/">CLDR</a>) for language-specific formats for dates, times, time zones, numbers, and currencies</li>
+<li>The locale identifier is in <code>language_region</code> format, e.g. en_US for United States English language.</li>
+</ul>
+</li>
+</ul>
+<h4 id="localized-multilingual-implementation">Localized multilingual implementation</h4>
+<ul>
+<li>Distinguish multilingualism by subdomains (gTLDS) or ccTLDs (e.g. ccTLDs). For example: <a href="https://en.wikipedia.org/">https://en.wikipedia.org/</a></li>
+<li>Distinguish multilingualism by URL paths. For example: <a href="https://localizejs.com/de/">https://localizejs.com/de/</a></li>
+<li>Multilingual by URL query parameters (not SEO friendly). e.g. <a href="https://locize.com/?lng=de">https://locize.com/?lng=de</a></li>
+<li>Multi-language by user language setting. E.g. <a href="https://myaccount.google.com/language">https://myaccount.google.com/language</a></li>
+<li>Multilingual by browser local storage. E.g. <a href="https://www.instagram.com/">https://www.instagram.com/</a></li>
+</ul>
+<h4 id="the-challenges-of-localization">The Challenges of Localization</h4>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/f655798a-fd23-5828-1b72-b6ecd6d83b7a.png" alt="" layout="fill"></amp-img></div></p>
+<p>The challenges of localization are mainly issues arising from differences in language, culture, writing habits and laws in different geographic areas, in the following categories.</p>
+<ul>
+<li>Text encoding: For text in most Western European languages, ASCII character encoding is sufficient. However, languages that use non-Latin alphabets (e.g. Russian, Chinese, Hindi and Korean) require a larger character encoding, such as Unicode.</li>
+<li>Singular and plural: Different languages have different forms of singular and plural. The plural is used to represent a number that is &ldquo;not one&rdquo;. The singular and plural forms vary from language to language, with the most common plural form being used to represent numbers of two or greater. In some languages, it is also used to represent fractions, zeroes, negative numbers, or twos.</li>
+<li>Image translation: Images with text need to be translated.</li>
+<li>Dynamic data (data from the API): The data passed from the back-end to the front-end that is displayed on the interface needs to be localized. But it is a challenge to distinguish the source of this data, for example, although the data is sourced from the back-end, it may come from a database, it may come from a file, it may come from other internal services, or it may come from a third-party dependent service.</li>
+<li>Icons: Some icons that are highly recognizable in one region may look completely unrecognizable to users in other regions or be something else.</li>
+<li>Name/address: The order of the last name and first name, and the order in which addresses are written. For example, in Chinese, the last name comes first, then the first name.</li>
+<li>Gender: Some languages such as French place a lot of emphasis on gender.</li>
+<li>Phone: The format of phone calls varies from country to country.</li>
+<li>Voice: Inappropriate voices or cues may be offensive, and some countries are sensitive to the gender of the voice.</li>
+<li>Color: Colors and shades are associated with geographic regions or markets, for example, red in the U.S. indicates a decline and in the A-share indicates a rise.</li>
+<li>Units of Measure
+<ul>
+<li>Currency: Currency formatting must take into account the currency symbol, the position of the currency symbol and the position of the minus sign. Most currencies use the same decimal separator and thousands separator as the numbers in the regional or area setting. However, in some places this is not the case, for example in Switzerland, the decimal separator for the Swiss franc is a period.</li>
+<li>Date and time: The internationalization of date/time involves not only the geographical location (e.g. localized representation of calendar such as day of the week, month, etc.), but also the time zone (TimeZone, for UTC/GMT offsets). Time zones are not only geographically defined, but also politically defined. For example, China geographically spans 5 time zones, but only uses one unified time zone. Many other countries have &ldquo;daylight saving time&rdquo; and the difference between Berlin time and Beijing time is subject to change. Sometimes it is 7 hours (winter time), sometimes it is 6 hours (daylight saving time).</li>
+<li>Numbers: There are also differences in the way numbers are represented in different countries and regions. Factors that affect the representation of numbers include the representation of numeric characters, the representation of numeric symbols, the type of numbers, etc.</li>
+<li>Weight/length/physical units: Because of the differences in units, multiple geographical versions of the same set of data need to be converted.</li>
+<li>Business-related units of measurement: For example, different countries have different billing rules for their products. This requires business staff support to find out the corresponding position and give conversion rules.</li>
+</ul>
+</li>
+<li>Sentence length: German is usually longer than English, and Arabic requires more vertical space.</li>
+<li>Writing direction: In many languages it is left to right, but in Hebrew and Arabic it is right to left and in some Asian languages it is vertical.</li>
+<li>Punctuation: e.g. quotation marks (&quot;&quot;) in English, low quotation marks (,,&quot;) in German and quotation marks (&laquo;&raquo;) in French.</li>
+<li>Line breaks/splits: The rules of Asian CJK (Chinese, Japanese, Korean) character set languages are completely different from those of Western languages. For example, unlike most Western written languages, Chinese, Japanese, Korean and Thai do not necessarily use spaces to separate one word from the next. Thai does not even use punctuation.</li>
+<li>Case conversion: English has case conversion, while Chinese has no case distinction.</li>
+<li>Legal related: e.g. GDPR using personal data of EU citizens.</li>
+<li>Politics-related: For example, localization involves the display of flags and maps, which can easily cause major accidents if not handled properly.</li>
+<li>Sorting methods: For example, English is sorted alphabetically, while Chinese can be sorted in pinyin.</li>
+</ul>
+<h4 id="do-you-need-to-consider-seo">Do you need to consider SEO</h4>
+<p>If you are localizing a website for toC, you need to consider some things related to search engine optimization (SEO), such as this <a href="https://marketfinder.thinkwithgoogle.com/intl/en/guide/how-to-approach-i18n/#make-languages-easily-discoverable">How to approach an international strategy</a> mentions some key points.</p>
+<ul>
+<li>If you offer your site in multiple languages, use a single language for content and navigation on each page, and avoid side-by-side translations.</li>
+<li>Keep the content in each language on a separate URL and mark the language in the URL. For example, the URL <code>www.mysite.com/de/</code> would tell the user that the page is in German.</li>
+<li>Display the language you want to locate to Google via the hreflang meta tag. For example, <code>&lt;link rel=&quot;alternate&quot; href=&quot;http://example.com&quot; hreflang=&quot;en-us&quot; /&gt;</code>.</li>
+<li>Do not translate only the template text, but also the content within the template.</li>
+<li>do not use automatic translation exclusively, which can affect the user experience</li>
+<li>don&rsquo;t use cookies or scripting techniques to switch languages, Google crawlers can&rsquo;t index this content properly.</li>
+</ul>
+<h4 id="localization-of-product-design">Localization of product design</h4>
+<p>Using a more localized design for the same content in different geographies can lead to better results, as mentioned in the article <a href="http://www.woshipm.com/pd/4404611.html">Internationalization and Localization of Product Design</a> about the different presentation of Spotify&rsquo;s song covers in different countries.</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/165e3e02-74a9-a776-cc5a-cf8ef85f8f46.png" alt="" layout="fill"></amp-img></div></p>
+<h3 id="localization-under-microservices">Localization under Microservices</h3>
+<p>The localization process for a single application is relatively simple from an architectural point of view. However, many applications nowadays are microservice architectures with multiple teams collaborating on the development model. If individual teams are responsible for the localization of their respective services, there must be a unified localization committee to develop technical standards for localization.</p>
+<ul>
+<li>The identification of language markers.</li>
+<li>The design of language switching in front and back-end solutions.</li>
+<li>The design of translation automation process, etc.</li>
+</ul>
+<p>Or there is a dedicated localization team to implement localization, and this team will be responsible for solving the previous problems. The project I am involved in falls into the latter category. Our team completed the localization of nearly a dozen microservice subsystems for the entire large system, and these dozens of systems were handled by several large groups of multiple teams, so the collaborative process of such cross-functional requirements (CFR) across multiple teams is a complex task.</p>
+<h4 id="localized-technical-or-business-standards-development">Localized technical or business standards development</h4>
+<p>Prior to the implementation of localization, it is important to identify the relevant technical or operational standards, some of which are.</p>
+<ul>
+<li>Internationalization implementation standards for different technology stacks in front and back ends. Since there may be multiple technology stacks in microservices, each with its own internationalization implementation, the development of implementation standards for different technology stacks can help to use the same implementation across services.</li>
+<li>The determination of locale markers.
+<ul>
+<li>The possibility of storing language-related text in front-end or back-end static text extraction to files named by language identifiers, e.g. en.json for static text in English, and en_US.json for text related to US English (e.g. units of measure, dates, numbers, currency, etc.).</li>
+<li>The <code>language_region</code> format is uniformly used in remote service calls (front-end calls to back-end or back-end calls to other internal or external services), e.g. en_US stands for getting the localized version of the English language for the US region.</li>
+</ul>
+</li>
+<li>Language specific formats for dates, times, time zones, numbers and currencies use industry standard libraries. For example, using libraries that implement the <a href="https://en.wikipedia.org/wiki/Common_Locale_Data_Repository">CLDR</a> standard.</li>
+<li>Dynamic data type identification. Identifying, for example, which data comes from internal systems (databases or files); which comes from external systems; whether these dynamic data have internationalization capabilities; and how to localize them in stages.</li>
+<li>Localization of documents. Localization of electronic documents (PDF) or emails generated by the back-office system. If these documents are sent to clients, also consider whether to generate documents in the client&rsquo;s language preference.</li>
+<li>List of supported regions and languages. For example, whether the error page is entered when an unsupported country or language appears or whether the default regional or language localized version is displayed.</li>
+<li>The default region and default language.</li>
+<li>whether the region and language have a binding relationship.</li>
+<li>Whether the language switch needs to be saved to the user&rsquo;s personal information.</li>
+</ul>
+<h4 id="development-environment-and-business-processes">Development Environment and Business Processes</h4>
+<p>In fact, the most time-consuming part of localization for our team was the start-up of the local environment. With so many services involved and slight differences in the way different services are launched, and even wrong guidance documents, we needed to keep stepping on the toes to finish setting up the environment. In the end, our way of dealing with this was to contact the development teams, and each time we did the pre-localization of a service, we would ask the development team to help us set up the local environment.</p>
+<p>Another difficulty was our lack of understanding of the business. Since each service has a large number of components and pages, including dynamic data from different sources of back-end services, it was hard to figure out just by ourselves. In the end, when we did the pre-localization of this service, we would get business analysts from the development team to help us introduce the business processes involved in this service.</p>
+<h4 id="static-text-processing">Static text processing</h4>
+<ul>
+<li>Sorting through static text on the front and back ends to identify which systems have internationalization capabilities (initial language versions have had locale files extracted and internationalization libraries set up).</li>
+<li>Identifying where date, currency, and number formats occur and calling the industry standard libraries identified by the localization technical standards in those places.</li>
+<li>Identification of incremental static text translation processes, which need to be used to process new texts when they are added after the system has already been localized, using localization processes.</li>
+<li>Automated integration of translation platforms, where development teams use scripts or CI/CD streams to automatically upload and download files in the original and translated languages.</li>
+</ul>
+<h4 id="whether-to-store-language-and-region-settings">Whether to store language and region settings</h4>
+<p>Some internationalized sites have language or region switching designed as hyperlinks that allow users to access different language and region versions of the site, which do not require storing language or region configurations.</p>
+<p>Sites with user profile configuration generally offer to set the preferred language and region in the profile settings, so that users can synchronize the last set language or region when switching devices.</p>
+<p>If your site users switch devices infrequently, a simple process can store these configurations in the browser store. When the user switches devices, the default settings are automatically restored. The advantage of such a design is that it is simple, and it is easier to overtake to other solutions later. The specific design chosen needs to be combined with the specific business to choose.</p>
+<h4 id="localization-of-back-end-services">Localization of back-end services</h4>
+<p>Localization of back-end services involves the following four components.</p>
+<ul>
+<li>Static text. These can be read by walking through the code to find the relevant string.</li>
+<li>Databases, caches or files. Initial data that does not meet localization needs can be found by walking through the database initialization script, but for dynamically stored data, tables need to be designed to meet multilingual storage as well. For some resource files where translation is necessary there is also a need to provide multilingual versions and to adapt the code that uses the files.</li>
+<li>Remote calls to other internal services (RPC). The locale markers for internal service calls are part of the localization technology standards developed. For example, the <code>locale = en_US</code> HTTP header can be used to request pages in English for the United States.</li>
+<li>Generate documents (PDF or Email). Generated documents include the final language version of the template static text and dynamic data rendering. Especially when these documents and emails need to be sent to users, they need to be generated in the language that matches the user&rsquo;s language.</li>
+</ul>
+<p>If the technology stack of the back-end service is different, the localization team also needs to summarize the internationalization process for the different technology stacks of the back-end service and synchronize it with other development teams within the organization.</p>
+<h4 id="localization-of-third-party-services-and-resources">Localization of third-party services and resources</h4>
+<p>There are cases of calling external services in the backend service remote call. If you call external services, you need to confirm whether the external services support multi-language version first, and if they do, you can integrate them according to the docking documentation. If not, you need to contact the external service provider to determine the support plan.</p>
+<h4 id="release-process">Release Process</h4>
+<p>Since the implementation of localization involves the transformation of more than a dozen subservices, localization can be controlled by <a href="https://martinfowler.com/articles/feature-toggles.html">Feature Toggles</a> to be turned on or off in different environments. The tests affected by localization (unit tests, integration tests and UI tests) also need to be controlled via Feature Toggles so that the test suite of the original service is minimally affected.</p>
+<p>Once all services have been localized and implemented, the localized Feature Toggles for all services can be opened to bring the final version online.</p>
+<p>There are two designs to choose from regarding localized Feature Toggles.</p>
+<ul>
+<li>Centralized Feature Toggles. for example, a centralized feature configuration service can be built, and all localization-related services request this service to get the configuration switch status. The advantage is that localized features can be switched on and off in real time without going back online. The downside is that there is no flexibility to control the localized features of each service.</li>
+<li>Independent Feature Toggles: In contrast to centralized, each service sets its own localized Feature Toggles for flexible decoupling, but the downside is that each switch requires a new release to bring a single service online.</li>
+</ul>
+<h3 id="localization-under-micro-front-end-architecture">Localization under micro front-end architecture</h3>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/f57bbd44-f288-c81a-9f26-a55b767c6044.png" alt="" layout="fill"></amp-img></div></p>
+<p>As the above figure shows a micro front-end architecture website, the whole website interface is composed of five service pages of A/B/C/D/E. The language switch button is on service A. When the user switches from English to Chinese, the other services B/C/D/E need to switch their respective interfaces to the Chinese language version.</p>
+<p>One way is to have the internationalization (i18n) library instance initialized by Service A and mounted on the browser window object when the browser loads the page, and Services B/C/D/E use the internationalization library instance object initialized by Service A. When switching languages, the internationalization instance object of Service A switches the language of all services.</p>
+<p>The locale files for each service can be loaded into the browser uniformly by Service A. The advantage of this approach is that we know when the last language file is loaded, which means that the localization of all services on the whole page is initialized and the user can switch languages normally.</p>
+<h3 id="localized-testing">Localized testing</h3>
+<p>Localization testing verifies that the application or website content meets the language, cultural and geographical requirements of a particular country or region.</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/1b30e009-c4bb-0d8d-f148-82ac680671e9.png" alt="" layout="fill"></amp-img></div></p>
+<p>For more details, see this article <a href="https://levelup.gitconnected.com/localization-testing-9b8db20fb62f">Localization testing: why and how to do it</a>.</p>
+<h3 id="localization-platform">Localization Platform</h3>
+<p>A very important piece of localization is the selection of a suitable translation management platform (TMS), which generally has the following function points.</p>
+<ul>
+<li>Glossary: A glossary of specialized brand terms or domain terms that can help translators more accurately translate specialized language related to a product or market.</li>
+<li>Translation Memory (TM): TM is a database for storing strings of previously translated content. Translations are reused for the same or similar content. This ensures consistency of translations.</li>
+<li>Context Editor (In-Context Editor): This editor crawls website pages and allows translators to understand the context of the entire page, helping to improve the quality of the translation.</li>
+<li>Machine Translations (Machine Translations): most TMS platforms are docked to some machine translation platforms (such as Google Translate), which can automatically translate the target language and are suitable for developers.</li>
+<li>Human Translations: Professional human translation services can be ordered from the TMS platform. However, there are also features such as Crowdin, which provides localized translation collaboration for open source projects, and anyone can participate in this project for free, and the translated text with high votes will be used first.</li>
+</ul>
+<p>Major localization platforms.</p>
+<ul>
+<li><a href="https://crowdin.com/">Crowdin</a></li>
+<li><a href="https://lokalise.com/">Lokalise</a></li>
+<li><a href="https://localizejs.com">localizejs</a></li>
+<li><a href="https://phrase.com/">Phrase</a></li>
+</ul>
+<p>This concludes some introductions to internationalization and the basic process of localization. Localization is a complex task, and the biggest difficulty is <strong>not knowing enough about the target language and culture</strong>. But after you&rsquo;ve read this article, I hope it will give you more confidence to do localization-related work.</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

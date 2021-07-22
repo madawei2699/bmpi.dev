@@ -6,7 +6,21 @@
     <description>Recent content on Build My Passive Income</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 14 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>International(i18n) and Localization(L10n)</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/en/dev/i18n-l10n/</link>
+      <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/en/dev/i18n-l10n/</guid>
+      <description>This post shares my experience in implementing internationalization and localization in projects.</description>
+    </item>
+    
     <item>
       <title>Adventures in Serverless Application Development</title>
       

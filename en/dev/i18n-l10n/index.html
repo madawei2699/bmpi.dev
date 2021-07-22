@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="Dawei Ma">
+  
+  <meta name="description" content="This post shares my experience in implementing internationalization and localization in projects.">
+  
+  
+  
+  <meta name="keywords" content="life,dev,trade,passive income,money,developer,Self-management,IT technology,investment transactions">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="International(i18n) and Localization(L10n)"/>
+  <meta name="twitter:description" content="This post shares my experience in implementing internationalization and localization in projects."/>
+  
+  <meta property="twitter:image" content="https://img.bmpi.dev/9adbc2f4-7fa4-0f67-046b-f135c4b117b7.png" />
+  
+
+  
+  <meta property="og:title" content="International(i18n) and Localization(L10n)" />
+<meta property="og:description" content="This post shares my experience in implementing internationalization and localization in projects." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/en/dev/i18n-l10n/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2021-07-22T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-07-22T22:46:23&#43;08:00" />
+
+
+  
+  <meta property="og:image" content="https://img.bmpi.dev/9adbc2f4-7fa4-0f67-046b-f135c4b117b7.png" />
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "International(i18n) and Localization(L10n)",
+      
+      "image": "https://img.bmpi.dev/9adbc2f4-7fa4-0f67-046b-f135c4b117b7.png",
+      
+      "datePublished": "2021-07-22T00:00:00Z",
+      "dateModified": "2021-07-22T22:46:23+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "Dawei Ma"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/en/dev/i18n-l10n/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/mdw2.png"
+        }
+      },
+      "description": "This post shares my experience in implementing internationalization and localization in projects.",
+      "keywords": ["i18n", "l10n"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/en/dev/i18n-l10n/">
+  
+  <title>
+  International(i18n) and Localization(L10n) · Build My Passive Income
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/en/dev/i18n-l10n/">
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.deacf4638e988eb7ad13026417a95fe49dbb6368f04ffe5ffa15de11c942ed6c.css" integrity="sha256-3qz0Y46YjretEwJkF6lf5J27Y2jwT/5f&#43;hXeEclC7Ww="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/flying-pages.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="icon" type="image/png" href="https://www.bmpi.dev/images/f3/favicon-32x32.png"
+    sizes="32x32">
+  <link rel="icon" type="image/png" href="https://www.bmpi.dev/images/f3/favicon-16x16.png"
+    sizes="16x16">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/en/amp/dev/i18n-l10n/" title="Build My Passive Income" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css" media="screen" />
+
+  
+  <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=600a642fe0b9b900111a7f08&product=inline-share-buttons' async='async'></script>
+  
+
+  
+
+  
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "7lo5f5xbjs");
+  </script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://www.bmpi.dev/en">
+      Build My Passive Income
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/self/">Self</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/dev/">Dev</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/money/">Money</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/project/">Project</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/goal/">Goal</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/">Chinese</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">International(i18n) and Localization(L10n)</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2021-07-22T00:00:00Z'>
+                2021-07-22
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              20:9
+              
+            </span>
+            
+            <span class="post-word-count"> | 4426 words | </span>
+            <span id="post-views"></span> views
+            
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/en/tags/i18n/">i18n</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/l10n/">l10n</a></div>
+
+        </div>
+      </header>
+
+      <div class="article">
+        
+        
+        
+        
+        <ul>
+<li><a href="#internationalizationi18n">internationalization(i18N)</a>
+<ul>
+<li><a href="#problems-to-be-solved-for-internationalization">Problems to be solved for internationalization</a></li>
+<li><a href="#text-encoding">Text Encoding</a></li>
+<li><a href="#locale">locale</a></li>
+<li><a href="#language-and-country-codes">Language and Country Codes</a></li>
+<li><a href="#gettext">gettext</a></li>
+<li><a href="#internationalization-process">Internationalization Process</a></li>
+</ul>
+</li>
+<li><a href="#localizationl10n">Localization(L10N)</a>
+<ul>
+<li><a href="#localization-process">Localization Process</a></li>
+<li><a href="#develop-a-localization-strategy">Develop a localization strategy</a>
+<ul>
+<li><a href="#region-and-language">Region and Language</a></li>
+<li><a href="#add-new-regionlanguageservice">Add new region/language/service</a></li>
+<li><a href="#incremental-localization">Incremental Localization</a></li>
+<li><a href="#management-of-translation">Management of translation</a></li>
+<li><a href="#localized-implementation">Localized implementation</a></li>
+<li><a href="#localized-multilingual-implementation">Localized multilingual implementation</a></li>
+<li><a href="#the-challenges-of-localization">The Challenges of Localization</a></li>
+<li><a href="#do-you-need-to-consider-seo">Do you need to consider SEO</a></li>
+<li><a href="#localization-of-product-design">Localization of product design</a></li>
+</ul>
+</li>
+<li><a href="#localization-under-microservices">Localization under Microservices</a>
+<ul>
+<li><a href="#localized-technical-or-business-standards-development">Localized technical or business standards development</a></li>
+<li><a href="#development-environment-and-business-processes">Development Environment and Business Processes</a></li>
+<li><a href="#static-text-processing">Static text processing</a></li>
+<li><a href="#whether-to-store-language-and-region-settings">Whether to store language and region settings</a></li>
+<li><a href="#localization-of-back-end-services">Localization of back-end services</a></li>
+<li><a href="#localization-of-third-party-services-and-resources">Localization of third-party services and resources</a></li>
+<li><a href="#release-process">Release Process</a></li>
+</ul>
+</li>
+<li><a href="#localization-under-micro-front-end-architecture">Localization under micro front-end architecture</a></li>
+<li><a href="#localized-testing">Localized testing</a></li>
+<li><a href="#localization-platform">Localization Platform</a></li>
+</ul>
+</li>
+</ul>
+<p>A successful product needs to go global through many stages, from the perspective of software development there are two main processes: internationalization and localization.</p>
+<p><img data-src="https://img.bmpi.dev/53875fc9-00ac-e8e2-8d91-06399755dcba.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>A language environment is the use of a specific language or language variant within a country or geographic region, which determines the format and parsing of dates, times, numbers and currencies, as well as the various measurement units and translated names of time zones, languages, countries and regions. <strong>Internationalization enables a piece of software to handle multiple language environments, localization enables a piece of software to support a specific regional language environment</strong>. This means that the process of globalization is to first make the software internationalized, and then to do the localization implementation so that it can support a specific language environment in a specific region.</p>
+<blockquote>
+<p>They are often abbreviated as i18n (18 means that there are 18 letters between i and n in the word &ldquo;internationalization&rdquo;) and L10n, respectively, due to the length of their single words, using a capital L to distinguish the i in i18n and to make it easy to distinguish the lowercase l from the 1.(<a href="https://en.wikipedia.org/wiki/Internationalization_and_localization">Wikipedia</a>)</p>
+</blockquote>
+<h2 id="internationalizationi18n">internationalization(i18N)</h2>
+<h3 id="problems-to-be-solved-for-internationalization">Problems to be solved for internationalization</h3>
+<ul>
+<li>The ability to display text in the user&rsquo;s native language.</li>
+<li>Ability to enter text in the user&rsquo;s native language.</li>
+<li>Ability to process text in the user&rsquo;s native language in a specific encoding.</li>
+</ul>
+<h3 id="text-encoding">Text Encoding</h3>
+<p>The Unicode character set can display almost every character known to man in code points ranging from 0 to 10FFFF (hexadecimal). It requires at least 21 bits for storage. The text encoding system UTF-8 adapts Unicode code points to a reasonable 8-bit data stream and is compatible with the ASCII data processing system.UTF stands for Unicode Transformation Format.</p>
+<p>Since 2009, UTF-8 has been the dominant encoding form on the World Wide Web. As of November 2019, UTF-8 is used in 94.3% of all web pages (some of which are ASCII only, as it is a subset of UTF-8), and 96% of the top 1000 pages. Therefore, UTF-8 encoding is recommended for internationalization.</p>
+<p>This article <a href="https://mp.weixin.qq.com/s/j5hfWOBsOMYcQuMG36zqNA">Internationalization of IT products is never enough to &ldquo;support English&rdquo;</a> mentions that some GBK-encoded texts have many The text that &ldquo;looks the same&rdquo; is actually slightly different. However, in order to save space in Unicode, the same Code Point is assigned to them.</p>
+<p><img data-src="https://img.bmpi.dev/274d1394-df55-c0cb-331c-635979581c65.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>How can we distinguish these identical characters with the same code (displaying a character in a different glyph, i.e. the same character)? This requires the help of locale.</p>
+<blockquote>
+<p>When calculating the number of Chinese characters, it is usually done by character form, i.e., simplified, traditional, variant, new, old, etc., of a character representing the same phonetic meaning. This way of counting is in fact counting variants. Therefore, the number of glyphs included in large dictionaries has long been wrongly regarded as the size of the Chinese character system.(<a href="https://en.wikipedia.org/wiki/Grapheme">Wikipedia</a>)</p>
+</blockquote>
+<h3 id="locale">locale</h3>
+<p>A locale is the language environment of the software at runtime, which includes Language, Territory and Codeset. A locale is written in the following format: Language[_Territory[. UTF8. In Linux, a locale consists of the following parts.</p>
+<ul>
+<li>LC_COLLATE: Controls character sorting.</li>
+<li>LC_CTYPE: controls the character handling function in handling upper and lower case or determining if it is a character.</li>
+<li>LC_MESSAGES: format of prompt messages.</li>
+<li>LC_MONETARY: format of currency.</li>
+<li>LC_NUMERIC: the format of the number.</li>
+<li>LC_TIME: the format of time.</li>
+</ul>
+<p>If your locale is en_US.UTF8, you must change it to zh_CN.UTF8 to display Chinese correctly. All supported locales are stored in the <code>/usr/share/locale</code> directory of the macOS operating system.</p>
+<p><img data-src="https://img.bmpi.dev/b40d3f61-046a-df48-735f-b27ec188a3e8.png" alt="" class="lazyload" loading="lazy"/></p>
+<h3 id="language-and-country-codes">Language and Country Codes</h3>
+<p>The same language may have some subtle differences in different countries and regions, for example, there are some differences between American English and British English. The same country may also have multiple languages, for example, China has simplified and traditional languages. In the introduction to locale above we saw the use of <code>language_region</code> to express the exact language of a country.</p>
+<p>For countries and languages ISO has developed corresponding standard codes <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a> and <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1</a>.</p>
+<p>The browser uses the language code to send the name of the language accepted by the browser in the <code>Accept-Language</code> HTTP header. For example: it, de-at, es, pt-br.</p>
+<h3 id="gettext">gettext</h3>
+<p>GNU gettext is the GNU Internationalization and Localization (i18n) library, which is often used to write multilingualization (M17N) programs. Many programming languages such as C, C++, Python, PHP, Rust, Elixir, etc. support the use of gettext from within the language.</p>
+<p>The following is the flow of how Java calls gettext to complete internationalization.</p>
+<p><img data-src="https://img.bmpi.dev/4a7179b3-ccae-ca0e-8554-1cb19a753e7d.png" alt="" class="lazyload" loading="lazy"/></p>
+<ul>
+<li>xgettext scans the source code to extract the input strings for the i18n functions tr(), trc(), and trn() and creates a pot file containing all the source language strings. The object that the translator needs to work with is the .po file, which is generated by the msginit program from the .pot template file.</li>
+<li>msgmerge merges the strings into a po file containing the translations for a single locale.</li>
+<li>msgfmt is used to generate Java class files that inherit from the Java <code>ResourceBundle</code> class.</li>
+</ul>
+<p>The following diagram shows the flow of internationalization in PHP using gettext.</p>
+<p><img data-src="https://img.bmpi.dev/5da7482c-d121-958e-606e-ff36aded4a1f.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>Elixir implements i18n&rsquo;s directory structure using gettext.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">priv/gettext
+└─ en_US
+|  └─ LC_MESSAGES
+|     ├─ default.po
+|     └─ errors.po
+└─ it
+   └─ LC_MESSAGES
+      ├─ default.po
+      └─ errors.po
+</code></pre></div><h3 id="internationalization-process">Internationalization Process</h3>
+<p>The process of using gettext is a typical process of making an application support i18n internationalization.</p>
+<ol>
+<li>Configure the i18n framework. i18n framework automatically obtains the relevant language files by the language identifier of the system or browser (in the case of web applications). For example, gettext uses a file with .mo suffix, while Javascript is usually a .json file and Java is a .properties file.</li>
+<li>extract the hard-coded source language text. Call the i18n function at the hard-coded place. For this part can be extracted manually, or automatically through a program or plugin (e.g. i18next internationalization framework for Javascript has i18next-scanner).</li>
+<li>finally implement <strong>localization</strong>. Translate (either manually or by machine translation, there are also relevant translation platforms that can be integrated) these extracted files in the language of the country to be supported.</li>
+</ol>
+<h2 id="localizationl10n">Localization(L10N)</h2>
+<h3 id="localization-process">Localization Process</h3>
+<p><img data-src="https://img.bmpi.dev/9adbc2f4-7fa4-0f67-046b-f135c4b117b7.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>A typical localization flow chart is shown in the figure above. Among the parties involved are.</p>
+<ul>
+<li>Dev Team: Developers make the system internationalized and deploy the machine-translated version of the multilingual version to the integration environment for testers to test, and can build an automated translation integration pipeline.</li>
+<li>Market Team: Confirm the market and supported languages of the product, organize the glossary of terms involved in the product, and purchase professional translation services to determine the final multilingual translated version. In the case of large companies, there may be a dedicated globalization team to do this work.</li>
+<li>Translation management platform (TMS): completes the management of translation languages, generally with specific API interfaces or SDK development kits that can be integrated into CI/CD environments and can automate the upload and download of source and translation language files. It also has a management interface for translators to modify and determine the final version of the translation. Can provide multiple machine translation services, as well as provide human translation for purchase or complete human translation in an open source collaborative manner.</li>
+</ul>
+<h3 id="develop-a-localization-strategy">Develop a localization strategy</h3>
+<h4 id="region-and-language">Region and Language</h4>
+<p>This piece begins with these basic antecedent considerations.</p>
+<ul>
+<li>Business implications of region</li>
+<li>Default region of the user</li>
+<li>Default language of the locale</li>
+<li>Whether different regions use the same system</li>
+<li>Whether to support users to switch locales</li>
+<li>Whether the user can belong to multiple locales</li>
+<li>Whether there is a one-to-one relationship between locale and country</li>
+<li>Mapping between locale and language</li>
+<li>Is there a linkage between locale and language (can the user see all languages supported by all locales)</li>
+<li>Whether language switching needs to be saved to the user&rsquo;s personal information</li>
+<li>Whether the user&rsquo;s default language needs to be set by the user&rsquo;s environment language identifier (OS or browser)</li>
+<li>Whether the <strong>service is deployed in multiple geographies and whether the data is isolated in multiple geographies</strong></li>
+</ul>
+<h4 id="add-new-regionlanguageservice">Add new region/language/service</h4>
+<ul>
+<li>Whether the system can support the process of adding new regions and new regions</li>
+<li>Whether the system can support the process of adding new languages and the process of adding new languages</li>
+<li>The process of localization when adding subservices to the system</li>
+</ul>
+<h4 id="incremental-localization">Incremental Localization</h4>
+<ul>
+<li>Localization process when new pages or components appear when localization is implemented</li>
+</ul>
+<h4 id="management-of-translation">Management of translation</h4>
+<ul>
+<li>Whether you need a translation management platform (TMS)</li>
+<li>Selection of Translation Management Platform</li>
+<li>Integration of translation management platform</li>
+<li>Whether to subscribe to professional translation services</li>
+<li>Development of collaborative processes with translation teams</li>
+</ul>
+<h4 id="localized-implementation">Localized implementation</h4>
+<ul>
+<li>Whether each service of the system is localized by its own development team</li>
+<li>Whether there is a dedicated localization team to do localization</li>
+<li>The collaboration mode between localization team and each service development team
+<ul>
+<li>Whether localization is done by code Open PR</li>
+<li>How each service development team does incremental localization</li>
+<li>Synchronization of knowledge on localization among teams</li>
+</ul>
+</li>
+<li>Development of technical standards for localization and promotion within the organization
+<ul>
+<li>Use of industry standard libraries (e.g. Unicode Common Locale Data Repository <a href="http://cldr.unicode.org/">CLDR</a>) for language-specific formats for dates, times, time zones, numbers, and currencies</li>
+<li>The locale identifier is in <code>language_region</code> format, e.g. en_US for United States English language.</li>
+</ul>
+</li>
+</ul>
+<h4 id="localized-multilingual-implementation">Localized multilingual implementation</h4>
+<ul>
+<li>Distinguish multilingualism by subdomains (gTLDS) or ccTLDs (e.g. ccTLDs). For example: <a href="https://en.wikipedia.org/">https://en.wikipedia.org/</a></li>
+<li>Distinguish multilingualism by URL paths. For example: <a href="https://localizejs.com/de/">https://localizejs.com/de/</a></li>
+<li>Multilingual by URL query parameters (not SEO friendly). e.g. <a href="https://locize.com/?lng=de">https://locize.com/?lng=de</a></li>
+<li>Multi-language by user language setting. E.g. <a href="https://myaccount.google.com/language">https://myaccount.google.com/language</a></li>
+<li>Multilingual by browser local storage. E.g. <a href="https://www.instagram.com/">https://www.instagram.com/</a></li>
+</ul>
+<h4 id="the-challenges-of-localization">The Challenges of Localization</h4>
+<p><img data-src="https://img.bmpi.dev/f655798a-fd23-5828-1b72-b6ecd6d83b7a.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>The challenges of localization are mainly issues arising from differences in language, culture, writing habits and laws in different geographic areas, in the following categories.</p>
+<ul>
+<li>Text encoding: For text in most Western European languages, ASCII character encoding is sufficient. However, languages that use non-Latin alphabets (e.g. Russian, Chinese, Hindi and Korean) require a larger character encoding, such as Unicode.</li>
+<li>Singular and plural: Different languages have different forms of singular and plural. The plural is used to represent a number that is &ldquo;not one&rdquo;. The singular and plural forms vary from language to language, with the most common plural form being used to represent numbers of two or greater. In some languages, it is also used to represent fractions, zeroes, negative numbers, or twos.</li>
+<li>Image translation: Images with text need to be translated.</li>
+<li>Dynamic data (data from the API): The data passed from the back-end to the front-end that is displayed on the interface needs to be localized. But it is a challenge to distinguish the source of this data, for example, although the data is sourced from the back-end, it may come from a database, it may come from a file, it may come from other internal services, or it may come from a third-party dependent service.</li>
+<li>Icons: Some icons that are highly recognizable in one region may look completely unrecognizable to users in other regions or be something else.</li>
+<li>Name/address: The order of the last name and first name, and the order in which addresses are written. For example, in Chinese, the last name comes first, then the first name.</li>
+<li>Gender: Some languages such as French place a lot of emphasis on gender.</li>
+<li>Phone: The format of phone calls varies from country to country.</li>
+<li>Voice: Inappropriate voices or cues may be offensive, and some countries are sensitive to the gender of the voice.</li>
+<li>Color: Colors and shades are associated with geographic regions or markets, for example, red in the U.S. indicates a decline and in the A-share indicates a rise.</li>
+<li>Units of Measure
+<ul>
+<li>Currency: Currency formatting must take into account the currency symbol, the position of the currency symbol and the position of the minus sign. Most currencies use the same decimal separator and thousands separator as the numbers in the regional or area setting. However, in some places this is not the case, for example in Switzerland, the decimal separator for the Swiss franc is a period.</li>
+<li>Date and time: The internationalization of date/time involves not only the geographical location (e.g. localized representation of calendar such as day of the week, month, etc.), but also the time zone (TimeZone, for UTC/GMT offsets). Time zones are not only geographically defined, but also politically defined. For example, China geographically spans 5 time zones, but only uses one unified time zone. Many other countries have &ldquo;daylight saving time&rdquo; and the difference between Berlin time and Beijing time is subject to change. Sometimes it is 7 hours (winter time), sometimes it is 6 hours (daylight saving time).</li>
+<li>Numbers: There are also differences in the way numbers are represented in different countries and regions. Factors that affect the representation of numbers include the representation of numeric characters, the representation of numeric symbols, the type of numbers, etc.</li>
+<li>Weight/length/physical units: Because of the differences in units, multiple geographical versions of the same set of data need to be converted.</li>
+<li>Business-related units of measurement: For example, different countries have different billing rules for their products. This requires business staff support to find out the corresponding position and give conversion rules.</li>
+</ul>
+</li>
+<li>Sentence length: German is usually longer than English, and Arabic requires more vertical space.</li>
+<li>Writing direction: In many languages it is left to right, but in Hebrew and Arabic it is right to left and in some Asian languages it is vertical.</li>
+<li>Punctuation: e.g. quotation marks (&quot;&quot;) in English, low quotation marks (,,&quot;) in German and quotation marks (&laquo;&raquo;) in French.</li>
+<li>Line breaks/splits: The rules of Asian CJK (Chinese, Japanese, Korean) character set languages are completely different from those of Western languages. For example, unlike most Western written languages, Chinese, Japanese, Korean and Thai do not necessarily use spaces to separate one word from the next. Thai does not even use punctuation.</li>
+<li>Case conversion: English has case conversion, while Chinese has no case distinction.</li>
+<li>Legal related: e.g. GDPR using personal data of EU citizens.</li>
+<li>Politics-related: For example, localization involves the display of flags and maps, which can easily cause major accidents if not handled properly.</li>
+<li>Sorting methods: For example, English is sorted alphabetically, while Chinese can be sorted in pinyin.</li>
+</ul>
+<h4 id="do-you-need-to-consider-seo">Do you need to consider SEO</h4>
+<p>If you are localizing a website for toC, you need to consider some things related to search engine optimization (SEO), such as this <a href="https://marketfinder.thinkwithgoogle.com/intl/en/guide/how-to-approach-i18n/#make-languages-easily-discoverable">How to approach an international strategy</a> mentions some key points.</p>
+<ul>
+<li>If you offer your site in multiple languages, use a single language for content and navigation on each page, and avoid side-by-side translations.</li>
+<li>Keep the content in each language on a separate URL and mark the language in the URL. For example, the URL <code>www.mysite.com/de/</code> would tell the user that the page is in German.</li>
+<li>Display the language you want to locate to Google via the hreflang meta tag. For example, <code>&lt;link rel=&quot;alternate&quot; href=&quot;http://example.com&quot; hreflang=&quot;en-us&quot; /&gt;</code>.</li>
+<li>Do not translate only the template text, but also the content within the template.</li>
+<li>do not use automatic translation exclusively, which can affect the user experience</li>
+<li>don&rsquo;t use cookies or scripting techniques to switch languages, Google crawlers can&rsquo;t index this content properly.</li>
+</ul>
+<h4 id="localization-of-product-design">Localization of product design</h4>
+<p>Using a more localized design for the same content in different geographies can lead to better results, as mentioned in the article <a href="http://www.woshipm.com/pd/4404611.html">Internationalization and Localization of Product Design</a> about the different presentation of Spotify&rsquo;s song covers in different countries.</p>
+<p><img data-src="https://img.bmpi.dev/165e3e02-74a9-a776-cc5a-cf8ef85f8f46.png" alt="" class="lazyload" loading="lazy"/></p>
+<h3 id="localization-under-microservices">Localization under Microservices</h3>
+<p>The localization process for a single application is relatively simple from an architectural point of view. However, many applications nowadays are microservice architectures with multiple teams collaborating on the development model. If individual teams are responsible for the localization of their respective services, there must be a unified localization committee to develop technical standards for localization.</p>
+<ul>
+<li>The identification of language markers.</li>
+<li>The design of language switching in front and back-end solutions.</li>
+<li>The design of translation automation process, etc.</li>
+</ul>
+<p>Or there is a dedicated localization team to implement localization, and this team will be responsible for solving the previous problems. The project I am involved in falls into the latter category. Our team completed the localization of nearly a dozen microservice subsystems for the entire large system, and these dozens of systems were handled by several large groups of multiple teams, so the collaborative process of such cross-functional requirements (CFR) across multiple teams is a complex task.</p>
+<h4 id="localized-technical-or-business-standards-development">Localized technical or business standards development</h4>
+<p>Prior to the implementation of localization, it is important to identify the relevant technical or operational standards, some of which are.</p>
+<ul>
+<li>Internationalization implementation standards for different technology stacks in front and back ends. Since there may be multiple technology stacks in microservices, each with its own internationalization implementation, the development of implementation standards for different technology stacks can help to use the same implementation across services.</li>
+<li>The determination of locale markers.
+<ul>
+<li>The possibility of storing language-related text in front-end or back-end static text extraction to files named by language identifiers, e.g. en.json for static text in English, and en_US.json for text related to US English (e.g. units of measure, dates, numbers, currency, etc.).</li>
+<li>The <code>language_region</code> format is uniformly used in remote service calls (front-end calls to back-end or back-end calls to other internal or external services), e.g. en_US stands for getting the localized version of the English language for the US region.</li>
+</ul>
+</li>
+<li>Language specific formats for dates, times, time zones, numbers and currencies use industry standard libraries. For example, using libraries that implement the <a href="https://en.wikipedia.org/wiki/Common_Locale_Data_Repository">CLDR</a> standard.</li>
+<li>Dynamic data type identification. Identifying, for example, which data comes from internal systems (databases or files); which comes from external systems; whether these dynamic data have internationalization capabilities; and how to localize them in stages.</li>
+<li>Localization of documents. Localization of electronic documents (PDF) or emails generated by the back-office system. If these documents are sent to clients, also consider whether to generate documents in the client&rsquo;s language preference.</li>
+<li>List of supported regions and languages. For example, whether the error page is entered when an unsupported country or language appears or whether the default regional or language localized version is displayed.</li>
+<li>The default region and default language.</li>
+<li>whether the region and language have a binding relationship.</li>
+<li>Whether the language switch needs to be saved to the user&rsquo;s personal information.</li>
+</ul>
+<h4 id="development-environment-and-business-processes">Development Environment and Business Processes</h4>
+<p>In fact, the most time-consuming part of localization for our team was the start-up of the local environment. With so many services involved and slight differences in the way different services are launched, and even wrong guidance documents, we needed to keep stepping on the toes to finish setting up the environment. In the end, our way of dealing with this was to contact the development teams, and each time we did the pre-localization of a service, we would ask the development team to help us set up the local environment.</p>
+<p>Another difficulty was our lack of understanding of the business. Since each service has a large number of components and pages, including dynamic data from different sources of back-end services, it was hard to figure out just by ourselves. In the end, when we did the pre-localization of this service, we would get business analysts from the development team to help us introduce the business processes involved in this service.</p>
+<h4 id="static-text-processing">Static text processing</h4>
+<ul>
+<li>Sorting through static text on the front and back ends to identify which systems have internationalization capabilities (initial language versions have had locale files extracted and internationalization libraries set up).</li>
+<li>Identifying where date, currency, and number formats occur and calling the industry standard libraries identified by the localization technical standards in those places.</li>
+<li>Identification of incremental static text translation processes, which need to be used to process new texts when they are added after the system has already been localized, using localization processes.</li>
+<li>Automated integration of translation platforms, where development teams use scripts or CI/CD streams to automatically upload and download files in the original and translated languages.</li>
+</ul>
+<h4 id="whether-to-store-language-and-region-settings">Whether to store language and region settings</h4>
+<p>Some internationalized sites have language or region switching designed as hyperlinks that allow users to access different language and region versions of the site, which do not require storing language or region configurations.</p>
+<p>Sites with user profile configuration generally offer to set the preferred language and region in the profile settings, so that users can synchronize the last set language or region when switching devices.</p>
+<p>If your site users switch devices infrequently, a simple process can store these configurations in the browser store. When the user switches devices, the default settings are automatically restored. The advantage of such a design is that it is simple, and it is easier to overtake to other solutions later. The specific design chosen needs to be combined with the specific business to choose.</p>
+<h4 id="localization-of-back-end-services">Localization of back-end services</h4>
+<p>Localization of back-end services involves the following four components.</p>
+<ul>
+<li>Static text. These can be read by walking through the code to find the relevant string.</li>
+<li>Databases, caches or files. Initial data that does not meet localization needs can be found by walking through the database initialization script, but for dynamically stored data, tables need to be designed to meet multilingual storage as well. For some resource files where translation is necessary there is also a need to provide multilingual versions and to adapt the code that uses the files.</li>
+<li>Remote calls to other internal services (RPC). The locale markers for internal service calls are part of the localization technology standards developed. For example, the <code>locale = en_US</code> HTTP header can be used to request pages in English for the United States.</li>
+<li>Generate documents (PDF or Email). Generated documents include the final language version of the template static text and dynamic data rendering. Especially when these documents and emails need to be sent to users, they need to be generated in the language that matches the user&rsquo;s language.</li>
+</ul>
+<p>If the technology stack of the back-end service is different, the localization team also needs to summarize the internationalization process for the different technology stacks of the back-end service and synchronize it with other development teams within the organization.</p>
+<h4 id="localization-of-third-party-services-and-resources">Localization of third-party services and resources</h4>
+<p>There are cases of calling external services in the backend service remote call. If you call external services, you need to confirm whether the external services support multi-language version first, and if they do, you can integrate them according to the docking documentation. If not, you need to contact the external service provider to determine the support plan.</p>
+<h4 id="release-process">Release Process</h4>
+<p>Since the implementation of localization involves the transformation of more than a dozen subservices, localization can be controlled by <a href="https://martinfowler.com/articles/feature-toggles.html">Feature Toggles</a> to be turned on or off in different environments. The tests affected by localization (unit tests, integration tests and UI tests) also need to be controlled via Feature Toggles so that the test suite of the original service is minimally affected.</p>
+<p>Once all services have been localized and implemented, the localized Feature Toggles for all services can be opened to bring the final version online.</p>
+<p>There are two designs to choose from regarding localized Feature Toggles.</p>
+<ul>
+<li>Centralized Feature Toggles. for example, a centralized feature configuration service can be built, and all localization-related services request this service to get the configuration switch status. The advantage is that localized features can be switched on and off in real time without going back online. The downside is that there is no flexibility to control the localized features of each service.</li>
+<li>Independent Feature Toggles: In contrast to centralized, each service sets its own localized Feature Toggles for flexible decoupling, but the downside is that each switch requires a new release to bring a single service online.</li>
+</ul>
+<h3 id="localization-under-micro-front-end-architecture">Localization under micro front-end architecture</h3>
+<p><img data-src="https://img.bmpi.dev/f57bbd44-f288-c81a-9f26-a55b767c6044.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>As the above figure shows a micro front-end architecture website, the whole website interface is composed of five service pages of A/B/C/D/E. The language switch button is on service A. When the user switches from English to Chinese, the other services B/C/D/E need to switch their respective interfaces to the Chinese language version.</p>
+<p>One way is to have the internationalization (i18n) library instance initialized by Service A and mounted on the browser window object when the browser loads the page, and Services B/C/D/E use the internationalization library instance object initialized by Service A. When switching languages, the internationalization instance object of Service A switches the language of all services.</p>
+<p>The locale files for each service can be loaded into the browser uniformly by Service A. The advantage of this approach is that we know when the last language file is loaded, which means that the localization of all services on the whole page is initialized and the user can switch languages normally.</p>
+<h3 id="localized-testing">Localized testing</h3>
+<p>Localization testing verifies that the application or website content meets the language, cultural and geographical requirements of a particular country or region.</p>
+<p><img data-src="https://img.bmpi.dev/1b30e009-c4bb-0d8d-f148-82ac680671e9.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>For more details, see this article <a href="https://levelup.gitconnected.com/localization-testing-9b8db20fb62f">Localization testing: why and how to do it</a>.</p>
+<h3 id="localization-platform">Localization Platform</h3>
+<p>A very important piece of localization is the selection of a suitable translation management platform (TMS), which generally has the following function points.</p>
+<ul>
+<li>Glossary: A glossary of specialized brand terms or domain terms that can help translators more accurately translate specialized language related to a product or market.</li>
+<li>Translation Memory (TM): TM is a database for storing strings of previously translated content. Translations are reused for the same or similar content. This ensures consistency of translations.</li>
+<li>Context Editor (In-Context Editor): This editor crawls website pages and allows translators to understand the context of the entire page, helping to improve the quality of the translation.</li>
+<li>Machine Translations (Machine Translations): most TMS platforms are docked to some machine translation platforms (such as Google Translate), which can automatically translate the target language and are suitable for developers.</li>
+<li>Human Translations: Professional human translation services can be ordered from the TMS platform. However, there are also features such as Crowdin, which provides localized translation collaboration for open source projects, and anyone can participate in this project for free, and the translated text with high votes will be used first.</li>
+</ul>
+<p>Major localization platforms.</p>
+<ul>
+<li><a href="https://crowdin.com/">Crowdin</a></li>
+<li><a href="https://lokalise.com/">Lokalise</a></li>
+<li><a href="https://localizejs.com">localizejs</a></li>
+<li><a href="https://phrase.com/">Phrase</a></li>
+</ul>
+<p>This concludes some introductions to internationalization and the basic process of localization. Localization is a complex task, and the biggest difficulty is <strong>not knowing enough about the target language and culture</strong>. But after you&rsquo;ve read this article, I hope it will give you more confidence to do localization-related work.</p>
+
+
+        
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          更新时间:
+          
+          
+          
+          
+          
+              今日
+          
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/4a2a4bb79f9c262720992ad8e3fe0101ea4e9e46">4a2a4bb</a>
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">CC BY-NC-ND 4.0</a></p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        <a href="https://twitter.com/madawei2699"><img style="box-shadow:none !important;width: 200px;" src="https://img.shields.io/twitter/follow/madawei2699?style=social"></a>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">Related posts recommended</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="sharethis-inline-reaction-buttons"></div>
+<div class="sharethis-inline-share-buttons"></div>
+
+        <div style="color: darkgreen;">
+  <form style="border:1px dashed #ccc;padding:10px 10px;margin: 10px auto;text-align:center;width: 95%;" action="https://tinyletter.com/i365" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/i365', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+    
+    <span>Get weekly updates, right in your mailbox</span>
+    
+    <p style="margin: 10px 0;"><input type="text" style="width:240px;text-align: center;" name="email" id="tlemail" placeholder="Email"/></p>
+    <input type="hidden" value="1" name="embed"/>
+    
+    <input type="submit" value="Subscribe" />
+    
+  </form>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://utteranc.es/client.js"
+  repo= "bmpi-dev/bmpi.dev"
+  issue-term="title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script>
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div style="margin-bottom: 10px;">
+      <a href="https://wiki.bmpi.dev/">Wiki</a>
+      ⚔️
+      <a href="https://talk.bmpi.dev/">Talk</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/invest/">Invest</a>
+      ⚔️
+      <a href="https://tg.bmpi.dev">Think</a>
+    </div>
+    <div>
+      <a href= /en/affiliate >Affiliate</a>
+      ⚡️
+      <a href= /en/tool >Tool</a>
+      ⚡️
+      <a href= /en/link >Link</a>
+    </div>
+  </div>
+  <div class="footer-taxonomy">
+    <a href= /en/tags style="color: #B36D61;">Tags</a>
+    👈
+    <a href= /en/categories style="color: #FF8C31;">Categories</a>
+    👉
+    <a href= /en/series style="color: #519A73;">Series</a>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2021
+    
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154678195-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154678195-1');
+  </script>
+  
+
+  
+  <script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BHuwaXciWicBjh6HQS2tfudv6IYQD11K9u1NUj7nuaEV9NoDT7ns9JjgqyYTflUv-m3TlD7ELY84AHMfgmPXNgU');</script>
+  
+
+</body>
+
+</html>

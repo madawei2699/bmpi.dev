@@ -3,6 +3,66 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/en/</loc>
+    <lastmod>2021-07-22T22:46:23+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/i18n/</loc>
+    <lastmod>2021-07-22T22:46:23+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/i18n/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/i18n/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/dev/i18n-l10n/</loc>
+    <lastmod>2021-07-22T22:46:23+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/dev/i18n-l10n/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/dev/i18n-l10n/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/l10n/</loc>
+    <lastmod>2021-07-22T22:46:23+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/l10n/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/l10n/"
+                />
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/en/dev/guide-to-serverless/</loc>
     <lastmod>2021-02-14T16:04:53+08:00</lastmod>
     <xhtml:link
@@ -44,21 +104,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://www.bmpi.dev/en/tags/aws-ecs/"
-                />
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/en/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/"
                 />
   </url>
 
