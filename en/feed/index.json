@@ -1,7 +1,7 @@
 {
     "latest-post": {
         "url": "/en/dev/i18n-l10n/",
-        "title": "International(i18n) and Localization(L10n)",
+        "title": "Internationalization(i18n) and Localization(L10n)",
         "description": "This post shares my experience in implementing internationalization and localization in projects.",
         "publish-date": "2021-07-22 00:00:00 +0000 UTC"
     }
