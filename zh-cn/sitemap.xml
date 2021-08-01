@@ -3,13 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E4%BF%A1%E6%81%AF%E8%BE%93%E5%85%A5/</loc>
-    <lastmod>2021-07-25T22:49:47+08:00</lastmod>
+    <loc>https://www.bmpi.dev/tags/etf/</loc>
+    <lastmod>2021-08-01T09:41:41+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/series/%E6%8A%95%E8%B5%84%E5%AE%9E%E8%AF%81/</loc>
+    <lastmod>2021-08-01T09:41:41+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
+    <lastmod>2021-08-01T09:41:41+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/money/passive-income-protfolio/202107/</loc>
+    <lastmod>2021-08-01T09:41:41+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%AE%9A%E6%8A%95/</loc>
+    <lastmod>2021-08-01T09:41:41+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2021-07-25T22:49:47+08:00</lastmod>
+    <lastmod>2021-08-01T09:41:41+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -20,6 +40,16 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/categories/%E8%A2%AB%E5%8A%A8%E6%94%B6%E5%85%A5%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
+    <lastmod>2021-08-01T09:41:41+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E4%BF%A1%E6%81%AF%E8%BE%93%E5%85%A5/</loc>
+    <lastmod>2021-07-25T22:49:47+08:00</lastmod>
   </url>
 
   <url>
@@ -43,32 +73,7 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/etf/</loc>
-    <lastmod>2021-07-03T20:06:58+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/series/%E6%8A%95%E8%B5%84%E5%AE%9E%E8%AF%81/</loc>
-    <lastmod>2021-07-03T20:06:58+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
-    <lastmod>2021-07-03T20:06:58+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%AE%9A%E6%8A%95/</loc>
-    <lastmod>2021-07-03T20:06:58+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/money/passive-income-protfolio/202106/</loc>
-    <lastmod>2021-07-03T20:06:58+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/categories/%E8%A2%AB%E5%8A%A8%E6%94%B6%E5%85%A5%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
     <lastmod>2021-07-03T20:06:58+08:00</lastmod>
   </url>
 
