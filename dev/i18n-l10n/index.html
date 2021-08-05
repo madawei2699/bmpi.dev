@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/i18n-l10n/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2021-06-27T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-07-05T19:17:02&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2021-08-05T13:31:51&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://img.bmpi.dev/9adbc2f4-7fa4-0f67-046b-f135c4b117b7.png",
       
       "datePublished": "2021-06-27T00:00:00Z",
-      "dateModified": "2021-07-05T19:17:02+08:00",
+      "dateModified": "2021-08-05T13:31:51+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -246,11 +246,11 @@
               
               
               
-              37:2
+              37:33
               
             </span>
             
-            <span class="post-word-count"> | 8148 字 | </span>
+            <span class="post-word-count"> | 8262 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -281,6 +281,7 @@
 <li><a href="#%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%9B%BD%E5%AE%B6%E4%BB%A3%E7%A0%81">语言与国家代码</a></li>
 <li><a href="#gettext">gettext</a></li>
 <li><a href="#%E5%9B%BD%E9%99%85%E5%8C%96%E6%B5%81%E7%A8%8B">国际化流程</a></li>
+<li><a href="#%E5%9B%BD%E9%99%85%E5%8C%96%E6%A0%87%E5%87%86%E5%9C%A8java-jdk%E7%9A%84%E5%AE%9E%E7%8E%B0">国际化标准在Java JDK的实现</a></li>
 </ul>
 </li>
 <li><a href="#%E6%9C%AC%E5%9C%B0%E5%8C%96l10n">本地化（L10N）</a>
@@ -382,6 +383,8 @@
 <li>抽取硬编码的源语言文本。在硬编码的地方调用 i18n 函数。对于这部分可以人工抽取，也可以通过程序或者插件（如 Javascript 的 i18next 国际化框架有 i18next-scanner）自动抽取。</li>
 <li>最后实施<strong>本地化</strong>。翻译（可通过人工或机器翻译，也有相关的翻译平台可以集成）这些抽取出来的要支持的国家语言文件。</li>
 </ol>
+<h3 id="国际化标准在java-jdk的实现">国际化标准在Java JDK的实现</h3>
+<p>IETF 在软件国际化上有一个 BCP(Best Current Practice) 47 的实践，此实践里有 RFC 4647 与 RFC 5646 共同规定了国际化中语言标签（Language Tag）的定义及匹配标准。具体见我这个 <a href="https://talk.bmpi.dev/i18n_java/#/i18n">i18N in Java</a> 的 Session。</p>
 <h2 id="本地化l10n">本地化（L10N）</h2>
 <h3 id="本地化流程">本地化流程</h3>
 <p><img data-src="https://img.bmpi.dev/9adbc2f4-7fa4-0f67-046b-f135c4b117b7.png" alt="" class="lazyload" loading="lazy"/></p>
@@ -592,10 +595,10 @@
           
           
           
-              27天前
+              今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/12a1f45bcf226e6921dd289ca4602e044ca94355">12a1f45</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/6434cd6cbcd9b7a0f72b46e697169f2964f87b51">6434cd6</a>
         </div>
         
 
