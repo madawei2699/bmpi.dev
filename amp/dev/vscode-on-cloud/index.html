@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>云端 IDE</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/vscode-on-cloud/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/vscode-on-cloud\/",
+          "name": "vscode-on-cloud"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>云端 IDE</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2021-08-23T00:00:00Z'>
+                2021-08-23
+              </time>
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/aws/">AWS</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/pulumi/">Pulumi</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/vscode/">VSCode</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/aws-cloud9/">AWS Cloud9</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/github-codespaces/">GitHub Codespaces</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/ide/">IDE</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#%E4%BA%91%E7%AB%AF-ide">云端 IDE</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-vscode">为什么是 VSCode</a>
+<ul>
+<li><a href="#%E8%89%AF%E5%A5%BD%E7%9A%84%E8%AE%BE%E8%AE%A1">良好的设计</a></li>
+<li><a href="#%E8%B7%A8%E5%B9%B3%E5%8F%B0">跨平台</a></li>
+<li><a href="#%E5%BC%80%E6%BA%90">开源</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-aws-%E4%B8%8E-pulumi-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BA%91-ide">基于 AWS 与 Pulumi 搭建个人云 IDE</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E8%B4%B9%E7%94%A8">关于费用</a></li>
+<li><a href="#%E4%BA%91-ide-%E7%A0%94%E5%8F%91%E6%A8%A1%E5%BC%8F">云 IDE 研发模式</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0">参考文章</a></li>
+</ul>
+<p>前不久 GitHub 官方 Twitter 发了一个如下的 Tweet：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/0dd20034-d46f-8910-a6dc-cf71802979f4.png" alt="" layout="fill"></amp-img></div></p>
+<p>只要你在任何 GitHub Repo 页面上按下<code>.</code>键会自动跳转到<code>github.dev</code>的网站，此网站是一个网页版的 VSCode 并且会自动克隆下这个 Repo 的代码。在这个网页版的 VSCode 里你甚至可以安装一些特定的插件（无法安装需要外部依赖的插件），能更方便的阅读代码。因为这个网站是官方出品，这个 VSCode 已自动绑定了你的 GitHub 账户，开发者可以在里面阅读、编辑及提交代码，整个过程行云流水，甚至全程不需要打开本地的 IDE。此举直接干掉了 <a href="https://github.com/conwnet/github1s">github1s</a> 这个具备类似功能的开源项目。</p>
+<p>在浏览器写代码还能拥有桌面 IDE 的开发体验，是 IT 行业一直在追求的。VSCode 的团队负责人 Erich Gamma（JUnit 作者之一，《设计模式》作者之一，Eclipse 架构师） 在 2011 年入职微软后的工作内容就是：</p>
+<blockquote>
+<p>Envision new paradigms for online developer tooling that will be as successful as the IDE has been for the desktop.</p>
+</blockquote>
+<p>之后才有了 VSCode 的诞生。可以说 VSCode 从诞生之处就朝着云端 IDE 的方向去设计。</p>
+<p>为什么要使用云端 IDE？这源于本地开发环境的一些问题，比如：</p>
+<ul>
+<li>环境差异问题：如 Mac 与 Linux 就有一些差异，尤其是在 Mac 上使用基于 Linux 内核的流行技术如 Docker，会让整个体验变差。</li>
+<li>性能问题：本地的开发机器一般需要运行很多软件，如一些办公和通讯软件啥的，让本来就不高的性能捉襟见肘。</li>
+<li>稳定性问题：本地的开发机器启动时间长了就需要重启，每次重启后需要花费很多时间去设置相关的开发环境，浪费了大量时间。</li>
+<li>依赖问题：如果开发环境依赖一些特定的云基础设施，网络通信就会很麻烦。而在云主机上，天然与其他云基础设施在一个网络环境中，环境设置简单。</li>
+<li>网络问题：现代软件开发都是站在巨人的肩膀上，很多软件都依赖大量的库、框架和运行时，这些依赖下载需要快的网络速度。一般云主机的网络性能要好于家庭或办公网络。</li>
+<li>安全问题：代码或者密钥放在本地开发环境有泄漏的风险，比如开发人员的开发机器被盗后丢失了代码或者密钥。</li>
+<li>存储问题：本地开发机器的磁盘存储有限，扩展性也不好。而云主机的磁盘很容易扩容。</li>
+</ul>
+<p>而解决这些问题的终极办法就是把开发环境搬到云端，而在云端开发最重要的就是需要一个好的 IDE 支持，这也导致了行业对云端 IDE 强烈的需求。</p>
+<h2 id="云端-ide">云端 IDE</h2>
+<p>在说云端 IDE 前我们先了解下 IDE 的一些主要功能点，如下图所示：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/b203c603-cc39-3ee0-3ce4-9ed3d7022777.png" alt="" layout="fill"></amp-img></div></p>
+<p>一个优秀的 IDE 当然要让程序员写代码写的爽，看代码看的溜。而要达到这个目的，必不可少的要支持以下功能点：</p>
+<ul>
+<li>优秀的文本编辑功能，支持键盘自定义布局；</li>
+<li>代码提示功能，如语法高亮，代码跳转，错误提示等；</li>
+<li>调试功能；</li>
+<li>多编程语言支持；</li>
+<li>代码补全功能；</li>
+<li>代码重构功能；</li>
+<li>扩展能力，支持用户自定义或提供插件；</li>
+<li>好的生态。</li>
+</ul>
+<p>在桌面级 IDE 里，这些功能都不是事，有很多 IDE 支持这些功能，比如 Visual Studio、Eclipse、IntelliJ IDEA、NetBeans 及 Xcode 等。但以支持在线使用的维度看，这些老牌 IDE 都不行。</p>
+<p>早期行业里对云端 IDE 的要求也不高，所以有了大约三个大的类别的云端 IDE，如下图：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/6743ed9b-5ffa-3032-1e3e-12aa383e5ec6.png" alt="" layout="fill"></amp-img></div></p>
+<ul>
+<li>在线编辑器。以 CodePen 与 JSFiddle 为主的 Web 在线编辑器，可以方便的对前端页面做在线开发。但这距离桌面 IDE 的体验相差甚远。</li>
+<li>类 REPL。以 Repl.it 和 Jupyter 为主的在线 <a href="https://en.wikipedia.org/wiki/Read-eval-print_loop">REPL</a>。REPL 最多算桌面 IDE 支持众多功能中的一个点，它的使用场景适合一些编写一些验证类型的代码片段，距离工程化的代码开发体验还有很多路需要走。</li>
+<li>功能受限的云 IDE。以 AWS Cloud9 为主的云 IDE，这类云 IDE 已经能给予很好的代码开发体验了，甚至可以无缝使用云基础设施，很适合规模化的代码开发协作。但这类云 IDE 一般不具备扩展能力，比如无法安装一些插件。</li>
+</ul>
+<p>在上述功能受限的云 IDE 类别里面有一些基于 VSCode 而实现的云 IDE，比如 Github Codespaces 使用了 VSCode 结合 Azure 云服务器可以给予开发者桌面 IDE 的体验，也可以安装插件。同时在最受欢迎的开发者社区 StackOverflow 的一份 <a href="https://insights.stackoverflow.com/survey/2021">2021 Developer Survey</a> 调查问卷里的 <code>Integrated development environment(IDE)</code> 部分中（共八万多个开发者调查反馈），VSCode 以 71% 的高票（2019 年这个占比已经到了 50%）当选最受欢迎的 IDE：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/ef162e34-50e9-e7bd-e1aa-1de4b80a27b8.png" alt="" layout="fill"></amp-img></div></p>
+<p>看起来 VSCode 达到了云 IDE 想要实现的终极目标：<strong>与桌面级 IDE 一样的开发体验</strong>。这里的问题是为什么是 VSCode 呢？</p>
+<h2 id="为什么是-vscode">为什么是 VSCode</h2>
+<h3 id="良好的设计">良好的设计</h3>
+<p>VSCode 远程开发模式如下图所示：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/4c5f0a02-139f-1bb5-5dbd-46c1af97f60a.png" alt="" layout="fill"></amp-img></div></p>
+<p>通过 CS 架构设计让 VSCode 具备使用远程服务器或容器的能力，本地的 VSCode 只负责 UI 界面与主题的显示，其他的如插件、程序运行、终端进程与调试器都运行在远程服务器上。界面显示与计算分离的设计，这也是实现云 IDE 很重要的一点。</p>
+<p>CS 架构设计也体现在代码提示上，通过制定<code>Language Server Protocol</code>标准协议，VSCode 核心无需解析多种编程语言的 AST 或实现多个编程语言 Parser，而将这些功能委托给各语言的插件来实现，保证了核心非常小巧且稳定。</p>
+<p>同样的设计也体现在了调试器（Debugger）与<code>Debug Adaptor Protocol</code>标准协议上。</p>
+<p>更多的架构设计分析可以看我的这篇 <a href="https://www.bmpi.dev/dev/vscode-plugin-development-notes/">VSCode插件开发小记</a>。</p>
+<h3 id="跨平台">跨平台</h3>
+<p>VSCode 的前身是 <a href="https://github.com/Microsoft/monaco-editor">monaco-editor</a> 在线编辑器。作为一个 Web 软件，想要实现跨平台功能，就需要使用<code>Electron</code>技术。所以桌面级的 VSCode 和服务器端 Web 版的 VSCode 其实是一个代码库。</p>
+<p>正因为其是一个 Web 软件，才有了 <a href="https://github.com/cdr/code-server">code-server</a> 这个第三方 Repo 的出现，也才有了运行在浏览器里的 VSCode。这才导致了众多基于 VSCode 的云 IDE 的出现。</p>
+<h3 id="开源">开源</h3>
+<p><a href="https://github.com/microsoft/vscode">VSCode</a> 如果没有开源，结局可能大不相同。正是有了微软华丽的转身，对开源的热情拥抱，才打开了 VSCode 走向世界的大门，否则结局可能是沦落为微软众多内部项目的一员。</p>
+<h2 id="基于-aws-与-pulumi-搭建个人云-ide">基于 AWS 与 Pulumi 搭建个人云 IDE</h2>
+<p>由于 VSCode 的开源和 Web 特性，让我们可以快速搭建一个基于 VSCode 的个人云 IDE，功能对标 <a href="https://github.com/features/codespaces">Github Codespaces</a>，但比其便宜很多。</p>
+<p>我的实现见这个 <a href="https://github.com/bmpi-dev/code.bmpi.dev/tree/master/server">Repo</a>。架构如下：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/dafdc38a-8e97-7daa-d860-4ad78c4d182b.png" alt="" layout="fill"></amp-img></div></p>
+<p>前置条件：</p>
+<ol>
+<li>需要一个 AWS 账号且安装 AWS CLI，本地配置好 AWS Credentials。 AWS 账号需具备对 EC2 的一些操作权限；</li>
+<li>需要一个 <a href="https://www.pulumi.com/">Pulumi</a> 账号，并创建一个工程；(如果你对 Pulumi 不熟悉，可参考我这篇 <a href="https://www.bmpi.dev/dev/pulumi-aws-serverless-hugo-site-vists/">基于Serverless实现静态博客访问统计功能</a> 文章里的介绍)</li>
+</ol>
+<p>使用非常简单（得益于 Pulumi 和 AWS CLI 的强大功能）：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/bmpi-dev/code.bmpi.dev.git
+<span style="color:#fff;font-weight:bold">cd</span> code.bmpi.dev/server
+pulumi up <span style="color:#007f7f"># 使用 Pulumi 设置 AWS EC2</span>
+./run work <span style="color:#007f7f"># 打开远程 VSCode</span>
+./run rest <span style="color:#007f7f"># 关闭远程 VSCode</span>
+</code></pre></div><p>如果<code>./run open_tunnel</code>因为服务器还在启动时通道无法连接，可在服务器启动后再次执行即可建立通道连接。</p>
+<p>首次访问需要输入 VSCode 的登录密码，通过执行<code>sh connect-server.sh</code>登录服务器后执行<code>cat ~/.config/code-server/config.yaml | grep password:</code>获取登陆密码。</p>
+<p>通过浏览器访问<code>http://localhost:8888/</code>后即可开始使用远端 VSCode：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/db6642d4-1224-d743-c881-314dd043e318.png" alt="" layout="fill"></amp-img></div></p>
+<p>如果暂时不需要这个环境了记得通过<code>./run rest</code>休眠这台云服务器，服务器在关闭后 AWS 就不对该 EC2 实例计费了，只对存储卷收取很便宜的费用。</p>
+<p>如果你彻底不需要这个环境，想销毁所有资源免得 AWS 继续收费，只需要执行<code>pulumi destroy</code>即可删除所有 AWS 资源。</p>
+<h2 id="关于费用">关于费用</h2>
+<p>以AWS EC2 T2.Medium 实例（2 核 4GB 内存 + 50GB 存储）为例。每天开发 5 小时，每月 20 天共100小时，总成本为 $0.0464 * 100 + $0.1 * 50 = $9.64。相同的服务器配置 Github Codespaces 需要 21.5 美元，相差近 2.23 倍。</p>
+<h2 id="云-ide-研发模式">云 IDE 研发模式</h2>
+<p>云 IDE 代表了一种研发模式的发展方向。这种研发模式可能的发展趋势有：</p>
+<ul>
+<li>标准化的开发环境：一套云 IDE 开发环境可以标准化批量配置，开箱即用，大幅度降低开发者在配置开发环境上的时间消耗。</li>
+<li>定制化的开发环境：可以对开发环境做定制，满足不同类型项目的开发环境需求。</li>
+<li>弹性的开发环境：开发环境的配置依托于云服务的自动弹性扩容，可动态调整配置，满足开发环境对资源配置的动态需求。</li>
+<li>智能的开发环境：依托云服务器对特定代码仓库的机器学习分析，能够更好的做到智能提示，辅助开发，类似于 <a href="https://copilot.github.com/">GitHub Copilot</a>。</li>
+<li>安全的开发环境：代码和基础设施配置都在云服务器上存储，可以极大的降低因开发人员疏忽而造成的代码或者环境密钥泄露的风险。只要做好云服务器的系统安全配置，就可以降低研发环境的安全风险。</li>
+<li>随时可用的开发环境：无需特定开发机器，只需要一个具备浏览器的电脑即可访问云 IDE 开始开发。</li>
+</ul>
+<p>一句话总结就是：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cloud IDE, Coding Anytime Anywhere.
+</code></pre></div><h2 id="参考文章">参考文章</h2>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/145981067">从 VSCode 看大型 IDE 技术架构</a></li>
+<li><a href="https://holisticsecurity.io/2020/09/06/implementing-vscode-based-on-cloud-with-aws-cdk/">Implementing VSCode-based (Code-Server) on Cloud with AWS CDK</a></li>
+</ol>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

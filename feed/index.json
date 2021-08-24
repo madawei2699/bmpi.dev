@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/money/passive-income-protfolio/202107/",
-        "title": "护城河还在但城没了 # 组合月报(202107)",
-        "description": "被动收入投资组合2021年07月月报",
-        "publish-date": "2021-07-27 00:00:00 +0000 UTC"
+        "url": "/dev/vscode-on-cloud/",
+        "title": "云端 IDE",
+        "description": "本文分享笔者基于AWS与Pulumi搭建类GitHub Codespaces的云端VSCode的经验。",
+        "publish-date": "2021-08-23 00:00:00 +0000 UTC"
     }
 }
