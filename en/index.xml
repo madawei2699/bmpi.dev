@@ -6,7 +6,21 @@
     <description>Recent content on Build My Passive Income</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 22 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cloud IDE</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/en/dev/vscode-on-cloud/</link>
+      <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/en/dev/vscode-on-cloud/</guid>
+      <description>This post shares my experience of building a cloud VSCode on AWS which is similar to GitHub Codespaces.</description>
+    </item>
+    
     <item>
       <title>Internationalization(i18n) and Localization(L10n)</title>
       

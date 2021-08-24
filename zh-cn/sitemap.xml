@@ -20,31 +20,91 @@
   <url>
     <loc>https://www.bmpi.dev/tags/aws-cloud9/</loc>
     <lastmod>2021-08-24T13:38:26+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/aws-cloud9/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/aws-cloud9/"
+                />
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/github-codespaces/</loc>
     <lastmod>2021-08-24T13:38:26+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/github-codespaces/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/github-codespaces/"
+                />
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/ide/</loc>
     <lastmod>2021-08-24T13:38:26+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/ide/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/ide/"
+                />
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/pulumi/</loc>
     <lastmod>2021-08-24T13:38:26+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/pulumi/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/pulumi/"
+                />
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/vscode/</loc>
     <lastmod>2021-08-24T13:38:26+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/vscode/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/vscode/"
+                />
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/dev/vscode-on-cloud/</loc>
     <lastmod>2021-08-24T13:38:26+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/dev/vscode-on-cloud/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/dev/vscode-on-cloud/"
+                />
   </url>
 
   <url>

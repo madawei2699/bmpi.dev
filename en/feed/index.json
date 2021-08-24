@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/en/dev/i18n-l10n/",
-        "title": "Internationalization(i18n) and Localization(L10n)",
-        "description": "This post shares my experience in implementing internationalization and localization in projects.",
-        "publish-date": "2021-07-22 00:00:00 +0000 UTC"
+        "url": "/en/dev/vscode-on-cloud/",
+        "title": "Cloud IDE",
+        "description": "This post shares my experience of building a cloud VSCode on AWS which is similar to GitHub Codespaces.",
+        "publish-date": "2021-08-23 00:00:00 +0000 UTC"
     }
 }

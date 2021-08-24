@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="Dawei Ma">
+  
+  <meta name="description" content="This post shares my experience of building a cloud VSCode on AWS which is similar to GitHub Codespaces.">
+  
+  
+  
+  <meta name="keywords" content="life,dev,trade,passive income,money,developer,Self-management,IT technology,investment transactions">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="Cloud IDE"/>
+  <meta name="twitter:description" content="This post shares my experience of building a cloud VSCode on AWS which is similar to GitHub Codespaces."/>
+  
+  <meta property="twitter:image" content="https://img.bmpi.dev/dafdc38a-8e97-7daa-d860-4ad78c4d182b.png" />
+  
+
+  
+  <meta property="og:title" content="Cloud IDE" />
+<meta property="og:description" content="This post shares my experience of building a cloud VSCode on AWS which is similar to GitHub Codespaces." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/en/dev/vscode-on-cloud/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2021-08-23T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-08-24T19:25:44&#43;08:00" />
+
+
+  
+  <meta property="og:image" content="https://img.bmpi.dev/dafdc38a-8e97-7daa-d860-4ad78c4d182b.png" />
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "Cloud IDE",
+      
+      "image": "https://img.bmpi.dev/dafdc38a-8e97-7daa-d860-4ad78c4d182b.png",
+      
+      "datePublished": "2021-08-23T00:00:00Z",
+      "dateModified": "2021-08-24T19:25:44+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "Dawei Ma"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/en/dev/vscode-on-cloud/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/mdw2.png"
+        }
+      },
+      "description": "This post shares my experience of building a cloud VSCode on AWS which is similar to GitHub Codespaces.",
+      "keywords": ["AWS", "Pulumi", "VSCode", "AWS Cloud9", "GitHub Codespaces", "IDE"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/en/dev/vscode-on-cloud/">
+  
+  <title>
+  Cloud IDE · Build My Passive Income
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/en/dev/vscode-on-cloud/">
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.deacf4638e988eb7ad13026417a95fe49dbb6368f04ffe5ffa15de11c942ed6c.css" integrity="sha256-3qz0Y46YjretEwJkF6lf5J27Y2jwT/5f&#43;hXeEclC7Ww="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/flying-pages.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="icon" type="image/png" href="https://www.bmpi.dev/images/f3/favicon-32x32.png"
+    sizes="32x32">
+  <link rel="icon" type="image/png" href="https://www.bmpi.dev/images/f3/favicon-16x16.png"
+    sizes="16x16">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/en/amp/dev/vscode-on-cloud/" title="Build My Passive Income" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css" media="screen" />
+
+  
+  <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=600a642fe0b9b900111a7f08&product=inline-share-buttons' async='async'></script>
+  
+
+  
+
+  
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "7lo5f5xbjs");
+  </script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://www.bmpi.dev/en">
+      Build My Passive Income
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/self/">Self</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/dev/">Dev</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/money/">Money</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/project/">Project</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/goal/">Goal</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/">Chinese</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Cloud IDE</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2021-08-23T00:00:00Z'>
+                2021-08-23
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              7:50
+              
+            </span>
+            
+            <span class="post-word-count"> | 1726 words | </span>
+            <span id="post-views"></span> views
+            
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/en/tags/aws/">AWS</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/pulumi/">Pulumi</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/vscode/">VSCode</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/aws-cloud9/">AWS Cloud9</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/github-codespaces/">GitHub Codespaces</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/ide/">IDE</a></div>
+
+        </div>
+      </header>
+
+      <div class="article">
+        
+        
+        
+        
+        <p>A while back, the GitHub Twitter posted the following Tweet.</p>
+<p><img data-src="https://img.bmpi.dev/0dd20034-d46f-8910-a6dc-cf71802979f4.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>If you press <code>.</code> on any GitHub Repo page, you will automatically be redirected to the <code>github.dev</code> which is a web version of VSCode and will automatically clone the code of the repo. In this web VSCode you can even install some specific plugins (you can&rsquo;t install plugins that require external dependencies) to make it easier to read the code. Because this site is official, VSCode is automatically bound to your GitHub account, so developers can read, edit, and commit code in it without having to open a local IDE. github1s), an open source project with similar functionality.</p>
+<p>VSCode&rsquo;s team leader Erich Gamma (one of the authors of JUnit, one of the authors of Design Patterns, and an Eclipse architect) joined Microsoft in 2011 with the following job description.</p>
+<blockquote>
+<p>Envision new paradigms for online developer tooling that will be as successful as the IDE has been for the desktop.</p>
+</blockquote>
+<p>Then came the birth of VSCode. We can say that VSCode is designed to be a cloud-based IDE from its inception.</p>
+<p>Why use a cloud IDE, it is due to some problems in local development environment, such as</p>
+<ul>
+<li>Environment differences: There are some differences between Mac and Linux, especially when using popular Linux kernel-based technologies like Docker on Mac, which can make the whole experience worse.</li>
+<li>Performance issues: Local development machines generally need to run a lot of software, such as some office and communication app, so the performance is not high enough to stretch.</li>
+<li>Stability problem: The local development machine takes a long time to restart, and it takes a lot of time to set up the development environment after each restart, which wastes a lot of time.</li>
+<li>Dependency issues: If the development environment relies on some specific cloud infrastructure, network communication can be troublesome. Whereas on cloud hosting, it is naturally in a network environment with other cloud infrastructures and the environment is simple to set up.</li>
+<li>Network issues: Modern software development is standing on the shoulders of giants, and a lot of software relies on a large number of libraries, frameworks, and runtime, and these dependencies require fast network speeds to download. Generally cloud hosting has better network performance than a home or office network.</li>
+<li>Security issues: There is a risk of leakage of code or keys placed in the local development environment, such as the loss of code or keys when a developer&rsquo;s development machine is stolen.</li>
+<li>Storage issues: Local development machines have limited disk storage and do not scale well. And the cloud host&rsquo;s disks are easily expandable.</li>
+</ul>
+<p>The ultimate solution to these problems is to move the development environment to the cloud, and the most important thing to develop in the cloud is the need for a good IDE support, which has led to a strong demand for cloud IDEs in the industry.</p>
+<h2 id="cloud-ide">Cloud IDE</h2>
+<p>Before we talk about the cloud IDE let&rsquo;s understand some of the main functional points of the IDE, as shown in the following figure.</p>
+<p><img data-src="https://img.bmpi.dev/b203c603-cc39-3ee0-3ce4-9ed3d7022777.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>A good IDE should of course let the programmer write the code to write the cool, see the code to see the smooth. And to achieve this purpose, it is essential to support the following feature points.</p>
+<ul>
+<li>Excellent text editing features, supporting keyboard custom layout.</li>
+<li>Code hint functions, such as syntax highlighting, code jumping, error hints, etc..</li>
+<li>Debugging features.</li>
+<li>Multi-programming language support.</li>
+<li>Code completion function.</li>
+<li>Code refactoring capabilities.</li>
+<li>Extension capabilities, support for user-defined or provided plug-ins.</li>
+<li>Good ecology.</li>
+</ul>
+<p>In desktop IDEs, these features are not a problem, and there are many IDEs that support them, such as Visual Studio, Eclipse, IntelliJ IDEA, NetBeans and Xcode. But in the dimension of online support, none of these older IDEs can.</p>
+<p>The requirements for cloud IDEs in the early industry were also not high, so there were about three broad categories of cloud IDEs, as follows.</p>
+<p><img data-src="https://img.bmpi.dev/6743ed9b-5ffa-3032-1e3e-12aa383e5ec6.png" alt="" class="lazyload" loading="lazy"/></p>
+<ul>
+<li>Online editors. Web online editors, mainly CodePen and JSFiddle, make it easy to do online development of front-end pages. But this is far from the desktop IDE experience.</li>
+<li>Repl.it and Jupyter are the main online <a href="https://en.wikipedia.org/wiki/Read-eval-print_loop">REPL</a>. REPL is at most one of the many features supported by desktop IDEs, and its usage scenario is suitable for writing some validation type There is still a long way to go before an engineered code development experience.</li>
+<li>Cloud IDEs with limited functionality, mainly AWS Cloud9, are already very good for code development, even seamlessly using cloud infrastructure, and are suitable for collaborative code development at scale. However, these cloud IDEs are generally not scalable, for example, some plugins cannot be installed.</li>
+</ul>
+<p>For example, Github Codespaces uses VSCode combined with Azure cloud servers to give developers a desktop IDE experience and the ability to install plugins. Also, in a <a href="https://insights.stackoverflow.com/survey/2021">2021 Developer Survey</a> questionnaire from StackOverflow, the most popular developer community, the <code>Integrated development environment (IDE)</code> section of a StackOverflow <a href="">2021 Developer Survey</a> survey (with more than 80,000 developer survey responses), VSCode was voted the most popular IDE with 71% of the votes (up to 50% in 2019).</p>
+<p><img data-src="https://img.bmpi.dev/ef162e34-50e9-e7bd-e1aa-1de4b80a27b8.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>It seems that VSCode achieves the ultimate goal that cloud IDEs are trying to achieve: <strong>the same development experience as desktop IDEs</strong>. The question here is why VSCode?</p>
+<h2 id="why-vscode">Why VSCode</h2>
+<h3 id="good-design">Good Design</h3>
+<p>The VSCode remote development model is shown in the following figure.</p>
+<p><img data-src="https://img.bmpi.dev/4c5f0a02-139f-1bb5-5dbd-46c1af97f60a.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>The CS architecture is designed to give VSCode the ability to use remote servers or containers. The local VSCode is only responsible for the UI interface and theme display, while other things such as plug-ins, program runs, terminal processes and debuggers are run on the remote server. The separation of interface display and computation is a very important point for implementing a cloud IDE.</p>
+<p>The CS architecture design is also reflected in the code prompting. By developing the <code>Language Server Protocol</code> standard protocol, the VSCode core does not need to parse ASTs of multiple programming languages or implement multiple programming language parsers, but delegates these functions to the plug-ins of each language, ensuring that the core is very small and stable.</p>
+<p>The same design is also reflected in the Debugger and the <code>Debug Adaptor Protocol</code> standard protocol.</p>
+<p>More analysis of the architecture can be found in my article <a href="https://www.bmpi.dev/dev/vscode-plugin-development-notes/">VSCode Plugin Development Notes</a>.</p>
+<h3 id="cross-platform">Cross Platform</h3>
+<p>VSCode was formerly known as <a href="https://github.com/Microsoft/monaco-editor">monaco-editor</a> online editor. As a web software, it need to use <code>Electron</code> technology to achieve cross-platform functionality. So the desktop VSCode and the server-side Web version of VSCode are actually one code base.</p>
+<p>Because it is a web software, there is a third-party Repo <a href="https://github.com/cdr/code-server">code-server</a> and a VSCode running in the browser.</p>
+<h3 id="open-source">Open source</h3>
+<p><a href="https://github.com/microsoft/vscode">VSCode</a> Without open source, it could have ended very differently. It was Microsoft&rsquo;s gorgeous turnaround and enthusiastic embrace of open source that opened the door for VSCode to go global, or it could have ended up as one of Microsoft&rsquo;s many internal projects.</p>
+<h2 id="build-cloud-ide-based-on-aws-with-pulumi">Build Cloud IDE based on AWS with Pulumi</h2>
+<p>Thanks to VSCode&rsquo;s open source and web features, we can quickly build a VSCode-based personal cloud IDE that is comparable to <a href="https://github.com/features/codespaces">Github Codespaces</a>, but much cheaper.</p>
+<p>My implementation can be found in this <a href="https://github.com/bmpi-dev/code.bmpi.dev/tree/master/server">Repo</a>. The architecture is as follows.</p>
+<p><img data-src="https://img.bmpi.dev/dafdc38a-8e97-7daa-d860-4ad78c4d182b.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>Prerequisites.</p>
+<ol>
+<li>An AWS account with the AWS CLI installed and AWS Credentials configured locally. The AWS account needs to have rights to access to EC2.</li>
+<li>A <a href="https://www.pulumi.com/">Pulumi</a> account and create a project; (if you are not familiar with Pulumi, you can refer to this article <a href="https://www.bmpi.dev/dev/pulumi-aws-serverless-hugo-site-vists/">Implementing static blog access statistics based on Serverless</a>)</li>
+</ol>
+<p>Very simple to use (thanks to the power of Pulumi and AWS CLI).</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/bmpi-dev/code.bmpi.dev.git
+<span style="color:#fff;font-weight:bold">cd</span> code.bmpi.dev/server
+pulumi up <span style="color:#007f7f"># Set up AWS EC2 with Pulumi</span>
+./run work <span style="color:#007f7f"># Open remote VSCode</span>
+./run rest <span style="color:#007f7f"># Shut down the remote VSCode</span>
+</code></pre></div><p>If <code>./run open_tunnel</code> cannot connect to the tunnel while the server is still up, you can run it again after the server is up to establish the tunnel connection.</p>
+<p>You need to enter the VSCode login password for the first time access, by executing <code>sh connect-server.sh</code> and then execute <code>cat ~/.config/code-server/config.yaml | grep password:</code> to get the login password.</p>
+<p>You can start using the remote VSCode by accessing <code>http://localhost:8888/</code> through your browser.</p>
+<p><img data-src="https://img.bmpi.dev/db6642d4-1224-d743-c881-314dd043e318.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>If you don&rsquo;t need this environment for a while, remember to hibernate it via <code>./run rest</code> to hibernate the cloud server. After the server is shut down, AWS does not bill the EC2 instance, but only the storage volumes for a very cheap fee.</p>
+<p>If you don&rsquo;t need the environment at all and want to destroy all resources so that AWS doesn&rsquo;t continue to charge, just run <code>pulumi destroy</code> to delete all AWS resources.</p>
+<h2 id="about-fees">About fees</h2>
+<p>Take an AWS EC2 T2.Medium instance (2 cores 4GB RAM + 50GB storage) as an example. For 5 hours of development per day and 100 hours per month for 20 days, the total cost is $0.0464 * 100 + $0.1 * 50 = $9.64. The same server configuration with Github Codespaces costs $21.50, 2.23 times bigger than our.</p>
+<h2 id="the-future-of-cloud-ide">The future of Cloud IDE</h2>
+<p>Cloud IDE represents the future of an R&amp;D model. The possible development trends of this R&amp;D model are as follows.</p>
+<ul>
+<li>Standardized development environment. A set of cloud IDE development environment can be standardized for batch configuration and used out of the box, significantly reducing the time consumption of developers in configuring the development environment.</li>
+<li>Customized development environment. The development environment can be customized to meet the needs of different types of projects.</li>
+<li>Elastic development environment. The configuration of the development environment relies on the automatic elastic expansion of the cloud service, and the configuration can be dynamically adjusted to meet the dynamic needs of the development environment for resource allocation.</li>
+<li>Intelligent development environment. Relying on the cloud server&rsquo;s machine learning analysis of specific code repositories, it can better achieve intelligent tips to assist development, similar to <a href="https://copilot.github.com/">GitHub Copilot</a>.</li>
+<li>Secure development environment. The code and infrastructure configuration are stored on the cloud server, which can greatly reduce the risk of code or environment key leakage caused by developer negligence. With a good system security configuration of the cloud server, the security risk of the development environment can be reduced.</li>
+<li>Ready-to-use development environment. No need for a specific development machine, just a computer with a browser to access the cloud IDE to start development.</li>
+</ul>
+<p>In a nutshell.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cloud IDE, Coding Anytime Anywhere.
+</code></pre></div><h2 id="reference">Reference</h2>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/145981067">Large-scale IDE technology architecture from VSCode</a></li>
+<li><a href="https://holisticsecurity.io/2020/09/06/implementing-vscode-based-on-cloud-with-aws-cdk/">Implementing VSCode-based (Code-Server) on Cloud with AWS CDK</a></li>
+</ol>
+
+
+        
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          更新时间:
+          
+          
+          
+          
+          
+              今日
+          
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/df6da9ebc8d220c3d632d93e9daadcfbfa08b847">df6da9e</a>
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">CC BY-NC-ND 4.0</a></p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        <a href="https://twitter.com/madawei2699"><img style="box-shadow:none !important;width: 200px;" src="https://img.shields.io/twitter/follow/madawei2699?style=social"></a>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">Related posts recommended</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/en/dev/guide-to-serverless/">Adventures in Serverless Application Development</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="sharethis-inline-reaction-buttons"></div>
+<div class="sharethis-inline-share-buttons"></div>
+
+        <div style="color: darkgreen;">
+  <form style="border:1px dashed #ccc;padding:10px 10px;margin: 10px auto;text-align:center;width: 95%;" action="https://tinyletter.com/i365" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/i365', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+    
+    <span>Get weekly updates, right in your mailbox</span>
+    
+    <p style="margin: 10px 0;"><input type="text" style="width:240px;text-align: center;" name="email" id="tlemail" placeholder="Email"/></p>
+    <input type="hidden" value="1" name="embed"/>
+    
+    <input type="submit" value="Subscribe" />
+    
+  </form>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://utteranc.es/client.js"
+  repo= "bmpi-dev/bmpi.dev"
+  issue-term="title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script>
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div style="margin-bottom: 10px;">
+      <a href="https://wiki.bmpi.dev/">Wiki</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/talk/">Talk</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/invest/">Invest</a>
+      ⚔️
+      <a href="https://tg.bmpi.dev">Think</a>
+    </div>
+    <div>
+      <a href= /en/affiliate >Affiliate</a>
+      ⚡️
+      <a href= /en/tool >Tool</a>
+      ⚡️
+      <a href= /en/link >Link</a>
+    </div>
+  </div>
+  <div class="footer-taxonomy">
+    <a href= /en/tags style="color: #B36D61;">Tags</a>
+    👈
+    <a href= /en/categories style="color: #FF8C31;">Categories</a>
+    👉
+    <a href= /en/series style="color: #519A73;">Series</a>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2021
+    
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154678195-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154678195-1');
+  </script>
+  
+
+  
+  <script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BHuwaXciWicBjh6HQS2tfudv6IYQD11K9u1NUj7nuaEV9NoDT7ns9JjgqyYTflUv-m3TlD7ELY84AHMfgmPXNgU');</script>
+  
+
+</body>
+
+</html>
