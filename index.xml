@@ -6,7 +6,21 @@
     <description>Recent content on 构建我的被动收入</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 02 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 Beancoun 管理家庭财务</title>
+      
+      
+      <category>Lifelong Learner</category>
+      
+      
+      <link>https://www.bmpi.dev/self/beancount-my-accounting-tool-v2/</link>
+      <pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/self/beancount-my-accounting-tool-v2/</guid>
+      <description>本文介绍了我用 Beancount 替换近 9 年多的挖财记账 App。</description>
+    </item>
+    
     <item>
       <title>三周年小记 # 组合月报(202109)</title>
       
