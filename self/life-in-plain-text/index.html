@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/self/life-in-plain-text/" /><meta property="article:section" content="self" />
 <meta property="article:published_time" content="2021-03-14T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-05-02T12:25:49&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2021-10-15T20:23:15&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
 
@@ -53,7 +53,7 @@
       "image": "https://img.bmpi.dev/cf3a1023-57ae-b3ce-4110-9624c26f860b.png",
       
       "datePublished": "2021-03-14T00:00:00Z",
-      "dateModified": "2021-05-02T12:25:49+08:00",
+      "dateModified": "2021-10-15T20:23:15+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -251,11 +251,11 @@
               
               
               
-              15:35
+              15:31
               
             </span>
             
-            <span class="post-word-count"> | 3431 字 | </span>
+            <span class="post-word-count"> | 3414 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -332,7 +332,7 @@
 <p>这套系统实现的关键在于需要有 <code>Tag</code>、<code>TODO</code>、<code>笔记管理</code>、<code>记账</code>等功能，记账可以用 <code>Beancount</code> 去做，只需要结合它的 Tag 功能就可以追逐相关 Tag 的开销。那么只需要选择一个具备 <code>Tag</code> 和 <code>TODO</code> 功能的开源笔记工具就行了。这么看来我们可选择的很有限了。</p>
 <p>以最近大热的 <code>Roam Research</code> 为例，它开启了不少笔记工具的新特性：反向链接、右边栏、每日笔记及图数据库。最重要的其实是它的图数据库特性，因为当一个工具具备了数据库的查询能力时，结合插件特性我们可以做出非常多的应用场景。可惜的是它是一个商业软件且不开源（ <code>Notion</code> 也因为这个原因被排除），所以我找到了一个具备它很多特性的开源软件 <a href="https://github.com/logseq/logseq">Logseq</a>，Logseq 本身受很多笔记工具的启发，如 <code>Roam Research</code>、<code>Tiddlywiki</code>、<code>Workflowy</code> 与 <code>Org Mode</code> 。</p>
 <p>在把玩了几天 Logseq 后我发现最强的就是它底层的 DataScript 内存图数据库，可以通过高级查询做很多自定义界面。这样就可以满足我们的很多需求了，比如生成每日待办任务，根据 OKR 生成的 Tag 来过滤和 OKR 相关的任务，统计相关任务的花费时间等。</p>
-<p>目前 Logseq 还在开发插件系统，等插件系统上线后，很多难以实现的功能都可以通过插件来完成。当然我的需求还不需要插件系统的支持，光高级查询就可以满足。</p>
+<p><del>目前 Logseq 还在开发插件系统，等插件系统上线后，很多难以实现的功能都可以通过插件来完成</del>目前 Logseq 已经实现了 <a href="https://logseq.github.io/plugins/">插件系统</a>，可以有更高级的玩法。当然我的需求还不需要插件系统的支持，光高级查询就可以满足。</p>
 <h3 id="我的方案">我的方案</h3>
 <p>当确定了笔记工具和记账工具后，我最终的方案如下：</p>
 <p><img data-src="https://img.bmpi.dev/e48e4ba1-5c08-23b5-9292-f92e3187e5db.png" alt="my life manage system" class="lazyload" loading="lazy"/></p>
@@ -360,7 +360,7 @@
 <li><code>🚮 待做其他事项</code>。任何不<code>重要</code>的或者和 <code>OKR</code> 不相关的<strong>待做</strong>任务。</li>
 </ul>
 <p>底部的区块是和 <code>OKR</code> 相关的信息，让我可以快速了解到目前最重要的 Objective 有哪些。</p>
-<p>当然这个系统远不止如此，更多的信息我会新开一篇文章来介绍 <a href="https://www.bmpi.dev/self/okr-gtd-note-logseq/">如何用 Logseq 实现 OKR + GTD + Note</a>。也会写一篇文章介绍如何基于文本使用 Beancount 做复式记账。</p>
+<p>具体的实现见 <a href="https://www.bmpi.dev/self/okr-gtd-note-logseq/">如何用 Logseq 实现 OKR + GTD + Note</a> 与 <a href="https://www.bmpi.dev/self/beancount-my-accounting-tool-v2/">使用 Beancount 管理家庭财务</a>。</p>
 <blockquote>
 <p>本文配图皆用 Excalidraw 绘制，更多我常用的绘图工具见 <a href="https://www.bmpi.dev/self/my-drawing-toolbox/">我的绘图工具箱</a> 这篇文章介绍。</p>
 </blockquote>
@@ -374,9 +374,10 @@
           
           
           
-              5个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/3363b3a2dde95b1600075d0daaa859edd2a88830">3363b3a2</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/7c6701f4912209fcb169b798004330f0766f9cf5">7c6701f4</a>
         </div>
         
 
@@ -396,6 +397,9 @@
   <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
   
   <div style="padding-left: 10px;">
+    
+    
+    
     
     
     
@@ -551,9 +555,6 @@
     
     
     <li style="list-style: none;"><a href="https://www.bmpi.dev/self/okr-gtd-note-logseq/">OKR &#43; GTD &#43; Note =&gt; Logseq</a></li>
-    
-    
-    
     
     
     
