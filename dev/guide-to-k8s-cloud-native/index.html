@@ -1,0 +1,2685 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="马大伟">
+  
+  <meta name="description" content="本文分享了笔者使用 K8S 云原生技术开发个人项目的踩坑经验。">
+  
+  
+  
+  <meta name="keywords" content="自我提升、时间管理、GTD、写作、摄影、笔记管理、知识管理、财务管理、全栈开发、指数投资、基金、股票、债券、SEO、Affiliate、Media Buy、Niche、社交媒体、被动收入、网赚">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="K8S 云原生应用开发小记"/>
+  <meta name="twitter:description" content="本文分享了笔者使用 K8S 云原生技术开发个人项目的踩坑经验。"/>
+  
+  <meta property="twitter:image" content="https://img.bmpi.dev/4c613ca1-0874-d09b-79ad-243cd926bfba.png" />
+  
+
+  
+  <meta property="og:title" content="K8S 云原生应用开发小记" />
+<meta property="og:description" content="本文分享了笔者使用 K8S 云原生技术开发个人项目的踩坑经验。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2021-11-08T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-11-11T10:01:28&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+
+
+  
+  <meta property="og:image" content="https://img.bmpi.dev/4c613ca1-0874-d09b-79ad-243cd926bfba.png" />
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "K8S 云原生应用开发小记",
+      
+      "image": "https://img.bmpi.dev/4c613ca1-0874-d09b-79ad-243cd926bfba.png",
+      
+      "datePublished": "2021-11-08T00:00:00Z",
+      "dateModified": "2021-11-11T10:01:28+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "马大伟"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/mdw2.png"
+        }
+      },
+      "description": "本文分享了笔者使用 K8S 云原生技术开发个人项目的踩坑经验。",
+      "keywords": ["kubernetes", "K8S", "Cloud Native", "云原生架构"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/">
+  
+  <title>
+  K8S 云原生应用开发小记 · 构建我的被动收入
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/">
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.a05e86b79f84ad061105a3eef5706b1c70e4a8391f3777e709be5b90285f83d9.css" integrity="sha256-oF6Gt5&#43;ErQYRBaPu9XBrHHDkqDkfN3fnCb5bkChfg9k="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/flying-pages.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="icon" type="image/png" href="https://www.bmpi.dev/images/f3/favicon-32x32.png"
+    sizes="32x32">
+  <link rel="icon" type="image/png" href="https://www.bmpi.dev/images/f3/favicon-16x16.png"
+    sizes="16x16">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/amp/dev/guide-to-k8s-cloud-native/" title="构建我的被动收入" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css" media="screen" />
+
+  
+  <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=600a642fe0b9b900111a7f08&product=inline-share-buttons' async='async'></script>
+  
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+
+  
+
+  
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "7lo5f5xbjs");
+  </script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://www.bmpi.dev/">
+      构建我的被动收入
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://datastudio.google.com/reporting/6c3c6d3d-cd2f-4f8c-85e6-c06d672c445b">Dashboard</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/about/">关于</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/self/">学习</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/dev/">技术</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/money/">投资</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/project/">个人项目</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/goal/">长期目标</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/en/">English</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">K8S 云原生应用开发小记</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2021-11-08T00:00:00Z'>
+                2021-11-08
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              27:15
+              
+            </span>
+            
+            <span class="post-word-count"> | 5997 字 | </span>
+            <span id="post-views"></span> 次阅读
+            
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/kubernetes/">kubernetes</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/k8s/">K8S</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/cloud-native/">Cloud Native</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E4%BA%91%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84/">云原生架构</a></div>
+
+        </div>
+      </header>
+
+      <div class="article">
+        
+        
+        
+        
+        <blockquote>
+<p>注：本篇文章是作者与 <a href="https://copilot.github.com/">GitHub Copilot</a> 结对创作完成。Copilot 大概完成了本文 5% 左右的部分。作者也在这个 <a href="https://twitter.com/madawei2699/status/1458313535792955393">Tweet</a> 上部分记录了 Copilot 的创作部分。</p>
+</blockquote>
+<p>作为一个业余独立开发者，我在开发上的投入时间和资金都不多，所以对 <a href="https://www.bmpi.dev/dev/tech-stack-of-side-project/">项目技术栈</a> 的选择有两个很基本的要求：</p>
+<ol>
+<li>这项技术能极大的提高我的开发效率。</li>
+<li>这项技术不需要投入过多资金。</li>
+</ol>
+<p>第一点对我的影响是，我会选择使用更高效的技术栈，包括编程语言、生态与架构等：</p>
+<ul>
+<li>我对 <a href="https://www.bmpi.dev/dev/tech-stack-of-side-project/#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80">Elixir</a> 的尝试，就是因为它是基于 Erlang 平台的，有着强大的并发模型与富有表达力的语言特性，还可以利用 Erlang/OTP 的生态，这可以让我更加高效的开发上线某个产品。</li>
+<li>我对 <a href="https://www.bmpi.dev/dev/guide-to-serverless/">Serverless</a> 的尝试，是因为不少个人产品初始用户都很少，用传统租 VPS 的方式会浪费很多资源，而且 Serverless 的弹性扩容能力与可用性都是传统 VPS 不可比拟的，所以我会用 Serverless 开发一些小产品。</li>
+<li>我对 <a href="https://www.bmpi.dev/dev/tech-stack-of-side-project/#devops%E7%9B%B8%E5%85%B3">IaC</a> 的尝试，是因为它可以以声明的方式构建基础设施，还可以对基础设施版本做管理，这样我对基础设施的投入是一次性的，而无需每次重复手工操作配置部署环境。</li>
+</ul>
+<p>第二点对我的影响是，我会避免使用庞大耗费资源的技术，转而去寻找廉价轻量级的替代技术。这也意味着我不会追求过高的 SLA，性价比是我的主要目标。选择工业级的技术栈，牺牲掉一定的可用性，一方面让我可以接受这个成本，另外一方面还能得到工业级的扩展性。这方面的体现是我对 Serverless 的成本分析上，我会选择成本可以承受的服务组件，同时选择最具性价比的计费方式。</p>
+<p>我对 K8S 的初步印象是它并不符合我这两点的要求。这也是我一直没有在个人项目上尝试的原因。直到我看到这篇 <a href="https://twitter.com/madawei2699/status/1381417261425065986">The Architecture Behind A One-Person Tech Startup</a> 的长文。</p>
+<p><img data-src="https://img.bmpi.dev/adfd0869-e190-4027-2d53-6e973dbf5b32.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>作者介绍了他在个人项目上运用 K8S 的经验，K8S 虽然需耗费一定的资源，但却带来了强大的扩展性与可靠性。</p>
+<h2 id="架构演进历史">架构演进历史</h2>
+<p>应用架构从组成形态来看，主要分为单体与分布式架构：</p>
+<ul>
+<li>
+<p>原始的分布式架构甚至比单体都要早，因为早期的计算机性能都很差，无法满足人类不断膨胀的对计算能力的需求，进而导致应用架构的演进。随着单台计算机性能的提高，而原始分布式技术又非常的复杂，所以单体架构流行了很长一段时间，直到单台计算机的性能无法满足计算人类社会爆炸增长的海量信息。</p>
+</li>
+<li>
+<p>分布式架构能协调利用多台计算机的计算能力，提供更高的性能，更高的可用性，更高的扩展性。但由于其复杂性，分布式架构的演进又分为这几个阶段：</p>
+<ul>
+<li>第一阶段：<a href="https://icyfenix.cn/architecture/architect-history/soa.html">面向服务的架构（SOA）</a>。面向服务的架构是一次具体地、系统性地成功解决分布式服务主要问题的架构模式。但这种架构需要应用开发人员花费大量的时间和精力学习框架本身，且这种架构模式的架构设计比较复杂，推广成本太高。</li>
+<li>第二阶段：<a href="https://icyfenix.cn/architecture/architect-history/microservices.html">微服务架构</a>。微服务是一种通过多个小型服务组合来构建单个应用的架构风格，这些服务围绕业务能力而非特定的技术标准来构建。这就解决了 SOA 的复杂性问题，让业务开发人员能更专注业务开发。但微服务的问题在于业务开发人员依旧要面对这些注册发现、跟踪治理、负载均衡、传输通信等分布式架构需解决的问题。</li>
+<li>第三阶段：<a href="https://icyfenix.cn/architecture/architect-history/cloud-native.html">云原生架构</a>。云原生架构是从软件层面独力应对微服务架构无法解决的问题，发展成为软、硬一体（软件定义计算、软件定义网络、软件定义存储），合力应对分布式架构的通用问题。利用容器、虚拟化技术、不可变基础设施、服务网格、声明式 API 等技术，K8S 提供了开箱即用的弹性伸缩、服务发现、配置中心、服务网关	、负载均衡、服务安全、监控告警、容错处理等功能。这些技术能够构建<strong>容错性好</strong>、<strong>易于管理</strong>和<strong>便于观察</strong>的<strong>松耦合系统</strong>，结合可靠的自动化手段，云原生技术使工程师能够轻松地对系统作出<strong>频繁和可预测的重大变更</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="云原生时代">云原生时代</h3>
+<blockquote>
+<p>当虚拟化的基础设施从单个服务的容器扩展至由多个容器构成的服务集群、通信网络和存储设施时，软件与硬件的界限便已经模糊。一旦虚拟化的硬件能够跟上软件的灵活性，那些与业务无关的技术性问题便有可能从软件层面剥离，悄无声息地解决于硬件基础设施之内，让软件得以只专注业务，真正“围绕业务能力构建”团队与产品。(摘自 <a href="https://icyfenix.cn/architecture/architect-history/post-microservices.html">凤凰架构/后微服务时代</a> )</p>
+</blockquote>
+<h3 id="kubernetesk8s">Kubernetes(K8S)</h3>
+<h4 id="设计理念">设计理念</h4>
+<p>K8S 创造了一种 DSL 的语言，用户通过这种语言<strong>声明式</strong>的定义了分布式系统架构中用到的<strong>一切资源</strong>（如计算、网络、存储、路由、密钥、证书）。当用户定义了自己期望的资源状态，K8S 就会自动帮助用户创建这些资源，并且自动管理这些资源。</p>
+<blockquote>
+<p>资源在 Kubernetes 中是极为常用的术语，广义上讲，Kubernetes 系统中所有你能够接触的方方面面都被抽象成了资源，譬如表示工作负荷的资源（Pod、ReplicaSet、Service、……），表示存储的资源（Volume、PersistentVolume、Secret、……），表示策略的资源（SecurityContext、ResourceQuota、LimitRange、……），表示身份的资源（ServiceAccount、Role、ClusterRole、……），等等。“一切皆为资源”的设计是 Kubernetes 能够顺利施行声明式 API 的必要前提，Kubernetes 以资源为载体，建立了一套同时囊括了抽象元素（如策略、依赖、权限）和物理元素（如软件、硬件、网络）的领域特定语言。通过不同层级间资源的使用关系来描述上至整个集群甚至是集群联邦，下至某一块内存区域或者一小部分的处理器核心的状态，这些对资源状态的描述的集合，共同构成了一幅信息系统工作运行的全景图。(摘自 <a href="https://icyfenix.cn/immutable-infrastructure/schedule/hardware-schedule.html">凤凰架构/不可变基础设施</a> )</p>
+</blockquote>
+<h4 id="优势">优势</h4>
+<ul>
+<li>能够构建容错性好、便于观察的应用</li>
+<li>能够以统一的方式管理应用</li>
+<li>让应用具备弹性扩容的能力</li>
+<li>一键应用安装部署（Helm）</li>
+</ul>
+<h4 id="劣势">劣势</h4>
+<ul>
+<li>资源成本高。不论 K8S 的 Master 或者 Worker 节点都需耗费一定的计算资源。</li>
+<li>学习成本高。K8S 重新定义了很多抽象的技术概念，使用门槛不低。</li>
+</ul>
+<h3 id="云平台托管-k8s-成本分析">云平台托管 K8S 成本分析</h3>
+<p>我对不同云平台的 Kubernetes 托管方案选择主要是基于成本方面的考虑。这篇 <a href="https://github.com/bmpi-dev/bmpi-tech-starter/blob/main/infra/k8s-cost.md">K8S Cluster Cost Compare</a> 文档提供了不同云平台（AWS/Azure/GCP/DigitalOcean/Vultr）的 Kubernetes 托管方案的成本比较。</p>
+<p>我最终选择了最便宜的 DigitalOcean 云平台，Master 控制平面基础版（对 SLA 没有高的要求就可以用）是免费的，Worker 节点是新加坡区域的 2 核 4GB 内存的机器（$20/月），还有一个 $10/月 的 Load Balancer 费用。一个月总成本是 $30/月。</p>
+<p>由于 Worker 节点需要安装一些 K8S 本身的服务如 kube-proxy、core-dns 等共计 12 个 pod，占用 Worker 节点一半的内存。这样供应用调用的资源还剩 2GB。</p>
+<h2 id="应用开发部署与架构">应用开发部署与架构</h2>
+<p><img data-src="https://img.bmpi.dev/4c613ca1-0874-d09b-79ad-243cd926bfba.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>以上图展示了这个云原生应用的开发部署流程以及 K8S 部署的各内部服务的架构：</p>
+<ul>
+<li>开发部署流程。代码推送到 GitHub 后会触发两个动作：
+<ul>
+<li>Vercel 会检测前端代码的变化，如果有变化就自动部署到 Vercel 的 CDN 上。</li>
+<li>GitHub Actions 会检测后端代码的变化，如果有变化就自动构建镜像并发布至 GitHub Packages 里，然后自动创建一个新的 K8S Deployment，并重新部署后端服务。</li>
+</ul>
+</li>
+<li>请求流处理流程。当一个用户访问网站时，DNS 经 Cloudflare 解析后，浏览器会发送两个请求至：
+<ul>
+<li>Vercel 端：浏览器拉取静态页面资源。</li>
+<li>K8S 端：请求经 K8S 的 Load Balance 解析 Ingress 规则后转发至 default Namespace 的 ExternalName 类型的 Service，之后经其转发至后端服务 （Namespace 为 free4chat） 的 Service，经 Service 最终转发至其中某个 Pod 的 Container。Container 中就是我们的后端业务应用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="实现">实现</h2>
+<p>最终效果见：<a href="https://www.free4.chat/">线上版本</a>。</p>
+<p>源码见：<a href="https://github.com/madawei2699/free4chat">代码仓库</a>。</p>
+<h3 id="前置条件">前置条件</h3>
+<h4 id="前置知识">前置知识</h4>
+<p>如果你对 K8S 不了解，可以先看这个高质量的入门视频：<a href="https://youtu.be/X48VuDVv0do">Kubernetes Tutorial for Beginners [FULL COURSE in 4 Hours]</a>。在实际操作之前，确保自己能理解基本的 K8S 概念：Namespace、Deployment、Service、Pod、Node、Ingress。</p>
+<h4 id="前置资源">前置资源</h4>
+<p>你需要先注册以下账号：</p>
+<ul>
+<li><a href="https://www.digitalocean.com/">DigitalOcean</a></li>
+<li><a href="https://www.cloudflare.com/">Cloudflare</a></li>
+<li>一个域名。</li>
+</ul>
+<p>并安装这些软件：</p>
+<ul>
+<li>kubectl</li>
+<li>doctl</li>
+<li>helm</li>
+</ul>
+<h3 id="工程目录结构">工程目录结构</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">.
+├── .github
+│   └── workflows
+|       └── workflow.yml
+├── Makefile
+├── backend
+├── frontend
+└── infra
+    ├── Dockerfile.backend
+    ├── k8s
+    │   ├── free4chat-svc.yaml
+    │   ├── ingress-free4-chat.yaml
+    │   ├── ingress_nginx_svc.yaml
+    │   └── production_issuer.yaml
+    └── tools
+        └── nsenter-node.sh
+</code></pre></div><p>整体项目分为 frontend、backend 与 infra 部分，本文主要聚集于 infra 部分，也就是 K8S 的部署。infra 部分没有使用 IaC，因为 K8S 本身就是声明式的构建文件，如果不使用一些云托管服务的话，没必要增加复杂度去使用 IaC。CI/CD 部分使用 GitHub Actions 完成的。</p>
+<h3 id="dockerfile">Dockerfile</h3>
+<p>后端服务是个 Golang 应用，打包的 <a href="https://github.com/madawei2699/free4chat/blob/main/infra/Dockerfile.backend">Dockerfile</a> 在此。我还做了一个 <a href="https://github.com/madawei2699/free4chat/blob/main/backend/Makefile">Makefile</a> 的简单配置，用于编译后端服务。本地使用 Docker 部署后端服务可以使用这个 <a href="https://github.com/madawei2699/free4chat/blob/main/Makefile">Makefile</a>。</p>
+<h3 id="配置-k8s">配置 K8S</h3>
+<h4 id="创建-k8s-cluster">创建 K8S Cluster</h4>
+<p>在 DigitalOcean 创建 K8S Cluster 是一件非常简单的事情，你只需要选择好区域（取决于你的业务用户所在区域）与 Worker Node 的规格（取决于你的成本预算）就可以创建出一个 Cluster。</p>
+<h4 id="连接-k8s-cluster">连接 K8S Cluster</h4>
+<p>使用 doctl 配置 K8S：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">doctl kubernetes cluster kubeconfig save use_your_cluster_name
+</code></pre></div><h4 id="namespace">Namespace</h4>
+<p>Namespace 是 K8S 用来在单个集群中隔离资源组的机制。比如我们可以在同一个集群创建不同的业务 Namespace，而这个 Namespace 下存放着和这个业务相关的 Pod、Service、Deployment 等资源，如果要删除这个业务相关的资源，只需要删除这个 Namespace 即可。</p>
+<p>K8S 默认有个 kube-system 的 Namespace，这个 Namespace 下存放着和 K8S 相关的资源。还有一个 default 的 Namespace，这个 Namespace 存放默认（不带 Namespace）被创建的资源。</p>
+<h4 id="backend-service">Backend Service</h4>
+<p>先创建一个后端服务的 Namespace：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create namespace free4chat
+</code></pre></div><p>再创建一个后端 Service 模版 <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/free4chat-svc.yaml">free4chat-svc.yaml</a>：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: v1
+<span style="font-weight:bold">kind</span>: Service
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: apifree4chat
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">ports</span>:
+  - <span style="font-weight:bold">port</span>: <span style="color:#ff0;font-weight:bold">80</span>
+    <span style="font-weight:bold">targetPort</span>: <span style="color:#ff0;font-weight:bold">8888</span>
+  <span style="font-weight:bold">selector</span>:
+    <span style="font-weight:bold">app</span>: apifree4chat
+---
+<span style="font-weight:bold">apiVersion</span>: apps/v1
+<span style="font-weight:bold">kind</span>: Deployment
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: apifree4chat
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">selector</span>:
+    <span style="font-weight:bold">matchLabels</span>:
+      <span style="font-weight:bold">app</span>: apifree4chat
+  <span style="font-weight:bold">replicas</span>: <span style="color:#ff0;font-weight:bold">1</span>
+  <span style="font-weight:bold">template</span>:
+    <span style="font-weight:bold">metadata</span>:
+      <span style="font-weight:bold">labels</span>:
+        <span style="font-weight:bold">app</span>: apifree4chat
+    <span style="font-weight:bold">spec</span>:
+      <span style="font-weight:bold">containers</span>:
+      - <span style="font-weight:bold">name</span>: echo
+        <span style="font-weight:bold">image</span>: &lt;IMAGE&gt;
+        <span style="font-weight:bold">resources</span>:
+          <span style="font-weight:bold">requests</span>:
+            <span style="font-weight:bold">memory</span>: <span style="color:#0ff;font-weight:bold">&#34;128Mi&#34;</span>
+            <span style="font-weight:bold">cpu</span>: <span style="color:#0ff;font-weight:bold">&#34;250m&#34;</span>
+          <span style="font-weight:bold">limits</span>:
+            <span style="font-weight:bold">memory</span>: <span style="color:#0ff;font-weight:bold">&#34;500Mi&#34;</span>
+            <span style="font-weight:bold">cpu</span>: <span style="color:#0ff;font-weight:bold">&#34;1000m&#34;</span>
+        <span style="font-weight:bold">ports</span>:
+        - <span style="font-weight:bold">containerPort</span>: <span style="color:#ff0;font-weight:bold">8888</span>
+</code></pre></div><p>之所以说这是模版，因为在 image 这块放了一个 <code>&lt;IMAGE&gt;</code> 的占位符，这个占位符会在后面的 GitHub Actions 部署时被替换成真正的镜像。</p>
+<p>这个模版定义了一个 Deployment 和 Service 资源。Deployment 定义了 Pod 实例的 CPU 和内存限制、实例数、端口映射和容器镜像等资源。Service 定义了 Cluster 内部访问后端服务的域名和端口。</p>
+<p>最终 GitHub Actions 会将这个 Service 和 Deployment 部署到 K8S Cluster 中的<code>free4chat</code>的 Namespace 中。</p>
+<h4 id="ingress-controller">Ingress Controller</h4>
+<p>有了后端服务的 Service，如何让外部流量进入后端服务？这是 K8S Ingress 做的事情。我们首选要安装 Ingress Controller，它有很多类型，如 HAProxy、Nginx、Traefik 等，我们这里选择 Nginx。在 DigitalOcean K8S 管理界面上找到 <a href="https://marketplace.digitalocean.com/apps/nginx-ingress-controller">Nginx Ingress Controller</a>，然后点击安装即可。</p>
+<p>这样会自动创建一个 ingress-nginx 的 Namespace，并且会创建一个 DigitalOcean Load Balance 的服务，这个服务费用是 $10/月，有独立的 IP 地址（可在 DigitalOcean 管理界面查看）。之后我们在 DNS 配置的时候会用到这个 IP。</p>
+<p>现在我们需要在 default Namespace 下创建一个 ingress 规则，将 LoadBalance 的流量转发至后端服务，这个配置文件是 <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/ingress-free4-chat.yaml">ingress-free4-chat.yaml</a>：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: networking.k8s.io/v1
+<span style="font-weight:bold">kind</span>: Ingress
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: api-free4chat-ingress
+  <span style="font-weight:bold">annotations</span>:
+    <span style="font-weight:bold">kubernetes.io/ingress.class</span>: nginx
+    <span style="font-weight:bold">cert-manager.io/cluster-issuer</span>: letsencrypt-prod <span style="color:#007f7f"># 这个是 cert-manager 的 ClusterIssuer，用于自动生成 SSL 证书</span>
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">tls</span>:
+  - <span style="font-weight:bold">hosts</span>:
+    - api.k.free4.chat
+    <span style="font-weight:bold">secretName</span>: api-free4chat-tls
+  <span style="font-weight:bold">rules</span>:
+  - <span style="font-weight:bold">host</span>: api.k.free4.chat <span style="color:#007f7f"># 后端服务域名</span>
+    <span style="font-weight:bold">http</span>:
+      <span style="font-weight:bold">paths</span>:
+      - <span style="font-weight:bold">pathType</span>: Prefix
+        <span style="font-weight:bold">path</span>: <span style="color:#0ff;font-weight:bold">&#34;/&#34;</span>
+        <span style="font-weight:bold">backend</span>:
+          <span style="font-weight:bold">service</span>:
+            <span style="font-weight:bold">name</span>: apifree4chat
+            <span style="font-weight:bold">port</span>:
+              <span style="font-weight:bold">number</span>: <span style="color:#ff0;font-weight:bold">80</span>
+---
+<span style="font-weight:bold">kind</span>: Service
+<span style="font-weight:bold">apiVersion</span>: v1
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: apifree4chat
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">type</span>: ExternalName <span style="color:#007f7f"># 因为后端服务不在 default Namespace 中，需要通过 ExternalName 这个 Service 来转发至 apifree4chat Namespace 中的后端服务</span>
+  <span style="font-weight:bold">externalName</span>: apifree4chat.free4chat.svc.cluster.local <span style="color:#007f7f"># 跨 Namespace 的后端服务域名</span>
+</code></pre></div><p>这个配置文件会生成两个资源，一个是 ingress 规则，一个是 ExternalName 类型的 Service。我们会在配置好 cert-manager 的 ClusterIssuer 后，使用 kubectl 来创建这个资源。</p>
+<h4 id="cert-managerhttps">Cert Manager(HTTPS)</h4>
+<p>在 K8S 中通过 Cert Manager 来自动生成和更新域名的 SSL 证书，在这里面我们使用 Let&rsquo;s Encrypt 服务来为我们颁发证书。</p>
+<p>先通过 Helm 一键安装 Cert Manager 应用：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create namespace cert-manager
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.2.0 --set installCRDs=<span style="color:#fff;font-weight:bold">true</span>
+</code></pre></div><p>执行完这些命令后需要创建一个为生产环境颁发 SSL 证书的 ClusterIssuer 资源，配置文件是 <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/production_issuer.yaml">production_issuer.yaml</a>：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: cert-manager.io/v1
+<span style="font-weight:bold">kind</span>: ClusterIssuer
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: letsencrypt-prod
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">acme</span>:
+    <span style="color:#007f7f"># Email address used for ACME registration</span>
+    <span style="font-weight:bold">email</span>: your@email.com
+    <span style="font-weight:bold">server</span>: https://acme-v02.api.letsencrypt.org/directory
+    <span style="font-weight:bold">privateKeySecretRef</span>:
+      <span style="color:#007f7f"># Name of a secret used to store the ACME account private key</span>
+      <span style="font-weight:bold">name</span>: letsencrypt-prod-private-key
+    <span style="color:#007f7f"># Add a single challenge solver, HTTP01 using nginx</span>
+    <span style="font-weight:bold">solvers</span>:
+    - <span style="font-weight:bold">http01</span>:
+        <span style="font-weight:bold">ingress</span>:
+          <span style="font-weight:bold">class</span>: nginx
+</code></pre></div><p>在 DigitalOcean 中，为了让 Cert Manager 能够自检，必须通过 Nginx Ingress Controller 启用 Pod-Pod 通信，这样 Cert Manager 才能正常工作为 K8S 办法证书，创建一个 Service 资源，配置文件是 <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/ingress_nginx_svc.yaml">ingress_nginx_svc.yaml</a>：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: v1
+<span style="font-weight:bold">kind</span>: Service
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">annotations</span>:
+    <span style="font-weight:bold">service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol</span>: <span style="color:#0ff;font-weight:bold">&#39;true&#39;</span>
+    <span style="font-weight:bold">service.beta.kubernetes.io/do-loadbalancer-hostname</span>: <span style="color:#0ff;font-weight:bold">&#34;k.free4.chat&#34;</span>
+  <span style="font-weight:bold">labels</span>:
+    <span style="font-weight:bold">helm.sh/chart</span>: ingress-nginx-2.11.1
+    <span style="font-weight:bold">app.kubernetes.io/name</span>: ingress-nginx
+    <span style="font-weight:bold">app.kubernetes.io/instance</span>: ingress-nginx
+    <span style="font-weight:bold">app.kubernetes.io/version</span>: <span style="color:#ff0;font-weight:bold">0.34.1</span>
+    <span style="font-weight:bold">app.kubernetes.io/managed-by</span>: Helm
+    <span style="font-weight:bold">app.kubernetes.io/component</span>: controller
+  <span style="font-weight:bold">name</span>: ingress-nginx-controller
+  <span style="font-weight:bold">namespace</span>: ingress-nginx
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">type</span>: LoadBalancer
+  <span style="font-weight:bold">externalTrafficPolicy</span>: Local
+  <span style="font-weight:bold">ports</span>:
+    - <span style="font-weight:bold">name</span>: http
+      <span style="font-weight:bold">port</span>: <span style="color:#ff0;font-weight:bold">80</span>
+      <span style="font-weight:bold">protocol</span>: TCP
+      <span style="font-weight:bold">targetPort</span>: http
+    - <span style="font-weight:bold">name</span>: https
+      <span style="font-weight:bold">port</span>: <span style="color:#ff0;font-weight:bold">443</span>
+      <span style="font-weight:bold">protocol</span>: TCP
+      <span style="font-weight:bold">targetPort</span>: https
+  <span style="font-weight:bold">selector</span>:
+    <span style="font-weight:bold">app.kubernetes.io/name</span>: ingress-nginx
+    <span style="font-weight:bold">app.kubernetes.io/instance</span>: ingress-nginx
+    <span style="font-weight:bold">app.kubernetes.io/component</span>: controller
+</code></pre></div><h3 id="创建资源">创建资源</h3>
+<p>经过以上步骤我们有了一些声明式的 K8S 资源创建配置文件了，现在是时候真正开始创建这些资源了：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f production_issuer.yaml <span style="color:#007f7f"># 创建颁发 SSL 证书的 ClusterIssuer 资源</span>
+kubectl apply -f ingress_nginx_svc.yaml <span style="color:#007f7f"># 创建解决 Pod-Pod 通信的 Service 资源</span>
+kubectl apply -f ingress-free4-chat.yaml <span style="color:#007f7f"># 创建 ingress 规则资源</span>
+</code></pre></div><p>当执行完这些命令后，所有环节里我们还缺少：</p>
+<ul>
+<li>后端服务资源的创建。这个我们会通过 GitHub Actions 来创建。</li>
+<li>DNS 域名配置。这个我们会在 Cloudflare 上配置。</li>
+</ul>
+<h4 id="dns-配置">DNS 配置</h4>
+<p>在 Cloudflare 上配置 DNS 解析：</p>
+<p><img data-src="https://img.bmpi.dev/a55880f1-8f45-71d5-a682-65588d0eb4b1.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>由于我们前端部署在 Vercel 上，后端在 K8S 上，所以这里采用了给后端 K8S 创建一个 *.k 的 A 类记录，映射的 IP 就是 Digital LoadBalance 的 IP。而给主域名的 A 记录映射到 Vercel。这么做的原因是我们没法同时给一个主域名创建两个不同的 IP 记录，所以只能给后端子域名的方式来解决这个问题。</p>
+<p>最后创建两个 CNAME 记录，分别是：</p>
+<ul>
+<li>api -&gt; <code>api.k.free4.chat</code>：我们的后端服务 API 域名。</li>
+<li>www -&gt; <code>www.free4.chat</code>：我们的主域名。</li>
+</ul>
+<p>到了这一步我们就可以访问 <code>https://www.free4.chat</code> 了。但 <code>https://api.k.free4.chat</code> 还不行，因为后端服务并没有创建完成。所以接下来需要通过 GitHub Actions 来创建后端服务。</p>
+<h3 id="github-workflow">GitHub Workflow</h3>
+<p>通过 GitHub Actions 来创建后端服务的好处是让开发部署自动化，当后端代码产生变化时，会自动触发 GitHub Actions 来构建新的镜像并创建新的后端服务。</p>
+<p>要创建一个 GitHub Workflow，只需要创建 <a href="https://github.com/madawei2699/free4chat/blob/main/.github/workflows/workflow.yml">.github/workflows/workflow.yaml</a>：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">name</span>: DO_K8S_Deploy
+
+<span style="font-weight:bold">on</span>:
+  <span style="font-weight:bold">push</span>:
+    <span style="font-weight:bold">branches</span>:
+      - main
+    <span style="font-weight:bold">paths</span>:
+      - <span style="color:#0ff;font-weight:bold">&#39;backend/src/**&#39;</span>
+      - <span style="color:#0ff;font-weight:bold">&#39;infra/Dockerfile.backend&#39;</span>
+      - <span style="color:#0ff;font-weight:bold">&#39;.github/workflows/**&#39;</span>
+
+<span style="color:#007f7f"># A workflow run is made up of one or more jobs that can run sequentially or in parallel.</span>
+<span style="font-weight:bold">jobs</span>:
+  <span style="color:#007f7f"># This workflow contains a single job called &#34;build&#34;.</span>
+  <span style="font-weight:bold">build</span>:
+    <span style="color:#007f7f"># The type of runner that the job will run on.</span>
+    <span style="font-weight:bold">runs-on</span>: ubuntu-latest
+    
+    <span style="color:#007f7f"># Steps represent a sequence of tasks that will be executed as part of the job</span>
+    <span style="font-weight:bold">steps</span>:
+
+    <span style="color:#007f7f"># Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it.</span>
+    - <span style="font-weight:bold">name</span>: Checkout master
+      <span style="font-weight:bold">uses</span>: actions/checkout@main
+
+    <span style="color:#007f7f"># Install doctl.</span>
+    - <span style="font-weight:bold">name</span>: Install doctl
+      <span style="font-weight:bold">uses</span>: digitalocean/action-doctl@v2
+      <span style="font-weight:bold">with</span>:
+        <span style="font-weight:bold">token</span>: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    
+    <span style="color:#007f7f"># Build a Docker image of your application in your registry and tag the image with the $GITHUB_SHA.</span>
+    - <span style="font-weight:bold">name</span>: Build container image
+      <span style="font-weight:bold">run</span>: docker build -t ghcr.io/madawei2699/apifree4chat:$(echo $GITHUB_SHA | head -c7) -f ./infra/Dockerfile.backend .
+
+    - <span style="font-weight:bold">name</span>: Log in to GitHub Packages
+      <span style="font-weight:bold">run</span>: echo &#34;${{ secrets.GITHUB_TOKEN }}&#34; | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - <span style="font-weight:bold">name</span>: Push image to GitHub Packages
+      <span style="font-weight:bold">run</span>: docker push ghcr.io/madawei2699/apifree4chat:$(echo $GITHUB_SHA | head -c7)
+
+    - <span style="font-weight:bold">name</span>: Update deployment file
+      <span style="font-weight:bold">run</span>: TAG=$(echo $GITHUB_SHA | head -c7) &amp;&amp; sed -i &#39;s|&lt;IMAGE&gt;|ghcr.io/madawei2699/apifree4chat:&#39;${TAG}&#39;|&#39; $GITHUB_WORKSPACE/infra/k8s/free4chat-svc.yaml
+
+    - <span style="font-weight:bold">name</span>: Save DigitalOcean kubeconfig with short-lived credentials
+      <span style="font-weight:bold">run</span>: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ secrets.CLUSTER_NAME }}
+
+    - <span style="font-weight:bold">name</span>: Deploy to DigitalOcean Kubernetes
+      <span style="font-weight:bold">run</span>: kubectl apply -f $GITHUB_WORKSPACE/infra/k8s/free4chat-svc.yaml -n free4chat
+
+    - <span style="font-weight:bold">name</span>: Verify deployment
+      <span style="font-weight:bold">run</span>: kubectl rollout status deployment/apifree4chat -n free4chat
+</code></pre></div><p>这里唯一要做的就是提前给这个 repo 的 Actions secrets 里创建 <code>CLUSTER_NAME</code> 与 <code>DIGITALOCEAN_ACCESS_TOKEN</code> 的环境变量供 GitHub Actions 使用。其中 <code>DIGITALOCEAN_ACCESS_TOKEN</code> 就是 DigitalOcean 的 API Token，而 <code>CLUSTER_NAME</code> 就是我们的 DigitalOcean 上的 Kubernetes Cluster 的名字。</p>
+<p>这样每当代码有更新被推送到 GitHub 时，一个新的服务（包括前后端）会自动构建并发布到 Vercel 和 K8S 上。</p>
+<p>这时候我们的应用就上线了！</p>
+<h3 id="还需要做的事情">还需要做的事情</h3>
+<ul>
+<li>日志：传统的 ELK 需要大量的服务器资源，不适合我们这种轻量级的集群。最简单的就是跑到多个 Pod 里看日志，这方面有个 <a href="https://github.com/wercker/stern">stern</a> 的工具可以帮助我们在多个 Pod 间进行日志查询。</li>
+<li>监控与告警：我们可以通过安装 Prometheus 和 Grafana 的方式来监控我们的服务，并且可以通过 Prometheus 的 Alert Manager 来发送告警。但如果整个集群都挂了，那安装到集群里的监控告警服务也不会有效果，所以最佳的实践是使用外部的监控告警服务。这方面可以使用 <a href="https://newrelic.com/">New Relic</a> 或类似的服务来实现。</li>
+<li>错误追踪：集成 <a href="https://sentry.io/welcome/">Sentry</a> 就可以实现后端服务错误追踪。</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>到这里我们已经从零开始（没有包括 K8S Master 控制平面）构建了一个 K8S 集群。让我们思考一个问题，那就是 K8S 到底帮助我们解决了什么问题？</p>
+<p>让我们先思考下现代软件开发经常要考虑的 <a href="https://12factor.net/">12要素</a> ：</p>
+<p><img data-src="https://img.bmpi.dev/f8b5fad5-5d4c-5263-8b1e-7d2110a667f8.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>以上的这些要素，K8S 都直接或间接给出了它的解决方案，而 K8S 也和围绕它的生态让工程师能以低成本去构建出满足这些软件设计要素的健壮软件。</p>
+<p>我想这也是 K8S 能号称云上操作系统的原因吧。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://mike.sg/2021/08/29/modern-web-hosting-for-personal-projects/">Modern Web Hosting for Personal Projects - Mike Cartmell&rsquo;s blog</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/architecting-applications-for-kubernetes">Architecting Applications for Kubernetes | DigitalOcean</a></li>
+<li><a href="https://www.doxsey.net/blog/kubernetes--the-surprisingly-affordable-platform-for-personal-projects/">Kubernetes: The Surprisingly Affordable Platform for Personal Projects | doxsey.net</a></li>
+<li><a href="https://downey.io/blog/skip-kubernetes-loadbalancer-with-hostport-daemonset/">Save Money and Skip the Kubernetes Load Balancer: Lowering Infrastructure Costs with Ingress Controllers, DNS, and Host Ports|downey.io</a></li>
+<li><a href="https://mike.sg/2021/08/31/digitalocean-kubernetes-without-a-load-balancer/">DigitalOcean Kubernetes Without a Load Balancer - Mike Cartmell&rsquo;s blog</a></li>
+</ul>
+
+
+        
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          更新时间:
+          
+          
+          
+          
+          
+              今日
+          
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/073d371b4e70b745d042da402f0787a8954f285e">073d371b</a>
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可</p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        <a href="https://twitter.com/madawei2699"><img style="box-shadow:none !important;width: 200px;" src="https://img.shields.io/twitter/follow/madawei2699?style=social"></a>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="sharethis-inline-reaction-buttons"></div>
+<div class="sharethis-inline-share-buttons"></div>
+
+        <div style="color: darkgreen;">
+  <form style="border:1px dashed #ccc;padding:10px 10px;margin: 10px auto;text-align:center;width: 95%;" action="https://tinyletter.com/i365" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/i365', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+    
+    <span>每月一份邮件，分享我对如何构建被动收入的思考、推荐文章及资源，欢迎订阅</span>
+    
+    <p style="margin: 10px 0;"><input type="text" style="width:240px;text-align: center;" name="email" id="tlemail" placeholder="Email"/></p>
+    <input type="hidden" value="1" name="embed"/>
+    
+    <input type="submit" value="订阅" />
+    
+  </form>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://utteranc.es/client.js"
+  repo= "bmpi-dev/bmpi.dev"
+  issue-term="title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script>
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div style="margin-bottom: 10px;">
+      <a href="https://wiki.bmpi.dev/">Wiki</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/talk/">Talk</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/invest/">Invest</a>
+      ⚔️
+      <a href="https://tg.bmpi.dev">Think</a>
+    </div>
+    <div>
+      <a href= /affiliate >Affiliate</a>
+      ⚡️
+      <a href= /tool >Tool</a>
+      ⚡️
+      <a href= /link >Link</a>
+    </div>
+  </div>
+  <div class="footer-taxonomy">
+    <a href= /tags style="color: #B36D61;">Tags</a>
+    👈
+    <a href= /categories style="color: #FF8C31;">Categories</a>
+    👉
+    <a href= /series style="color: #519A73;">Series</a>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2021
+    
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154678195-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154678195-1');
+  </script>
+  
+
+  
+  <script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BHuwaXciWicBjh6HQS2tfudv6IYQD11K9u1NUj7nuaEV9NoDT7ns9JjgqyYTflUv-m3TlD7ELY84AHMfgmPXNgU');</script>
+  
+
+  
+  <script>
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+</body>
+
+</html>

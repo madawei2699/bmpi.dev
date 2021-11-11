@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/self/beancount-my-accounting-tool-v2/",
-        "title": "使用 Beancount 管理家庭财务",
-        "description": "本文介绍了我用 Beancount 替换近 9 年多的挖财记账 App。",
-        "publish-date": "2021-10-04 00:00:00 +0000 UTC"
+        "url": "/dev/guide-to-k8s-cloud-native/",
+        "title": "K8S 云原生应用开发小记",
+        "description": "本文分享了笔者使用 K8S 云原生技术开发个人项目的踩坑经验。",
+        "publish-date": "2021-11-08 00:00:00 +0000 UTC"
     }
 }
