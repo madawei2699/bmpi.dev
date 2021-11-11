@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>Adventures in K8S Cloud Native App Development</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/en/dev/guide-to-k8s-cloud-native/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Build My Passive Income",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/",
+          "name": "en"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/dev\/guide-to-k8s-cloud-native\/",
+          "name": "guide-to-k8s-cloud-native"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>Adventures in K8S Cloud Native App Development</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2021-11-11T00:00:00Z'>
+                2021-11-11
+              </time>
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/en/tags/kubernetes/">kubernetes</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/k8s/">K8S</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/cloud-native/">Cloud Native</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <blockquote>
+<p>Note: This post is a pairing between the author and <a href="https://copilot.github.com/">GitHub Copilot</a>. Copilot did about 5% of the work on this post. The author also partially documented Copilot&rsquo;s work in this <a href="https://twitter.com/madawei2699/status/1458313535792955393">Tweet</a>.</p>
+</blockquote>
+<p>As an amateur indie developer, I don&rsquo;t invest much time or money in development, so I have two very basic requirements for my <a href="https://www.bmpi.dev/dev/tech-stack-of-side-project/">side project tech stack</a>:</p>
+<ol>
+<li>The tech stack can greatly improve my development efficiency.</li>
+<li>The tech stack does not require a lot of money.</li>
+</ol>
+<p>The first point is that I would choose to use a more efficient tech stack, including programming language, ecology, architecture, etc.</p>
+<ul>
+<li>I tried <a href="https://www.bmpi.dev/dev/tech-stack-of-side-project/#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80">Elixir</a> because it is based on Erlang platform, which has a powerful concurrency model and expressive language syntax, and can take advantage of Erlang/OTP ecology, which allows me to develop a product online more efficiently.</li>
+<li>I tried <a href="https://www.bmpi.dev/dev/guide-to-serverless/">Serverless</a> because many personal products have few initial users, and the traditional way of renting VPS would waste a lot of resources, and the elastic scaling ability and availability of Serverless are more power than VPS, so I will use Serverless to develop some small products.</li>
+<li>I tried <a href="https://www.bmpi.dev/dev/tech-stack-of-side-project/#devops%E7%9B%B8%E5%85%B3">IaC</a> because it can build infrastructure in a declarative way and also manage infrastructure versions so that my investment in infrastructure is one-time and I don&rsquo;t have to repeat manual operations to provision the server environment each time.</li>
+</ul>
+<p>The second impact on me is that I will avoid using large, resource-intensive tech stack and instead look for cheap, lightweight alternatives. This also means that I won&rsquo;t be looking for high SLA, cost effectiveness is my main goal. Choosing an industrial-grade tech stack, sacrificing some availability, allows me to accept the cost on the one hand, and get industrial-grade scalability on the other. This is reflected in my cost analysis of Serverless, where I choose the service components that are affordable and the most cost-effective billing service.</p>
+<p>My initial impression of the K8S is that it doesn&rsquo;t meet my requirements on either of these points. That&rsquo;s why I never tried it on my side project. Until I came across this long post <a href="https://twitter.com/madawei2699/status/1381417261425065986">The Architecture Behind A One-Person Tech Startup</a>.</p>
+<p>The author describes his experience using K8S on his personal projects, which is resource intensive but brings great scalability and reliability.</p>
+<h2 id="architecture-evolution-history">Architecture Evolution History</h2>
+<p>Application architectures, in terms of composition pattern, are divided into monolithic and distributed architectures.</p>
+<ul>
+<li>
+<p>Primitive distributed architectures predate even monoliths, as early computers were all poor in performance and could not meet the expanding human demand for computing power, which in turn led to the evolution of application architectures. As the performance of single computers improved, and the original distributed technologies were so complex that monolithic architectures became popular for a long time until the performance of single computers could not meet the massive amount of information needed to compute the explosive growth of human society.</p>
+</li>
+<li>
+<p>Distributed architectures provide higher performance, higher availability, and higher scalability by coordinating the use of the computing power of multiple computers. However, due to its complexity, the evolution of distributed architectures is further divided into these phases.</p>
+<ul>
+<li>Phase 1: <a href="https://icyfenix.cn/architecture/architect-history/soa.html">Service-Oriented Architecture (SOA)</a>. Service-oriented architecture is an architectural model that successfully addresses the main problems of distributed services in a concrete and systematic way at a time. However, this architecture requires a lot of time and effort from application developers to learn the framework itself, and the architectural design of this architecture pattern is more complex and too costly to promote.</li>
+<li>Phase 2: <a href="https://icyfenix.cn/architecture/architect-history/microservices.html">Microservice Architecture</a>. Microservices is an architectural style of building a single application through a combination of multiple small services that are built around business capabilities rather than specific technical standards. This solves the complexity problem of SOA and allows business developers to focus more on business development. But the problem with microservices is that business developers still have to deal with these problems that need to be solved for distributed architectures such as service discovery, error tracking, load balancing, transport communications, etc.</li>
+<li>Phase 3: <a href="https://icyfenix.cn/architecture/architect-history/post-microservices.html">Cloud Native Architecture</a>. Cloud-native architecture is the development from the software level alone to cope with the problems that cannot be solved by microservices architecture to the soft and hard integration (software-defined computing, software-defined networking, and software-defined storage), and the combined efforts to cope with the general problems of distributed architecture. Using technologies such as containers, virtualization technology, immutable infrastructure, service mesh, declarative APIs, K8S provides out-of-the-box elastic scaling, service discovery, configuration center, service gateway, load balancing, service security, monitoring and alerting, fault-tolerant processing and other functions. These technologies enable the construction of <strong>loosely coupled systems</strong> that are <strong>fault-tolerant</strong>, <strong>easy to manage</strong> and <strong>easy to observe</strong>. Combined with reliable automation, cloud native technologies enable engineers to easily make <strong>frequent and predictable major changes</strong> to the system.</li>
+</ul>
+</li>
+</ul>
+<h3 id="cloud-native-era">Cloud Native Era</h3>
+<blockquote>
+<p>As the virtualized infrastructure expands from containers of individual services to clusters of services, communication networks and storage facilities consisting of multiple containers, the line between software and hardware is blurred. Once virtualized hardware is able to keep up with the flexibility of software, technical issues that are not business-related can be stripped away from the software and silently resolved within the hardware infrastructure, allowing software to focus solely on the business and truly &ldquo;build teams and products around business capabilities. (From <a href="https://icyfenix.cn/architecture/architect-history/post-microservices.html">Phoenix Architecture/Post-Microservices Era</a>)</p>
+</blockquote>
+<h3 id="kubernetesk8s">Kubernetes(K8S)</h3>
+<h4 id="k8s-design">K8S Design</h4>
+<p>K8S creates a DSL language in which users define <strong>every resource</strong> (e.g., compute, network, storage, routing, secrets, certificates) used in a distributed system architecture <strong>declaratively</strong>. When the user defines the state of the resources they expect, K8S automatically helps them create those resources and manages them automatically.</p>
+<blockquote>
+<p>Resources is an extremely common term in Kubernetes. Broadly speaking, all aspects of the Kubernetes system that you can touch are abstracted into resources, such as resources for workloads (Pod, ReplicaSet, Service, &hellip;&hellip;), resources for storage (Volume, PersistentVolume, Secret, &hellip;&hellip;), resources for policies (SecurityContext, ResourceQuota, LimitRange, &hellip;), and resources for policies (SecurityContext, ResourceQuota, LimitRange, &hellip;). resources (Volume, PersistentVolume, Secret, &hellip;&hellip;), resources representing policies (SecurityContext, ResourceQuota, LimitRange, &hellip;), and resources representing identities. &hellip;), resources representing identities (ServiceAccount, Role, ClusterRole, &hellip;&hellip;), and so on. The &ldquo;everything is a resource&rdquo; design is an essential prerequisite for Kubernetes to be able to implement declarative APIs, and Kubernetes uses resources as a vehicle to build a domain-specific language that encompasses both abstract elements (e.g., policies, dependencies, permissions) and physical elements (e.g., software, hardware, networks). The collection of descriptions of resource states, from the state of the entire cluster or even a cluster federation down to a memory area or a small number of processor cores, through the relationship of resource usage between different layers, together form a panoramic picture of the working operation of an information system. (From <a href="https://icyfenix.cn/immutable-infrastructure/schedule/hardware-schedule.html">Phoenix Architecture/Unchangeable Infrastructure</a>)</p>
+</blockquote>
+<h4 id="benefits">Benefits</h4>
+<ul>
+<li>Ability to build fault-tolerant, easy-to-observed applications</li>
+<li>Enables applications to be managed in a unified manner</li>
+<li>Enables applications to scale resiliently</li>
+<li>One-click application installation and deployment (Helm)</li>
+</ul>
+<h4 id="disadvantages">Disadvantages</h4>
+<ul>
+<li>High resource costs. Both the Master and Worker nodes of K8S require a certain amount of compute resources.</li>
+<li>K8S redefines many abstract technical concepts and has a high learning curve.</li>
+</ul>
+<h3 id="cost-analysis-of-k8s-hosted-on-cloud-platforms">Cost analysis of K8S hosted on cloud platforms</h3>
+<p>My choice of Kubernetes hosting solution for different cloud platforms is mainly based on cost considerations. This <a href="https://github.com/bmpi-dev/bmpi-tech-starter/blob/main/infra/k8s-cost.md">K8S Cluster Cost Compare</a> document provides a cost analysis of different cloud platforms (AWS/Azure/GCP/ DigitalOcean/Vultr) for Kubernetes hosting solutions.</p>
+<p>I ended up with the cheapest DigitalOcean cloud platform, where Master Control Plane Basic is free, Worker nodes are 2-core 4GB RAM machines in Singapore region ($20/month), and a $10/month Load Balancer fee. The total cost for a month is $30/month.</p>
+<p>Since the Worker node needs to install some K8S services such as kube-proxy, core-dns, etc., there are 12 pods, which take up half of the memory of the Worker node. This leaves 2GB of resources left for user application usage.</p>
+<h2 id="application-architecture">Application Architecture</h2>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/4c613ca1-0874-d09b-79ad-243cd926bfba.png" alt="" layout="fill"></amp-img></div></p>
+<p>The above diagram shows the development and deployment process of this cloud-native application and the architecture of each internal service deployed by K8S.</p>
+<ul>
+<li>Development and deployment process. The push of the code to GitHub triggers two actions.
+<ul>
+<li>Vercel detects changes to the front-end code and automatically deploys it to Vercel&rsquo;s CDN if there are any changes.</li>
+<li>GitHub Actions detects changes to the back-end code, builds the image and publishes it to GitHub Packages, then automatically creates a new K8S Deployment and redeploys the back-end service.</li>
+</ul>
+</li>
+<li>Request flow processing. When a user visits a website, DNS is parsed by Cloudflare and the browser sends two requests to:
+<ul>
+<li>Vercel side: the browser pulls static page resources.</li>
+<li>K8S side: the request is forwarded to the Service of ExternalName type of default Namespace after the Ingress rule is parsed by Load Balance of K8S, and then forwarded to the Service of the back-end service (Namespace is free4chat), and finally forwarded by the Service to the Container of one of the Pods. The Container is our backend business application.</li>
+</ul>
+</li>
+</ul>
+<h2 id="implementation">Implementation</h2>
+<p>The final result is available at: <a href="https://www.free4.chat/">Online version</a>.</p>
+<p>The source code is available at: <a href="https://github.com/madawei2699/free4chat">code repository</a>.</p>
+<h3 id="pre-requisites">Pre-requisites</h3>
+<h4 id="pre-requisite-knowledge">Pre-requisite knowledge</h4>
+<p>If you don&rsquo;t know anything about K8S, you can start by watching this high-quality introductory video: <a href="https://youtu.be/X48VuDVv0do">Kubernetes Tutorial for Beginners [FULL COURSE in 4 Hours]</a>. Make sure you understand the basic K8S concepts: Namespace, Deployment, Service, Pod, Node, Ingress before you get into the real thing.</p>
+<h4 id="pre-requisites-1">Pre-requisites</h4>
+<p>You will need to register for the following account first.</p>
+<ul>
+<li><a href="https://www.digitalocean.com/">DigitalOcean</a></li>
+<li><a href="https://www.cloudflare.com/">Cloudflare</a></li>
+<li>A domain name.</li>
+</ul>
+<p>And install these software.</p>
+<ul>
+<li>kubectl</li>
+<li>doctl</li>
+<li>helm</li>
+</ul>
+<h3 id="project-directory-structure">Project directory structure</h3>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">.
+├── .github
+│   └── workflows
+|       └── workflow.yml
+├── Makefile
+├── backend
+├── frontend
+└── infra
+    ├── Dockerfile.backend
+    ├── k8s
+    │   ├── free4chat-svc.yaml
+    │   ├── ingress-free4-chat.yaml
+    │   ├── ingress_nginx_svc.yaml
+    │   └── production_issuer.yaml
+    └── tools
+        └── nsenter-node.sh
+</code></pre></div><p>The overall project is divided into frontend, backend, and infra parts, and this article focuses on the infra part, which is the K8S deployment. infra does not use IaC because K8S itself is a declarative yaml files, and there is no need to add complexity to use IaC if you are not using some cloud hosting service. the CI/CD part is done by using GitHub Actions.</p>
+<h3 id="dockerfile">Dockerfile</h3>
+<p>The backend service is a Golang application, and the packaged <a href="https://github.com/madawei2699/free4chat/blob/main/infra/Dockerfile.backend">Dockerfile</a> is here. I also made a simple configuration of <a href="https://github.com/madawei2699/free4chat/blob/main/backend/Makefile">Makefile</a> for compiling the backend service. Local deployment of backend services using Docker can use this <a href="https://github.com/madawei2699/free4chat/blob/main/Makefile">Makefile</a>.</p>
+<h3 id="configuring-k8s">Configuring K8S</h3>
+<h4 id="creating-a-k8s-cluster">Creating a K8S Cluster</h4>
+<p>Creating a K8S Cluster at DigitalOcean is a very simple task, you just need to select the region (depending on where your business users are located) and the specifications of the Worker Node (depending on your cost budget) to create a Cluster.</p>
+<h4 id="connecting-to-a-k8s-cluster">Connecting to a K8S Cluster</h4>
+<p>Configure K8S using <code>doctl</code>:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">doctl kubernetes cluster kubeconfig save use_your_cluster_name
+</code></pre></div><h4 id="namespace">Namespace</h4>
+<p>Namespace is a mechanism used by K8S to isolate groups of resources within a single cluster. For example, we can create different business Namespace in the same cluster, and under this Namespace, we can store Pods, Services, Deployment and other resources related to this business, if we want to delete the resources related to this business, we just need to delete this Namespace.</p>
+<p>By default, K8S has a kube-system Namespace, which holds K8S-related resources. There is also a default Namespace, which holds the resources created by default (without the Namespace).</p>
+<h4 id="backend-service">Backend Service</h4>
+<p>First create a Namespace for the backend service.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create namespace free4chat
+</code></pre></div><p>Then create a backend Service template <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/free4chat-svc.yaml">free4chat-svc.yaml</a>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: v1
+<span style="font-weight:bold">kind</span>: Service
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: apifree4chat
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">ports</span>:
+  - <span style="font-weight:bold">port</span>: <span style="color:#ff0;font-weight:bold">80</span>
+    <span style="font-weight:bold">targetPort</span>: <span style="color:#ff0;font-weight:bold">8888</span>
+  <span style="font-weight:bold">selector</span>:
+    <span style="font-weight:bold">app</span>: apifree4chat
+---
+<span style="font-weight:bold">apiVersion</span>: apps/v1
+<span style="font-weight:bold">kind</span>: Deployment
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: apifree4chat
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">selector</span>:
+    <span style="font-weight:bold">matchLabels</span>:
+      <span style="font-weight:bold">app</span>: apifree4chat
+  <span style="font-weight:bold">replicas</span>: <span style="color:#ff0;font-weight:bold">1</span>
+  <span style="font-weight:bold">template</span>:
+    <span style="font-weight:bold">metadata</span>:
+      <span style="font-weight:bold">labels</span>:
+        <span style="font-weight:bold">app</span>: apifree4chat
+    <span style="font-weight:bold">spec</span>:
+      <span style="font-weight:bold">containers</span>:
+      - <span style="font-weight:bold">name</span>: echo
+        <span style="font-weight:bold">image</span>: &lt;IMAGE&gt;
+        <span style="font-weight:bold">resources</span>:
+          <span style="font-weight:bold">requests</span>:
+            <span style="font-weight:bold">memory</span>: <span style="color:#0ff;font-weight:bold">&#34;128Mi&#34;</span>
+            <span style="font-weight:bold">cpu</span>: <span style="color:#0ff;font-weight:bold">&#34;250m&#34;</span>
+          <span style="font-weight:bold">limits</span>:
+            <span style="font-weight:bold">memory</span>: <span style="color:#0ff;font-weight:bold">&#34;500Mi&#34;</span>
+            <span style="font-weight:bold">cpu</span>: <span style="color:#0ff;font-weight:bold">&#34;1000m&#34;</span>
+        <span style="font-weight:bold">ports</span>:
+        - <span style="font-weight:bold">containerPort</span>: <span style="color:#ff0;font-weight:bold">8888</span>
+</code></pre></div><p>The reason this is a template is that there is a <code>&lt;IMAGE&gt;</code> placeholder in the image section that will be replaced with the real image when GitHub Actions are deployed later.</p>
+<p>This template defines a Deployment and Service resource; Deployment defines the CPU and memory limits for Pod instances, the number of instances, port mapping, and container images, etc. Service defines the domain name and port for accessing backend services inside the Cluster.</p>
+<p>Finally, GitHub Actions deploys this Service and Deployment to the <code>free4chat</code> namespace in the K8S Cluster.</p>
+<h4 id="ingress-controller">Ingress Controller</h4>
+<p>How do you get external traffic to the backend service when you have a Service for the backend service? This is what K8S Ingress does. Our first choice is to install the Ingress Controller, which comes in many types, such as HAProxy, Nginx, Traefik, etc. We choose Nginx here. Find <a href="https://marketplace.digitalocean.com/apps/nginx-ingress-controller">Nginx Ingress Controller</a> on the DigitalOcean K8S administration interface, and click Install.</p>
+<p>This will automatically create an ingress-nginx namespace and a DigitalOcean Load Balance service, which costs $10/month and has a separate IP address (available in the DigitalOcean administration interface). We will use this IP in our DNS configuration later.</p>
+<p>Now we need to create an ingress rule under default Namespace to forward the LoadBalance traffic to the backend service, the configuration file is <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/ingress-free4-chat.yaml">ingress-free-4-chat.yaml</a>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: networking.k8s.io/v1
+<span style="font-weight:bold">kind</span>: Ingress
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: api-free4chat-ingress
+  <span style="font-weight:bold">annotations</span>:
+    <span style="font-weight:bold">kubernetes.io/ingress.class</span>: nginx
+    <span style="font-weight:bold">cert-manager.io/cluster-issuer</span>: letsencrypt-prod <span style="color:#007f7f"># This is the ClusterIssuer for cert-manager, which is used to automatically generate SSL certificates</span>
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">tls</span>:
+  - <span style="font-weight:bold">hosts</span>:
+    - api.k.free4.chat
+    <span style="font-weight:bold">secretName</span>: api-free4chat-tls
+  <span style="font-weight:bold">rules</span>:
+  - <span style="font-weight:bold">host</span>: api.k.free4.chat <span style="color:#007f7f"># Back-end service domain name</span>
+    <span style="font-weight:bold">http</span>:
+      <span style="font-weight:bold">paths</span>:
+      - <span style="font-weight:bold">pathType</span>: Prefix
+        <span style="font-weight:bold">path</span>: <span style="color:#0ff;font-weight:bold">&#34;/&#34;</span>
+        <span style="font-weight:bold">backend</span>:
+          <span style="font-weight:bold">service</span>:
+            <span style="font-weight:bold">name</span>: apifree4chat
+            <span style="font-weight:bold">port</span>:
+              <span style="font-weight:bold">number</span>: <span style="color:#ff0;font-weight:bold">80</span>
+---
+<span style="font-weight:bold">kind</span>: Service
+<span style="font-weight:bold">apiVersion</span>: v1
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: apifree4chat
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">type</span>: ExternalName <span style="color:#007f7f"># Because the backend service is not in the default Namespace, it needs to be forwarded to the backend service in the apifree4chat Namespace through the ExternalName service.</span>
+  <span style="font-weight:bold">externalName</span>: apifree4chat.free4chat.svc.cluster.local <span style="color:#007f7f"># Back-end service domains across Namespace</span>
+</code></pre></div><p>This configuration file will generate two resources, an ingress rule and a Service of type ExternalName. we will use kubectl to create this resource after configuring the ClusterIssuer for cert-manager.</p>
+<h4 id="cert-manager-https">Cert Manager (HTTPS)</h4>
+<p>The SSL certificate for the domain is automatically generated and updated in K8S via Cert Manager, where we use the Let&rsquo;s Encrypt service to issue the certificate for us.</p>
+<p>First, install the Cert Manager application via Helm with one click.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create namespace cert-manager
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.2.0 --set installCRDs=<span style="color:#fff;font-weight:bold">true</span>
+</code></pre></div><p>After executing these commands you need to create a ClusterIssuer resource that issues SSL certificates for the production environment, the configuration file is <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/production_issuer.yaml">production_issuer.yaml</a>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: cert-manager.io/v1
+<span style="font-weight:bold">kind</span>: ClusterIssuer
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">name</span>: letsencrypt-prod
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">acme</span>:
+    <span style="color:#007f7f"># Email address used for ACME registration</span>
+    <span style="font-weight:bold">email</span>: your@email.com
+    <span style="font-weight:bold">server</span>: https://acme-v02.api.letsencrypt.org/directory
+    <span style="font-weight:bold">privateKeySecretRef</span>:
+      <span style="color:#007f7f"># Name of a secret used to store the ACME account private key</span>
+      <span style="font-weight:bold">name</span>: letsencrypt-prod-private-key
+    <span style="color:#007f7f"># Add a single challenge solver, HTTP01 using nginx</span>
+    <span style="font-weight:bold">solvers</span>:
+    - <span style="font-weight:bold">http01</span>:
+        <span style="font-weight:bold">ingress</span>:
+          <span style="font-weight:bold">class</span>: nginx
+</code></pre></div><p>In DigitalOcean, in order for Cert Manager to be self-check, Pod-Pod communication must be enabled through the Nginx Ingress Controller for Cert Manager to work properly. To create a Service resource for the K8S approach certificate, the configuration file is <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/ingress_nginx_svc.yaml">ingress_ nginx_svc.yaml</a>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: v1
+<span style="font-weight:bold">kind</span>: Service
+<span style="font-weight:bold">metadata</span>:
+  <span style="font-weight:bold">annotations</span>:
+    <span style="font-weight:bold">service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol</span>: <span style="color:#0ff;font-weight:bold">&#39;true&#39;</span>
+    <span style="font-weight:bold">service.beta.kubernetes.io/do-loadbalancer-hostname</span>: <span style="color:#0ff;font-weight:bold">&#34;k.free4.chat&#34;</span>
+  <span style="font-weight:bold">labels</span>:
+    <span style="font-weight:bold">helm.sh/chart</span>: ingress-nginx-2.11.1
+    <span style="font-weight:bold">app.kubernetes.io/name</span>: ingress-nginx
+    <span style="font-weight:bold">app.kubernetes.io/instance</span>: ingress-nginx
+    <span style="font-weight:bold">app.kubernetes.io/version</span>: <span style="color:#ff0;font-weight:bold">0.34.1</span>
+    <span style="font-weight:bold">app.kubernetes.io/managed-by</span>: Helm
+    <span style="font-weight:bold">app.kubernetes.io/component</span>: controller
+  <span style="font-weight:bold">name</span>: ingress-nginx-controller
+  <span style="font-weight:bold">namespace</span>: ingress-nginx
+<span style="font-weight:bold">spec</span>:
+  <span style="font-weight:bold">type</span>: LoadBalancer
+  <span style="font-weight:bold">externalTrafficPolicy</span>: Local
+  <span style="font-weight:bold">ports</span>:
+    - <span style="font-weight:bold">name</span>: http
+      <span style="font-weight:bold">port</span>: <span style="color:#ff0;font-weight:bold">80</span>
+      <span style="font-weight:bold">protocol</span>: TCP
+      <span style="font-weight:bold">targetPort</span>: http
+    - <span style="font-weight:bold">name</span>: https
+      <span style="font-weight:bold">port</span>: <span style="color:#ff0;font-weight:bold">443</span>
+      <span style="font-weight:bold">protocol</span>: TCP
+      <span style="font-weight:bold">targetPort</span>: https
+  <span style="font-weight:bold">selector</span>:
+    <span style="font-weight:bold">app.kubernetes.io/name</span>: ingress-nginx
+    <span style="font-weight:bold">app.kubernetes.io/instance</span>: ingress-nginx
+    <span style="font-weight:bold">app.kubernetes.io/component</span>: controller
+</code></pre></div><h3 id="creating-resources">Creating resources</h3>
+<p>After the above steps we have some declarative K8S resource creation profiles, now it&rsquo;s time to actually start creating these resources:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f production_issuer.yaml <span style="color:#007f7f"># Create the ClusterIssuer resource for issuing SSL certificates</span>
+kubectl apply -f ingress_nginx_svc.yaml <span style="color:#007f7f"># Create a Service resource that resolves Pod-Pod communication</span>
+kubectl apply -f ingress-free-4-chat.yaml <span style="color:#007f7f"># Create ingress rule resource</span>
+</code></pre></div><p>When these commands are executed, we are still missing some steps.</p>
+<ul>
+<li>The creation of the backend service resource. We&rsquo;ll create this via GitHub Actions.</li>
+<li>DNS domain configuration. We will configure this on Cloudflare.</li>
+</ul>
+<h4 id="dns-configuration">DNS configuration</h4>
+<p>Configuring DNS resolution on Cloudflare.</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/a55880f1-8f45-71d5-a682-65588d0eb4b1.png" alt="" layout="fill"></amp-img></div></p>
+<p>The reason for this is that we cannot create two different IP records for a primary domain at the same time, so we have to give the back-end domain name to solve this problem.</p>
+<p>Finally, we create two CNAME records, which are</p>
+<ul>
+<li>api -&gt; <code>api.k.free4.chat</code>: the domain name of our backend service API.</li>
+<li>www -&gt; <code>www.free4.chat</code>: our main domain name.</li>
+</ul>
+<p>At this point we can access <code>https://www.free4.chat</code>. But <code>https://api.k.free4.chat</code> doesn&rsquo;t work yet, because the backend service hasn&rsquo;t been created yet. So next we need to create the backend service via GitHub Actions.</p>
+<h3 id="github-workflow">GitHub Workflow</h3>
+<p>The benefit of creating backend services via GitHub Actions is that it automates deployments and automatically triggers GitHub Actions to build new images and create new backend services when changes are made to the backend code.</p>
+<p>To create a GitHub Workflow, just create <a href="https://github.com/madawei2699/free4chat/blob/main/.github/workflows/workflow.yml">.github/workflows/workflow.yaml</a>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">name</span>: DO_K8S_Deploy
+
+<span style="font-weight:bold">on</span>:
+  <span style="font-weight:bold">push</span>:
+    <span style="font-weight:bold">branches</span>:
+      - main
+    <span style="font-weight:bold">paths</span>:
+      - <span style="color:#0ff;font-weight:bold">&#39;backend/src/**&#39;</span>
+      - <span style="color:#0ff;font-weight:bold">&#39;infra/Dockerfile.backend&#39;</span>
+      - <span style="color:#0ff;font-weight:bold">&#39;.github/workflows/**&#39;</span>
+
+<span style="color:#007f7f"># A workflow run is made up of one or more jobs that can run sequentially or in parallel.</span>
+<span style="font-weight:bold">jobs</span>:
+  <span style="color:#007f7f"># This workflow contains a single job called &#34;build&#34;.</span>
+  <span style="font-weight:bold">build</span>:
+    <span style="color:#007f7f"># The type of runner that the job will run on.</span>
+    <span style="font-weight:bold">runs-on</span>: ubuntu-latest
+    
+    <span style="color:#007f7f"># Steps represent a sequence of tasks that will be executed as part of the job</span>
+    <span style="font-weight:bold">steps</span>:
+
+    <span style="color:#007f7f"># Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it.</span>
+    - <span style="font-weight:bold">name</span>: Checkout master
+      <span style="font-weight:bold">uses</span>: actions/checkout@main
+
+    <span style="color:#007f7f"># Install doctl.</span>
+    - <span style="font-weight:bold">name</span>: Install doctl
+      <span style="font-weight:bold">uses</span>: digitalocean/action-doctl@v2
+      <span style="font-weight:bold">with</span>:
+        <span style="font-weight:bold">token</span>: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    
+    <span style="color:#007f7f"># Build a Docker image of your application in your registry and tag the image with the $GITHUB_SHA.</span>
+    - <span style="font-weight:bold">name</span>: Build container image
+      <span style="font-weight:bold">run</span>: docker build -t ghcr.io/madawei2699/apifree4chat:$(echo $GITHUB_SHA | head -c7) -f ./infra/Dockerfile.backend .
+
+    - <span style="font-weight:bold">name</span>: Log in to GitHub Packages
+      <span style="font-weight:bold">run</span>: echo &#34;${{ secrets.GITHUB_TOKEN }}&#34; | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - <span style="font-weight:bold">name</span>: Push image to GitHub Packages
+      <span style="font-weight:bold">run</span>: docker push ghcr.io/madawei2699/apifree4chat:$(echo $GITHUB_SHA | head -c7)
+
+    - <span style="font-weight:bold">name</span>: Update deployment file
+      <span style="font-weight:bold">run</span>: TAG=$(echo $GITHUB_SHA | head -c7) &amp;&amp; sed -i &#39;s|&lt;IMAGE&gt;|ghcr.io/madawei2699/apifree4chat:&#39;${TAG}&#39;|&#39; $GITHUB_WORKSPACE/infra/k8s/free4chat-svc.yaml
+
+    - <span style="font-weight:bold">name</span>: Save DigitalOcean kubeconfig with short-lived credentials
+      <span style="font-weight:bold">run</span>: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ secrets.CLUSTER_NAME }}
+
+    - <span style="font-weight:bold">name</span>: Deploy to DigitalOcean Kubernetes
+      <span style="font-weight:bold">run</span>: kubectl apply -f $GITHUB_WORKSPACE/infra/k8s/free4chat-svc.yaml -n free4chat
+
+    - <span style="font-weight:bold">name</span>: Verify deployment
+      <span style="font-weight:bold">run</span>: kubectl rollout status deployment/apifree4chat -n free4chat
+</code></pre></div><p>The only thing you need to do here is create the <code>CLUSTER_NAME</code> and <code>DIGITALOCEAN_ACCESS_TOKEN</code> environment variables in the Actions secrets for this repo in advance for GitHub Actions to use. where <code>DIGITALOCEAN_ACCESS_TOKEN</code> is the DigitalOcean API Token and <code>CLUSTER_NAME</code> is the name of our Kubernetes Cluster on DigitalOcean.</p>
+<p>This way, whenever a code update is pushed to GitHub, a new service (including front-end and back-end) is automatically built and published to Vercel and DigitalOcean K8S.</p>
+<p>When you are here, our application goes live!</p>
+<h3 id="one-more-thing">One More Thing</h3>
+<ul>
+<li>Logging: Traditional ELK requires a lot of server resources and is not suitable for a lightweight cluster like ours. The easiest way is to run multiple Pods to see the logs, and there is a <a href="https://github.com/wercker/stern">stern</a> tool that helps us to query the logs across multiple Pods.</li>
+<li>Monitoring and alerting: We can monitor our services by installing Prometheus and Grafana, and we can send alerts through Prometheus' Alert Manager. However, if the entire cluster is down, the monitoring and alerting service installed into the cluster will not work, so the best practice is to use an external monitoring and alerting service. This can be done using <a href="https://newrelic.com/">New Relic</a> or a similar service.</li>
+<li>Error tracking: Integrating <a href="https://sentry.io/welcome/">Sentry</a> will enable backend service error tracking.</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>At this point we have built a K8S cluster from scratch (without including the K8S Master control plane). Let&rsquo;s think about the question, what problem does K8S help us solve?</p>
+<p>Let&rsquo;s start by thinking about the <a href="https://12factor.net/">12 Factor</a> that are often considered in modern software development.</p>
+<ul>
+<li>Codebase</li>
+<li>Dependencies</li>
+<li>Config</li>
+<li>Backing services</li>
+<li>Build, release, run</li>
+<li>Processes</li>
+<li>Port binding</li>
+<li>Concurrency</li>
+<li>Disposability</li>
+<li>Dev/prod parity</li>
+<li>Logs</li>
+<li>Admin processes</li>
+</ul>
+<p>K8S offers solutions to all of these factors, directly or indirectly, and the ecosystem around it allows engineers to build robust software that meets these software design factors at low cost.</p>
+<p>I think this is the reason why K8S is called the operating system on the cloud.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://mike.sg/2021/08/29/modern-web-hosting-for-personal-projects/">Modern Web Hosting for Personal Projects - Mike Cartmell&rsquo;s blog</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/architecting-applications-for-kubernetes">Architecting Applications for Kubernetes | DigitalOcean</a></li>
+<li><a href="https://www.doxsey.net/blog/kubernetes--the-surprisingly-affordable-platform-for-personal-projects/">Kubernetes: The Surprisingly Affordable Platform for Personal Projects | doxsey.net</a></li>
+<li><a href="https://downey.io/blog/skip-kubernetes-loadbalancer-with-hostport-daemonset/">Save Money and Skip the Kubernetes Load Balancer: Lowering Infrastructure Costs with Ingress Controllers, DNS, and Host Ports|downey.io</a></li>
+<li><a href="https://mike.sg/2021/08/31/digitalocean-kubernetes-without-a-load-balancer/">DigitalOcean Kubernetes Without a Load Balancer - Mike Cartmell&rsquo;s blog</a></li>
+</ul>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

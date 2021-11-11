@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/en/dev/vscode-on-cloud/",
-        "title": "Cloud IDE",
-        "description": "This post shares my experience of building a cloud VSCode on AWS which is similar to GitHub Codespaces.",
-        "publish-date": "2021-08-23 00:00:00 +0000 UTC"
+        "url": "/en/dev/guide-to-k8s-cloud-native/",
+        "title": "Adventures in K8S Cloud Native App Development",
+        "description": "This post shares my experience in using K8S cloud native technology to develop side projects.",
+        "publish-date": "2021-11-11 00:00:00 +0000 UTC"
     }
 }
