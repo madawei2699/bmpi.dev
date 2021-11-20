@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/en/dev/guide-to-k8s-cloud-native/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2021-11-11T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-11-11T23:36:38&#43;08:00" />
+<meta property="article:modified_time" content="2021-11-20T12:27:51&#43;08:00" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://img.bmpi.dev/4c613ca1-0874-d09b-79ad-243cd926bfba.png",
       
       "datePublished": "2021-11-11T00:00:00Z",
-      "dateModified": "2021-11-11T23:36:38+08:00",
+      "dateModified": "2021-11-20T12:27:51+08:00",
       "author": {
         "@type": "Person",
         "name": "Dawei Ma"
@@ -249,7 +249,7 @@
               
             </span>
             
-            <span class="post-word-count"> | 3404 words | </span>
+            <span class="post-word-count"> | 3403 words | </span>
             <span id="post-views"></span> views
             
           </div>
@@ -347,7 +347,7 @@
 </ul>
 <h2 id="implementation">Implementation</h2>
 <p>The final result is available at: <a href="https://www.free4.chat/">Online version</a>.</p>
-<p>The source code is available at: <a href="https://github.com/madawei2699/free4chat">code repository</a>.</p>
+<p>The source code is available at: <a href="https://github.com/madawei2699/free4chat/tree/k8s">code repository</a>.</p>
 <h3 id="pre-requisites">Pre-requisites</h3>
 <h4 id="pre-requisite-knowledge">Pre-requisite knowledge</h4>
 <p>If you don&rsquo;t know anything about K8S, you can start by watching this high-quality introductory video: <a href="https://youtu.be/X48VuDVv0do">Kubernetes Tutorial for Beginners [FULL COURSE in 4 Hours]</a>. Make sure you understand the basic K8S concepts: Namespace, Deployment, Service, Pod, Node, Ingress before you get into the real thing.</p>
@@ -383,7 +383,7 @@
         └── nsenter-node.sh
 </code></pre></div><p>The overall project is divided into frontend, backend, and infra parts, and this article focuses on the infra part, which is the K8S deployment. infra does not use IaC because K8S itself is a declarative yaml files, and there is no need to add complexity to use IaC if you are not using some cloud hosting service. the CI/CD part is done by using GitHub Actions.</p>
 <h3 id="dockerfile">Dockerfile</h3>
-<p>The backend service is a Golang application, and the packaged <a href="https://github.com/madawei2699/free4chat/blob/main/infra/Dockerfile.backend">Dockerfile</a> is here. I also made a simple configuration of <a href="https://github.com/madawei2699/free4chat/blob/main/backend/Makefile">Makefile</a> for compiling the backend service. Local deployment of backend services using Docker can use this <a href="https://github.com/madawei2699/free4chat/blob/main/Makefile">Makefile</a>.</p>
+<p>The backend service is a Golang application, and the packaged <a href="https://github.com/madawei2699/free4chat/blob/k8s/infra/Dockerfile.backend">Dockerfile</a> is here. I also made a simple configuration of <a href="https://github.com/madawei2699/free4chat/blob/k8s/backend/Makefile">Makefile</a> for compiling the backend service. Local deployment of backend services using Docker can use this <a href="https://github.com/madawei2699/free4chat/blob/k8s/Makefile">Makefile</a>.</p>
 <h3 id="configuring-k8s">Configuring K8S</h3>
 <h4 id="creating-a-k8s-cluster">Creating a K8S Cluster</h4>
 <p>Creating a K8S Cluster at DigitalOcean is a very simple task, you just need to select the region (depending on where your business users are located) and the specifications of the Worker Node (depending on your cost budget) to create a Cluster.</p>
@@ -396,7 +396,7 @@
 <h4 id="backend-service">Backend Service</h4>
 <p>First create a Namespace for the backend service.</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create namespace free4chat
-</code></pre></div><p>Then create a backend Service template <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/free4chat-svc.yaml">free4chat-svc.yaml</a>.</p>
+</code></pre></div><p>Then create a backend Service template <a href="https://github.com/madawei2699/free4chat/blob/k8s/infra/k8s/free4chat-svc.yaml">free4chat-svc.yaml</a>.</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: v1
 <span style="font-weight:bold">kind</span>: Service
 <span style="font-weight:bold">metadata</span>:
@@ -440,7 +440,7 @@
 <h4 id="ingress-controller">Ingress Controller</h4>
 <p>How do you get external traffic to the backend service when you have a Service for the backend service? This is what K8S Ingress does. Our first choice is to install the Ingress Controller, which comes in many types, such as HAProxy, Nginx, Traefik, etc. We choose Nginx here. Find <a href="https://marketplace.digitalocean.com/apps/nginx-ingress-controller">Nginx Ingress Controller</a> on the DigitalOcean K8S administration interface, and click Install.</p>
 <p>This will automatically create an ingress-nginx namespace and a DigitalOcean Load Balance service, which costs $10/month and has a separate IP address (available in the DigitalOcean administration interface). We will use this IP in our DNS configuration later.</p>
-<p>Now we need to create an ingress rule under default Namespace to forward the LoadBalance traffic to the backend service, the configuration file is <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/ingress-free4-chat.yaml">ingress-free-4-chat.yaml</a>.</p>
+<p>Now we need to create an ingress rule under default Namespace to forward the LoadBalance traffic to the backend service, the configuration file is <a href="https://github.com/madawei2699/free4chat/blob/k8s/infra/k8s/ingress-free4-chat.yaml">ingress-free-4-chat.yaml</a>.</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: networking.k8s.io/v1
 <span style="font-weight:bold">kind</span>: Ingress
 <span style="font-weight:bold">metadata</span>:
@@ -480,7 +480,7 @@
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.2.0 --set installCRDs=<span style="color:#fff;font-weight:bold">true</span>
-</code></pre></div><p>After executing these commands you need to create a ClusterIssuer resource that issues SSL certificates for the production environment, the configuration file is <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/production_issuer.yaml">production_issuer.yaml</a>.</p>
+</code></pre></div><p>After executing these commands you need to create a ClusterIssuer resource that issues SSL certificates for the production environment, the configuration file is <a href="https://github.com/madawei2699/free4chat/blob/k8s/infra/k8s/production_issuer.yaml">production_issuer.yaml</a>.</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: cert-manager.io/v1
 <span style="font-weight:bold">kind</span>: ClusterIssuer
 <span style="font-weight:bold">metadata</span>:
@@ -498,7 +498,7 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --versi
     - <span style="font-weight:bold">http01</span>:
         <span style="font-weight:bold">ingress</span>:
           <span style="font-weight:bold">class</span>: nginx
-</code></pre></div><p>In DigitalOcean, in order for Cert Manager to be self-check, Pod-Pod communication must be enabled through the Nginx Ingress Controller for Cert Manager to work properly. To create a Service resource for the K8S approach certificate, the configuration file is <a href="https://github.com/madawei2699/free4chat/blob/main/infra/k8s/ingress_nginx_svc.yaml">ingress_ nginx_svc.yaml</a>.</p>
+</code></pre></div><p>In DigitalOcean, in order for Cert Manager to be self-check, Pod-Pod communication must be enabled through the Nginx Ingress Controller for Cert Manager to work properly. To create a Service resource for the K8S approach certificate, the configuration file is <a href="https://github.com/madawei2699/free4chat/blob/k8s/infra/k8s/ingress_nginx_svc.yaml">ingress_nginx_svc.yaml</a>.</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">apiVersion</span>: v1
 <span style="font-weight:bold">kind</span>: Service
 <span style="font-weight:bold">metadata</span>:
@@ -552,7 +552,7 @@ kubectl apply -f ingress-free-4-chat.yaml <span style="color:#007f7f"># Create i
 <p>At this point we can access <code>https://www.free4.chat</code>. But <code>https://api.k.free4.chat</code> doesn&rsquo;t work yet, because the backend service hasn&rsquo;t been created yet. So next we need to create the backend service via GitHub Actions.</p>
 <h3 id="github-workflow">GitHub Workflow</h3>
 <p>The benefit of creating backend services via GitHub Actions is that it automates deployments and automatically triggers GitHub Actions to build new images and create new backend services when changes are made to the backend code.</p>
-<p>To create a GitHub Workflow, just create <a href="https://github.com/madawei2699/free4chat/blob/main/.github/workflows/workflow.yml">.github/workflows/workflow.yaml</a>.</p>
+<p>To create a GitHub Workflow, just create <a href="https://github.com/madawei2699/free4chat/blob/k8s/.github/workflows/workflow.yml">.github/workflows/workflow.yaml</a>.</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="font-weight:bold">name</span>: DO_K8S_Deploy
 
 <span style="font-weight:bold">on</span>:
@@ -654,7 +654,7 @@ kubectl apply -f ingress-free-4-chat.yaml <span style="color:#007f7f"># Create i
               今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ca459511ff351928223f8099a4e35f21bcf2543e">ca459511</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/962d3fd0a4e88386d594c896b4c9b567d2b8ebbd">962d3fd0</a>
         </div>
         
 
