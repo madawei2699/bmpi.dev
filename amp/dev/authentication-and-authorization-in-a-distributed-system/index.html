@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>分布式系统下的认证与授权</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/authentication-and-authorization-in-a-distributed-system\/",
+          "name": "authentication-and-authorization-in-a-distributed-system"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>分布式系统下的认证与授权</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2021-12-18T00:00:00Z'>
+                2021-12-18
+              </time>
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E8%AE%A4%E8%AF%81/">认证</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%8E%88%E6%9D%83/">授权</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%87%AD%E8%AF%81/">凭证</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">分布式系统</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/jwt/">JWT</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <p>在软件系统设计中，如何让应用能够在各种环境中安全高效的访问是个复杂的问题，这个问题的背后是一系列软件设计时需要考虑的架构安全问题：<sup><a href="https://icyfenix.cn/architect-perspective/general-architecture/system-security/">架构安全性 | 凤凰架构</a></sup></p>
+<ul>
+<li>认证：系统如何识别合法用户，也就是解决 <strong>你是谁</strong> 的问题；</li>
+<li>授权：系统在识别合法用户后，还需要解决 <strong>你能做什么</strong> 的问题；</li>
+<li>凭证：系统如何保证它与用户之间的承诺是双方真实意图的体现，是准确、完整且不可抵赖的；</li>
+<li>保密：如何安全的持久化用户的账户信息，确保不会被任何人窃取与滥用；</li>
+<li>传输：在复杂的用户环境中，如何安全的传递用户信息，保证不被第三方窃听、篡改和冒充。</li>
+</ul>
+<p>在漫长的架构演进历史中，业界对这些问题已经有很成熟的解决方案。在架构安全这块，最好的是遵循技术标准与最佳实践，尽可能<strong>不重复造轮子或“创新”</strong>。下面这个思维导图就是针对这些问题的常见的技术标准及方案：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/0f3dfb95-7f80-2311-74f1-f70ea7fd9a69.png" alt="" layout="fill"></amp-img></div></p>
+<p>在研究分布式系统的认证和授权问题前，让我们回到单体架构的时代，看看在单体架构上这些问题是如何被解决的。</p>
+<h2 id="单体系统">单体系统</h2>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/6a49ae32-998b-f030-b9a2-f77c3ac66c84.png" alt="" layout="fill"></amp-img></div></p>
+<h3 id="认证">认证</h3>
+<p>认证主要解决 <strong>你是谁</strong> 的问题，从方式上来看有以下三种：<sup><a href="https://icyfenix.cn/architect-perspective/general-architecture/system-security/authentication.html">认证 | 凤凰架构</a></sup></p>
+<ul>
+<li>基于通信信道：建立通信信道之前需要证明 <strong>你是谁</strong>。在网络传输（Network）场景中的典型是基于 SSL/TLS 传输安全层的认证。</li>
+<li>基于通信协议：在获取资源之前需要证明 <strong>你是谁</strong>。在互联网（Internet）场景中的典型是基于 HTTP 协议的认证。</li>
+<li>基于通信内容：在提供服务之前需要证明 <strong>你是谁</strong>。在万维网（World Wide Web）场景中的典型是基于 Web 内容的认证。</li>
+</ul>
+<p>在单体系统时代，认证方式一般是在通信信道上开启 HTTPS，在通信协议上利用 <a href="https://datatracker.ietf.org/doc/html/rfc7235#section-4.2">HTTP Basic</a>/<a href="https://datatracker.ietf.org/doc/html/rfc7616">Digest</a>/<a href="https://datatracker.ietf.org/doc/html/rfc6750">Bearer</a>/<a href="https://datatracker.ietf.org/doc/html/rfc7486">HOBA</a>/<a href="https://datatracker.ietf.org/doc/html/rfc6287">OCRA</a> 等方式并在通信内容上结合表单或 <a href="https://datatracker.ietf.org/doc/html/rfc6238">TOTP</a> 等的认证组合方式。这样可以从通信的不同阶段获得相应的安全保证。</p>
+<p>如果想对基于 HTTP 协议的认证方式做进一步的了解，可以参考这两篇文章：</p>
+<ol>
+<li><a href="https://icyfenix.cn/architect-perspective/general-architecture/system-security/authentication.html">认证 | 凤凰架构</a></li>
+<li><a href="https://insights.thoughtworks.cn/api-2/">细说API - 认证、授权和凭证 - Thoughtworks洞见</a></li>
+</ol>
+<h4 id="单点登录ssohttpsenwikipediaorgwikisingle_sign-on">单点登录（<a href="https://en.wikipedia.org/wiki/Single_sign-on">SSO</a>）</h4>
+<p>认证的一个常见应用场景是单点登录。单点登录主要解决了一个一次登录访问多个独立应用的问题。在单点登录方案出现之前，每个应用都需要独立登录维持各自的会话。相关的技术方案已经很成熟，主要有以下：</p>
+<ul>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc4120">Kerberos-based</a>：MIT 设计的 SSO 协议，基于对称密码学，并需要一个值得信赖的第三方。其广泛用于操作系统认证，如被 Windows 2000 和后续的操作系统作为默认的认证方法。</li>
+<li><a href="https://www.apereo.org/projects/cas">CAS</a>：Yale 设计的 SSO 协议，基于浏览器的 SSO 方案，部署简单，适用于简单的应用场景。</li>
+<li><a href="https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language">SAML</a>：基于 XML 标记语言的认证断言方案，适用的场景众多，但技术较复杂。</li>
+<li><a href="https://openid.net/connect/">OIDC</a>：在 OAuth2 的基础上额外加一个 JWT 来传递用户信息。功能全面强大，是目前很流行的 SSO 方案。</li>
+</ul>
+<h3 id="授权">授权</h3>
+<p>授权主要解决 <strong>你能做什么</strong> 的问题，从方案上来说有以下几种：</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Access-control_list">ACL</a>：访问控制列表（Access-control list）广泛用于操作系统内部的文件系统、网络及进程权限控制方面。如在 Linux 中，可通过 <code>getfacl</code> 获取目录的默认 ACL 设置。</li>
+<li><a href="https://en.wikipedia.org/wiki/Role-based_access_control">RBAC</a>：RBAC 通过将权限属性从 ACL 方案中的单个用户抽取成更为抽象的角色（Role），通过给角色一组权限属性，再将多个角色赋予某个用户，实现了比 ACL 更为灵活强大的权限控制方案。实际上大部分系统的授权方案采用 RBAC 就足够了。但 RBAC 在面临复杂的权限控制需求时可能面临角色爆炸的问题，这时可以考虑采用更细粒度的 ABAC 方案。</li>
+<li><a href="https://en.wikipedia.org/wiki/Attribute-based_access_control">ABAC</a>：ABAC 是比 RBAC 更细粒度的权限控制方案。通过引入一组称为“属性“的特征，包括用户属性、环境属性和资源属性。例如，ABAC 可以对用户的访问做进一步的控制，如只允许在特定的时间或与相关员工相关的某些分支机构进行访问员工信息的操作，而不是让某部门的人员总是能够访问员工信息。但 ABAC 的问题在于初始设置需要定义大量的属性，工作量比 RBAC 要大。</li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc6749">OAuth2</a>：OAuth2 是为了解决应用系统给第三方系统授权的问题而设计的授权框架。传统的客户端服务器交互模式中，客户端持有资源访问凭证（如用户名密码），服务端验证成功后放行。而在给第三方系统提供资源时，如果给第三方系统资源凭证，可能会带来未知的安全问题，比如凭证泄漏，凭证回收等问题。如果应用系统需面向第三方系统提供服务，那需要使用此方案。同时因为 OAuth2 做授权的时候一般需要用户登录，也能实现单点登录的功能。</li>
+</ul>
+<p>如果想对授权做进一步的了解，可以参考这篇文章：</p>
+<ol>
+<li><a href="https://icyfenix.cn/architect-perspective/general-architecture/system-security/authorization.html">授权 | 凤凰架构</a></li>
+</ol>
+<h3 id="凭证">凭证</h3>
+<p>凭证是为了解决在认证授权后如何承载认证授权信息的问题。在单体应用时代，主流的解决方案是基于 HTTP 协议的 Cookie-Session 机制为代表的服务端状态存储技术。</p>
+<p>由于 HTTP 协议本身是无状态的，要维持一个会话（Session），而不是每次访问都重新认证授权，需要客户端也就是浏览器通过 Cookie 来存储服务器端返回的一个凭证信息，这个凭证信息一般是一串随机的字符串，用来代表用户此次的会话标识。每次请求浏览器都会在 HTTP Header 中携带这个 Cookie 信息，应用拿到这个会话标识后从内存或缓存（Cache）中查询出用户的信息，这样就定位到了具体的用户，实现了会话的维持。</p>
+<p>这套古老的方案存在以下先天优势：<sup><a href="https://icyfenix.cn/architect-perspective/general-architecture/system-security/credentials.html">凭证 | 凤凰架构</a></sup></p>
+<ul>
+<li>状态信息都存储于服务器，只要依靠客户端的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">同源策略</a> 和 HTTPS 的传输层安全，保证 Cookie 中的键值不被窃取而出现被冒认身份的情况，就能完全规避掉上下文信息在传输过程中被泄漏和篡改的风险（但 Cookie 方案容易受到 <a href="https://owasp.org/www-community/attacks/csrf">CSRF</a> 攻击，这种可通过 <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#token-based-mitigation">CSRF Token</a> 技术防御）；</li>
+<li>另一大优点是服务端有主动的状态管理能力，可根据自己的意愿随时修改、清除任意上下文信息，譬如很轻易就能实现强制某用户下线的这样功能；</li>
+<li>服务端也很容易实现如统计用户在线这类功能；</li>
+</ul>
+<p>一切都很美好，直到我们来到了分布式系统时代。</p>
+<h2 id="分布式系统">分布式系统</h2>
+<p>分布式系统与单体系统的一大区别就是状态管理。分布式系统通过把单体系统中有状态的部分转移到中间件中去管理，从而很容易做到水平扩容，提高系统峰值处理能力。在架构认证和授权部分，分布式和单体并没有什么不同，唯独有变化的在持有状态的凭证部分。</p>
+<p>我们知道单体应用在服务端管理用户会话信息，客户端只持有会话标识。如果服务端要将此用户会话状态转移出去有两种处理思路：</p>
+<ul>
+<li>将用户会话信息继续托管至服务端。此时有几种服务端方案可以选择：
+<ul>
+<li>中心化存储：转移到中间件如 Redis 中去。利用 Redis <a href="https://redis.io/topics/benchmarks">极高的并发处理能力</a>，也可以做到弹性横行扩容。不过可能会带来中间件高可用性维护难的问题，通过租赁云服务商的托管中间件是降低中间件 <a href="https://en.wikipedia.org/wiki/Single_point_of_failure">单点故障（SPOF）</a> 的一种方式；</li>
+<li>会话复制（Session replication）：让各个节点之间采用复制式的 Session，每一个节点中的 Session 变动都会发送到组播地址的其他服务器上，这样某个节点崩溃了，不会中断该节点用户的服务。但 Session 之间组播复制的同步代价高昂，节点越多时，同步成本越高。</li>
+<li>会话粘滞（Sticky session）：通过负载均衡算法如 Nginx 的 <a href="https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/">IP Hash</a> 算法将来自同一 IP 的请求转发至同一服务。每个服务节点都不重复地保存着一部分用户的状态，如果这个服务崩溃了，里面的用户状态便完全丢失。</li>
+</ul>
+<blockquote>
+<p>为什么在分布式系统中共享状态就这么困难？这是因为分布式系统中有一个不可能三角的理论：<a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP</a>。这个理论简单的理解就是因为在分布式系统中，因为网络无法做到绝对的可靠（分区容错性：<strong>P</strong>artition Tolerance），只能在一致性（<strong>C</strong>onsistency）和可靠性（<strong>A</strong>vailability）间选择一个。</p>
+<p>比如上述的三种服务端方案其实都是牺牲了 CAP 的某个方面。比如第一种中心化存储方案我们放弃了中心化存储的分区容错性，一旦其网络分区，整个集群都会不可用。第二种会话复制方案我们牺牲了可用性，当节点在同步会话数据时，整个服务会短暂的不可用。第三种会话粘滞方案我们牺牲了一致性，一旦某个节点宕机，整个集群的数据会因该节点的数据丢失而达到不一致的状态。</p>
+</blockquote>
+</li>
+<li>将状态从服务端转移到客户端。Cookie-Session 是一种引用令牌（Reference tokens），也就是客户端持有的是服务端存储的会话引用标识。还有一种自包含令牌（Self-contained tokens），如 <a href="https://datatracker.ietf.org/doc/html/rfc7519.html">JWT</a> 就是这种客户端保存会话信息的技术，服务端只是去校验会话信息是否合法。</li>
+</ul>
+<h3 id="jwt">JWT</h3>
+<p>如果你对 JWT 不了解，可以先看这两篇：</p>
+<ol>
+<li><a href="https://icyfenix.cn/architect-perspective/general-architecture/system-security/credentials.html#jwt">JWT | 凤凰架构</a></li>
+<li><a href="https://www.pingidentity.com/en/company/blog/posts/2019/jwt-security-nobody-talks-about.html">The Hard Parts of JWT Security Nobody Talks About</a></li>
+</ol>
+<p>由于 JWT 的 Payload 并未做过多限制，所以很容易产生滥用的问题，并且带来很多误解。 比如下面的一些问题：</p>
+<ul>
+<li>误把 JWT 当作 Cookie-Session 使用（把 JWT 当作引用令牌使用），会带来未知的隐患。遵循不重复造轮子和“创新”的指导原则，尽可能不要这么做；</li>
+<li>认为 JWT 更安全。虽然 JWT 采用了一定的加密算法签名，使其具备了抗篡改的能力。但其 Payload 大部分都只是采用 <code>base64UrlEncode</code> 编码，数据并不是加密的。攻击者可以通过 <a href="https://owasp.org/www-community/attacks/Session_hijacking_attack">会话劫持（Session hijacking）</a> 技术拿到 JWT 会话信息，之后通过 <a href="https://campus.barracuda.com/product/webapplicationfirewall/doc/49058327/session-replay-attack/">会话重放攻击（Session Replay Attack）</a> 获取用户资源，所以最佳实践是通过启用 TLS/SSL 来加密通信信道。</li>
+<li>把 JWT 存储到浏览器的 Local Storage 中。此方式很容易受到 <a href="https://owasp.org/www-community/attacks/xss/">XSS</a> 攻击导致 JWT 泄漏。可通过服务端启用 <a href="https://developers.google.com/web/fundamentals/security/csp/">内容安全策略（CSP）</a> 来防御这种攻击。</li>
+<li>采用对称加密方式签名（Signature）。对称加密密钥一旦泄漏，会让整个服务的基础设施遭受安全威胁。JWT 支持非对称加密算法，只有签名的服务需要私钥，其他验证 JWT 信息的服务只需要使用公钥即可。</li>
+<li>不校验 JWT 的签名算法。这篇 <a href="https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/">Critical vulnerabilities in JSON Web Token libraries</a> 文章提到 JWT 的一种漏洞，通过 <code>none</code> 算法规避令牌验证。所以最好每次都验证 JWT header 中的签名算法是否是期望的。</li>
+</ul>
+<p>相信看了上述的一些问题，你对 JWT 的“简单、安全”有了新的理解。这还没完，JWT 还有以下一些 Cookie-Session 没有的问题：</p>
+<ul>
+<li>令牌难以主动失效：JWT 中虽然有 <code>exp</code>、<code>nbf</code> 与 <code>iat</code> 这些和时间相关的属性，但很难在令牌到期之前让令牌失效，比如很难在用户退出登录时立刻让签发的令牌全部失效。虽然可能通过一些“黑名单”的技术解决这个问题，不过相比 Cookie-Session 来说，引入了一定的复杂性；</li>
+<li>令牌数据老旧：很难把签发的令牌全部更新成最新的数据。比如把用户的权限信息（Role）放在 JWT Payload 中，当用户的角色发生变化时，很难把之前签发的令牌信息更新成最新的数据；</li>
+<li>令牌存储：存储在客户端意味着有多种选择：Cookie？Local Storage？如果放在 Cookie 中，为了安全，一般会给 Cookie 设置 <code>http-only</code> 和 <code>secure</code> 的属性。但这也会带来一定的不便性，比如客户端要读取 JWT Payload 的内容只能借助服务端 API 接口。如果将 JWT 存储至浏览器 Local Storage，虽然方便了客户端读取，但可能会带来 XSS 攻击的威胁，又需要去设置 CSP 来防御这种威胁；</li>
+<li>令牌大小：JWT 相比 Cookie-Session 还是大不少，尤其是要在 Payload 中存储一些额外的权限信息。一般服务端都有对 HTTP Header 的大小限制；</li>
+<li>网络开销：更大的文本意味着更高的网络开销，进一步会需要更复杂的基础设施，也会产生复杂的运维问题等；</li>
+<li>难以统计：服务端无状态意味着很难做诸如统计用户在线数量的功能；</li>
+</ul>
+<p>JWT 解决了 Cookie-Session 方案在分布式系统中因 CAP 的限制而带来的问题，但同时也带来了一些新的问题。所以并不能说 JWT 就是 Cookie-Session 在分布式系统中的完美替代。</p>
+<p>那么 JWT 的最佳使用场景到底是什么？这篇 <a href="http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/">Stop using JWT for sessions</a> 给出了以下的结论：<strong>JWT 更适合作分布式系统中的一次性令牌使用</strong>。分布式系统继续使用 Cookie-Session 做会话管理，但可以在认证鉴权后生成 JWT 做分布式系统内部服务调用间的一次性令牌。</p>
+<p>让我们通过一个例子来理解下在分布式系统下的认证授权场景。</p>
+<h3 id="一个例子">一个例子</h3>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/9c440a22-887c-c05c-e381-fd84f6071858.png" alt="" layout="fill"></amp-img></div></p>
+<ol>
+<li>用户通过 HTTPS 访问我们的应用。当请求发送至微服务网关层（Gateway），网关检测 HTTP Header 中的 Cookie 发现没有 <code>SESSIONID</code> 这个键值对，重定向至 SSO 登录页面。</li>
+<li>用户通过 SSO 登录我们的应用。
+<ol>
+<li>用户信息存放至 AD/LDAP 等系统中。管理员提前给用户配置好角色权限。</li>
+<li>SSO 集成方案我们选择 OIDC。OIDC 集成了 AD/LDAP，当用户提供正确的用户名和密码后，SSO 重定向至网关。</li>
+<li>网关生成了 <code>SESSIONID</code> 键值对并通过 HTTP <code>Set-Cookie</code> 响应给用户浏览器设置了此 Cookie。</li>
+</ol>
+</li>
+<li>浏览器重新发起带 <code>SESSIONID</code> Cookie 的请求。网关经过查询其缓存或中间件（如将会话信息存放至 Redis）中的 Session 信息确认了用户的身份信息。之后网关请求 Auth 服务利用其私钥签名生成 JWT 凭证，JWT Payload 中可以存放一部分用户信息和角色信息，这些信息可以从中间件中或 AD/LDAP 中查询出。</li>
+<li>网关之后将此 JWT 凭证通过反向代理转发至内部的 BFF 服务，之后请求到达内部的领域微服务。</li>
+<li>各领域微服务接受到请求后，先从 HTTP Header 中拿出 JWT 凭证。
+<ol>
+<li>在执行真正的业务逻辑前，先利用之前定时从 Auth 服务中同步获取的公钥。
+<ol>
+<li>Auth 服务通过一个类似 <code>https://&lt;your_domain&gt;/.well-known/jwks.json</code> 的 API 提供 JWT 公钥的分发。关于 <code>.well-known</code> 前缀，可阅读 <a href="https://datatracker.ietf.org/doc/html/rfc5785">RFC 5785</a> 做进一步了解。在 <code>jwks.json</code> 文件中，我们可以找到 <a href="https://datatracker.ietf.org/doc/html/rfc7517">JWK</a> 或 JSON Web Key，这是我们用来验证签名的公钥。</li>
+<li>校验 JWT 这块逻辑属于微服务共有的部分，一般可以开发一个 SDK 包来做这个通用的工作。为了提高性能，可使用缓存技术，定时从 Auth 中同步公钥。</li>
+</ol>
+</li>
+<li>获取到公钥后验证成功后拿出 JWT Payload 即可获取到用户信息和角色权限。</li>
+</ol>
+</li>
+</ol>
+<p>全部流程就是这样，我们得到了以下的一些好处：</p>
+<ul>
+<li>这个流程里我们并没有将 JWT 返回给用户，只是在认证授权过后生成一个一次性的 JWT 令牌凭证用于微服务内部服务间的调用。因为用户的权限信息存放至 JWT Payload 中，内部的服务并不需要从 AD/LDAP 中获取用户权限信息。可能有人觉得内部服务直接从中间件中获取用户会话信息也可以，但这又让我们的应用进一步耦合了中间件，同时也让一个请求链路中产生更多的子请求，不如直接在请求头中存放用户信息的方式高效。</li>
+<li>在微服务内部间传递的是经过非对称加密算法签名的 JWT 凭证，并不是一个 JWT Payload 信息。就算我们的微服务内部被入侵，攻击者也并不能通过篡改凭证中用户的权限信息来搞破坏。这也满足了分布式系统中 <a href="https://icyfenix.cn/distribution/secure/zero-trust.html">零信任网络（Zero Trust）</a> 的部分要求。</li>
+<li>与外部第三方应用的通讯（M2M），可以采用 OAuth2 的方式或 Personal Access Token 这种方式来集成。</li>
+<li>通过引入 SDK 与定时同步公钥的机制，我们引入了一定的复杂度。比如 SDK 在异构编程语言的项目中开发复杂的问题。不过这个问题在云原生系统时代有了不同的解法，让我们之后讨论这个问题。</li>
+</ul>
+<p>架构总是在演进，也许分布式系统中很多问题我们还没完全解决，就来到了云原生时代。</p>
+<h2 id="云原生系统">云原生系统</h2>
+<p>如果你对云原生应用开发还不了解的话，可以先看看我这篇 <a href="https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/">K8S 云原生应用开发小记</a>。云原生系统其实并不是什么后分布式系统时代。它们两者都是为了解决不同场景的问题而出现的解决方案。</p>
+<p>在认证授权这块，云原生系统的优势在于可以通过 <a href="https://icyfenix.cn/immutable-infrastructure/mesh/">服务网格(Service Mesh)</a> 做一些业务系统中通用的切面工作，比如我们在分布式系统中遇到的校验 JWT 的 SDK 其实就可以放入服务网格中的边车（<a href="https://www.thoughtworks.com/radar/techniques/sidecars-for-endpoint-security">Sidecar</a>）去实现，让业务应用更专注特定领域的业务。</p>
+<p>由于这篇文章并不主要讨论云原生，对这部分感兴趣的可以参考以下两篇文章做进一步了解：</p>
+<ol>
+<li><a href="https://insights.thoughtworks.cn/service-mesh-authentication-authorization/">Service Mesh架构下的认证与授权</a></li>
+<li><a href="https://www.thoughtworks.com/insights/blog/architecture/authentication-sidecar-a-new-experience-in-microservice-architecture-part-one">Authentication sidecar</a></li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>由于篇幅及能力限制，这篇文章我只能从高层次梳理在不同架构演进中认证、授权及凭证这些和架构安全相关的技术的发展过程。由于这些技术涉及了大量的技术标准及实践，很难在一篇文章中对这些技术做详尽的分享，更无法去分享如何实现。但有了这些理论支持和最佳实践，希望能让你在实现的过程中多了一个指引。如果你想进一步了解，可参考文章中的参考文章链接。</p>
+<p>最后，技术总是在不断的发展，但并不是新技术总比老技术“先进”。正如文章中对 Cookie-Session 与 JWT 的分析对比，技术方案总是充满了各种 <code>Trade-off</code>。而作为一个工程师，我们能做的就是认清这些技术的历史背景及局限性，选择最适合项目需求的技术方案。</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

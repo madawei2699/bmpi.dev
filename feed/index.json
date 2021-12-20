@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/how-to-learn-tech/",
-        "title": "如何学习一门技术",
-        "description": "本文分享笔者在学习一门新技术时的一些经验。",
-        "publish-date": "2021-11-20 00:00:00 +0000 UTC"
+        "url": "/dev/authentication-and-authorization-in-a-distributed-system/",
+        "title": "分布式系统下的认证与授权",
+        "description": "本文从高层次梳理在不同架构演进中认证、授权及凭证这些和架构安全相关的技术的发展过程。",
+        "publish-date": "2021-12-18 00:00:00 +0000 UTC"
     }
 }

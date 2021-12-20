@@ -6,7 +6,21 @@
     <description>Recent content on 构建我的被动收入</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 20 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>分布式系统下的认证与授权</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/</guid>
+      <description>本文从高层次梳理在不同架构演进中认证、授权及凭证这些和架构安全相关的技术的发展过程。</description>
+    </item>
+    
     <item>
       <title>如何学习一门技术</title>
       
