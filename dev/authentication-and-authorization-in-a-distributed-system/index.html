@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2021-12-18T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-12-20T20:16:21&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2021-12-21T15:20:42&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://img.bmpi.dev/0f3dfb95-7f80-2311-74f1-f70ea7fd9a69.png",
       
       "datePublished": "2021-12-18T00:00:00Z",
-      "dateModified": "2021-12-20T20:16:21+08:00",
+      "dateModified": "2021-12-21T15:20:42+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -334,7 +334,7 @@
 <li>会话粘滞（Sticky session）：通过负载均衡算法如 Nginx 的 <a href="https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/">IP Hash</a> 算法将来自同一 IP 的请求转发至同一服务。每个服务节点都不重复地保存着一部分用户的状态，如果这个服务崩溃了，里面的用户状态便完全丢失。</li>
 </ul>
 <blockquote>
-<p>为什么在分布式系统中共享状态就这么困难？这是因为分布式系统中有一个不可能三角的理论：<a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP</a>。这个理论简单的理解就是因为在分布式系统中，因为网络无法做到绝对的可靠（分区容错性：<strong>P</strong>artition Tolerance），只能在一致性（<strong>C</strong>onsistency）和可靠性（<strong>A</strong>vailability）间选择一个。</p>
+<p>为什么在分布式系统中共享状态就这么困难？这是因为分布式系统中有一个不可能三角的理论：<a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP</a>。这个理论简单的理解就是因为在分布式系统中，因为网络无法做到绝对的可靠（分区容错性：<strong>P</strong>artition Tolerance），只能在一致性（<strong>C</strong>onsistency）和可用性（<strong>A</strong>vailability）间选择一个。</p>
 <p>比如上述的三种服务端方案其实都是牺牲了 CAP 的某个方面。比如第一种中心化存储方案我们放弃了中心化存储的分区容错性，一旦其网络分区，整个集群都会不可用。第二种会话复制方案我们牺牲了可用性，当节点在同步会话数据时，整个服务会短暂的不可用。第三种会话粘滞方案我们牺牲了一致性，一旦某个节点宕机，整个集群的数据会因该节点的数据丢失而达到不一致的状态。</p>
 </blockquote>
 </li>
@@ -423,7 +423,7 @@
               今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5b41a06eabfa4974845c7317f2127a99d142a9e4">5b41a06e</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/4a92b77be147abab741d1cf86b42ff15299b5725">4a92b77b</a>
         </div>
         
 
