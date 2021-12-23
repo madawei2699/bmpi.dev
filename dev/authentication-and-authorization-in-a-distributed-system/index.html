@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2021-12-18T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-12-23T11:36:23&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2021-12-23T19:49:43&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://img.bmpi.dev/0f3dfb95-7f80-2311-74f1-f70ea7fd9a69.png",
       
       "datePublished": "2021-12-18T00:00:00Z",
-      "dateModified": "2021-12-23T11:36:23+08:00",
+      "dateModified": "2021-12-23T19:49:43+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -94,7 +94,7 @@
   
   
   
-  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.a05e86b79f84ad061105a3eef5706b1c70e4a8391f3777e709be5b90285f83d9.css" integrity="sha256-oF6Gt5&#43;ErQYRBaPu9XBrHHDkqDkfN3fnCb5bkChfg9k="
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.7da8c52acb73a01b545369364516c9c77ebba003e67f94141c22fb2439c485fe.css" integrity="sha256-fajFKstzoBtUU2k2RRbJx367oAPmf5QUHCL7JDnEhf4="
     crossorigin="anonymous" media="screen" />
   
 
@@ -238,11 +238,11 @@
               
               
               
-              27:29
+              27:53
               
             </span>
             
-            <span class="post-word-count"> | 6048 字 | </span>
+            <span class="post-word-count"> | 6137 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -263,11 +263,12 @@
       </header>
 
       <div class="article">
-        
-        
-        
-        
-        <p>在软件系统设计中，如何让应用能够在各种环境中安全高效的访问是个复杂的问题，这个问题的背后是一系列软件设计时需要考虑的架构安全问题：<sup><a href="https://icyfenix.cn/architect-perspective/general-architecture/system-security/">架构安全性 | 凤凰架构</a></sup></p>
+        <div class="article-content">
+          
+          
+          
+          
+          <p>在软件系统设计中，如何让应用能够在各种环境中安全高效的访问是个复杂的问题，这个问题的背后是一系列软件设计时需要考虑的架构安全问题：<sup><a href="https://icyfenix.cn/architect-perspective/general-architecture/system-security/">架构安全性 | 凤凰架构</a></sup></p>
 <ul>
 <li>认证：系统如何识别合法用户，也就是解决 <strong>你是谁</strong> 的问题；</li>
 <li>授权：系统在识别合法用户后，还需要解决 <strong>你能做什么</strong> 的问题；</li>
@@ -368,6 +369,12 @@
 <p>让我们通过一个例子来理解下在分布式系统下的认证授权场景。</p>
 <h3 id="一个例子">一个例子</h3>
 <p><img data-src="https://img.bmpi.dev/9c440a22-887c-c05c-e381-fd84f6071858.png" alt="" class="lazyload" loading="lazy"/></p>
+<blockquote>
+<ol>
+<li>此处 Auth 服务承担的是授权（Authorization）的职责，而不是认证（Authentication）的职责；</li>
+<li>OAuth2 在协议中是做授权框架的，但是其一般需要登录授权，也能实现 SSO 的功能。</li>
+</ol>
+</blockquote>
 <ol>
 <li>用户通过 HTTPS 访问我们的应用。当请求发送至微服务网关层（Gateway），网关检测 HTTP Header 中的 Cookie 发现没有 <code>SESSIONID</code> 这个键值对，重定向至 SSO 登录页面。</li>
 <li>用户通过 SSO 登录我们的应用。
@@ -411,6 +418,7 @@
 <p>由于篇幅及能力限制，这篇文章我只能从高层次梳理在不同架构演进中认证、授权及凭证这些和架构安全相关的技术的发展过程。由于这些技术涉及了大量的技术标准及实践，很难在一篇文章中对这些技术做详尽的分享，更无法去分享如何实现。但有了这些理论支持和最佳实践，希望能让你在实现的过程中多了一个指引。如果你想进一步了解，可参考文章中的参考文章链接。</p>
 <p>最后，技术总是在不断的发展，但并不是新技术总比老技术“先进”。正如文章中对 Cookie-Session 与 JWT 的分析对比，技术方案总是充满了各种 <code>Trade-off</code>。而作为一个工程师，我们能做的就是认清这些技术的历史背景及局限性，选择最适合项目需求的技术方案。</p>
 
+        </div>
 
         
         <div style="color: #5c7080;font-size: small;font-style: italic;">
@@ -423,7 +431,7 @@
               今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/9cdcc82ed611ec67692d92d3267e5a6bd6ab55a9">9cdcc82e</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/297918e21cf54fa7bf80c9a6157b8b82814e9d74">297918e2</a>
         </div>
         
 

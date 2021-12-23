@@ -405,6 +405,12 @@ amp-img.contain img {
 <p>让我们通过一个例子来理解下在分布式系统下的认证授权场景。</p>
 <h3 id="一个例子">一个例子</h3>
 <p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/9c440a22-887c-c05c-e381-fd84f6071858.png" alt="" layout="fill"></amp-img></div></p>
+<blockquote>
+<ol>
+<li>此处 Auth 服务承担的是授权（Authorization）的职责，而不是认证（Authentication）的职责；</li>
+<li>OAuth2 在协议中是做授权框架的，但是其一般需要登录授权，也能实现 SSO 的功能。</li>
+</ol>
+</blockquote>
 <ol>
 <li>用户通过 HTTPS 访问我们的应用。当请求发送至微服务网关层（Gateway），网关检测 HTTP Header 中的 Cookie 发现没有 <code>SESSIONID</code> 这个键值对，重定向至 SSO 登录页面。</li>
 <li>用户通过 SSO 登录我们的应用。
