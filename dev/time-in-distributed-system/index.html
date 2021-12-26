@@ -1,0 +1,2648 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="马大伟">
+  
+  <meta name="description" content="本文梳理在分布式系统中时间对事件序列的影响，介绍逻辑时钟、向量时钟及混合逻辑时钟等不同算法的解决思路。">
+  
+  
+  
+  <meta name="keywords" content="自我提升、时间管理、GTD、写作、摄影、笔记管理、知识管理、财务管理、全栈开发、指数投资、基金、股票、债券、SEO、Affiliate、Media Buy、Niche、社交媒体、被动收入、网赚">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="分布式系统中的时间"/>
+  <meta name="twitter:description" content="本文梳理在分布式系统中时间对事件序列的影响，介绍逻辑时钟、向量时钟及混合逻辑时钟等不同算法的解决思路。"/>
+  
+  <meta property="twitter:image" content="https://img.bmpi.dev/3d3413ee-7024-5ff7-5904-e9120dd5690f.png" />
+  
+
+  
+  <meta property="og:title" content="分布式系统中的时间" />
+<meta property="og:description" content="本文梳理在分布式系统中时间对事件序列的影响，介绍逻辑时钟、向量时钟及混合逻辑时钟等不同算法的解决思路。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/dev/time-in-distributed-system/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2021-12-24T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-12-26T12:12:59&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+
+
+  
+  <meta property="og:image" content="https://img.bmpi.dev/3d3413ee-7024-5ff7-5904-e9120dd5690f.png" />
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "分布式系统中的时间",
+      
+      "image": "https://img.bmpi.dev/3d3413ee-7024-5ff7-5904-e9120dd5690f.png",
+      
+      "datePublished": "2021-12-24T00:00:00Z",
+      "dateModified": "2021-12-26T12:12:59+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "马大伟"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/dev/time-in-distributed-system/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/mdw2.png"
+        }
+      },
+      "description": "本文梳理在分布式系统中时间对事件序列的影响，介绍逻辑时钟、向量时钟及混合逻辑时钟等不同算法的解决思路。",
+      "keywords": ["物理时钟", "Lamport timestamp", "逻辑时钟", "分布式系统", "向量时钟", "混合逻辑时钟"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/dev/time-in-distributed-system/">
+  
+  <title>
+  分布式系统中的时间 · 构建我的被动收入
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/dev/time-in-distributed-system/">
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.7da8c52acb73a01b545369364516c9c77ebba003e67f94141c22fb2439c485fe.css" integrity="sha256-fajFKstzoBtUU2k2RRbJx367oAPmf5QUHCL7JDnEhf4="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/flying-pages.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="icon" type="image/png" href="https://www.bmpi.dev/images/f3/favicon-32x32.png"
+    sizes="32x32">
+  <link rel="icon" type="image/png" href="https://www.bmpi.dev/images/f3/favicon-16x16.png"
+    sizes="16x16">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/amp/dev/time-in-distributed-system/" title="构建我的被动收入" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css" media="screen" />
+
+  
+  <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=600a642fe0b9b900111a7f08&product=inline-share-buttons' async='async'></script>
+  
+  
+  
+
+  
+
+  
+  
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://www.bmpi.dev/">
+      构建我的被动收入
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/about/">关于</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/self/">学习</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/dev/">技术</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/money/">投资</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/project/">个人项目</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/goal/">长期目标</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/en/">English</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">分布式系统中的时间</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2021-12-24T00:00:00Z'>
+                2021-12-24
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              31:25
+              
+            </span>
+            
+            <span class="post-word-count"> | 6913 字 | </span>
+            <span id="post-views"></span> 次阅读
+            
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E4%BB%80%E4%B9%88%E6%98%AFx/">什么是X</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E7%89%A9%E7%90%86%E6%97%B6%E9%92%9F/">物理时钟</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/lamport-timestamp/">Lamport timestamp</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E9%80%BB%E8%BE%91%E6%97%B6%E9%92%9F/">逻辑时钟</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">分布式系统</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%90%91%E9%87%8F%E6%97%B6%E9%92%9F/">向量时钟</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%B7%B7%E5%90%88%E9%80%BB%E8%BE%91%E6%97%B6%E9%92%9F/">混合逻辑时钟</a></div>
+
+        </div>
+      </header>
+
+      <div class="article">
+        <div class="article-content">
+          
+          
+          
+          
+          <ul>
+<li><a href="#%E5%A4%9A%E5%87%BA%E4%B8%80%E7%A7%92%E8%AE%A9%E4%BA%92%E8%81%94%E7%BD%91%E6%9A%82%E5%81%9C">多出一秒让互联网暂停</a></li>
+<li><a href="#%E7%8E%B0%E5%AE%9E%E4%B8%96%E7%95%8C%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4">现实世界中的时间</a>
+<ul>
+<li><a href="#%E6%97%B6%E9%97%B4%E7%9A%84%E4%B8%A4%E4%B8%AA%E7%89%B9%E5%BE%81">时间的两个特征</a></li>
+<li><a href="#%E7%89%A9%E7%90%86%E6%97%B6%E9%92%9F">物理时钟</a>
+<ul>
+<li><a href="#%E6%97%B6%E9%97%B4%E6%A0%87%E5%87%86">时间标准</a></li>
+<li><a href="#%E6%97%B6%E9%92%9F%E4%BB%AA%E5%99%A8">时钟仪器</a></li>
+<li><a href="#%E6%97%B6%E9%92%9F%E5%90%8C%E6%AD%A5">时钟同步</a></li>
+<li><a href="#%E6%97%B6%E9%97%B4%E8%A1%A8%E7%A4%BA">时间表示</a></li>
+<li><a href="#%E6%97%B6%E9%92%9F%E7%B1%BB%E5%9E%8B">时钟类型</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4">分布式系统中的时间</a>
+<ul>
+<li><a href="#%E9%87%8D%E6%96%B0%E8%AE%A4%E8%AF%86%E7%A8%8B%E5%BA%8F">重新认识程序</a></li>
+<li><a href="#%E5%9B%A0%E6%9E%9C%E4%B8%80%E8%87%B4%E6%80%A7">因果一致性</a></li>
+<li><a href="#%E9%80%BB%E8%BE%91%E6%97%B6%E9%92%9F">逻辑时钟</a>
+<ul>
+<li><a href="#lamport-timestamp">Lamport timestamp</a>
+<ul>
+<li><a href="#happened-before">Happened-before</a></li>
+<li><a href="#%E7%AE%97%E6%B3%95%E6%8F%8F%E8%BF%B0">算法描述</a></li>
+<li><a href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90">一个例子</a></li>
+<li><a href="#%E5%B1%80%E9%99%90%E6%80%A7">局限性</a></li>
+</ul>
+</li>
+<li><a href="#vector-clock">Vector clock</a>
+<ul>
+<li><a href="#%E5%B1%80%E9%99%90%E6%80%A7-1">局限性</a></li>
+<li><a href="#%E5%86%B2%E7%AA%81%E7%AD%96%E7%95%A5">冲突策略</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">应用场景</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%93%E8%AF%AD">结语</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0--%E8%BF%9B%E9%98%B6%E9%98%85%E8%AF%BB">参考文章 &amp;&amp; 进阶阅读</a></li>
+</ul>
+<figure >
+    
+        <img data-src="https://img.bmpi.dev/3d3413ee-7024-5ff7-5904-e9120dd5690f.png" class="lazyload" loading="lazy" alt="和本文中时间相关概念" />
+    
+    
+    <figcaption>
+        <p>
+        和本文中时间相关概念
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+<h2 id="多出一秒让互联网暂停">多出一秒让互联网暂停</h2>
+<p>2012 年 6 月 30 日，很多互联网在线服务系统和网站突然同时宕机，包括知名的社区 Reddit：</p>
+<p><img data-src="https://img.bmpi.dev/d3041422-0068-0c1d-67e7-c8b789006ade.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>这并不是什么大规模黑客攻击或底层基础库如最近的 Log4j 安全事件引发的，而是一个被人忽略的和时间相关的现象导致的错误。</p>
+<p>WIRED 的这篇 <a href="https://www.wired.com/2012/07/leap-second-glitch-explained/">The Inside Story of the Extra Second That Crashed the Web</a> 文章详细的报道了这个事件，原因简单来说是：</p>
+<ol>
+<li>由于地球自转速度并非恒定，导致每隔一段时间协调世界时（UTC）与太阳时（Mean Solar Time）、世界时（UT1）出现微小的偏差。国际地球自转服务（IERS）基于实际地球自转确定何时必须插入闰秒（leap second）来纠正协调世界时与地球自转的偏差，于是他们决定在 2012 年 6 月 30 日最后一秒插入闰秒。</li>
+<li>由于闰秒的特殊性，很多 IT 应用系统选择直接忽略它，依靠操作系统来处理这多出一秒的影响。问题就出在 Linux Kernel 对闰秒的处理上产生了 Bug。</li>
+<li>Linux Kernel 的一个子系统 Hrtimer 负责唤醒因等待 CPU 时间片而睡眠的进程。但因为闰秒的影响，Hrtimer 在 Linux 内核还未完成任务前提前 1 秒唤醒了睡眠的进程，进而导致了 CPU 过载而无法正常工作。</li>
+<li>由于 Linux 是很多互联网服务的操作系统，这导致了大量的互联网服务停止服务，整个互联网按下了暂停键！</li>
+</ol>
+<p>很难想象因为月球、潮汐等对地球自转的影响，间接导致了整个互联网暂停🤯。但这就是无处不在时间的力量。</p>
+<p>当然 Linux 内核最终修复了这个错误，对技术细节感兴趣的可以看这篇 <a href="https://access.redhat.com/articles/15145">Resolve Leap Second Issues in Red Hat Enterprise Linux</a>。</p>
+<h2 id="现实世界中的时间">现实世界中的时间</h2>
+<h3 id="时间的两个特征">时间的两个特征</h3>
+<p>从维基百科对时间的定义中提到：</p>
+<blockquote>
+<p>借着时间，事件发生之先后可以按过去-现在-未来之序列得以确定（时间点/时刻），也可以衡量事件持续的期间以及事件之间和间隔长短（时间段）。</p>
+<p>哲学家对于时间有两派不同的观点：一派认为时间是宇宙的基本结构，是一个会依序列方式出现的维度，像艾萨克·牛顿就对时间有这样的观点。包括戈特弗里德·莱布尼茨及伊曼努尔·康德在内的另一派认为时间不是任何一种已经存在的维度，也不是任何会“流动”的实存物，时间只是一种心智的概念，配合空间和数可以让人类对事件进行排序和比较。</p>
+</blockquote>
+<p>这里面无论是定义，还是哲学家的观点，都提到了时间和<strong>事件发生序列</strong>的关系。</p>
+<p>在物理学爱因斯坦的相对论中，时间与空间一起组成四维时空，构成宇宙的基本结构。时间与空间都不是绝对的，观察者在不同的相对速度或不同时空结构的测量点，所测量到时间的流逝速度是不同的。在狭义相对论中，发生在空间中不同位置的两个事件，它们的同时性并不具有绝对的意义，我们没办法肯定地说它们是否为同时发生。</p>
+<p><img data-src="https://img.bmpi.dev/8b46343d-5e4b-7de0-52f4-11f7aa698317.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>在相对论中，时间的定义复杂了很多。因为参考系的不同，时间中的序列的先后次序也有了一些不同。在同一个参考系中，随着时间的推移，事件出现的先后次序有因果关系。但在不同参考系中，事件出现的先后次序并没有因果关系。也就是说<strong>视角不同，事件的相互次序很难被判定</strong>。</p>
+<p>明白时间的两个特征对之后我们理解分布式系统中的时间问题有很大的帮助：</p>
+<ol>
+<li><strong>在同一个参考系（视角）中事件发生的先后次序是确定的，可以判定事件的因果关系</strong>；</li>
+<li><strong>在不同参考系（视角）中事件发生的先后次序是不确定的，不一定能判定事件的因果关系</strong>。</li>
+</ol>
+<h3 id="物理时钟">物理时钟</h3>
+<p>人类很早就尝试通过一些方法丈量时间了，比如早期的太阳钟（日晷）：</p>
+<p><img data-src="https://img.bmpi.dev/8f28642d-c1a5-fdfb-221c-d2225790c2ca.png" alt="" class="lazyload" loading="lazy"/></p>
+<h4 id="时间标准">时间标准</h4>
+<p>太阳钟和地球自转现象相关，和地球自转相关的时间标准有恒星时与太阳时，而在太阳时下又分为民用时（平太阳时）和世界时（UT1）。还记得我们刚开始的和闰秒相关的故事吗？我们通过闰秒来纠正 <a href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6">协调世界时（UTC）</a>和太阳时的差异。协调世界时（UTC）是与谐波振荡相关的时间标准下的原子时类别。在原子时里还有国际原子时（TAI）与卫星导航系统（GPS）使用的原子时。</p>
+<p><strong>时间标准反应了人们观察时间的视角</strong>。虽然原子钟是以原子的能级跃迁为基础建立的时间基准，但它追踪的是太阳时，也就是从地球自转的视角观察时间的流逝。还有一类是与天体运动相关的时间标准，比如历书时与相对论力学时。不过在计算机中用的时间标准现在大多都是原子时。</p>
+<h4 id="时钟仪器">时钟仪器</h4>
+<p>有了时间标准，如何通过仪器去实现精确记录时间的功能？这又是一个漫长的历史发展过程，这其中时钟仪器经历了以太阳影子、水流、燃点线香、沙漏、以砝码带动的机械、钟摆、电子、石英甚至原子等方式的发展。各种方式的尝试，只是为了找到能更精确记录时间的方式。目前的原子钟就是人类现在科技能实现的最精确的记录时间的方式。计时方式越来越精确，也反应了社会越来越快的节奏。</p>
+<h4 id="时钟同步">时钟同步</h4>
+<p>有了精确的时间源，如何给网络上的计算机设备同步时间？这方面有以下几种协议：</p>
+<ul>
+<li><strong><a href="https://en.wikipedia.org/wiki/Precision_Time_Protocol">PTP（Precision Time Protocol）</a></strong>：精确时间协议 (PTP) 是一种用于在整个计算机网络中同步时钟的协议。在局域网中，时钟精度达到亚微秒级，适用于测控系统；</li>
+<li><strong><a href="https://en.wikipedia.org/wiki/Network_Time_Protocol">NTP（Network Time Protocol）</a></strong>：网络时间协议 (NTP) 是在互联网上进行时钟同步的一个网络协议，位于OSI模型的应用层。具体可看这篇 <a href="https://yang.observer/2020/07/11/time-ntp/">计算机的时钟（一）：NTP协议</a> 的介绍；</li>
+<li><strong>GPS（Global Positioning System）</strong>：通过 GPS 来实现高精度的时间同步；</li>
+<li><strong><a href="http://www.beidouchina.org.cn/bdss/">北斗授时</a></strong>：和 GPS 一样可提供高精度的时间同步；</li>
+<li><strong><a href="https://cloud.google.com/spanner/docs/true-time-external-consistency">TrueTime</a></strong>：Google 设计的用来给其分布式数据库 Spanner 精准同步时间的算法。相比 NTP 协议，误差小很多。具体见这篇 <a href="https://yang.observer/2020/11/02/true-time/">计算机的时钟（四）：TrueTime</a> 的介绍；</li>
+</ul>
+<p>计算机或智能设备大多采用 NTP 协议来同步时间。你还可以访问 <a href="https://time.is/">time.is</a> 这个网站来查看你的设备与高精度原子钟的时间偏差：</p>
+<p><img data-src="https://img.bmpi.dev/0e3a0585-cd0f-ec04-112a-b295bc6746e4.png" alt="" class="lazyload" loading="lazy"/></p>
+<h4 id="时间表示">时间表示</h4>
+<p>时钟表示时间的方式很简单，但计算机在内部如何表示时间？有三个常用时间格式的标准：</p>
+<ul>
+<li><strong><a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a></strong>：在 Linux 中输入 <code>date --iso-8601=ns</code> 会得到 ISO 8601 格式的时间 <code>2021-12-25T19:31:12,753290000+08:00</code>；</li>
+<li><strong><a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a></strong>：在 Linux 中输入 <code>date --rfc-3339=ns</code> 会得到 RFC 3339 格式的时间 <code>2021-12-25 19:31:10.900897000+08:00</code>；</li>
+<li><strong><a href="https://en.wikipedia.org/wiki/Unix_time">Unix timestamp</a></strong>：在 Linux 中输入 <code>date +%s</code> 获得当前时间的 Unix 时间戳 <code>1640432950</code>。它是自 Unix 纪元（Unix Epoch：<code>1970-01-01 00:00:00.000000000+00:00</code>）以来的不包括闰秒的到现在的总秒数。需要注意的是 Unix 时间戳是协调世界时（UTC）标准。</li>
+</ul>
+<p>RFC 3339 可以理解为是 ISO 8601 的一个扩展，所以很多时候可以直接用 RFC 3339 替换 ISO 8601。以 RFC 3339 为例：</p>
+<p><img data-src="https://img.bmpi.dev/a8df98fa-90b8-8113-73c5-ec666ca34c32.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>也可以用 <code>date --rfc-3339=ns -u</code> 获得协调世界时（UTC）标准的时间格式 <code>2021-12-25 11:45:42.740865000+00:00</code>。任何时间都建议使用 RFC 3339 的 UTC 格式或 Unix 时间戳做时间表示，Unix 时间戳在存储和网络传输方面耗费资源更少：</p>
+<p><img data-src="https://img.bmpi.dev/c00fec13-5e26-d10f-f0b5-b16522c1f1ff.png" alt="" class="lazyload" loading="lazy"/></p>
+<h4 id="时钟类型">时钟类型</h4>
+<p>大多时候我们不会意识到计算机在与 NTP 服务器同步时间时的一些影响，但在某些场景比如统计某个程序函数的执行时间时，时间同步会让计算机的本地时间突然向前或者回拨，当程序在做时间差统计的时候，可能会带来错误的值（比如负数），这是墙上时钟（Wall Clock）的弊端。</p>
+<p>而单调时钟（Monotonic Clock）则是一种更简单的时间表示方式，它不会被 NTP 服务器影响，但是它也不能保证时间的精确性，因为它只能保证时间的递增或递减，而不能保证时间的绝对准确。</p>
+<p>在 Java 中 <code>System.currentTimeMills()</code> API 返回的就是墙上时钟时间，<code>System.nanoTime()</code> API 返回的是单调时钟时间，后者可以用来在日志中统计程序函数执行时间。</p>
+<h2 id="分布式系统中的时间">分布式系统中的时间</h2>
+<h3 id="重新认识程序">重新认识程序</h3>
+<p>什么是程序？估计很多人会回答 <code>程序 = 算法 + 数据结构</code>。但这只从静态的角度描述了程序，而程序的价值是在运行的时候。如果从运行时的角度看呢？<a href="https://lamport.azurewebsites.net/pubs/pubs.html">Leslie Lamport</a> 在这个 <a href="https://www.youtube.com/watch?v=6QsTfL-uXd8&amp;t=3023s">Programing Should Be More Than Coding</a> 课程中给出了他的解释：</p>
+<p><img data-src="https://img.bmpi.dev/b4485b78-8b03-263f-1db9-3634fab4e1d0.png" alt="" class="lazyload" loading="lazy"/></p>
+<p><strong>一个程序可以看作一系列行为的集合，而一个行为又可以看作一系列状态的转换</strong>。这个和天然分布式的 <a href="https://www.erlang.org/">Erlang</a> 的世界观有异曲同工之妙：</p>
+<p><a href="https://www.slideshare.net/barrywjones3/repeating-historyon-purposewith-elixir"><img data-src="https://img.bmpi.dev/e829cb47-0202-0524-84f7-5500c4d3951e.png" alt="" class="lazyload" loading="lazy"/></a></p>
+<p>在 Erlang 的世界观里，程序是由一系列独立的进程组成的，这些进程通过消息传递（Message）来通信共享状态。消息传递的是什么？消息传递的是状态，而状态的转换是由进程来完成的。这个消息传递就是上述中的行为，从这个角度看，<strong>程序是由大量的消息传递行为（事件）组成的</strong>。</p>
+<h3 id="因果一致性">因果一致性</h3>
+<p>在单节点的程序里，有全局的墙上时钟，大量的消息传递行为并不会出现因果关系的错误。请看如下的例子：</p>
+<p><img data-src="https://img.bmpi.dev/76784915-7f3d-c44e-87a2-2d414ae6335f.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>如上图，当进程 P2 收到 P1 发来的消息 m1 后，经过处理之后 P2 将 m2 发送给 P1 和 P3。因为全局时钟的存在，t1 &lt; t2，所以在 P3 进程的视角看，肯定是先收到一个 P1 发来的 m1，然后再收到一个 P2 发来的 m2。实际上，我们程序的逻辑也是 P2 收到 m1 后经过处理才生成 m2，于因果关系上，先有 m1，然后才有 m2。不可能出现 P3 先收到 m2，然后再收到 m1 的情况。</p>
+<p>举个实际的例子就是，小王（P1）发了个朋友圈，说“天好美”（m1），小李（P2）看到后评论了一句“好美！”（m2），小赵（P3）看到的肯定是先小王发的，然后小李评论的，不太可能出现先看到小李的评论，然后再看到小王的朋友圈的情况。</p>
+<p>但在分布式系统中，因为网络原因和节点同步时钟会产生一定的偏差，可能会出现因果悖论。请看如下的例子：</p>
+<p><img data-src="https://img.bmpi.dev/8487222b-c941-e7b1-a1d4-2246119abc97.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>和上面的例子的区别在于，此时的进程分布在不同的节点，甚至可能在物理上相距很远。因为时钟无法做到极高的精确性，此时可能会在不同节点上出现 t2 &lt; t1 的情况。站在 P3 的视角，它很难判断到底是先有 m1 还是先有 m2:</p>
+<ol>
+<li>虽然先收到 m2，后收到 m1，但完全可能是网络延迟，导致 m1 后于 m2；</li>
+<li>就算 P1 发送 m1 时携带了自己的本地时间戳 t1，P2 发送 m2 时也携带了自己的本地时间戳 t2。但由于 P1 和 P2 的时间并没有完全同步，导致 P2 的 t2 &lt; P1 的 t1。P3 在收到消息后，根据消息携带的时间戳排序，得到了错误的排序，出现了 m2 先于 m1 的因果悖论。</li>
+</ol>
+<p>放到上述朋友圈的例子就是小赵先看到了小李的评论，然后才看到了小王发的朋友圈😵。</p>
+<h3 id="逻辑时钟">逻辑时钟</h3>
+<p>靠物理时钟肯定是解决不了分布式因果一致性的问题了，因为现有的技术无法解决时钟在不同节点完全同步的问题。</p>
+<p>这时候一位大神跳出来了，从狭义相对论中得到了启示写了这篇深刻影响分布式系统领域的论文：<a href="http://research.microsoft.com/users/lamport/pubs/time-clocks.pdf">Time, Clocks and the Ordering of Events in a Distributed System</a>。这位大神正是之前提到的 Leslie Lamport，他同时也是分布式领域极其复杂的 <a href="https://zh.wikipedia.org/wiki/Paxos%E7%AE%97%E6%B3%95">Paxos</a> 共识算法的作者，也是我们接下来要讲到到的 <a href="https://en.wikipedia.org/wiki/Lamport_timestamp">Lamport timestamp</a> 的作者。</p>
+<p>Leslie Lamport 在这个 <a href="https://lamport.azurewebsites.net/pubs/pubs.html#time-clocks">论文背景介绍</a> 中提到：</p>
+<blockquote>
+<p>&hellip; Special relativity teaches us that there is no invariant total ordering of events in space-time; different observers can disagree about which of two events happened first. There is only a partial order in which an event e1 precedes an event e2 iff e1 can causally affect e2. &hellip;</p>
+</blockquote>
+<p>这段关于狭义相对论的介绍中提到了两个数学概念：<a href="https://zh.wikipedia.org/wiki/%E5%85%A8%E5%BA%8F%E5%85%B3%E7%B3%BB">全序</a> 与 <a href="https://zh.wikipedia.org/wiki/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB">偏序</a>。简单理解就是宇宙时空中不存在绝对的全序事件顺序（因为很多事件都没有因果关系，也就是没有次序关系）。但当且仅当（iff）事件 e2 是由 e1 引起时（存在因果关系），e2 后于 e1 发生，它们之间存在偏序关系。</p>
+<p>既然在分布式中很难解决时钟同步的问题，那就不去解决这个问题。在分布式中同步时钟是为了解决不同节点发出事件的次序（因果关系），那只需要通过某种手段解决这个事件次序的问题就好了。这正是逻辑时钟解决问题的思路。</p>
+<p>理论有点复杂，让我们先看看 Lamport timestamp 到底是怎么解决这个复杂的分布式因果一致性问题的吧。</p>
+<h4 id="lamport-timestamp">Lamport timestamp</h4>
+<p>狭义相对论告诉我们宇宙时空中不存在绝对的全序事件，但我们是否可以在有限的分布式节点中<strong>构建一个全局的全序逻辑时钟</strong>来描述事件顺序？这正是 <a href="https://en.wikipedia.org/wiki/Lamport_timestamp">Lamport timestamp</a> 的解法。</p>
+<h5 id="happened-before">Happened-before</h5>
+<p>在进行算法介绍之前先介绍 Leslie Lamport 定义的另外一个重要的概念：<a href="https://en.wikipedia.org/wiki/Happened-before">Happened-before</a>，它<strong>定义了如果事件
+e<sub>i</sub> 导致了事件 e<sub>j</sub>，那么一定 e<sub>i</sub> 发生在 e<sub>j</sub> 之前</strong>。它满足如下几个数学规则：</p>
+<ol>
+<li>e<sub>i</sub> 和 e<sub>j</sub> 是同一个进程内的事件，e<sub>i</sub> 发生在 e<sub>j</sub> 之前，则 e<sub>i</sub> → e<sub>j</sub>；</li>
+<li>e<sub>i</sub> 和 e<sub>j</sub> 在不同的进程中，e<sub>i</sub> 是发送进程内的发送事件，e<sub>j</sub> 是同一消息接收进程内的接收事件，则 e<sub>i</sub> → e<sub>j</sub> （发送进程和接受进程可以分布在不同的物理节点上）；</li>
+<li>如果 e<sub>i</sub> → e<sub>j</sub> 并且 e<sub>j</sub> → e<sub>k</sub>，则 e<sub>i</sub> → e<sub>k</sub> （满足传递性）。</li>
+<li>如果两个事件无法推导出顺序关系的话，我们称两个事件是并行的，记作 e<sub>i</sub> || e<sub>j</sub>。</li>
+</ol>
+<p>第 4 条规则说明 Happened-before 是一种偏序关系。</p>
+<blockquote>
+<p>看到这里熟悉 Java 的人立即意识到在 Java <a href="https://en.wikipedia.org/wiki/Java_memory_model">JMM</a> 中就有了 Happened-before 的概念：在多线程编程中，Happened-before 提供了跨线程的内存可见性保证。在编译器执行编译优化的时候，会对指令做重排序，为了保证程序运行的最终正确，JMM 设定了一些 Happened-before 规则，程序员只要遵循这些规则，JMM 就能保证程序的正确运行。</p>
+</blockquote>
+<p>所以 Happened-before 是一种约束，遵循它我们能获得一定的事件次序最终保证。</p>
+<h5 id="算法描述">算法描述</h5>
+<p>发送进程端：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># event is known
+time = time + 1;
+# event happens
+send(message, time);
+</code></pre></div><p>接受进程端：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">(message, time_stamp) = receive();
+time = max(time_stamp, time) + 1;
+</code></pre></div><p>这个算法描述起来就是：每个节点都维护一个本地永远递增的<code>逻辑时间戳</code>（初始都为 0），节点发送事件时必须携带此逻辑时间戳。每当节点有事件产生或接收时，节点本地的逻辑时间戳就自增 1。如果节点接受到一个事件，如果事件逻辑时间戳比本地逻辑时间戳还小就忽略，否则就接收此事件，并更新节点本地的逻辑时间戳，新的值取节点本地逻辑时间戳和接收事件所携带的逻辑时间戳二者的最大值并自增 1。</p>
+<h5 id="一个例子">一个例子</h5>
+<p><img data-src="https://img.bmpi.dev/2de64450-58be-a12c-6e14-1558a1cec063.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>如上图所示，我们以<code>m@(T,P)</code>的模式全局识别一个事件<code>m</code>，比如<code>m1@(1,P1)</code>代表在 P1 进程上发生了事件 m，在 P1 上本地逻辑时间戳为 1。接下来事件的发生如下描述：</p>
+<ol>
+<li>在 P1 进程上发生了事件<code>m1@(1,P1)</code>，之后 P1 给 P2 和 P3 发送了此事件；</li>
+<li>P2 先接收到了此事件，本地更新逻辑时间戳，这个事件在 P2 中为<code>m1@(2,P2)</code>。之后 P2 更新了 m1，本地变为<code>m1@(3,P2)</code>，并将此事件传播给 P1 和 P3；</li>
+<li>在 P1 中又对 m1 进行了两次更新，在 P1 中 m1 为<code>m1@(3,P1)</code>。之后 P1 收到了 P2 发来的 m1，因为接受的事件为<code>m1@(3,P2)</code>，但本地的 m1 为<code>m1@(3,P1)</code>。<strong>两者的逻辑时间戳都一样大，此时是难以区分到底选择哪个版本的 m1，因为无法确定这两个版本 m1 的因果关系</strong>；</li>
+<li>在 P3 中先接收到了 P2 发来的<code>m1@(3,P2)</code>，因 P3 之前并无 m1，所以接收此事件并更新为<code>m1@(4,P3)</code>。之后 P3 收到了 P1 发来的<code>m1@(1,P1)</code>，因为接收事件的逻辑时间戳小于 P3 本地的逻辑时间戳，所以忽略了此事件。</li>
+</ol>
+<p>通过上述描述，我们解决了在 <a href="#%E5%9B%A0%E6%9E%9C%E4%B8%80%E8%87%B4%E6%80%A7">因果一致性</a> 中描述的 P3 无法区分从 P1 和 P2 发来两个版本 m1 的问题。</p>
+<h5 id="局限性">局限性</h5>
+<p>如上述第 3 步的描述，Lamport timestamp 算法无法识别并行事件。在 P1 的视角里它无法确定是选择自己本地版本的 m1 还是 P2 发送的 m1，因为其可能是并行事件，毫无关系，也可能是<code>Happened-before</code>的因果关系。</p>
+<p>从序论的角度分析，是因为 Lamport timestamp 通过构造一个全序关系来描述实际上是偏序关系的问题集。如果两个事件毫无关系，它们的逻辑时间戳的大小比较毫无意义。</p>
+<p>不过在上述例子中，P1 最终选择了通过比较事件的节点大小来确定是否接收事件。在这里我们的冲突解决策略是如果同一事件相同逻辑时间戳，我们选择节点小的值的事件，也就是 P1 &gt; P2 &gt; P3。</p>
+<h4 id="vector-clock">Vector clock</h4>
+<p><a href="https://en.wikipedia.org/wiki/Vector_clock">Vector clock</a> 解决了 Lamport timestamp 无法识别并行事件的问题。通过构造偏序关系来解决偏序关系的问题集。</p>
+<p>Vector clock 在 Lamport timestamp 单值逻辑时间戳的基础上升级为向量（Vector）时间戳。</p>
+<p><img data-src="https://img.bmpi.dev/001bc9f5-b9cb-c9ff-8349-e863acf3b61c.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>有了向量的大小比较，Vector clock 将全序改造为了偏序关系，这样就可以识别出事件是否为并行还是<code>Happened-before</code>的因果关系。</p>
+<p>如在 P3 收到 P1 发来的事件<code>m1@([1,0,0],P1)</code>时，本地已经有了<code>m1@([1,2,1],P3)</code>，因为<code>[1,2,1]</code>比<code>[1,0,0]</code>大，所以忽略了此事件。</p>
+<p>但在 P1 收到了 P2 发来的事件<code>m1@([1,2,0],P2)</code>时，本地已经有了<code>m1@([3,0,0],P1)</code>，但<code>[1,2,0]</code>与<code>[3,0,0]</code>不可比较，或者说这两个向量平行。此时冲突发生，需要选择一种冲突策略来确定最终接受的 m1 版本。</p>
+<h5 id="局限性-1">局限性</h5>
+<p>Vector clock 虽然解决了 Lamport timestamp 无法识别并行事件的问题，但它也不是一种公平的算法。在冲突出现时，也只能选择提前定义好的冲突策略来确定最终的事件版本。不过在分布式中集群一般会通过共识算法选举一个 leader 节点，通过 leader 节点可以制定一些更合适的冲突解决算法。</p>
+<p>另外一个问题在节点数量多的时候，向量会变的很大，网络通信及向量的比较计算都会对系统产生一定的资源损耗。而且也没有考虑节点的动态加入或退出对向量比较的影响。</p>
+<h5 id="冲突策略">冲突策略</h5>
+<p>识别冲突后需要一种冲突策略来解决冲突。这里我们可以选择在 Lamport timestamp 算法中提到的用节点大小比较来确定最终版本，也可以选择 <a href="https://martinfowler.com/articles/patterns-of-distributed-systems/hybrid-clock.html">混合逻辑时钟（Hybrid Clock
+）</a> 算法。</p>
+<h3 id="应用场景">应用场景</h3>
+<p>逻辑时钟在分布式系统应用场景非常广泛。比如 <a href="https://blog.xiaohansong.com/lamport-logic-clock.html">构造分布式锁</a>、分布式节点状态同步（Replication）、数据冲突检测、强制因果通信、<a href="https://crdt.tech/">CRDT</a> 及 <a href="https://youtu.be/OqqliwwG0SM">实时协作应用（Collaborative）</a> 等。</p>
+<p>限于篇幅及能力，这些内容请读者自行查阅研究。</p>
+<h2 id="结语">结语</h2>
+<p>本文通过梳理在现实世界中时间在分布式系统应用会产生的一些问题，介绍了通过引入逻辑时间算法来解决这个问题。可以把逻辑时间理解为分布式系统的一个基石理论，因为当你去研究分布式系统的很多算法，都会发现它的影子。</p>
+<p>最后的最后，时间究竟是什么？相信不同人有不同的答案，但当你思考它时，就会发现的影响无处不在。</p>
+<p><img data-src="https://img.bmpi.dev/15abba7d-ffd2-044f-9137-ba07821528f2.png" alt="" class="lazyload" loading="lazy"/></p>
+<h2 id="参考文章--进阶阅读">参考文章 &amp;&amp; 进阶阅读</h2>
+<ol start="0">
+<li><a href="https://pavpanchekha.com/blog/time-clocks.html">Time, Clocks, and an Implementation in Erlang</a></li>
+<li><a href="https://www.youtube.com/watch?v=x-D8iFU1d-o&amp;list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB&amp;index=11&amp;t=11s">Distributed Systems 4.1: Logical time</a></li>
+<li><a href="https://writings.sh/post/logical-clocks">逻辑时钟 - 如何刻画分布式中的事件顺序</a></li>
+<li><a href="https://www.inlighting.org/archives/lamport-timestamp-vector-clock/">Lamport 逻辑时钟（Lamport Timestamp）和 Vector Clock 简单理解</a></li>
+<li><a href="https://yang.observer/2020/07/26/time-lamport-logical-time/">计算机的时钟（二）：Lamport逻辑时钟</a></li>
+<li><a href="https://www.raychase.net/5768">从物理时钟到逻辑时钟</a></li>
+<li><a href="https://www.scattered-thoughts.net/writing/causal-ordering/">Causal ordering</a></li>
+<li><a href="http://archagon.net/blog/2018/03/24/data-laced-with-history/">Data Laced with History: Causal Trees &amp; Operational CRDTs</a></li>
+<li><a href="https://github.com/antonkharenko/logical-clocks">antonkharenko/logical-clocks: Lamport and Vector clocks</a></li>
+<li><a href="https://github.com/gsharma/vector-clock">gsharma/vector-clock: Vector clocks &amp; Lamport timestamps</a></li>
+</ol>
+
+        </div>
+
+        
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          更新时间:
+          
+          
+          
+          
+          
+              今日
+          
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ac7e0ccb5adcc4774156a62b8d6f27f9466aa28b">ac7e0ccb</a>
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可</p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        <a href="https://twitter.com/madawei2699"><img style="box-shadow:none !important;width: 200px;" src="https://img.shields.io/twitter/follow/madawei2699?style=social"></a>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/">分布式系统下的认证与授权</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="sharethis-inline-reaction-buttons"></div>
+<div class="sharethis-inline-share-buttons"></div>
+
+        <div style="color: darkgreen;">
+  <form style="border:1px dashed #ccc;padding:10px 10px;margin: 10px auto;text-align:center;width: 95%;" action="https://tinyletter.com/i365" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/i365', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+    
+    <span>每月一份邮件，分享我对如何构建被动收入的思考、推荐文章及资源，欢迎订阅</span>
+    
+    <p style="margin: 10px 0;"><input type="text" style="width:240px;text-align: center;" name="email" id="tlemail" placeholder="Email"/></p>
+    <input type="hidden" value="1" name="embed"/>
+    
+    <input type="submit" value="订阅" />
+    
+  </form>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://utteranc.es/client.js"
+  repo= "bmpi-dev/bmpi.dev"
+  issue-term="title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script>
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div style="margin-bottom: 10px;">
+      <a href="https://wiki.bmpi.dev/">Wiki</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/talk/">Talk</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/invest/">Invest</a>
+      ⚔️
+      <a href="https://tg.bmpi.dev">Think</a>
+    </div>
+    <div>
+      <a href= /affiliate >Affiliate</a>
+      ⚡️
+      <a href= /tool >Tool</a>
+      ⚡️
+      <a href= /link >Link</a>
+    </div>
+  </div>
+  <div class="footer-taxonomy">
+    <a href= /tags style="color: #B36D61;">Tags</a>
+    👈
+    <a href= /categories style="color: #FF8C31;">Categories</a>
+    👉
+    <a href= /series style="color: #519A73;">Series</a>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2021
+    
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154678195-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154678195-1');
+  </script>
+  
+
+  
+  <script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BHuwaXciWicBjh6HQS2tfudv6IYQD11K9u1NUj7nuaEV9NoDT7ns9JjgqyYTflUv-m3TlD7ELY84AHMfgmPXNgU');</script>
+  
+
+  
+  <script>
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+</body>
+
+</html>

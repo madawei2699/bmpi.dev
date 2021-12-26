@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/authentication-and-authorization-in-a-distributed-system/",
-        "title": "分布式系统下的认证与授权",
-        "description": "本文从高层次梳理在不同架构演进中认证、授权及凭证这些和架构安全相关的技术的发展过程。",
-        "publish-date": "2021-12-18 00:00:00 +0000 UTC"
+        "url": "/dev/time-in-distributed-system/",
+        "title": "分布式系统中的时间",
+        "description": "本文梳理在分布式系统中时间对事件序列的影响，介绍逻辑时钟、向量时钟及混合逻辑时钟等不同算法的解决思路。",
+        "publish-date": "2021-12-24 00:00:00 +0000 UTC"
     }
 }
