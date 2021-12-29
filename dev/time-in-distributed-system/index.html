@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/time-in-distributed-system/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2021-12-24T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-12-27T11:03:15&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2021-12-29T18:17:58&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://img.bmpi.dev/3d3413ee-7024-5ff7-5904-e9120dd5690f.png",
       
       "datePublished": "2021-12-24T00:00:00Z",
-      "dateModified": "2021-12-27T11:03:15+08:00",
+      "dateModified": "2021-12-29T18:17:58+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -238,11 +238,11 @@
               
               
               
-              32:5
+              32:4
               
             </span>
             
-            <span class="post-word-count"> | 7059 字 | </span>
+            <span class="post-word-count"> | 7058 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -451,7 +451,7 @@ send(message, time);
 </code></pre></div><p>接受进程端：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">(message, time_stamp) = receive();
 time = max(time_stamp, time) + 1;
-</code></pre></div><p>这个算法描述起来就是：每个节点都维护一个本地永远递增的<code>逻辑时间戳</code>（初始都为 0），节点发送事件时必须携带此逻辑时间戳。每当节点有事件产生或接收时，节点本地的逻辑时间戳就自增 1。如果节点接受到一个事件，如果事件逻辑时间戳比本地逻辑时间戳还小就忽略，否则就接收此事件，并更新节点本地的逻辑时间戳，新的值取节点本地逻辑时间戳和接收事件所携带的逻辑时间戳二者的最大值并自增 1。</p>
+</code></pre></div><p>这个算法描述起来就是：每个节点都维护一个本地永远递增的<code>逻辑时间戳</code>（初始都为 0），节点发送事件时必须携带此逻辑时间戳。每当节点有事件产生或接收时，节点本地的逻辑时间戳就自增 1。当节点接受到一个事件，如果事件逻辑时间戳比本地逻辑时间戳还小就忽略，否则就接收此事件，并更新节点本地的逻辑时间戳，新的值取节点本地逻辑时间戳和接收事件所携带的逻辑时间戳二者的最大值并自增 1。</p>
 <h5 id="一个例子">一个例子</h5>
 <p><img data-src="https://img.bmpi.dev/2de64450-58be-a12c-6e14-1558a1cec063.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>如上图所示，我们以<code>m@(T,P)</code>的模式全局识别一个事件<code>m</code>，比如<code>m1@(1,P1)</code>代表在 P1 进程上发生了事件 m，在 P1 上本地逻辑时间戳为 1。接下来事件的发生如下描述：</p>
@@ -511,10 +511,10 @@ time = max(time_stamp, time) + 1;
           
           
           
-              1天前
+              今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/3385815eb30e8b35cb67fe1ecef09d1c0c0b3aab">3385815e</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5367ec48573f8f81df0bae73dbfde719d37b5f08">5367ec48</a>
         </div>
         
 
