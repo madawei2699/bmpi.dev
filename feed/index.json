@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/time-in-distributed-system/",
-        "title": "分布式系统中的时间",
-        "description": "本文梳理在分布式系统中时间对事件序列的影响，介绍逻辑时钟、向量时钟及混合逻辑时钟等不同算法的解决思路。",
-        "publish-date": "2021-12-24 00:00:00 +0000 UTC"
+        "url": "/self/annual-summary/2021/",
+        "title": "我的2021",
+        "description": "我的2021年度个人总结",
+        "publish-date": "2021-12-31 00:00:00 +0000 UTC"
     }
 }
