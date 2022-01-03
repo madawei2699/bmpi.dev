@@ -3,6 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/tags/%E5%AE%B6%E5%BA%AD%E8%B4%A2%E5%8A%A1/</loc>
+    <lastmod>2022-01-03T15:54:52+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/</loc>
+    <lastmod>2022-01-03T15:54:52+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/</loc>
+    <lastmod>2022-01-03T15:54:52+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%B4%A2%E5%8A%A1%E8%87%AA%E7%94%B1/</loc>
+    <lastmod>2022-01-03T15:54:52+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/self/how-to-get-rich/</loc>
+    <lastmod>2022-01-03T15:54:52+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/tags/etf/</loc>
     <lastmod>2022-01-01T21:03:37+08:00</lastmod>
   </url>
@@ -25,21 +60,6 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%AE%9A%E6%8A%95/</loc>
     <lastmod>2022-01-01T21:03:37+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2022-01-02T15:49:26+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/"
-                />
   </url>
 
   <url>
@@ -224,11 +244,6 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%A4%8D%E5%BC%8F%E8%AE%B0%E8%B4%A6/</loc>
-    <lastmod>2021-10-15T20:23:15+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E5%AE%B6%E5%BA%AD%E8%B4%A2%E5%8A%A1/</loc>
     <lastmod>2021-10-15T20:23:15+08:00</lastmod>
   </url>
 
@@ -1828,11 +1843,6 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/</loc>
-    <lastmod>2021-01-22T21:01:13+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/tags/%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93/</loc>
     <lastmod>2021-01-22T21:01:13+08:00</lastmod>
   </url>
@@ -1874,11 +1884,6 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%8E%B0%E9%87%91%E6%B5%81%E6%B8%B8%E6%88%8F/</loc>
-    <lastmod>2021-01-22T21:01:13+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E8%B4%A2%E5%8A%A1%E8%87%AA%E7%94%B1/</loc>
     <lastmod>2021-01-22T21:01:13+08:00</lastmod>
   </url>
 
@@ -1945,7 +1950,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/about/</loc>
-    <lastmod>2021-11-22T13:06:46+08:00</lastmod>
+    <lastmod>2022-01-03T15:54:52+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
