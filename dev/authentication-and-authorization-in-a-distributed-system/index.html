@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2021-12-18T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-12-26T12:12:59&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-01-11T22:42:15&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://img.bmpi.dev/0f3dfb95-7f80-2311-74f1-f70ea7fd9a69.png",
       
       "datePublished": "2021-12-18T00:00:00Z",
-      "dateModified": "2021-12-26T12:12:59+08:00",
+      "dateModified": "2022-01-11T22:42:15+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -94,7 +94,7 @@
   
   
   
-  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.7da8c52acb73a01b545369364516c9c77ebba003e67f94141c22fb2439c485fe.css" integrity="sha256-fajFKstzoBtUU2k2RRbJx367oAPmf5QUHCL7JDnEhf4="
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.efd1f4e169c4f582894a0fa44b42a156d278e9a91e32d9ce3ccb41a1050fc42b.css" integrity="sha256-79H04WnE9YKJSg&#43;kS0KhVtJ46akeMtnOPMtBoQUPxCs="
     crossorigin="anonymous" media="screen" />
   
 
@@ -137,8 +137,7 @@
 
   
   <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=600a642fe0b9b900111a7f08&product=inline-share-buttons' async='async'></script>
-  
-  
+  <link rel="stylesheet" href="//unpkg.com/heti/umd/heti.min.css">
   
 
   
@@ -242,7 +241,7 @@
               
             </span>
             
-            <span class="post-word-count"> | 6137 字 | </span>
+            <span class="post-word-count"> | 6135 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -266,7 +265,7 @@
       </header>
 
       <div class="article">
-        <div class="article-content">
+        <div class="article-content heti">
           
           
           
@@ -358,7 +357,7 @@
 <li>采用对称加密方式签名（Signature）。对称加密密钥一旦泄漏，会让整个服务的基础设施遭受安全威胁。JWT 支持非对称加密算法，只有签名的服务需要私钥，其他验证 JWT 信息的服务只需要使用公钥即可。</li>
 <li>不校验 JWT 的签名算法。这篇 <a href="https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/">Critical vulnerabilities in JSON Web Token libraries</a> 文章提到 JWT 的一种漏洞，通过 <code>none</code> 算法规避令牌验证。所以最好每次都验证 JWT header 中的签名算法是否是期望的。</li>
 </ul>
-<p>相信看了上述的一些问题，你对 JWT 的“简单、安全”有了新的理解。这还没完，JWT 还有以下一些 Cookie-Session 没有的问题：</p>
+<p>相信看了上述的一些问题，你对 JWT 的<span class="heti-em">简单</span>、<span class="heti-em">安全</span>有了新的理解。这还没完，JWT 还有以下一些 Cookie-Session 没有的问题：</p>
 <ul>
 <li>令牌难以主动失效：JWT 中虽然有 <code>exp</code>、<code>nbf</code> 与 <code>iat</code> 这些和时间相关的属性，但很难在令牌到期之前让令牌失效，比如很难在用户退出登录时立刻让签发的令牌全部失效。虽然可能通过一些“黑名单”的技术解决这个问题，不过相比 Cookie-Session 来说，引入了一定的复杂性；</li>
 <li>令牌数据老旧：很难把签发的令牌全部更新成最新的数据。比如把用户的权限信息（Role）放在 JWT Payload 中，当用户的角色发生变化时，很难把之前签发的令牌信息更新成最新的数据；</li>
@@ -431,10 +430,10 @@
           
           
           
-              16天前
+              今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ac7e0ccb5adcc4774156a62b8d6f27f9466aa28b">ac7e0ccb</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/c58a68af88ec42174a59ad405fbcc054541dca41">c58a68af</a>
         </div>
         
 
@@ -2615,10 +2614,12 @@
   
 
   
+
+  
+  <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
-    AOS.init({
-      disable: 'mobile'
-    });
+    const heti = new Heti('.heti');
+    heti.autoSpacing(); 
   </script>
   
 

@@ -94,7 +94,7 @@
   
   
   
-  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.7da8c52acb73a01b545369364516c9c77ebba003e67f94141c22fb2439c485fe.css" integrity="sha256-fajFKstzoBtUU2k2RRbJx367oAPmf5QUHCL7JDnEhf4="
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.efd1f4e169c4f582894a0fa44b42a156d278e9a91e32d9ce3ccb41a1050fc42b.css" integrity="sha256-79H04WnE9YKJSg&#43;kS0KhVtJ46akeMtnOPMtBoQUPxCs="
     crossorigin="anonymous" media="screen" />
   
 
@@ -137,8 +137,7 @@
 
   
   <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=600a642fe0b9b900111a7f08&product=inline-share-buttons' async='async'></script>
-  
-  
+  <link rel="stylesheet" href="//unpkg.com/heti/umd/heti.min.css">
   
 
   
@@ -265,7 +264,7 @@
       </header>
 
       <div class="article">
-        <div class="article-content">
+        <div class="article-content heti">
           
           
           
@@ -2528,10 +2527,12 @@
   
 
   
+
+  
+  <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
-    AOS.init({
-      disable: 'mobile'
-    });
+    const heti = new Heti('.heti');
+    heti.autoSpacing(); 
   </script>
   
 
