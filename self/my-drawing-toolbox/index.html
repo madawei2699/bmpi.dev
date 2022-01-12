@@ -137,6 +137,8 @@
   
   <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=600a642fe0b9b900111a7f08&product=inline-share-buttons' async='async'></script>
   <link rel="stylesheet" href="//unpkg.com/heti/umd/heti.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   
 
   
@@ -285,7 +287,7 @@
       </header>
 
       <div class="article">
-        <div class="article-content heti">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
           
           
           
@@ -2553,6 +2555,10 @@ skinparam monochrome true
   <script>
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
+
+    AOS.init({
+      disable: 'mobile'
+    });
   </script>
   
 
