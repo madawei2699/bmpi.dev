@@ -51,7 +51,7 @@ main();
 
 // web share text
 var control = document.importNode(document.querySelector('template').content, true).childNodes[0];
-control.addEventListener('pointerdown', oncontroldown, true);
+control.addEventListener('click', onclick, true);
 document.querySelectorAll('p').forEach(i => {
     i.onpointerup = ()=>{
         let selection = document.getSelection(), text = selection.toString();
@@ -94,8 +94,7 @@ function text2Img(text) {
       },'image/png');
 }
 
-function oncontroldown(event) {
-	// window.open(`https://twitter.com/intent/tweet?text=${this.text}`);
+function onclick(event) {
     text2Img(this.text);
 	this.remove();
 	document.getSelection().removeAllRanges();
