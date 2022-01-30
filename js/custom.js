@@ -80,8 +80,8 @@ function text2Img(text) {
                 type: blob.type,
                 }),
             ],
-            title: document.title,
-            text: text,
+            // title: document.title,
+            // text: text,
         };
         console.log(data);
         if (navigator.canShare && navigator.canShare(data)) {
