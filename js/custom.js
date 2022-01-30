@@ -76,7 +76,7 @@ function text2Img(text) {
     canvas.toBlob(function(blob){
         const data = {
             files: [
-                new File([blob], 'file.png', {
+                new File([blob], document.querySelector('.title').textContent + '.png', {
                 type: blob.type,
                 }),
             ],
