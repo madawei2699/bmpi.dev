@@ -81,7 +81,7 @@ function text2Img(text) {
                 }),
             ],
             title: document.title,
-            text: document.querySelector('meta[name="description"]').content,
+            text: text,
         };
         console.log(data);
         if (navigator.canShare && navigator.canShare(data)) {
