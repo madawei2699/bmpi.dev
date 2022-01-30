@@ -58,7 +58,7 @@ document.querySelectorAll('p').forEach(i => {
         if (text !== "") {
             let rect = selection.getRangeAt(0).getBoundingClientRect();
             let articleY =  document.body.getBoundingClientRect().top;
-            control.style.top = `calc(${rect.bottom}px - ${articleY}px + 10px)`;
+            control.style.top = `calc(${rect.bottom}px - ${articleY}px + 20px)`;
             control.style.left = `calc(${rect.left}px + calc(${rect.width}px / 2) - 30px)`;
             control['text']= text; 
             document.body.appendChild(control);
@@ -67,23 +67,25 @@ document.querySelectorAll('p').forEach(i => {
 });
 
 function text2Img(text) {
-    var canvas = document.createElement("canvas");
+    const canvas = document.createElement("canvas");
     canvas.width = 620;
-    canvas.height = 80;
-    var ctx = canvas.getContext('2d');
+    canvas.height = 500;
+    const ctx = canvas.getContext('2d');
     ctx.font = "30px Arial";
     ctx.fillText(text,10,50);
     canvas.toBlob(function(blob){
-        var file = new File([blob], "tmp.png", {
-            type: "image/png",
-        });
-        console.log(file);
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({
-              files: filesArray,
-              title: document.title,
-              text: document.querySelector('meta[name="description"]').content,
-            })
+        const data = {
+            files: [
+                new File([blob], 'file.png', {
+                type: blob.type,
+                }),
+            ],
+            title: document.title,
+            text: document.querySelector('meta[name="description"]').content,
+        };
+        console.log(data);
+        if (navigator.canShare && navigator.canShare(data)) {
+            navigator.share(data)
             .then(() => console.log('Share was successful.'))
             .catch((error) => console.log('Sharing failed', error));
           } else {
