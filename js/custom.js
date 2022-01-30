@@ -82,6 +82,7 @@ function text2Img(text) {
             ],
             title: document.title,
             text: text,
+            url: window.location.href,
         };
         console.log(data);
         if (navigator.canShare && navigator.canShare(data)) {
