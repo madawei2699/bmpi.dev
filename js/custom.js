@@ -51,7 +51,7 @@ main();
 
 // web share text
 var control = document.importNode(document.querySelector('template').content, true).childNodes[0];
-control.addEventListener('click', onclick, true);
+control.addEventListener('pointerdown', oncontroldown, true);
 document.querySelectorAll('p').forEach(i => {
     i.onpointerup = ()=>{
         let selection = document.getSelection(), text = selection.toString();
@@ -94,7 +94,7 @@ function text2Img(text) {
       },'image/png');
 }
 
-function onclick(event) {
+function oncontroldown(event) {
     text2Img(this.text);
 	this.remove();
 	document.getSelection().removeAllRanges();
