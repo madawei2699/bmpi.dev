@@ -49,6 +49,61 @@ function main() {
 
 main();
 
+// web share text
+var control = document.importNode(document.querySelector('template').content, true).childNodes[0];
+control.addEventListener('pointerdown', oncontroldown, true);
+document.querySelectorAll('p').forEach(i => {
+    i.onpointerup = ()=>{
+        let selection = document.getSelection(), text = selection.toString();
+        if (text !== "") {
+            let rect = selection.getRangeAt(0).getBoundingClientRect();
+            let articleY =  document.body.getBoundingClientRect().top;
+            control.style.top = `calc(${rect.bottom}px - ${articleY}px + 10px)`;
+            control.style.left = `calc(${rect.left}px + calc(${rect.width}px / 2) - 30px)`;
+            control['text']= text; 
+            document.body.appendChild(control);
+        }
+    }
+});
+
+function text2Img(text) {
+    var canvas = document.createElement("canvas");
+    canvas.width = 620;
+    canvas.height = 80;
+    var ctx = canvas.getContext('2d');
+    ctx.font = "30px Arial";
+    ctx.fillText(text,10,50);
+    canvas.toBlob(function(blob){
+        var file = new File([blob], "tmp.png", {
+            type: "image/png",
+        });
+        console.log(file);
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({
+              files: filesArray,
+              title: document.title,
+              text: document.querySelector('meta[name="description"]').content,
+            })
+            .then(() => console.log('Share was successful.'))
+            .catch((error) => console.log('Sharing failed', error));
+          } else {
+            console.log(`Your system doesn't support sharing files.`);
+          }
+      },'image/png');
+}
+
+function oncontroldown(event) {
+	// window.open(`https://twitter.com/intent/tweet?text=${this.text}`);
+    text2Img(this.text);
+	this.remove();
+	document.getSelection().removeAllRanges();
+	event.stopPropagation();
+}
+document.onpointerdown = ()=>{	
+	let control = document.querySelector('#control');
+	if (control !== null) {control.remove();document.getSelection().removeAllRanges();}
+}
+
 // remove dashboard iframe on mobile
 
 // window.mobileCheck = function() {
