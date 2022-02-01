@@ -102,6 +102,39 @@ function dataURItoBlob(dataURI) {
     return new Blob([ab], {type: mimeString});
 }
 
+function addDatePart(html) {
+    let date = new Date();
+    let p = document.createElement('p');
+    p.textContent = '摘录于 ' + date.toISOString().split('T')[0].replace(/-/g, '/');
+    html.insertBefore(p, html.firstChild);
+}
+
+function addAuthorPart(html) {
+    let div = document.createElement('div');
+    let p1 = document.createElement('p');
+    p1.textContent = '/ ' + document.title;
+    p1.setAttribute('style', 'font-size: 0.8em;color: #eee;margin-bottom: -10px;padding-top: 10px;border-top-style: double;border-top-width: 1px;border-color: #999;');
+    div.appendChild(p1);
+    let p2 = document.createElement('p');
+    p2.textContent = '/ 马大伟';
+    p2.setAttribute('style', 'font-size: 0.8em; color: #eee; margin-top: 0px; margin-bottom: -10px;');
+    div.appendChild(p2);
+    let p3 = document.createElement('p');
+    p3.textContent = '/ ' + window.location.href;
+    p3.setAttribute('style', 'font-size: 0.8em; color: #eee; margin-top: 0px;');
+    div.appendChild(p3);
+    html.appendChild(div);
+}
+
+function addQRPart(html) {
+    let div = document.createElement('div');
+    let qr = document.createElement('img');
+    qr.setAttribute('src', 'https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=' + window.location.href);
+    qr.setAttribute('style', 'width: 70px; height: 70px;');
+    div.appendChild(qr);
+    html.appendChild(div);
+}
+
 async function html2Img(html) {
     let control = document.querySelector('#control');
     let timer = setInterval(()=>{
@@ -114,10 +147,16 @@ async function html2Img(html) {
     }, 10);
     let div = document.createElement('div');
     div.id = 'capture';
-    div.setAttribute('style', 'padding: 10px; background: #f5da55;');
+    div.setAttribute('style', 'padding: 40px;background: #000;color: #f7f4cb;font-family: "LXGW WenKai";');
     div.innerHTML = html;
+    addDatePart(div);
+    let footer = document.createElement('div');
+    footer.setAttribute('style', 'display: flex;flex-direction: row;justify-content: space-between;align-items: center;');
+    addAuthorPart(footer);
+    addQRPart(footer);
+    div.appendChild(footer);
     document.body.appendChild(div);
-    let canvas = await html2canvas(div);
+    let canvas = await html2canvas(div, {allowTaint: true, useCORS: true});
     let dataURL = canvas.toDataURL("image/png");
     const blob = dataURItoBlob(dataURL);
     const data = {
