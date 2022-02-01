@@ -102,21 +102,10 @@ async function text2Img(text) {
     };
     if (navigator.canShare && navigator.canShare(data)) {
         try {
-            await navigator.share({
-                title: document.title,
-                text: text,
-                url: document.location.href
-              });
+            await navigator.share(data);
         } catch(error) {
-            console.log('Sharing failed', error);
+            console.log('Sharing failed: ', error);
         }
-        // navigator.share({
-        //     title: document.title,
-        //     text: text,
-        //     url: document.location.href
-        //   })
-        // .then(() => console.log('Share was successful.'))
-        // .catch((error) => console.log('Sharing failed', error));
     } else {
         console.log(`Your system doesn't support sharing files.`);
     }
