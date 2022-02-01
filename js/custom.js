@@ -101,7 +101,11 @@ function text2Img(text) {
         // text: text,
     };
     if (navigator.canShare && navigator.canShare(data)) {
-        navigator.share(data)
+        navigator.share({
+            title: document.title,
+            text: text,
+            url: document.location.href
+          })
         .then(() => console.log('Share was successful.'))
         .catch((error) => console.log('Sharing failed', error));
     } else {
