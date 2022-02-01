@@ -54,17 +54,34 @@ var control = document.importNode(document.querySelector('template').content, tr
 control.addEventListener('pointerdown', oncontroldown, true);
 document.querySelectorAll('p').forEach(i => {
     i.onpointerup = ()=>{
-        let selection = document.getSelection(), text = selection.toString();
-        if (text !== "") {
-            let rect = selection.getRangeAt(0).getBoundingClientRect();
-            let articleY =  document.body.getBoundingClientRect().top;
-            control.style.top = `calc(${rect.bottom}px - ${articleY}px + 20px)`;
-            control.style.left = `calc(${rect.left}px + calc(${rect.width}px / 2) - 30px)`;
-            control['text']= text; 
-            document.body.appendChild(control);
+        if (navigator.canShare) {
+            let selection = document.getSelection(), text = selection.toString();
+            if (text !== "") {
+                let rect = selection.getRangeAt(0).getBoundingClientRect();
+                let articleY =  document.body.getBoundingClientRect().top;
+                control.style.top = `calc(${rect.bottom}px - ${articleY}px + 20px)`;
+                control.style.left = `calc(${rect.left}px + calc(${rect.width}px / 2) - 30px)`;
+                control['text']= text; 
+                document.body.appendChild(control);
+            }
         }
     }
 });
+
+function dataURItoBlob(dataURI) {
+    // convert base64 to raw binary data held in a string
+    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+    var byteString = atob(dataURI.split(',')[1]);
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    // write the bytes of the string to an ArrayBuffer
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], {type: mimeString});
+}
 
 function text2Img(text) {
     const canvas = document.createElement("canvas");
@@ -73,25 +90,22 @@ function text2Img(text) {
     const ctx = canvas.getContext('2d');
     ctx.font = "30px Arial";
     ctx.fillText(text,10,50);
-    canvas.toBlob(function(blob){
-        const data = {
-            files: [
-                new File([blob], document.querySelector('.title').textContent + '.png', {
-                type: blob.type,
-                }),
-            ],
-            // title: document.title,
-            // text: text,
-        };
-        console.log(data);
-        if (navigator.canShare && navigator.canShare(data)) {
-            navigator.share(data)
-            .then(() => console.log('Share was successful.'))
-            .catch((error) => console.log('Sharing failed', error));
-          } else {
-            console.log(`Your system doesn't support sharing files.`);
-          }
-      },'image/png');
+    const data = {
+        files: [
+            new File([dataURItoBlob(canvas.toDataURL("image/png"))], document.querySelector('.title').textContent + '.png', {
+            type: blob.type,
+            }),
+        ],
+        // title: document.title,
+        // text: text,
+    };
+    if (navigator.canShare && navigator.canShare(data)) {
+        navigator.share(data)
+        .then(() => console.log('Share was successful.'))
+        .catch((error) => console.log('Sharing failed', error));
+    } else {
+        console.log(`Your system doesn't support sharing files.`);
+    }
 }
 
 function oncontroldown(event) {
