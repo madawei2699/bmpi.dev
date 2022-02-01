@@ -90,9 +90,10 @@ function text2Img(text) {
     const ctx = canvas.getContext('2d');
     ctx.font = "30px Arial";
     ctx.fillText(text,10,50);
+    const blob = dataURItoBlob(canvas.toDataURL("image/png"));
     const data = {
         files: [
-            new File([dataURItoBlob(canvas.toDataURL("image/png"))], document.querySelector('.title').textContent + '.png', {
+            new File([blob], document.querySelector('.title').textContent + '.png', {
             type: blob.type,
             }),
         ],
