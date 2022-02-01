@@ -50,6 +50,25 @@ function main() {
 main();
 
 // web share text
+function getSelectionHtml() {
+    var html = "";
+    if (typeof window.getSelection != "undefined") {
+        var sel = window.getSelection();
+        if (sel.rangeCount) {
+            var container = document.createElement("div");
+            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                container.appendChild(sel.getRangeAt(i).cloneContents());
+            }
+            html = container.innerHTML;
+        }
+    } else if (typeof document.selection != "undefined") {
+        if (document.selection.type == "Text") {
+            html = document.selection.createRange().htmlText;
+        }
+    }
+    return html;
+}
+
 var control = document.importNode(document.querySelector('template').content, true).childNodes[0];
 control.addEventListener('pointerdown', oncontroldown);
 document.querySelectorAll('p').forEach(i => {
@@ -61,7 +80,7 @@ document.querySelectorAll('p').forEach(i => {
                 let articleY =  document.body.getBoundingClientRect().top;
                 control.style.top = `calc(${rect.bottom}px - ${articleY}px + 20px)`;
                 control.style.left = `calc(${rect.left}px + calc(${rect.width}px / 2) - 30px)`;
-                control['text']= text; 
+                control['html']= getSelectionHtml(); 
                 document.body.appendChild(control);
             }
         }
@@ -83,14 +102,15 @@ function dataURItoBlob(dataURI) {
     return new Blob([ab], {type: mimeString});
 }
 
-async function text2Img(text) {
-    const canvas = document.createElement("canvas");
-    canvas.width = 620;
-    canvas.height = 500;
-    const ctx = canvas.getContext('2d');
-    ctx.font = "30px Arial";
-    ctx.fillText(text,10,50);
-    const blob = dataURItoBlob(canvas.toDataURL("image/png"));
+async function html2Img(html) {
+    let div = document.createElement('div');
+    div.id = 'capture';
+    div.setAttribute('style', 'padding: 10px; background: #f5da55;');
+    div.innerHTML = html;
+    document.body.appendChild(div);
+    let canvas = await html2canvas(div);
+    let dataURL = canvas.toDataURL("image/png")
+    const blob = dataURItoBlob(dataURL);
     const data = {
         files: [
             new File([blob], document.querySelector('.title').textContent + '.png', {
@@ -109,10 +129,11 @@ async function text2Img(text) {
     } else {
         console.log(`Your system doesn't support sharing files.`);
     }
+    document.body.removeChild(div);
 }
 
 async function oncontroldown(event) {
-    text2Img(this.text);
+    await html2Img(this.html);
 	this.remove();
 	document.getSelection().removeAllRanges();
 	event.stopPropagation();
