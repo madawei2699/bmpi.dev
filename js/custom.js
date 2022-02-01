@@ -83,7 +83,7 @@ function dataURItoBlob(dataURI) {
     return new Blob([ab], {type: mimeString});
 }
 
-function text2Img(text) {
+async function text2Img(text) {
     const canvas = document.createElement("canvas");
     canvas.width = 620;
     canvas.height = 500;
