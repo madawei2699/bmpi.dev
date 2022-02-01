@@ -103,13 +103,22 @@ function dataURItoBlob(dataURI) {
 }
 
 async function html2Img(html) {
+    let control = document.querySelector('#control');
+    let timer = setInterval(()=>{
+        var currentOpacity  = (+control.style.opacity) - 0.1;
+        if (currentOpacity < 0) {
+            control.style.opacity = 1;
+        } else {
+            control.style.opacity = currentOpacity;
+        }
+    }, 10);
     let div = document.createElement('div');
     div.id = 'capture';
     div.setAttribute('style', 'padding: 10px; background: #f5da55;');
     div.innerHTML = html;
     document.body.appendChild(div);
     let canvas = await html2canvas(div);
-    let dataURL = canvas.toDataURL("image/png")
+    let dataURL = canvas.toDataURL("image/png");
     const blob = dataURItoBlob(dataURL);
     const data = {
         files: [
@@ -130,6 +139,8 @@ async function html2Img(html) {
         console.log(`Your system doesn't support sharing files.`);
     }
     document.body.removeChild(div);
+    clearInterval(timer);
+    control.style.opacity = 1;
 }
 
 async function oncontroldown(event) {
