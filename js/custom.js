@@ -107,7 +107,7 @@ async function text2Img(text) {
                 text: text,
                 url: document.location.href
               });
-        } catch(err) {
+        } catch(error) {
             console.log('Sharing failed', error);
         }
         // navigator.share({
