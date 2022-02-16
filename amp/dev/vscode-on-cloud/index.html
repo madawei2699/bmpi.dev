@@ -321,15 +321,13 @@ amp-img.contain img {
 <li><a href="#%E4%BA%91-ide-%E7%A0%94%E5%8F%91%E6%A8%A1%E5%BC%8F">云 IDE 研发模式</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0">参考文章</a></li>
 </ul>
-<hr>
-<p><strong><span style="color:red">更新时间：2021/10/11</span></strong></p>
-<p>最近我将 VSCode Server 从 AWS 迁移到了 Azure 云平台，并且集成了 OAuth2 。具体的实现见 <a href="https://github.com/bmpi-dev/Out-of-the-Box-CodeServer">Out-of-the-Box-CodeServer</a>。新的实现方案可以做到：</p>
-<ol>
-<li>关闭浏览器一定时间后自动关闭服务器以停止计费；</li>
-<li>使用 GitHub OAuth2 登录；</li>
-<li>使用自定义域名访问。</li>
-</ol>
-<hr>
+
+<div class="notices info" ><p><strong>更新时间：2021/10/11</strong><br>
+最近我将 VSCode Server 从 AWS 迁移到了 Azure 云平台，并且集成了 OAuth2 。具体的实现见 <a href="https://github.com/bmpi-dev/Out-of-the-Box-CodeServer">Out-of-the-Box-CodeServer</a>。新的实现方案可以做到：<br>
+1、关闭浏览器一定时间后自动关闭服务器以停止计费；<br>
+2、使用 GitHub OAuth2 登录；<br>
+3、使用自定义域名访问。</p>
+</div>
 <p>前不久 GitHub 官方 Twitter 发了一个如下的 Tweet：</p>
 <p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/0dd20034-d46f-8910-a6dc-cf71802979f4.png" alt="" layout="fill"></amp-img></div></p>
 <p>只要你在任何 GitHub Repo 页面上按下<code>.</code>键会自动跳转到<code>github.dev</code>的网站，此网站是一个网页版的 VSCode 并且会自动克隆下这个 Repo 的代码。在这个网页版的 VSCode 里你甚至可以安装一些特定的插件（无法安装需要外部依赖的插件），能更方便的阅读代码。因为这个网站是官方出品，这个 VSCode 已自动绑定了你的 GitHub 账户，开发者可以在里面阅读、编辑及提交代码，整个过程行云流水，甚至全程不需要打开本地的 IDE。此举直接干掉了 <a href="https://github.com/conwnet/github1s">github1s</a> 这个具备类似功能的开源项目。</p>
