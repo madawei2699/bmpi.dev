@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/glimpse-of-web3/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2022-01-07T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-01-11T22:42:15&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-16T23:11:38&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://img.bmpi.dev/6ab55cab-ceaf-3657-77db-4e1660924ca4.png",
       
       "datePublished": "2022-01-07T00:00:00Z",
-      "dateModified": "2022-01-11T22:42:15+08:00",
+      "dateModified": "2022-02-16T23:11:38+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -241,11 +241,11 @@
               
               
               
-              21:16
+              21:20
               
             </span>
             
-            <span class="post-word-count"> | 4680 字 | </span>
+            <span class="post-word-count"> | 4694 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -347,6 +347,14 @@
 <p>当然另外一个目前很火的 Web3 应用领域就是去中心化金融（<a href="https://en.wikipedia.org/wiki/Decentralized_finance">DeFi</a>）。数字加密货币本身就起源于金融领域，把传统的金融业搬上 Web3 并做一定的创新是必不可少的一个环节。</p>
 <p><strong>Web3 相比于 Web2 的主要吸引力之一，是用户不再是被出售的产品，而是因其积极贡献而被奖励的网络参与者</strong>。当然我也相信基于区块链的 Web3 可能只是未来的一个方向。也可能未来是 Web2 + Web3 这种模式，类似于目前的 5G 应用场景一样。Web3 不是 Web2 的替代，更像是一个方面的提升。</p>
 <p>但 Web3 会不会从去中心化逐渐发展为中心化呢？考虑到比特币的绝大部分算力目前都掌握在少数几个矿池公司手中，再精妙的算法也抵挡不了人性对利益的追求，用户为了方便连隐私都可以不要，更不会为了一个去中心化的技术问题而放弃中心化的便利，Web3 这条去中心化之路注定漫长而难走。</p>
+
+<div class="mermaid" align="center">
+graph LR;
+    Web1 --> Web2
+    Web2 -->|Blockchain?| D[Web3]
+    Web2 -->|AI?| E[Web3]
+    Web2 -->|Other?| F[Web3]
+</div>
 <p>本文参考的文章有：</p>
 <ul>
 <li><a href="https://consensys.net/reports/web3-report-q3-2021/">THE WEB3 REPORT</a></li>
@@ -382,9 +390,10 @@
           
           
           
-              1个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/c58a68af88ec42174a59ad405fbcc054541dca41">c58a68af</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/998f3220f2c8b88be97e99994bad4567ac5e4769">998f3220</a>
         </div>
         
 
@@ -2587,9 +2596,19 @@
     AOS.init({
       disable: 'mobile'
     });
+
+    var mermaid = document.getElementsByClassName('mermaid');
+    if (mermaid.length > 0) {
+      var tag = document.createElement('script');
+      tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      document.getElementsByTagName('body')[0].appendChild(tag);
+
+      var tag = document.createElement('script');
+      tag.type = 'text/javascript';
+      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
+      document.getElementsByTagName('body')[0].appendChild(tag);
+    }
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-  <script>mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'});</script>
   
 
 </body>
