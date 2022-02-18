@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/guide-to-serverless/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2020-08-30T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-03-02T14:42:01&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-18T09:32:20&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://img.bmpi.dev/48504c01-c2d0-e05a-1eda-d82b88f6496d.png",
       
       "datePublished": "2020-08-30T00:00:00Z",
-      "dateModified": "2021-03-02T14:42:01+08:00",
+      "dateModified": "2022-02-18T09:32:20+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -108,6 +108,8 @@
   <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
     crossorigin="anonymous" media="screen" />
   
+  
+
   
 
   
@@ -445,8 +447,8 @@ COPY src/ .
 CMD [ <span style="color:#0ff;font-weight:bold">&#34;python&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;./main.py&#34;</span> ]
 </code></pre></div><p>在这里需要注意的是基础镜像的选择，一般我们在选择 Python 镜像的时候用的是 alpine 版本。但是 alpine 版本在安装一些本地二进制包的时候需要大量的编译，这个编译会遇到各种错误，最终我选择了 buster 版本，也就是基于 ubuntu 的版本。如果想进一步了解可看这篇<a href="https://pythonspeed.com/articles/alpine-docker-python/">《Using Alpine can make Python Docker builds 50× slower》</a>。</p>
 <p>需要先获取 Tushare 的 API Token 后，在本地运行 Docker：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker build -t invest-alchemy/core . # 构建
-docker run -t -i -e TUSHARE_API_TOKEN=xxxx invest-alchemy/core # 本地运行
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker build -t invest-alchemy/core . <span style="color:#007f7f"># 构建</span>
+docker run -t -i -e TUSHARE_API_TOKEN=xxxx invest-alchemy/core <span style="color:#007f7f"># 本地运行</span>
 </code></pre></div><p>之后在 AWS 中创建 ECR 仓库，之后可以将本地构建的镜像推送到 ECR 中供 ECS 任务使用：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin replace_with_your_ecr_addr.dkr.ecr.us-east-1.amazonaws.com <span style="color:#007f7f"># 登陆ECR</span>
 
@@ -467,7 +469,7 @@ docker push replace_with_your_ecr_addr.dkr.ecr.us-east-1.amazonaws.com/invest-al
 <p>其他模式见<a href="https://github.com/nathanpeck/aws-cloudformation-fargate">《CloudFormation Templates for AWS Fargate deployments》</a>。</p>
 <p>要想进一步学习可看这篇<a href="https://cloudonaut.io/fargate-networking-101/">《Fargate networking 101》</a>。</p>
 <h5 id="iam">IAM</h5>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">######################### Role used by the container regulates what AWS services the task has access to, e.g. your application is using a DynamoDB, then the task role must give the task access to Dynamo.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#007f7f">######################### Role used by the container regulates what AWS services the task has access to, e.g. your application is using a DynamoDB, then the task role must give the task access to Dynamo.</span>
 resource &#34;aws_iam_role&#34; &#34;ecs_service_role&#34; {
   name               = &#34;${var.project}_ecs_service_role_${var.env}&#34;
   assume_role_policy = &#34;${data.aws_iam_policy_document.ecs_service_assume_role_policy.json}&#34;
@@ -484,8 +486,8 @@ data &#34;aws_iam_policy_document&#34; &#34;ecs_service_policy&#34; {
     effect = &#34;Allow&#34;
     resources = [&#34;*&#34;]
     actions = [
-        &#34;iam:ListPolicies&#34;,
-        &#34;iam:GetPolicyVersion&#34;
+        <span style="color:#0ff;font-weight:bold">&#34;iam:ListPolicies&#34;</span>,
+        <span style="color:#0ff;font-weight:bold">&#34;iam:GetPolicyVersion&#34;</span>
     ]
   }
 }
@@ -502,25 +504,25 @@ data &#34;aws_iam_policy_document&#34; &#34;ecs_service_assume_role_policy&#34; 
 
 resource &#34;aws_iam_role_policy_attachment&#34; &#34;ecs_service_role_policy_attachment&#34; {
   role       = aws_iam_role.ecs_service_role.name
-  policy_arn = &#34;arn:aws:iam::aws:policy/AWSLambdaFullAccess&#34; # https://gist.github.com/gene1wood/55b358748be3c314f956
+  policy_arn = &#34;arn:aws:iam::aws:policy/AWSLambdaFullAccess&#34; <span style="color:#007f7f"># https://gist.github.com/gene1wood/55b358748be3c314f956</span>
 }
 
-######################### Role used by the container enables the service to e.g. pull the image from ECR, spin up or deregister tasks etc
+<span style="color:#007f7f">######################### Role used by the container enables the service to e.g. pull the image from ECR, spin up or deregister tasks etc</span>
 
 resource &#34;aws_iam_role&#34; &#34;ecs_task_execution_role&#34; {
   name = &#34;${var.project}_ecs_task_execution_role_${var.env}&#34;
  
   assume_role_policy = &lt;&lt;EOF
 {
- &#34;Version&#34;: &#34;2012-10-17&#34;,
- &#34;Statement&#34;: [
+ <span style="font-weight:bold">&#34;Version&#34;: </span><span style="color:#0ff;font-weight:bold">&#34;2012-10-17&#34;</span>,
+ <span style="font-weight:bold">&#34;Statement&#34;: </span>[
    {
-     &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
-     &#34;Principal&#34;: {
-       &#34;Service&#34;: &#34;ecs-tasks.amazonaws.com&#34;
+     <span style="font-weight:bold">&#34;Action&#34;: </span><span style="color:#0ff;font-weight:bold">&#34;sts:AssumeRole&#34;</span>,
+     <span style="font-weight:bold">&#34;Principal&#34;: </span>{
+       <span style="font-weight:bold">&#34;Service&#34;: </span><span style="color:#0ff;font-weight:bold">&#34;ecs-tasks.amazonaws.com&#34;</span>
      },
-     &#34;Effect&#34;: &#34;Allow&#34;,
-     &#34;Sid&#34;: &#34;&#34;
+     <span style="font-weight:bold">&#34;Effect&#34;: </span><span style="color:#0ff;font-weight:bold">&#34;Allow&#34;</span>,
+     <span style="font-weight:bold">&#34;Sid&#34;: </span><span style="color:#0ff;font-weight:bold">&#34;&#34;</span>
    }
  ]
 }
@@ -529,10 +531,10 @@ EOF
  
 resource &#34;aws_iam_role_policy_attachment&#34; &#34;ecs_task_execution_role_policy_attachment&#34; {
   role       = aws_iam_role.ecs_task_execution_role.name
-  policy_arn = &#34;arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy&#34; # https://gist.github.com/gene1wood/55b358748be3c314f956
+  policy_arn = &#34;arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy&#34; <span style="color:#007f7f"># https://gist.github.com/gene1wood/55b358748be3c314f956</span>
 }
 
-######################### Role used for ECS Events
+<span style="color:#007f7f">######################### Role used for ECS Events</span>
 
 resource &#34;aws_iam_role&#34; &#34;ecs_events_role&#34; {
   name               = &#34;${var.project}_ecs_events_role_${var.env}&#34;
@@ -545,7 +547,7 @@ resource &#34;aws_iam_role_policy_attachment&#34; &#34;ecs_events_role_policy&#3
 }
 
 data &#34;aws_iam_policy&#34; &#34;ecs_events_policy&#34; {
-  arn = &#34;arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceEventsRole&#34; # https://gist.github.com/gene1wood/55b358748be3c314f956
+  arn = &#34;arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceEventsRole&#34; <span style="color:#007f7f"># https://gist.github.com/gene1wood/55b358748be3c314f956</span>
 }
 
 data &#34;aws_iam_policy_document&#34; &#34;ecs_events_assume_role_policy&#34; {
@@ -784,9 +786,10 @@ destroy:
           
           
           
-              11个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/f90eeefafe471d59994f605c9e501ca2d579b94e">f90eeefa</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ab9ebded741d9453b8789ca6d77df43d043bb441">ab9ebded</a>
         </div>
         
 
@@ -1947,24 +1950,29 @@ destroy:
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

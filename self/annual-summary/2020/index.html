@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/self/annual-summary/2020/" /><meta property="article:section" content="self" />
 <meta property="article:published_time" content="2020-12-18T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-12-31T22:46:42&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-18T09:32:20&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://www.bmpi.dev/images/mdw2.png",
       
       "datePublished": "2020-12-18T00:00:00Z",
-      "dateModified": "2021-12-31T22:46:42+08:00",
+      "dateModified": "2022-02-18T09:32:20+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -107,6 +107,8 @@
   <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
     crossorigin="anonymous" media="screen" />
   
+  
+
   
 
   
@@ -272,7 +274,7 @@
 <p>2020年我从阅读、写作、个人项目、关注领域与影响力五个维度总结，记录下这不平常的一年。</p>
 <h2 id="阅读">阅读</h2>
 <p>阅读的书籍主要是纸质书，一些书籍也是通过上下班开车时通过微信读书听的，偶尔也会听一些 Podcast 频道。以下是今年读过的书单：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">技术：
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">技术：
     Google SEO指南
     SEO艺术
     Thinking in Java
@@ -427,9 +429,10 @@
           
           
           
-              1个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/045bde56a64da60584d117dc27385c2175842c73">045bde56</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ab9ebded741d9453b8789ca6d77df43d043bb441">ab9ebded</a>
         </div>
         
 
@@ -2620,24 +2623,29 @@
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

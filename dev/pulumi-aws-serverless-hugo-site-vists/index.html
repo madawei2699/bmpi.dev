@@ -111,6 +111,8 @@
   
 
   
+
+  
   <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
   
 
@@ -1622,24 +1624,29 @@
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

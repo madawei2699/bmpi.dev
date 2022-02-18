@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/self/build-write-tool-v1/" /><meta property="article:section" content="self" />
 <meta property="article:published_time" content="2016-06-26T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-01-22T21:01:13&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-18T09:32:20&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
 
@@ -53,7 +53,7 @@
       "image": "https://www.bmpi.dev/images/mdw2.png",
       
       "datePublished": "2016-06-26T00:00:00Z",
-      "dateModified": "2021-01-22T21:01:13+08:00",
+      "dateModified": "2022-02-18T09:32:20+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -109,6 +109,8 @@
   <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
     crossorigin="anonymous" media="screen" />
   
+  
+
   
 
   
@@ -363,15 +365,15 @@ hexo d -g <span style="color:#007f7f">#重新产生博客文章并发布到GitHu
 <p><img data-src="https://img.bmpi.dev/60c0dc31-a5d3-a039-f17e-c16f4dd50e0a.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>写作发布流程</p>
 <p>在Mac打开iTerm终端</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd blog
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#fff;font-weight:bold">cd</span> blog
 </code></pre></div><p>新建文章并用Mou编写文章内容</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hexo new title
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hexo new title
 </code></pre></div><p>发布文章到GitHub Pages</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hexo d -g
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hexo d -g
 </code></pre></div><p>修改文章后继续执行第3步即可重新发布上去</p>
 <h3 id="版本管理">版本管理</h3>
 <p>如果我们想回到某一个写作版本的话也可以很方便的通过GitHub仓库里面进行回滚操作。每次当我们执行hexo d -g命令的时候实际上就是产生一个版本，你可以登陆到GitHub仓库里面看到每次提交的版本，当然这个仓库存放的是已经产生的Html文件，也就是在blog目录里面的public目录，这个目录的所有文件都会被发布到GitHub仓库里面去。但是source/_post目录里面存放的才是你真正的源文件，都是些md文件，那这些文件并没有被GitHub仓库管理，所以为了对这些源文件进行版本管理，你需要在GitHub新建一个仓库用来存放blog目录，blog目录里面有些文件并不需要发布到GitHub，这些不需要的文件你可以在.gitignore（存放在blog根目录下，如果没有你可以新建一个）里面写明，我的这个文件内容如下：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">.DS_Store
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">.DS_Store
 Thumbs.db
 db.json
 *.log
@@ -379,10 +381,10 @@ node_modules/
 public/
 .deploy*/
 </code></pre></div><p>这里面的node_modules目录里面放着一些node的模块，public目录存放着hexo产生的html文件（也就是你的博客）。当你部署好这个仓库后，你可以通过以下git命令来把你的博客系统发布GitHub仓库：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git add . #把此次更改写入git缓存
-git commit -m &#34;some changes&#34; #把此次更改提交到本地库里去
-git push #把本地库更改同步到GitHub远程库里去
-git status #查看本地git库状态
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git add . <span style="color:#007f7f">#把此次更改写入git缓存</span>
+git commit -m <span style="color:#0ff;font-weight:bold">&#34;some changes&#34;</span> <span style="color:#007f7f">#把此次更改提交到本地库里去</span>
+git push <span style="color:#007f7f">#把本地库更改同步到GitHub远程库里去</span>
+git status <span style="color:#007f7f">#查看本地git库状态</span>
 </code></pre></div><p>在这个库里你可以找到你写作源文件的所有发布的版本，当然也可以回滚到任意版本中去，相当简单方便。</p>
 <h3 id="图床">图床</h3>
 <p>当我们写作的时候，经常需要引用图片到文章里去，如果图片少的话我们可以直接把图片放入每篇文章的目录里面，然后发布到GitHub里去，但是这样会导致GitHub仓库变得越来越大，并且同步会非常慢。所以我们需要一个稳定强大长久的私人图床。一般小型网站的图床都不做考虑。</p>
@@ -399,7 +401,7 @@ git status #查看本地git库状态
 }
 </code></pre></div><p>在这里把src替换成泥实际目录的绝对路径。dest里面替换access_key、secret_key及bucket。
 这样每当你在src目录里添加图片后，执行如下命令即可把src目录的文件推送到bucket里面。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">qrsync conf.json
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">qrsync conf.json
 </code></pre></div><p>需要注意的是src目录里面不需要建立子目录，因为这个同步工具会忽略子目录，直接把文件全部放到src根目录即可。
 那怎么访问bucket里面的图片呢？每个存储空间都有一个域名，那任何一张图片访问的形式就是：http://七牛存储域名/xxx.jpg 。那么所有图片都可以这么调用外链。考虑到存储空间有流量的限制，为了防止别人调用你的图片，你可以在存储空间管理里面设置白名单，把你的域名添加进去即可，这样只有你的域名可以访问这个图片等外链了。
 如果你觉得七牛云存储无法长期存活的话，你可以把本地这个图片文件夹同步到OneDrive网盘里去，你甚至可以把所有的文件都放到OneDrive里面同步上去，这样几个地方互为备份，就可以长久的写下去了。</p>
@@ -448,9 +450,10 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
           
           
           
-              13个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5750fdef29285eb60bd558bc0522244f1fb90224">5750fdef</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ab9ebded741d9453b8789ca6d77df43d043bb441">ab9ebded</a>
         </div>
         
 
@@ -2650,24 +2653,29 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

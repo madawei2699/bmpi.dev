@@ -396,53 +396,53 @@ amp-img.contain img {
 <ol>
 <li>通过 Key Result 标题获取其具体内容。因为我们每个 Key Result 的具体内容都在其 Objective 页面存放，所以需要使用 Logseq 的高级查询实现：</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#+BEGIN_QUERY
-{:title &#34;KR内容&#34;
- :query [:find (pull ?b [*])
-         :in $ ?current-page
-         :where
-         [?p :page/name ?current-page]
-         [?b :block/ref-pages ?p]
-         [?b :block/page ?bp]
-         [?bp :page/name ?bp-name]
-         [(not= &#34;okr&#34; ?bp-name)]
-         (not [?b :block/marker ?marker]
-         [(contains? #{&#34;TODO&#34; &#34;DOING&#34; &#34;DONE&#34; &#34;LATER&#34; &#34;NOW&#34;} ?marker)])]
- :inputs [:current-page]}
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">#+BEGIN_QUERY
+{<span style="color:#0ff;font-weight:bold">:title</span> <span style="color:#0ff;font-weight:bold">&#34;KR内容&#34;</span>
+ <span style="color:#0ff;font-weight:bold">:query</span> [<span style="color:#0ff;font-weight:bold">:find</span> (pull ?b [*])
+         <span style="color:#0ff;font-weight:bold">:in</span> $ ?current-page
+         <span style="color:#0ff;font-weight:bold">:where</span>
+         [?p <span style="color:#0ff;font-weight:bold">:page/name</span> ?current-page]
+         [?b <span style="color:#0ff;font-weight:bold">:block/ref-pages</span> ?p]
+         [?b <span style="color:#0ff;font-weight:bold">:block/page</span> ?bp]
+         [?bp <span style="color:#0ff;font-weight:bold">:page/name</span> ?bp-name]
+         [(<span style="color:#fff;font-weight:bold">not= </span><span style="color:#0ff;font-weight:bold">&#34;okr&#34;</span> ?bp-name)]
+         (<span style="color:#fff;font-weight:bold">not </span>[?b <span style="color:#0ff;font-weight:bold">:block/marker</span> ?marker]
+         [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;TODO&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;DOING&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;DONE&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;LATER&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;NOW&#34;</span>} ?marker)])]
+ <span style="color:#0ff;font-weight:bold">:inputs</span> [<span style="color:#0ff;font-weight:bold">:current-page</span>]}
 #+END_QUERY
 </code></pre></div><ol start="2">
 <li>统计 Key Result 关联的所有完成的 TODO 任务的总耗费时间。</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#+BEGIN_QUERY
-{:title [:code &#34;花费时间 (分钟)&#34;]
-:query [:find (sum ?spent-min)
-             :in $ ?current-page
-                          :where
-                          [?p :page/name ?current-page]
-                          [?b :block/ref-pages ?p]
-                          [?b :block/marker ?m]
-                          [(contains? #{&#34;DOING&#34; &#34;DONE&#34;} ?m)]
-                          [?b :block/properties ?prop]
-                          [(get ?prop &#34;doing&#34;) ?doing]
-                          [(get ?prop &#34;done&#34;) ?done]
-                          [(- ?done ?doing) ?spent]
-                          [(/ ?spent 60000) ?spent-min]]
-              :inputs [:current-page]
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">#+BEGIN_QUERY
+{<span style="color:#0ff;font-weight:bold">:title</span> [<span style="color:#0ff;font-weight:bold">:code</span> <span style="color:#0ff;font-weight:bold">&#34;花费时间 (分钟)&#34;</span>]
+<span style="color:#0ff;font-weight:bold">:query</span> [<span style="color:#0ff;font-weight:bold">:find</span> (sum ?spent-min)
+             <span style="color:#0ff;font-weight:bold">:in</span> $ ?current-page
+                          <span style="color:#0ff;font-weight:bold">:where</span>
+                          [?p <span style="color:#0ff;font-weight:bold">:page/name</span> ?current-page]
+                          [?b <span style="color:#0ff;font-weight:bold">:block/ref-pages</span> ?p]
+                          [?b <span style="color:#0ff;font-weight:bold">:block/marker</span> ?m]
+                          [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;DOING&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;DONE&#34;</span>} ?m)]
+                          [?b <span style="color:#0ff;font-weight:bold">:block/properties</span> ?prop]
+                          [(<span style="color:#fff;font-weight:bold">get </span>?prop <span style="color:#0ff;font-weight:bold">&#34;doing&#34;</span>) ?doing]
+                          [(<span style="color:#fff;font-weight:bold">get </span>?prop <span style="color:#0ff;font-weight:bold">&#34;done&#34;</span>) ?done]
+                          [(<span style="color:#fff;font-weight:bold">- </span>?done ?doing) ?spent]
+                          [(<span style="color:#fff;font-weight:bold">/ </span>?spent <span style="color:#ff0;font-weight:bold">60000</span>) ?spent-min]]
+              <span style="color:#0ff;font-weight:bold">:inputs</span> [<span style="color:#0ff;font-weight:bold">:current-page</span>]
 }
 #+END_QUERY
 </code></pre></div><ol start="3">
 <li>统计 Key Result 关联的所有完成的 TODO 任务的总打卡次数。</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#+BEGIN_QUERY
-{:title &#34;打卡（次数）&#34;
- :query [:find (count ?b)
-         :in $ ?current-page
-         :where
-         [?p :page/name ?current-page]
-         [?b :block/marker ?marker]
-         [?b :block/ref-pages ?p]
-         [(= &#34;DONE&#34; ?marker)]]
- :inputs [:current-page]}
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">#+BEGIN_QUERY
+{<span style="color:#0ff;font-weight:bold">:title</span> <span style="color:#0ff;font-weight:bold">&#34;打卡（次数）&#34;</span>
+ <span style="color:#0ff;font-weight:bold">:query</span> [<span style="color:#0ff;font-weight:bold">:find</span> (<span style="color:#fff;font-weight:bold">count </span>?b)
+         <span style="color:#0ff;font-weight:bold">:in</span> $ ?current-page
+         <span style="color:#0ff;font-weight:bold">:where</span>
+         [?p <span style="color:#0ff;font-weight:bold">:page/name</span> ?current-page]
+         [?b <span style="color:#0ff;font-weight:bold">:block/marker</span> ?marker]
+         [?b <span style="color:#0ff;font-weight:bold">:block/ref-pages</span> ?p]
+         [(<span style="color:#fff;font-weight:bold">= </span><span style="color:#0ff;font-weight:bold">&#34;DONE&#34;</span> ?marker)]]
+ <span style="color:#0ff;font-weight:bold">:inputs</span> [<span style="color:#0ff;font-weight:bold">:current-page</span>]}
 #+END_QUERY
 </code></pre></div><ol start="4">
 <li>统计资金</li>
@@ -467,7 +467,7 @@ amp-img.contain img {
 <li>用 Logseq 高级查询获取每个象限的 TODO 任务。</li>
 </ul>
 <p>Logseq 新建一个 TODO 很简单，比如：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">TODO 读《毛选》
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">TODO 读《毛选》
 DOING 读《毛选》
 DONE 读《毛选》
 </code></pre></div><p>这就完成了一个 TODO 任务从待办 -&gt; 在做 -&gt; 完成 的全流程。</p>
@@ -476,61 +476,61 @@ DONE 读《毛选》
 <ul>
 <li>📅 在做计划事项。</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#+BEGIN_QUERY
-{:query [:find (pull ?b [*])
-         :where
-         [?b :block/marker ?marker]
-         (not (not [?b :block/ref-pages ?p]
-         [?p :page/name ?page-name]
-         [(clojure.string/includes? ?page-name &#34;okr&#34;)])
-         (not [?b :block/priority ?priority]
-         [(contains? #{&#34;A&#34; &#34;B&#34; &#34;C&#34;} ?priority)]))
-         [(contains? #{&#34;DOING&#34; &#34;NOW&#34;} ?marker)]]
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">#+BEGIN_QUERY
+{<span style="color:#0ff;font-weight:bold">:query</span> [<span style="color:#0ff;font-weight:bold">:find</span> (pull ?b [*])
+         <span style="color:#0ff;font-weight:bold">:where</span>
+         [?b <span style="color:#0ff;font-weight:bold">:block/marker</span> ?marker]
+         (<span style="color:#fff;font-weight:bold">not </span>(<span style="color:#fff;font-weight:bold">not </span>[?b <span style="color:#0ff;font-weight:bold">:block/ref-pages</span> ?p]
+         [?p <span style="color:#0ff;font-weight:bold">:page/name</span> ?page-name]
+         [(clojure.string/includes? ?page-name <span style="color:#0ff;font-weight:bold">&#34;okr&#34;</span>)])
+         (<span style="color:#fff;font-weight:bold">not </span>[?b <span style="color:#0ff;font-weight:bold">:block/priority</span> ?priority]
+         [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;A&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;B&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;C&#34;</span>} ?priority)]))
+         [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;DOING&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;NOW&#34;</span>} ?marker)]]
  }
 #+END_QUERY
 </code></pre></div><ul>
 <li>🌞 待做计划事项。</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#+BEGIN_QUERY
-{:query [:find (pull ?b [*])
-         :where
-         [?b :block/marker ?marker]
-         (not (not [?b :block/ref-pages ?p]
-         [?p :page/name ?page-name]
-         [(clojure.string/includes? ?page-name &#34;okr&#34;)])
-         (not [?b :block/priority ?priority]
-         [(contains? #{&#34;A&#34; &#34;B&#34; &#34;C&#34;} ?priority)]))
-         [(contains? #{&#34;TODO&#34; &#34;LATER&#34;} ?marker)]]
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">#+BEGIN_QUERY
+{<span style="color:#0ff;font-weight:bold">:query</span> [<span style="color:#0ff;font-weight:bold">:find</span> (pull ?b [*])
+         <span style="color:#0ff;font-weight:bold">:where</span>
+         [?b <span style="color:#0ff;font-weight:bold">:block/marker</span> ?marker]
+         (<span style="color:#fff;font-weight:bold">not </span>(<span style="color:#fff;font-weight:bold">not </span>[?b <span style="color:#0ff;font-weight:bold">:block/ref-pages</span> ?p]
+         [?p <span style="color:#0ff;font-weight:bold">:page/name</span> ?page-name]
+         [(clojure.string/includes? ?page-name <span style="color:#0ff;font-weight:bold">&#34;okr&#34;</span>)])
+         (<span style="color:#fff;font-weight:bold">not </span>[?b <span style="color:#0ff;font-weight:bold">:block/priority</span> ?priority]
+         [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;A&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;B&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;C&#34;</span>} ?priority)]))
+         [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;TODO&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;LATER&#34;</span>} ?marker)]]
  }
 #+END_QUERY
 </code></pre></div><ul>
 <li>⏰ 在做其他事项。</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#+BEGIN_QUERY
-{:query [:find (pull ?b [*])
-         :where
-         [?b :block/marker ?marker]
-         (not [?b :block/ref-pages ?p]
-         [?p :page/name ?page-name]
-         [(clojure.string/includes? ?page-name &#34;okr&#34;)])
-         (not [?b :block/priority ?priority]
-         [(contains? #{&#34;A&#34; &#34;B&#34; &#34;C&#34;} ?priority)])
-         [(contains? #{&#34;DOING&#34; &#34;NOW&#34;} ?marker)]]
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">#+BEGIN_QUERY
+{<span style="color:#0ff;font-weight:bold">:query</span> [<span style="color:#0ff;font-weight:bold">:find</span> (pull ?b [*])
+         <span style="color:#0ff;font-weight:bold">:where</span>
+         [?b <span style="color:#0ff;font-weight:bold">:block/marker</span> ?marker]
+         (<span style="color:#fff;font-weight:bold">not </span>[?b <span style="color:#0ff;font-weight:bold">:block/ref-pages</span> ?p]
+         [?p <span style="color:#0ff;font-weight:bold">:page/name</span> ?page-name]
+         [(clojure.string/includes? ?page-name <span style="color:#0ff;font-weight:bold">&#34;okr&#34;</span>)])
+         (<span style="color:#fff;font-weight:bold">not </span>[?b <span style="color:#0ff;font-weight:bold">:block/priority</span> ?priority]
+         [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;A&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;B&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;C&#34;</span>} ?priority)])
+         [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;DOING&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;NOW&#34;</span>} ?marker)]]
  }
 #+END_QUERY
 </code></pre></div><ul>
 <li>🚮 待做其他事项。</li>
 </ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#+BEGIN_QUERY
-{:query [:find (pull ?b [*])
-         :where
-         [?b :block/marker ?marker]
-         (not [?b :block/ref-pages ?p]
-         [?p :page/name ?page-name]
-         [(clojure.string/includes? ?page-name &#34;okr&#34;)])
-         (not [?b :block/priority ?priority]
-         [(contains? #{&#34;A&#34; &#34;B&#34; &#34;C&#34;} ?priority)])
-         [(contains? #{&#34;LATER&#34;} ?marker)]]
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-clojure" data-lang="clojure">#+BEGIN_QUERY
+{<span style="color:#0ff;font-weight:bold">:query</span> [<span style="color:#0ff;font-weight:bold">:find</span> (pull ?b [*])
+         <span style="color:#0ff;font-weight:bold">:where</span>
+         [?b <span style="color:#0ff;font-weight:bold">:block/marker</span> ?marker]
+         (<span style="color:#fff;font-weight:bold">not </span>[?b <span style="color:#0ff;font-weight:bold">:block/ref-pages</span> ?p]
+         [?p <span style="color:#0ff;font-weight:bold">:page/name</span> ?page-name]
+         [(clojure.string/includes? ?page-name <span style="color:#0ff;font-weight:bold">&#34;okr&#34;</span>)])
+         (<span style="color:#fff;font-weight:bold">not </span>[?b <span style="color:#0ff;font-weight:bold">:block/priority</span> ?priority]
+         [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;A&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;B&#34;</span> <span style="color:#0ff;font-weight:bold">&#34;C&#34;</span>} ?priority)])
+         [(<span style="color:#fff;font-weight:bold">contains? </span>#{<span style="color:#0ff;font-weight:bold">&#34;LATER&#34;</span>} ?marker)]]
  }
 #+END_QUERY
 </code></pre></div><p>最后将这个页面设置为首页就可以很方便看到今日待办事项。Logseq 对移动端的支持也可以，所以移动端的问题也解决了。</p>

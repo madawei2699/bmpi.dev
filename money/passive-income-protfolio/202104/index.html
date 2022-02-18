@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/money/passive-income-protfolio/202104/" /><meta property="article:section" content="money" />
 <meta property="article:published_time" content="2021-05-04T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-05-05T18:16:12&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-18T09:32:20&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
 
@@ -52,7 +52,7 @@
       "image": "https://img.bmpi.dev/1d2f4d18-7168-2123-1e61-0fa186ba21b2.png",
       
       "datePublished": "2021-05-04T00:00:00Z",
-      "dateModified": "2021-05-05T18:16:12+08:00",
+      "dateModified": "2022-02-18T09:32:20+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -108,6 +108,8 @@
   <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
     crossorigin="anonymous" media="screen" />
   
+  
+
   
 
   
@@ -297,7 +299,7 @@
 <p><img data-src="https://img.bmpi.dev/a8034d27-c3fa-d58a-55f9-f01f0cd2c400.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>医药和创业板暴涨，但是被动收入组合持仓太少了。</p>
 <h3 id="双均线策略信号截止210430交易信号">双均线策略信号(截止21.04.30交易信号)</h3>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">可买标的:
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">可买标的:
 300ETF(510300.SH)可买, 收盘价5.173, 11日均线5.079, 22日均线5.07
 #########################################
 可卖标的:
@@ -380,9 +382,10 @@ H股ETF(510900.SH)于20210305日卖出, 空仓55天, 空仓期涨幅-3.18%
           
           
           
-              9个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/1defa03b476818436cd6700aa4c8ec8c0d3e61fb">1defa03b</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ab9ebded741d9453b8789ca6d77df43d043bb441">ab9ebded</a>
         </div>
         
 
@@ -1599,24 +1602,29 @@ H股ETF(510900.SH)于20210305日卖出, 空仓55天, 空仓期涨幅-3.18%
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

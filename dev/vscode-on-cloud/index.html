@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/vscode-on-cloud/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2021-08-23T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-02-16T22:18:18&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-18T09:32:20&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://img.bmpi.dev/dafdc38a-8e97-7daa-d860-4ad78c4d182b.png",
       
       "datePublished": "2021-08-23T00:00:00Z",
-      "dateModified": "2022-02-16T22:18:18+08:00",
+      "dateModified": "2022-02-18T09:32:20+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -108,6 +108,8 @@
   <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
     crossorigin="anonymous" media="screen" />
   
+  
+
   
 
   
@@ -392,7 +394,7 @@ pulumi up <span style="color:#007f7f"># 使用 Pulumi 设置 AWS EC2</span>
 <li>随时可用的开发环境：无需特定开发机器，只需要一个具备浏览器的电脑即可访问云 IDE 开始开发。</li>
 </ul>
 <p>一句话总结就是：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Cloud IDE, Coding Anytime Anywhere.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Cloud IDE, Coding Anytime Anywhere.
 </code></pre></div><h2 id="参考文章">参考文章</h2>
 <ol>
 <li><a href="https://zhuanlan.zhihu.com/p/145981067">从 VSCode 看大型 IDE 技术架构</a></li>
@@ -413,7 +415,7 @@ pulumi up <span style="color:#007f7f"># 使用 Pulumi 设置 AWS EC2</span>
               今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5314cc565b7dc417783fc4b9d26f0c9f16ff1434">5314cc56</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ab9ebded741d9453b8789ca6d77df43d043bb441">ab9ebded</a>
         </div>
         
 
@@ -1571,24 +1573,29 @@ pulumi up <span style="color:#007f7f"># 使用 Pulumi 设置 AWS EC2</span>
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

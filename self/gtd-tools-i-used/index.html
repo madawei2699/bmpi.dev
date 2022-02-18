@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/self/gtd-tools-i-used/" /><meta property="article:section" content="self" />
 <meta property="article:published_time" content="2019-12-18T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-02-16T22:18:18&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-18T09:32:20&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
 
@@ -52,7 +52,7 @@
       "image": "https://www.bmpi.dev/images/mdw2.png",
       
       "datePublished": "2019-12-18T00:00:00Z",
-      "dateModified": "2022-02-16T22:18:18+08:00",
+      "dateModified": "2022-02-18T09:32:20+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -108,6 +108,8 @@
   <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
     crossorigin="anonymous" media="screen" />
   
+  
+
   
 
   
@@ -363,7 +365,7 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
 <p>因为这个插件是开源的，所以我克隆了一份后加入了查看当前正在做与重要但未开始做的事情查看窗口，并发布为<a href="https://marketplace.visualstudio.com/items?itemName=mdw.vscode-todo-plus-plus">Todo++</a>。</p>
 <p><img data-src="https://img.bmpi.dev/todo++.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>有了这个VSCode插件后我解决了在电脑端编辑待办事项的问题，这种方式足够灵活，你可以把自己的工作、学习、生活都以如下方式来管理：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">.
 ├── self
 │   ├── idea.todo
 │   └── inbox.todo
@@ -374,7 +376,7 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
     ├── project_a.todo
     └── project_b.todo
 </code></pre></div><p>每个你关注的领域使用一份todo文件来管理，然后这个领域内你又可以拆分无数的项目，每个项目又可以无限拆分子项目，每个子项目最终拆解为一些可执行的待办事项，使用快捷键可快速标记这个待办事项的三个状态 <strong>（started/done/canceled）</strong> ，还可以使用 <strong>@critical</strong> 来标记任务是否重要。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">项目B_1:
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">项目B_1:
     ☐ 项目A_1_1 @started(19-12-17 20:45)
     ✔ 项目A_1_2 @done(19-12-17 20:45)
 
@@ -527,7 +529,7 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
               今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5314cc565b7dc417783fc4b9d26f0c9f16ff1434">5314cc56</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ab9ebded741d9453b8789ca6d77df43d043bb441">ab9ebded</a>
         </div>
         
 
@@ -1696,24 +1698,29 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/self/how-to-get-rich/" /><meta property="article:section" content="self" />
 <meta property="article:published_time" content="2022-01-02T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-01-26T10:02:22&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-18T09:32:20&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://www.bmpi.dev/images/mdw2.png",
       
       "datePublished": "2022-01-02T00:00:00Z",
-      "dateModified": "2022-01-26T10:02:22+08:00",
+      "dateModified": "2022-02-18T09:32:20+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -108,6 +108,8 @@
   <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
     crossorigin="anonymous" media="screen" />
   
+  
+
   
 
   
@@ -365,7 +367,7 @@
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Combining all three forms of leverage is a magic combination
 </code></pre></div><p>科技公司是什么？从杠杆的角度看，科技公司是由以上三种杠杆组合的。科技初创公司通过一个技术想法，吸引最优秀的人力杠杆，也就是工程师、设计师、产品开发人员。然后引入资本杠杆，把资本转化为营销、广告和全球化扩张的形式，最终把代码、媒体和内容创造的产品通过互联网传播出去。</p>
 <p>这是一个神奇的组合，这就是为什么你看到技术初创公司突然爆发的原因，因为它使用大量的杠杆，成功后自然获得巨大的超额回报。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Product and media leverage are permissionless
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Product and media leverage are permissionless
 </code></pre></div><p>产品和媒体是无许可的。你无需其他人的帮助，甚至也不需要资本的帮助，只需要一台联网的设备就可以开始创造财富的过程了。比如你可以开始编码、写书、录制播客、发推特、创作 YouTube 视频。你不需要任何人的许可来做这些事情，<strong>产品和媒体是非常平等的杠杆</strong>。</p>
 <p>这就是为什么我告诉人们要学习代码。在未来，会有这些机器人，他们会做所有的事情。这可能是真的，但我想说，机器人革命的大部分已经发生了，而且机器人的数量远远超过人类。只是我们为了散热和效率的原因，把它们装在数据中心里。我们把它们放在服务器与电脑里面。所有的电路，都是机器人的头脑在里面做所有的工作。每一个伟大的软件开发人员，现在都有一支机器人大军为他工作。在晚上，当他或她睡觉的时候，在他们写完代码后，它就开始工作了。</p>
 <p>机器人大军已经来了，机器人革命已经发生。我们大约进行到一半。我们只是添加了更多的硬件组件，这些随着我们对自动驾驶汽车越来越满意，也许还有自动驾驶卡车、飞机与轮船。有送货机器人和波士顿动力机器人等等。例如，正在为您进行网络搜索的机器人已经在这里，那些回答许多客户咨询的机器人已经在这里，你可以订购这支机器人大军。但这些机器人不是很聪明。你必须用他们能理解的语言去发出命令（编码）。</p>
@@ -409,10 +411,10 @@
           
           
           
-              21天前
+              今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5f5ec2897513b3f31489333f87cead029376c853">5f5ec289</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ab9ebded741d9453b8789ca6d77df43d043bb441">ab9ebded</a>
         </div>
         
 
@@ -2612,24 +2614,29 @@
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

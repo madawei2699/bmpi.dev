@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/self/beancount-my-accounting-tool-v2/" /><meta property="article:section" content="self" />
 <meta property="article:published_time" content="2021-10-04T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-10-15T20:23:15&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-18T09:32:20&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
 
@@ -52,7 +52,7 @@
       "image": "https://img.bmpi.dev/3f09e4aa-6318-36ba-4d94-7296af047f21.png",
       
       "datePublished": "2021-10-04T00:00:00Z",
-      "dateModified": "2021-10-15T20:23:15+08:00",
+      "dateModified": "2022-02-18T09:32:20+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -108,6 +108,8 @@
   <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
     crossorigin="anonymous" media="screen" />
   
+  
+
   
 
   
@@ -346,7 +348,7 @@
 <p>不少人畏惧使用命令行（CLI）和纯文本来记账，尤其是非程序员的群体，但这些只是习惯问题。Beancount 的记账是很简单的，比如我们用记账 App 记录一笔中午吃饭的帐是这样的：</p>
 <p><img data-src="https://img.bmpi.dev/614dd539-7a8b-614e-7781-c1d39946e129.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>而用 Beancount 记账是这样的：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021-10-01 * &#34;请客吃饭&#34;
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021-10-01 * &#34;请客吃饭&#34;
   Liabilities:CreditCard:CN:PINGAN-6467      -83.0 CNY
   Expenses:Food:Lunch
 </code></pre></div><p>看起来用手机记账更直观一些，而且 Beancount 很难在手机上操作，一般都用电脑来记账。但纯文本的优势在于编辑和存储方便，不需要特定的软件即可编辑内容，尤其是有很多笔账要记录的时候，电脑编辑纯文本效率也更高。</p>
@@ -363,7 +365,7 @@
 <p>我的账本结构包括记账的工具都是参考 <a href="https://www.skyue.com/19101819.html">记账神器 Beancount 教程</a> 这篇文章。</p>
 <h3 id="账本建立">账本建立</h3>
 <p>在<code>accounts</code>这个目录里存放着：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">.
 ├── assets.bean # 资产账户，包括银行卡、信用卡、投资组合、房产、车、加密币钱包、RSU 等账户
 ├── liabilities.bean # 负债账户
 ├── income.bean # 收入类别
@@ -373,7 +375,7 @@
 </code></pre></div><h4 id="assetsbean">assets.bean</h4>
 <p><img data-src="https://img.bmpi.dev/3f09e4aa-6318-36ba-4d94-7296af047f21.png" alt="" class="lazyload" loading="lazy"/></p>
 <h4 id="liabilitiesbean">liabilities.bean</h4>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">;房贷
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;房贷
 2021-02-11 open Liabilities:Bank:CN:BOC:Mortgage:Loan       CNY ;中国银行
 
 ;信用卡
@@ -383,7 +385,7 @@
 ;应付款
 2021-02-11 open Liabilities:Payable:Friends:XYZ             CNY ;朋友的应付款
 </code></pre></div><h4 id="incomebean">income.bean</h4>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">;主动收入
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;主动收入
 2021-02-11 open Income:CN:Salary:XYZ    CNY     ;上班公司收入
 
 ;被动收入
@@ -417,7 +419,7 @@
 ;其他
 2021-02-11 open Income:CN:Other    CNY, BTC, ETH, BNB, XMR
 </code></pre></div><h4 id="expensesbean">expenses.bean</h4>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">;居家
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;居家
 2021-02-11 open Expenses:Home:Phone ;手机电话
 2021-02-11 open Expenses:Home:Mortgage:Loan:Interest ;房贷利息
 2021-02-11 open Expenses:Home:Insurance:ZJX ;重疾险
@@ -503,7 +505,7 @@
 2021-02-11 open Expenses:Invest:Cost ;手续费
 2021-02-11 open Expenses:Invest:Other ;其他
 </code></pre></div><h4 id="equitybean">equity.bean</h4>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">;权益账户
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;权益账户
 
 2021-02-11 open Equity:Opening-Balances
 
@@ -535,7 +537,7 @@
 2021-02-12 pad Liabilities:CreditCard:CN:CMB Equity:Opening-Balances
 2021-02-13 balance Liabilities:CreditCard:CN:CMB  -12345.6 CNY
 </code></pre></div><h4 id="pricebean">price.bean</h4>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">;Commodity Price
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;Commodity Price
 
 ;🏠
 ;;自住房产
@@ -574,7 +576,7 @@
 <h3 id="开始记账">开始记账</h3>
 <h4 id="日常开支">日常开支</h4>
 <p>由于日常消费的账目是最多的，所以每月一个文件来记录消费账目。比如 10 月份的账目存放在<code>./2021/0-default/10-expenses.bean</code>文件中：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021-10-03 ! &#34;AWS&#34; &#34;9月账单&#34;
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021-10-03 ! &#34;AWS&#34; &#34;9月账单&#34;
   Liabilities:CreditCard:CN:CMB-9848          -10.35 USD @@ 66.72 CNY
   Expenses:Invest:Dev
 
@@ -600,7 +602,7 @@
 </code></pre></div><p>从上面可以看出来，有时候一笔账目里包含了多笔消费记录，但是整体属于一个大类别。也可以在记账时做货币换算。</p>
 <p>收入的话由于记录条目比较少，一般一年就一个<code>income.bean</code>文件。记录频率的话我是晚上一次记录当天所有账目。</p>
 <h4 id="周期性记账">周期性记账</h4>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">.
 ├── 00.bean
 ├── bankcard.bean # 银行卡转账、信用卡还款、提现等
 ├── cycle-expenses.bean # 周期消费
@@ -613,7 +615,7 @@
 <ol>
 <li>在<code>./accounts/assets.bean</code>里创建被动收入投资组合货币</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021-02-11 commodity BDSR
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021-02-11 commodity BDSR
   export: &#34;BDSR&#34;
   name: &#34;被动收入投资组合&#34;
 
@@ -621,22 +623,22 @@
 </code></pre></div><ol start="2">
 <li>在<code>accounts/equity.bean</code>初始化投资组合资产</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021-02-12 pad Assets:Current:Invest:Portfolio:CN:HTZQ Equity:Opening-Balances
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021-02-12 pad Assets:Current:Invest:Portfolio:CN:HTZQ Equity:Opening-Balances
 2021-02-13 balance Assets:Current:Invest:Portfolio:CN:HTZQ      185418.43 BDSR
 </code></pre></div><ol start="3">
 <li>在<code>2021/1-invest/00.bean</code>里记录投资组合资金出入</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021-05-31 * &#34;BDSR&#34; &#34;卖出投资组合&#34;
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021-05-31 * &#34;BDSR&#34; &#34;卖出投资组合&#34;
   Assets:Current:Invest:Portfolio:CN:HTZQ -123456 BDSR @@ 123456.00 CNY
   Liabilities:CreditCard:CN:POS-TX
 </code></pre></div><ol start="4">
 <li>在<code>2021/0-default/event.bean</code>里记录投资组合资金出入事件</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021-05-31 event &#34;投资&#34; &#34;华泰证券转出资金123456元至信用卡&#34;
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021-05-31 event &#34;投资&#34; &#34;华泰证券转出资金123456元至信用卡&#34;
 </code></pre></div><ol start="5">
 <li>在<code>accounts/price.bean</code>创建自定义货币汇率</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">;💹
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;💹
 2021-01-31 price BDSR                                  1.533 CNY
 2021-05-31 price BDSR                                  1.581 CNY
 2021-09-20 price BDSR                                  1.49 CNY
@@ -647,7 +649,7 @@
 <ol>
 <li>创建加密货币与钱包账户</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">;₿
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;₿
 2021-02-11 commodity BTC
   export: &#34;BTC&#34;
   name: &#34;Bitcoin&#34;
@@ -673,19 +675,19 @@
 </code></pre></div><ol start="2">
 <li>初始化资产</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021-02-12 pad Assets:Current:Crypto:ImToken:Wallet Equity:Opening-Balances
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021-02-12 pad Assets:Current:Crypto:ImToken:Wallet Equity:Opening-Balances
 2021-02-13 balance Assets:Current:Crypto:ImToken:Wallet 0.1318 ETH
 </code></pre></div><ol start="3">
 <li>记录交易</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021-06-21 * &#34;币安&#34; &#34;买入ETH&#34;
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021-06-21 * &#34;币安&#34; &#34;买入ETH&#34;
   Assets:Current:Bank:CN:CMB               -10000.0 CNY @@ 0.7942440945 ETH
   Assets:Current:Bank:CN:CMB                -2700.0 CNY @@ 0.2144459055 ETH
   Assets:Current:Crypto:BINANCE:Wallet 1.00869 ETH
 </code></pre></div><ol start="4">
 <li>创建自定义货币汇率</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021-02-14 price BTC                                   305528 CNY
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021-02-14 price BTC                                   305528 CNY
 2021-02-14 price BNB                                   838   CNY
 2021-02-14 price ETH                                   11725  CNY
 2021-02-20 price BTC                                   372575.75 CNY
@@ -700,7 +702,7 @@
 <h5 id="房产">房产</h5>
 <p>房产的记账需要考虑是否为投资房产。如果你的房产是自住，那投资的收益其实没啥意义，没必要体现在整体资产中，但是我们可以追踪房产的当前市场估值。</p>
 <p>可以通过给自住房创建人民币的变种价格（估值价格），比如我的自住房是这样记账的：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">;创建房产货币
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;创建房产货币
 2021-02-11 commodity HOUSE.XYZ
   name: &#34;你房子的名字&#34;
 2021-02-11 open Assets:Property:CN:XA:XYZ                        HOUSE.XYZ
@@ -826,7 +828,7 @@ year = now.year <span style="color:#fff;font-weight:bold">if</span> now.month &g
         <span style="color:#fff;font-weight:bold">else</span>:
             <span style="color:#fff;font-weight:bold">print</span>(<span style="color:#fff;font-weight:bold">str</span>(year) + <span style="color:#0ff;font-weight:bold">&#39;/&#39;</span> + <span style="color:#fff;font-weight:bold">str</span>(last_month))
 </code></pre></div><p>这样每月月初就可以收到一份统计家庭月开支的报表：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">2021/9
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">2021/9
 Net income report
 Monthly total income
 total_income
@@ -878,9 +880,10 @@ Expenses:Invest:Dev                            81.21 CNY,    50.0  USD
           
           
           
-              4个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/7c6701f4912209fcb169b798004330f0766f9cf5">7c6701f4</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ab9ebded741d9453b8789ca6d77df43d043bb441">ab9ebded</a>
         </div>
         
 
@@ -2046,24 +2049,29 @@ Expenses:Invest:Dev                            81.21 CNY,    50.0  USD
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

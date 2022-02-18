@@ -364,7 +364,7 @@ amp-img.contain img {
     <span style="color:#007f7f">/* Code here */</span>
 }
 </code></pre></div><p>Token化为：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">TYPE: void
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">TYPE: void
 IDENTIFIER: do_awesome_stuff
 OPEN_BRACKET: (
 TYPE: int
@@ -476,7 +476,7 @@ CLOSE_BRACE: }
 <p>了解完上面这么多枯燥的理论，是时候该实战了，让我们使用Parser解决一个真正的问题。在<a href="https://www.bmpi.dev/zh-cn/self/gtd-tools-i-used/">《我的时间管理工具》</a>这篇文章中提到我开发了<a href="https://github.com/bmpi-dev/todo_parser_lib">todo_parser_lib</a>，这个库便是用JavaScript的jison库开发的解析todo文件为json的AST格式的功能。</p>
 <p>jison到底有多强，可以从这里感受下: <a href="https://github.com/zaach/jison/wiki/ProjectsUsingJison">ProjectsUsingJison</a>。</p>
 <p>todo文件是一种类似yaml/python缩进风格的纯文本格式的文件，如下：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">test1:
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">test1:
     ☐ test list1 @started(19-12-11 21:16)
     &gt; test list1 comm
     ✔ test list2 @critical @started(19-12-11 21:16) @done(19-12-11 21:17) @lasted(1m2s)
@@ -581,7 +581,7 @@ lexer.addRule(<span style="color:#0ff;font-weight:bold">/$/gm</span>, <span styl
   <span style="color:#fff;font-weight:bold">return</span> <span style="color:#0ff;font-weight:bold">&#39;EOF&#39;</span>;
 });
 </code></pre></div><p>Token化的核心是使用特殊的Token替代被Token化文件中的符合正则表达式的字符串，我们这里只关注缩进INDENT/DEDENT和Todo待办事项的NAME，还有文件结束符EOF，所以你可以猜到最终被lexer输出的是个Token List:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">NAME: test1:
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">NAME: test1:
 INDENT
 NAME: ☐ test list1 @started(19-12-11 21:16)
 NAME: ✘ cancel @cancelled(19-12-11 21:28)
@@ -598,30 +598,30 @@ DEDENT
 EOF
 </code></pre></div><h3 id="step2语法分析">step2/语法分析</h3>
 <p>有了上述Token List做输入给jison做BNF语法分析，最终解析出json AST。先看BNF语法：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
-  &#39;bnf&#39;: {
-    &#39;todo-plus&#39;: [
-      [&#39;todo-list EOF&#39;, &#39;return $1;&#39;],
-      [&#39;EOF&#39;, &#39;return null&#39;],
-    ],
-    &#39;todo-list&#39;: [
-      [&#39;todo&#39;, &#39;$$ = $1 == null ? null : [$1];&#39;],
-      [&#39;todo-list todo&#39;,
-        &#39;if ($1 == null) { $$ = $2; } &#39; +
-        &#39;else { if ($2 == null) { $$ == $1; } &#39; +
-        &#39;else { $$ = [].concat($1).concat($2); } };&#39;],
-    ],
-    &#39;todo&#39;: [
-      [&#39;item&#39;, &#39;$$ = {name: $1, todo: []};&#39;],
-      [&#39;item INDENT todo-list DEDENT&#39;, &#39;$$ = $3 == null ? $3 : {name: $1, todo: $3};&#39;],
-      [&#39;item INDENT DEDENT&#39;, &#39;$$ = null;&#39;],
-      [&#39;INDENT DEDENT&#39;, &#39;$$ = null&#39;],
-    ],
-    &#39;item&#39;: [
-      [&#39;NAME&#39;, &#39;$$ = yytext;&#39;],
-    ],
-  },
-}
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f00">&#39;bnf&#39;:</span> <span style="color:#f00">{</span>
+    <span style="color:#f00">&#39;todo-plus&#39;:</span> <span style="color:#f00">[</span>
+      <span style="color:#f00">[&#39;todo-list</span> <span style="color:#f00">EOF&#39;,</span> <span style="color:#f00">&#39;return</span> <span style="color:#f00">$1;&#39;],</span>
+      <span style="color:#f00">[&#39;EOF&#39;,</span> <span style="color:#f00">&#39;return</span> <span style="color:#f00">null&#39;],</span>
+    <span style="color:#f00">],</span>
+    <span style="color:#f00">&#39;todo-list&#39;:</span> <span style="color:#f00">[</span>
+      <span style="color:#f00">[&#39;todo&#39;,</span> <span style="color:#f00">&#39;$$</span> <span style="color:#f00">=</span> <span style="color:#f00">$1</span> <span style="color:#f00">==</span> <span style="color:#f00">null</span> <span style="color:#f00">?</span> <span style="color:#f00">null</span> <span style="color:#f00">:</span> <span style="color:#f00">[$1];&#39;],</span>
+      <span style="color:#f00">[&#39;todo-list</span> <span style="color:#f00">todo&#39;,</span>
+        <span style="color:#f00">&#39;if</span> <span style="color:#f00">($1</span> <span style="color:#f00">==</span> <span style="color:#f00">null)</span> <span style="color:#f00">{</span> <span style="color:#f00">$$</span> <span style="color:#f00">=</span> <span style="color:#f00">$2;</span> } <span style="color:#f00">&#39;</span> <span style="color:#f00">+</span>
+        <span style="color:#f00">&#39;else</span> { <span style="color:#f00">if</span> <span style="color:#f00">($2</span> <span style="color:#f00">==</span> <span style="color:#f00">null)</span> <span style="color:#f00">{</span> <span style="color:#f00">$$</span> <span style="color:#f00">==</span> <span style="color:#f00">$1;</span> } <span style="color:#f00">&#39;</span> <span style="color:#f00">+</span>
+        <span style="color:#f00">&#39;else</span> { <span style="color:#f00">$$</span> <span style="color:#f00">=</span> <span style="color:#f00">[].concat($1).concat($2);</span> } <span style="color:#f00">};&#39;],</span>
+    <span style="color:#f00">],</span>
+    <span style="color:#f00">&#39;todo&#39;:</span> [
+      [<span style="color:#f00">&#39;item&#39;</span>, <span style="color:#f00">&#39;$$</span> <span style="color:#f00">=</span> {<span style="color:#f00">name:</span> <span style="color:#f00">$1,</span> <span style="color:#f00">todo:</span> <span style="color:#f00">[]</span>}<span style="color:#f00">;&#39;</span>],
+      [<span style="color:#f00">&#39;item</span> <span style="color:#f00">INDENT</span> <span style="color:#f00">todo-list</span> <span style="color:#f00">DEDENT&#39;</span>, <span style="color:#f00">&#39;$$</span> <span style="color:#f00">=</span> <span style="color:#f00">$</span><span style="color:#ff0;font-weight:bold">3</span> <span style="color:#f00">==</span> <span style="color:#fff;font-weight:bold">null</span> <span style="color:#f00">?</span> <span style="color:#f00">$</span><span style="color:#ff0;font-weight:bold">3</span> <span style="color:#f00">:</span> {<span style="color:#f00">name:</span> <span style="color:#f00">$1,</span> <span style="color:#f00">todo:</span> <span style="color:#f00">$3</span>}<span style="color:#f00">;&#39;</span>],
+      [<span style="color:#f00">&#39;item</span> <span style="color:#f00">INDENT</span> <span style="color:#f00">DEDENT&#39;</span>, <span style="color:#f00">&#39;$$</span> <span style="color:#f00">=</span> <span style="color:#fff;font-weight:bold">null</span><span style="color:#f00">;&#39;</span>],
+      [<span style="color:#f00">&#39;INDENT</span> <span style="color:#f00">DEDENT&#39;</span>, <span style="color:#f00">&#39;$$</span> <span style="color:#f00">=</span> <span style="color:#fff;font-weight:bold">null</span><span style="color:#f00">&#39;</span>],
+    ]<span style="color:#f00">,</span>
+    <span style="color:#f00">&#39;item&#39;:</span> [
+      [<span style="color:#f00">&#39;NAME&#39;</span>, <span style="color:#f00">&#39;$$</span> <span style="color:#f00">=</span> <span style="color:#f00">yytext;&#39;</span>],
+    ]<span style="color:#f00">,</span>
+  <span style="color:#f00">},</span>
+<span style="color:#f00">}</span>
 </code></pre></div><p>BNF就是递归的分解要解析的文件字符串，直到遇到不可分割的Token，比如文件一开始肯定会拆解为 &lsquo;todo-list EOF&rsquo; ，然后 todo-list 可以进一步分割直到 NAME 和 INDENT/DEDENT ，jison是兼容bison语法的，所以如果一脸懵比可以先看下<a href="http://dinosaur.compilertools.net/bison/bison_6.html#SEC34">bison语法帮助文档</a>。</p>
 <h3 id="step3render">step3/Render</h3>
 <p>经过语法分析，我们得到了json字符串，在这里我们可以使用<a href="https://github.com/janl/mustache.js">mustache.js</a>将json渲染为HTML，我们只需要定义好Template，然后调用mustache render即可。</p>
@@ -643,12 +643,12 @@ module.exports = <span style="color:#fff;font-weight:bold">function</span> rende
   });
   <span style="color:#fff;font-weight:bold">return</span> outputIndexHtml;
 };
-</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;ul class=&#39;todos&#39; style=&#39;margin: 10px 0;&#39;&gt;
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="font-weight:bold">ul</span> <span style="color:#007f7f">class</span>=<span style="color:#0ff;font-weight:bold">&#39;todos&#39;</span> <span style="color:#007f7f">style</span>=<span style="color:#0ff;font-weight:bold">&#39;margin: 10px 0;&#39;</span>&gt;
 {{#todo}}
-&lt;li class=&#39;todo&#39; style=&#39;list-style-type: none;&#39;&gt; {{ name }} &lt;/li&gt;
+&lt;<span style="font-weight:bold">li</span> <span style="color:#007f7f">class</span>=<span style="color:#0ff;font-weight:bold">&#39;todo&#39;</span> <span style="color:#007f7f">style</span>=<span style="color:#0ff;font-weight:bold">&#39;list-style-type: none;&#39;</span>&gt; {{ name }} &lt;/<span style="font-weight:bold">li</span>&gt;
 {{&gt; recurse }}
 {{/todo}}
-&lt;/ul&gt;
+&lt;/<span style="font-weight:bold">ul</span>&gt;
 </code></pre></div><p>需要在这里注意的时，由于我们的JSON Scheme是嵌套的todo list，所以模版的渲染也需要嵌套<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup>。</p>
 <h3 id="step4工程化">step4/工程化</h3>
 <p>核心代码完成后，我们需要重构，应用一些工程实践，比如单元测试<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup>、命令行工具<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup>、CI自动发布工具到NPM仓库<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup>。</p>

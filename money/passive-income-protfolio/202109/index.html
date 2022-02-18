@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/money/passive-income-protfolio/202109/" /><meta property="article:section" content="money" />
 <meta property="article:published_time" content="2021-10-02T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-10-03T08:15:08&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-02-18T09:32:20&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
 
@@ -52,7 +52,7 @@
       "image": "https://img.bmpi.dev/e1ce3cfa-c724-42d6-8a28-d322bc70c86c.png",
       
       "datePublished": "2021-10-02T00:00:00Z",
-      "dateModified": "2021-10-03T08:15:08+08:00",
+      "dateModified": "2022-02-18T09:32:20+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -108,6 +108,8 @@
   <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
     crossorigin="anonymous" media="screen" />
   
+  
+
   
 
   
@@ -288,7 +290,7 @@
 <p>组合详情：投资标的：各类ETF，包括宽基指数、行业指数等；投资市场：中国、香港及美国。</p>
 <p>资金管理：分散投资，买入标的单个不超过总资金 20%，单个标持仓市值不超过总资金 30%；高估值标的买入采用非估值买入策略如趋势跟随或突破等交易策略且总市值占比不超过 30%；单个高估值标的止损点为 10% 且总止损额每月不超过总市值 2% * 30% 即 0.6%。</p>
 <h3 id="双均线策略信号截止-210930httpswwwi365techinvest-alchemydatastrategydouble-ma20210930txt-交易信号">双均线策略信号(截止 <a href="https://www.i365.tech/invest-alchemy/data/strategy/double-ma/20210930.txt">21.09.30</a> 交易信号)</h3>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">可买标的:
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">可买标的:
 #########################################
 可卖标的:
 1000ETF(512100.SH)可卖, 收盘价1.049, 11日均线1.119, 22日均线1.124
@@ -331,9 +333,10 @@
           
           
           
-              4个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/a2ff239d2730c17a6cbf20099da314fe9f5d1430">a2ff239d</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/ab9ebded741d9453b8789ca6d77df43d043bb441">ab9ebded</a>
         </div>
         
 
@@ -1550,24 +1553,29 @@
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

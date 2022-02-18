@@ -489,9 +489,9 @@ COPY src/ .
 CMD [ <span style="color:#0ff;font-weight:bold">&#34;python&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;./main.py&#34;</span> ]
 </code></pre></div><p>One thing to keep in mind here is the choice of base image, usually we use the alpine version when choosing a Python image. However, the alpine version requires a lot of compilation when installing some local binary packages, and this compilation will encounter various errors, so I finally chose the buster version, which is based on ubuntu. If you want to know more about it, see this article<a href="https://pythonspeed.com/articles/alpine-docker-python/">《Using Alpine can make Python Docker builds 50× slower》</a>。</p>
 <p>After obtaining the API Token for Tushare, you need to run Docker locally.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker build -t invest-alchemy/core . # Build
+<pre><code>docker build -t invest-alchemy/core . # Build
 docker run -t -i -e TUSHARE_API_TOKEN=xxxx invest-alchemy/core # Local Run
-</code></pre></div><p>The ECR repository is then created in AWS, and the locally built images can then be pushed to the ECR for use by ECS tasks.</p>
+</code></pre><p>The ECR repository is then created in AWS, and the locally built images can then be pushed to the ECR for use by ECS tasks.</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin replace_with_your_ecr_addr.dkr.ecr.us-east-1.amazonaws.com <span style="color:#007f7f"># Login ECR</span>
 
 docker build -t invest-alchemy/core . <span style="color:#007f7f"># Local Build</span>
@@ -511,97 +511,97 @@ docker push replace_with_your_ecr_addr.dkr.ecr.us-east-1.amazonaws.com/invest-al
 <p>For other scenes see <a href="https://github.com/nathanpeck/aws-cloudformation-fargate">《CloudFormation Templates for AWS Fargate deployments》</a>.</p>
 <p>For further study you can read this article <a href="https://cloudonaut.io/fargate-networking-101/">《Fargate networking 101》</a>.</p>
 <h5 id="iam">IAM</h5>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">######################### Role used by the container regulates what AWS services the task has access to, e.g. your application is using a DynamoDB, then the task role must give the task access to Dynamo.
-resource &#34;aws_iam_role&#34; &#34;ecs_service_role&#34; {
-  name               = &#34;${var.project}_ecs_service_role_${var.env}&#34;
-  assume_role_policy = &#34;${data.aws_iam_policy_document.ecs_service_assume_role_policy.json}&#34;
+<pre><code>######################### Role used by the container regulates what AWS services the task has access to, e.g. your application is using a DynamoDB, then the task role must give the task access to Dynamo.
+resource &quot;aws_iam_role&quot; &quot;ecs_service_role&quot; {
+  name               = &quot;${var.project}_ecs_service_role_${var.env}&quot;
+  assume_role_policy = &quot;${data.aws_iam_policy_document.ecs_service_assume_role_policy.json}&quot;
 }
 
-resource &#34;aws_iam_role_policy&#34; &#34;ecs_service_policy&#34; {
-  name   = &#34;${var.project}_ecs_service_role_policy_${var.env}&#34;
-  policy = &#34;${data.aws_iam_policy_document.ecs_service_policy.json}&#34;
-  role   = &#34;${aws_iam_role.ecs_service_role.id}&#34;
+resource &quot;aws_iam_role_policy&quot; &quot;ecs_service_policy&quot; {
+  name   = &quot;${var.project}_ecs_service_role_policy_${var.env}&quot;
+  policy = &quot;${data.aws_iam_policy_document.ecs_service_policy.json}&quot;
+  role   = &quot;${aws_iam_role.ecs_service_role.id}&quot;
 }
 
-data &#34;aws_iam_policy_document&#34; &#34;ecs_service_policy&#34; {
+data &quot;aws_iam_policy_document&quot; &quot;ecs_service_policy&quot; {
   statement {
-    effect = &#34;Allow&#34;
-    resources = [&#34;*&#34;]
+    effect = &quot;Allow&quot;
+    resources = [&quot;*&quot;]
     actions = [
-        &#34;iam:ListPolicies&#34;,
-        &#34;iam:GetPolicyVersion&#34;
+        &quot;iam:ListPolicies&quot;,
+        &quot;iam:GetPolicyVersion&quot;
     ]
   }
 }
 
-data &#34;aws_iam_policy_document&#34; &#34;ecs_service_assume_role_policy&#34; {
+data &quot;aws_iam_policy_document&quot; &quot;ecs_service_assume_role_policy&quot; {
   statement {
-    actions = [&#34;sts:AssumeRole&#34;]
+    actions = [&quot;sts:AssumeRole&quot;]
     principals {
-      type = &#34;Service&#34;
-      identifiers = [&#34;ecs-tasks.amazonaws.com&#34;]
+      type = &quot;Service&quot;
+      identifiers = [&quot;ecs-tasks.amazonaws.com&quot;]
     }
   }
 }
 
-resource &#34;aws_iam_role_policy_attachment&#34; &#34;ecs_service_role_policy_attachment&#34; {
+resource &quot;aws_iam_role_policy_attachment&quot; &quot;ecs_service_role_policy_attachment&quot; {
   role       = aws_iam_role.ecs_service_role.name
-  policy_arn = &#34;arn:aws:iam::aws:policy/AWSLambdaFullAccess&#34; # https://gist.github.com/gene1wood/55b358748be3c314f956
+  policy_arn = &quot;arn:aws:iam::aws:policy/AWSLambdaFullAccess&quot; # https://gist.github.com/gene1wood/55b358748be3c314f956
 }
 
 ######################### Role used by the container enables the service to e.g. pull the image from ECR, spin up or deregister tasks etc
 
-resource &#34;aws_iam_role&#34; &#34;ecs_task_execution_role&#34; {
-  name = &#34;${var.project}_ecs_task_execution_role_${var.env}&#34;
+resource &quot;aws_iam_role&quot; &quot;ecs_task_execution_role&quot; {
+  name = &quot;${var.project}_ecs_task_execution_role_${var.env}&quot;
  
   assume_role_policy = &lt;&lt;EOF
 {
- &#34;Version&#34;: &#34;2012-10-17&#34;,
- &#34;Statement&#34;: [
+ &quot;Version&quot;: &quot;2012-10-17&quot;,
+ &quot;Statement&quot;: [
    {
-     &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
-     &#34;Principal&#34;: {
-       &#34;Service&#34;: &#34;ecs-tasks.amazonaws.com&#34;
+     &quot;Action&quot;: &quot;sts:AssumeRole&quot;,
+     &quot;Principal&quot;: {
+       &quot;Service&quot;: &quot;ecs-tasks.amazonaws.com&quot;
      },
-     &#34;Effect&#34;: &#34;Allow&#34;,
-     &#34;Sid&#34;: &#34;&#34;
+     &quot;Effect&quot;: &quot;Allow&quot;,
+     &quot;Sid&quot;: &quot;&quot;
    }
  ]
 }
 EOF
 }
  
-resource &#34;aws_iam_role_policy_attachment&#34; &#34;ecs_task_execution_role_policy_attachment&#34; {
+resource &quot;aws_iam_role_policy_attachment&quot; &quot;ecs_task_execution_role_policy_attachment&quot; {
   role       = aws_iam_role.ecs_task_execution_role.name
-  policy_arn = &#34;arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy&#34; # https://gist.github.com/gene1wood/55b358748be3c314f956
+  policy_arn = &quot;arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy&quot; # https://gist.github.com/gene1wood/55b358748be3c314f956
 }
 
 ######################### Role used for ECS Events
 
-resource &#34;aws_iam_role&#34; &#34;ecs_events_role&#34; {
-  name               = &#34;${var.project}_ecs_events_role_${var.env}&#34;
-  assume_role_policy = &#34;${data.aws_iam_policy_document.ecs_events_assume_role_policy.json}&#34;
+resource &quot;aws_iam_role&quot; &quot;ecs_events_role&quot; {
+  name               = &quot;${var.project}_ecs_events_role_${var.env}&quot;
+  assume_role_policy = &quot;${data.aws_iam_policy_document.ecs_events_assume_role_policy.json}&quot;
 }
 
-resource &#34;aws_iam_role_policy_attachment&#34; &#34;ecs_events_role_policy&#34; {
-  policy_arn = &#34;${data.aws_iam_policy.ecs_events_policy.arn}&#34;
-  role       = &#34;${aws_iam_role.ecs_events_role.id}&#34;
+resource &quot;aws_iam_role_policy_attachment&quot; &quot;ecs_events_role_policy&quot; {
+  policy_arn = &quot;${data.aws_iam_policy.ecs_events_policy.arn}&quot;
+  role       = &quot;${aws_iam_role.ecs_events_role.id}&quot;
 }
 
-data &#34;aws_iam_policy&#34; &#34;ecs_events_policy&#34; {
-  arn = &#34;arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceEventsRole&#34; # https://gist.github.com/gene1wood/55b358748be3c314f956
+data &quot;aws_iam_policy&quot; &quot;ecs_events_policy&quot; {
+  arn = &quot;arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceEventsRole&quot; # https://gist.github.com/gene1wood/55b358748be3c314f956
 }
 
-data &#34;aws_iam_policy_document&#34; &#34;ecs_events_assume_role_policy&#34; {
+data &quot;aws_iam_policy_document&quot; &quot;ecs_events_assume_role_policy&quot; {
   statement {
-    actions = [&#34;sts:AssumeRole&#34;]
+    actions = [&quot;sts:AssumeRole&quot;]
     principals {
-      type = &#34;Service&#34;
-      identifiers = [&#34;events.amazonaws.com&#34;]
+      type = &quot;Service&quot;
+      identifiers = [&quot;events.amazonaws.com&quot;]
     }
   }
 }
-</code></pre></div><p>Three roles are defined here.</p>
+</code></pre><p>Three roles are defined here.</p>
 <ul>
 <li>ecs_service_role: container application privileges, such as Core Service needs to push data to S3 and SNS, you need to have the relevant privileges for this role.</li>
 <li>ecs_task_execution_role: ECS task execution permission, for example, if ECS needs to pull images from ECR, it needs to have the permission to access ECR.</li>

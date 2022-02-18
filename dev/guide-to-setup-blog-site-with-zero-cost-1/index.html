@@ -111,6 +111,8 @@
   
 
   
+
+  
   <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
   
 
@@ -404,15 +406,15 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
 <ol>
 <li>安装Hugo和Git</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">brew install hugo
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install hugo
 brew install git
 </code></pre></div><ol start="2">
 <li>选择主题皮肤</li>
 </ol>
 <p>在 Hugo 官方的<a href="https://themes.gohugo.io/">主题站</a>我们可以找到大量别人已经开发好的主题皮肤。我们以本博客主题 <a href="https://themes.gohugo.io/hugo-coder/">Coder</a> 为例：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hugo new site bmpi.dev
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo new site bmpi.dev
 </code></pre></div><p>执行这个命令后我们得到了这些文件:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">.
 ├── archetypes
 │   └── default.md
 ├── config.toml # 配置文件入口
@@ -424,7 +426,7 @@ brew install git
 </code></pre></div><p>这是Hugo帮我们生成好的网站骨架，其中 <code>content</code> 是我们写文章的地方，每篇文章就是一个 Markdown 文件。如下图是我博客目前的文章：</p>
 <p><img data-src="https://img.bmpi.dev/bfbb42ad-6007-b1d0-d5d2-e96ced5c116b.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>然后开始添加主题：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd bmpi.dev
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#fff;font-weight:bold">cd</span> bmpi.dev
 git init
 git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder
 </code></pre></div><p>配置 Hugo，主要是修改 <code>config.toml</code>：</p>
@@ -444,9 +446,9 @@ title = <span style="color:#0ff;font-weight:bold">&#34;My New Hugo Site&#34;</sp
 </div>
 </div><p>这是最简单的配置，本博客的配置文件在这里可以看到：<a href="https://github.com/bmpi-dev/bmpi.dev/blob/master/config.toml">bmpi.dev config.toml</a>。</p>
 <p>复制一些主题样本数据：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cp -R themes/hugo-coder/exampleSite/ .
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp -R themes/hugo-coder/exampleSite/ .
 </code></pre></div><p>启动！</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hugo server
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo server
 </code></pre></div><p>最终效果：</p>
 <p><img data-src="https://img.bmpi.dev/11caabbc-5203-a45c-af8d-141ab3c5a829.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>以上就是一个非常简单的使用 Hugo 创建网站的过程，当然这只是开始，如果你想深度定制 Hugo 的话，最好先看看它的官方<a href="https://gohugo.io/documentation/">帮助文档</a>，主要包括模版定制、内容组织、配置等。</p>
@@ -457,14 +459,14 @@ title = <span style="color:#0ff;font-weight:bold">&#34;My New Hugo Site&#34;</sp
 <p><img data-src="https://img.bmpi.dev/ff7a7542-1a49-0153-891b-aef08ef5007c.png" alt="" class="lazyload" loading="lazy"/></p>
 <p><img data-src="https://img.bmpi.dev/86e6fc0b-6c70-faec-b867-0aa426e8f50f.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>接下来让我们把上一步创建的网站数据通过 Git 上传到 GitHub 托管。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git add .
-git commit -m &#34;first commit&#34;
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git add .
+git commit -m <span style="color:#0ff;font-weight:bold">&#34;first commit&#34;</span>
 git remote add origin https://github.com/bmpi-dev/test.bmpi.dev.git
 git push -u origin master
 </code></pre></div><p><img data-src="https://img.bmpi.dev/1c62cc67-96b1-b926-3918-c68c7d2259cd.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>至此，我们已经将网站上传到了 GitHub 。如果之后你要新增文章后上传也只需要执行：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git add .
-git commit -m &#34;update&#34;
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git add .
+git commit -m <span style="color:#0ff;font-weight:bold">&#34;update&#34;</span>
 git push
 </code></pre></div><h2 id="使用netlify部署个人博客">使用Netlify部署个人博客</h2>
 <p>上传到 GitHub 后，接下来让我们开始部署网站：</p>
@@ -561,7 +563,7 @@ theme = <span style="color:#0ff;font-weight:bold">&#34;hugo-coder&#34;</span>
 <p><img data-src="https://img.bmpi.dev/5ed7aad5-6164-1efe-55d7-c693bfce0eec.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>备案还是不备案，这是一个问题。</p>
 <p>对于商业产品用户都是国内的话那必须要备案，备案后你也可以使用国内的云服务和 CDN 了，这样网站在国内的加载速度也会很快。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">最初，
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">最初，
 没有人在意这场灾难，
 这不过是一场山火，
 一次旱灾，
@@ -1748,24 +1750,29 @@ theme = <span style="color:#0ff;font-weight:bold">&#34;hugo-coder&#34;</span>
   
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
+    
     const heti = new Heti('.heti');
     heti.autoSpacing(); 
-
+    
     AOS.init({
       disable: 'mobile'
     });
-
+    
     var mermaid = document.getElementsByClassName('mermaid');
     if (mermaid.length > 0) {
       var tag = document.createElement('script');
       tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
       document.getElementsByTagName('body')[0].appendChild(tag);
-
-      var tag = document.createElement('script');
-      tag.type = 'text/javascript';
-      tag.text = "mermaid.initialize({ startOnLoad: true, securityLevel: 'loose'})";
-      document.getElementsByTagName('body')[0].appendChild(tag);
     }
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      e.parentElement.replaceWith(markupDiv);
+    });
   </script>
   
 

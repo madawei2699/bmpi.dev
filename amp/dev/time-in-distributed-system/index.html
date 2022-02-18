@@ -353,7 +353,7 @@ amp-img.contain img {
 <li><a href="#%E7%BB%93%E8%AF%AD">结语</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0--%E8%BF%9B%E9%98%B6%E9%98%85%E8%AF%BB">参考文章 &amp;&amp; 进阶阅读</a></li>
 </ul>
-<figure >
+<!-- <figure >
     
         <div class="fixed-container"><amp-img src="https://img.bmpi.dev/3d3413ee-7024-5ff7-5904-e9120dd5690f.png" class="contain" alt="和本文中时间相关概念" layout="fill"></amp-img></div>
     
@@ -367,8 +367,59 @@ amp-img.contain img {
         </p> 
     </figcaption>
     
-</figure>
-<h2 id="多出一秒让互联网暂停">多出一秒让互联网暂停</h2>
+</figure> -->
+<pre><code class="language-markmap" data-lang="markmap"># 时间
+## 物理时钟
+### 时间标准
+#### 与地球自转相关
+##### 恒星时
+##### 太阳时
+#### 与天体运动相关
+##### 历书时（Ephemeris Time）
+##### 相对论力学时
+#### 与谐波振荡相关
+##### 原子时
+###### 国际原子时（TAI）
+###### 协调世界时（UTC/Zulu time）
+###### GPS时
+### 时钟仪器
+#### 太阳钟
+#### 机械钟
+#### 石英钟
+#### 原子钟
+### 时钟同步
+#### PTP
+#### NTP
+#### GPS
+#### 北斗授时
+#### TrueTime
+### 时间表示
+#### ISO 8601
+#### RFC 3339
+#### Unix Time/Timestamp/Epoch time/Posix time
+### 时钟类型
+#### 墙上时钟（Wall Clock）
+#### 单调时钟（Monotonic Clock）
+## 逻辑时钟
+### 相关理论
+#### 狭义相对论（Special Relativity）
+#### 序理论（Order theory）
+##### 偏序（Partially ordered set）
+##### 全序（Total order）
+#### 因果排序（Causal ordering）
+### 算法
+#### Lamport timestamp
+#### Vector clock
+#### 混合逻辑时钟
+#### 布隆时钟（Bloom clock）
+### 应用场景
+#### 分布式锁
+#### 分布式节点状态同步（Replication）
+#### 数据冲突检测
+#### 强制因果通信
+#### CRDT
+#### 实时协作应用（Collaborative）
+</code></pre><h2 id="多出一秒让互联网暂停">多出一秒让互联网暂停</h2>
 <p>2012 年 6 月 30 日，很多互联网在线服务系统和网站突然同时宕机，包括知名的社区 Reddit：</p>
 <p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/d3041422-0068-0c1d-67e7-c8b789006ade.png" alt="" layout="fill"></amp-img></div></p>
 <p>这并不是什么大规模黑客攻击或底层基础库如最近的 Log4j 安全事件引发的，而是一个被人忽略的和时间相关的现象导致的错误。</p>
@@ -480,13 +531,13 @@ e<sub>i</sub> 导致了事件 e<sub>j</sub>，那么一定 e<sub>i</sub> 发生�
 <p>所以 Happened-before 是一种约束，遵循它我们能获得一定的事件次序最终保证。</p>
 <h5 id="算法描述">算法描述</h5>
 <p>发送进程端：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># event is known
-time = time + 1;
-# event happens
-send(message, time);
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#0f0;font-weight:bold"># event is known
+</span><span style="color:#0f0;font-weight:bold"></span>time = time + <span style="color:#ff0;font-weight:bold">1</span>;
+<span style="color:#0f0;font-weight:bold"># event happens
+</span><span style="color:#0f0;font-weight:bold"></span>send(message, time);
 </code></pre></div><p>接受进程端：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">(message, time_stamp) = receive();
-time = max(time_stamp, time) + 1;
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">(message, time_stamp) = receive();
+time = max(time_stamp, time) + <span style="color:#ff0;font-weight:bold">1</span>;
 </code></pre></div><p>这个算法描述起来就是：每个节点都维护一个本地永远递增的<code>逻辑时间戳</code>（初始都为 0），节点发送事件时必须携带此逻辑时间戳。每当节点有事件产生或接收时，节点本地的逻辑时间戳就自增 1。当节点接受到一个事件，如果事件逻辑时间戳比本地逻辑时间戳还小就忽略，否则就接收此事件，并更新节点本地的逻辑时间戳，新的值取节点本地逻辑时间戳和接收事件所携带的逻辑时间戳二者的最大值并自增 1。</p>
 <h5 id="一个例子">一个例子</h5>
 <p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/2de64450-58be-a12c-6e14-1558a1cec063.png" alt="" layout="fill"></amp-img></div></p>
