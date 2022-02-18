@@ -227,7 +227,7 @@
   <section class="container post">
     <article>
       <header>
-        <div class="post-title">
+        <div class="post-title heti">
           <h1 class="title">构建终身学习体系进行自我提升</h1>
         </div>
         <div class="post-meta">
@@ -550,7 +550,7 @@
           
           
           
-              14天前
+              15天前
           
           
            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/7745cc62bea7a18f3b9925a1ac6aac4665284197">7745cc62</a>
@@ -1735,19 +1735,12 @@
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
     
-    const heti = new Heti('.heti');
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
     heti.autoSpacing(); 
     
     AOS.init({
       disable: 'mobile'
     });
-    
-    var mermaid = document.getElementsByClassName('mermaid');
-    if (mermaid.length > 0) {
-      var tag = document.createElement('script');
-      tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
-      document.getElementsByTagName('body')[0].appendChild(tag);
-    }
     
     let markups = document.querySelectorAll('code[data-lang=markmap]');
     Array.prototype.forEach.call(markups, function(e) {
@@ -1758,6 +1751,7 @@
       e.parentElement.replaceWith(markupDiv);
     });
   </script>
+  
   
 
 </body>

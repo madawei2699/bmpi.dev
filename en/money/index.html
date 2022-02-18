@@ -223,7 +223,7 @@
   <section class="container list">
     <h1 class="title" style="font-size: 1.6rem !important;border-bottom:1px dotted #bf7326;padding-bottom:20px;">A series of articles on investment and wealth management and online earning, which teach you how to carry out home financial planning, fixed index investment, basic knowledge of fund stock bonds, investment strategy selection, arbitrage techniques, backtesting of trading system design, technical analysis of the stock market, and online money making , Affiliate, Media Buy and some SEO tips, etc.</h1>
 
-    <ul><li>
+    <ul><li class="heti" style="max-width: fit-content;">
   <span class="date">2020-01-18</span>
   <a class="title" href="https://www.bmpi.dev/en/money/10-simple-ways-build-passive-income-2020/">10 Simple Ways to Build Residual Income in 2020</a>
 </li>
@@ -297,19 +297,12 @@
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
     
-    const heti = new Heti('.heti');
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
     heti.autoSpacing(); 
     
     AOS.init({
       disable: 'mobile'
     });
-    
-    var mermaid = document.getElementsByClassName('mermaid');
-    if (mermaid.length > 0) {
-      var tag = document.createElement('script');
-      tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
-      document.getElementsByTagName('body')[0].appendChild(tag);
-    }
     
     let markups = document.querySelectorAll('code[data-lang=markmap]');
     Array.prototype.forEach.call(markups, function(e) {
@@ -320,6 +313,7 @@
       e.parentElement.replaceWith(markupDiv);
     });
   </script>
+  
   
 
 </body>

@@ -227,7 +227,7 @@
   <section class="container post">
     <article>
       <header>
-        <div class="post-title">
+        <div class="post-title heti">
           <h1 class="title">当别人的股票基金上涨时 # 组合月报(202101)</h1>
         </div>
         <div class="post-meta">
@@ -1605,19 +1605,12 @@ H股ETF(510900.SH)于20210104日买入, 持有25天, 盈利5.45%
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
     
-    const heti = new Heti('.heti');
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
     heti.autoSpacing(); 
     
     AOS.init({
       disable: 'mobile'
     });
-    
-    var mermaid = document.getElementsByClassName('mermaid');
-    if (mermaid.length > 0) {
-      var tag = document.createElement('script');
-      tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
-      document.getElementsByTagName('body')[0].appendChild(tag);
-    }
     
     let markups = document.querySelectorAll('code[data-lang=markmap]');
     Array.prototype.forEach.call(markups, function(e) {
@@ -1628,6 +1621,7 @@ H股ETF(510900.SH)于20210104日买入, 持有25天, 盈利5.45%
       e.parentElement.replaceWith(markupDiv);
     });
   </script>
+  
   
 
 </body>

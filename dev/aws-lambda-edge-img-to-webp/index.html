@@ -226,7 +226,7 @@
   <section class="container post">
     <article>
       <header>
-        <div class="post-title">
+        <div class="post-title heti">
           <h1 class="title">使用AWS Lambda提高网站图片加载速度1X倍</h1>
         </div>
         <div class="post-meta">
@@ -1638,19 +1638,12 @@ compression formats</a>论文对比了BMP、TIFF、PNG、JPEG、JPEG 2000图片�
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
     
-    const heti = new Heti('.heti');
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
     heti.autoSpacing(); 
     
     AOS.init({
       disable: 'mobile'
     });
-    
-    var mermaid = document.getElementsByClassName('mermaid');
-    if (mermaid.length > 0) {
-      var tag = document.createElement('script');
-      tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
-      document.getElementsByTagName('body')[0].appendChild(tag);
-    }
     
     let markups = document.querySelectorAll('code[data-lang=markmap]');
     Array.prototype.forEach.call(markups, function(e) {
@@ -1661,6 +1654,7 @@ compression formats</a>论文对比了BMP、TIFF、PNG、JPEG、JPEG 2000图片�
       e.parentElement.replaceWith(markupDiv);
     });
   </script>
+  
   
 
 </body>

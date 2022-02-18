@@ -227,7 +227,7 @@
   <section class="container post">
     <article>
       <header>
-        <div class="post-title">
+        <div class="post-title heti">
           <h1 class="title">Adventures in K8S Cloud Native App Development</h1>
         </div>
         <div class="post-meta">
@@ -654,7 +654,7 @@ kubectl apply -f ingress-free-4-chat.yaml <span style="color:#007f7f"># Create i
           
           
           
-              2个月前
+              3个月前
           
            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/962d3fd0a4e88386d594c896b4c9b567d2b8ebbd">962d3fd0</a>
         </div>
@@ -1147,19 +1147,12 @@ kubectl apply -f ingress-free-4-chat.yaml <span style="color:#007f7f"># Create i
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
     
-    const heti = new Heti('.heti');
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
     heti.autoSpacing(); 
     
     AOS.init({
       disable: 'mobile'
     });
-    
-    var mermaid = document.getElementsByClassName('mermaid');
-    if (mermaid.length > 0) {
-      var tag = document.createElement('script');
-      tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
-      document.getElementsByTagName('body')[0].appendChild(tag);
-    }
     
     let markups = document.querySelectorAll('code[data-lang=markmap]');
     Array.prototype.forEach.call(markups, function(e) {
@@ -1170,6 +1163,7 @@ kubectl apply -f ingress-free-4-chat.yaml <span style="color:#007f7f"># Create i
       e.parentElement.replaceWith(markupDiv);
     });
   </script>
+  
   
 
 </body>

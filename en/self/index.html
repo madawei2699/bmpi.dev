@@ -223,11 +223,11 @@
   <section class="container list">
     <h1 class="title" style="font-size: 1.6rem !important;border-bottom:1px dotted #bf7326;padding-bottom:20px;">Self-management articles, teach you how to manage your time, task management, goal management, asset finance, knowledge notes, writing, photography, reading notes, quick learning and other skills</h1>
 
-    <ul><li>
+    <ul><li class="heti" style="max-width: fit-content;">
   <span class="date">2020-01-15</span>
   <a class="title" href="https://www.bmpi.dev/en/self/gtd-tools-i-used/">My GTD Tool</a>
 </li>
-<li>
+<li class="heti" style="max-width: fit-content;">
   <span class="date">2020-01-15</span>
   <a class="title" href="https://www.bmpi.dev/en/self/note-system/">My Note System</a>
 </li>
@@ -301,19 +301,12 @@
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
     
-    const heti = new Heti('.heti');
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
     heti.autoSpacing(); 
     
     AOS.init({
       disable: 'mobile'
     });
-    
-    var mermaid = document.getElementsByClassName('mermaid');
-    if (mermaid.length > 0) {
-      var tag = document.createElement('script');
-      tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
-      document.getElementsByTagName('body')[0].appendChild(tag);
-    }
     
     let markups = document.querySelectorAll('code[data-lang=markmap]');
     Array.prototype.forEach.call(markups, function(e) {
@@ -324,6 +317,7 @@
       e.parentElement.replaceWith(markupDiv);
     });
   </script>
+  
   
 
 </body>

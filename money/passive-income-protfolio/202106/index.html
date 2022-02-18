@@ -227,7 +227,7 @@
   <section class="container post">
     <article>
       <header>
-        <div class="post-title">
+        <div class="post-title heti">
           <h1 class="title">最牛指数 # 组合月报(202106)</h1>
         </div>
         <div class="post-meta">
@@ -1747,19 +1747,12 @@ H股ETF(510900.SH)于20210616日卖出, 空仓13天, 空仓期涨幅2.39%
   <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
   <script>
     
-    const heti = new Heti('.heti');
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
     heti.autoSpacing(); 
     
     AOS.init({
       disable: 'mobile'
     });
-    
-    var mermaid = document.getElementsByClassName('mermaid');
-    if (mermaid.length > 0) {
-      var tag = document.createElement('script');
-      tag.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
-      document.getElementsByTagName('body')[0].appendChild(tag);
-    }
     
     let markups = document.querySelectorAll('code[data-lang=markmap]');
     Array.prototype.forEach.call(markups, function(e) {
@@ -1770,6 +1763,7 @@ H股ETF(510900.SH)于20210616日卖出, 空仓13天, 空仓期涨幅2.39%
       e.parentElement.replaceWith(markupDiv);
     });
   </script>
+  
   
 
 </body>
