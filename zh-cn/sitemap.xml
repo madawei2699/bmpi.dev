@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/tags/%E5%86%99%E4%BD%9C/</loc>
+    <lastmod>2022-02-24T18:08:39+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/self/my-writing-story/250k/</loc>
+    <lastmod>2022-02-24T18:08:39+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/</loc>
+    <lastmod>2022-02-24T18:08:39+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/"
+                />
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/tags/dao/</loc>
     <lastmod>2022-02-18T14:55:58+08:00</lastmod>
   </url>
@@ -35,21 +60,6 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96/</loc>
     <lastmod>2022-02-18T14:55:58+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2022-02-18T19:34:36+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/"
-                />
   </url>
 
   <url>
@@ -284,7 +294,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/series/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
   </url>
 
   <url>
@@ -734,7 +744,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/series/%E9%9B%B6%E6%88%90%E6%9C%AC%E6%90%AD%E5%BB%BA%E7%8E%B0%E4%BB%A3%E5%8D%9A%E5%AE%A2%E6%8C%87%E5%8D%97/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
   </url>
 
   <url>
@@ -1754,12 +1764,12 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/github-pages/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/hexo/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
   </url>
 
   <url>
@@ -1783,18 +1793,13 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E5%86%99%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/tags/%E5%8F%8C%E5%9D%87%E7%BA%BF%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2021-01-22T21:01:13+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%9B%BE%E5%BA%8A/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
   </url>
 
   <url>
@@ -1814,7 +1819,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/self/build-write-tool-v1/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
   </url>
 
   <url>
