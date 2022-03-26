@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>编程语言是如何实现范型的</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-generics/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/deep-in-program-language\/",
+          "name": "deep-in-program-language"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/deep-in-program-language\/how-to-implement-generics\/",
+          "name": "how-to-implement-generics"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>编程语言是如何实现范型的</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2022-03-25T00:00:00Z'>
+                2022-03-25
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/">编程技术</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E8%8C%83%E5%9E%8B/">范型</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%8F%82%E6%95%B0%E5%A4%9A%E6%80%81/">参数多态</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%A8%A1%E7%89%88/">模版</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%8F%82%E6%95%B0%E5%8C%96%E7%B1%BB%E5%9E%8B/">参数化类型</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#%E4%BB%8Ego%E5%BC%95%E5%85%A5%E8%8C%83%E5%9E%8B%E8%AF%B4%E8%B5%B7">从Go引入范型说起</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%8C%83%E5%9E%8B">什么是范型</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9Ftype-system">类型系统(Type system)</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80type-memory-layout">类型内存布局(Type Memory Layout)</a></li>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5">类型检查</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9D%9E%E8%8C%83%E5%9E%8B%E7%AA%81%E7%A0%B4%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%99%90%E5%88%B6">非范型突破类型的限制</a>
+<ul>
+<li><a href="#%E6%89%8B%E5%B7%A5%E5%A4%8D%E5%88%B6manual-code-duplication">手工复制(Manual code duplication)</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90code-generation">代码生成(Code generation)</a></li>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80type-assertation">类型断言(Type assertation)</a></li>
+<li><a href="#%E5%8F%8D%E5%B0%84reflection">反射(Reflection)</a></li>
+<li><a href="#%E6%8E%A5%E5%8F%A3interface">接口(Interface)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E7%8E%B0%E8%8C%83%E5%9E%8B">实现范型</a>
+<ul>
+<li><a href="#%E8%A3%85%E7%AE%B1boxing">装箱(Boxing)</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4type-erased">类型擦除(Type-erased)</a></li>
+<li><a href="#%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8vtable">虚函数表(Vtable)</a></li>
+<li><a href="#%E5%AD%97%E5%85%B8dictionary">字典(Dictionary)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8D%95%E6%80%81%E5%8C%96monomorphization">单态化(Monomorphization)</a>
+<ul>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90code-generation-1">代码生成(Code Generation)</a></li>
+<li><a href="#%E6%A8%A1%E7%89%88template">模版(Template)</a></li>
+<li><a href="#%E8%9C%A1%E5%8D%B0stenciling">蜡印(Stenciling)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+<h2 id="从go引入范型说起">从Go引入范型说起</h2>
+<p><u title="2022/03/16">本月</u>，Go 1.18版本发布，一个大的变化是引入了正式的<a href="https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md">范型支持</a>。此时距离Go的第一次<a href="https://go.googlesource.com/proposal/+/master/design/15292/2010-06-type-functions.md">范型提案</a>已经过去了快<span class="heti-em">十二年</span>了！而花费如此长的时间引入的特性却引发了很多讨论与质疑。如在Reddit和Hacker News上这两个热门的帖子：</p>
+<ul>
+<li><a href="https://www.reddit.com/r/golang/comments/teu78z/118_is_released/">1.18 is released : golang</a></li>
+<li><a href="https://news.ycombinator.com/item?id=30688208">Go 1.18 | Hacker News</a></li>
+</ul>
+<p>Go为什么要引入范型？又为什么会花费如此长的时间？带着这个疑问让我们来看看编程语言中范型的魔力吧。</p>
+<h2 id="什么是范型">什么是范型</h2>
+<p>先看维基百科中对范型编程（<a href="https://en.wikipedia.org/wiki/Generic_programming">Generic programming</a>）的定义：</p>
+<blockquote>
+<p>Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. This approach permits writing common functions or types that differ only in the set of types on which they operate when used, thus reducing duplication.</p>
+</blockquote>
+<p>如果上面这个非常学术化的定义让你无法理解的话，让我们先从一个简单的例子来说明范型的作用。如下是个简单的C语言函数：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#fff;font-weight:bold">int</span> compare(<span style="color:#fff;font-weight:bold">int</span> a, <span style="color:#fff;font-weight:bold">int</span> b) {
+    <span style="color:#fff;font-weight:bold">if</span> (a &lt; b) {
+        <span style="color:#fff;font-weight:bold">return</span> -<span style="color:#ff0;font-weight:bold">1</span>;
+    } <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">if</span> (a &gt; b) {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">1</span>;
+    } <span style="color:#fff;font-weight:bold">else</span> {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>;
+    }
+}
+</code></pre></div><p>这个函数的存在的问题是不灵活，如果调用方需要比较两个浮点数，那还需要编写一个浮点数的函数，这样就导致了很多仅有类型差异但实现重复的代码。</p>
+<p>如果你写过JavaScript这种动态的编程语言就会发现根本不需要类型的约束。如下是JavaScript版本的算法：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#fff;font-weight:bold">function</span> compare(a, b) {
+    <span style="color:#fff;font-weight:bold">if</span> (a &lt; b) {
+        <span style="color:#fff;font-weight:bold">return</span> -<span style="color:#ff0;font-weight:bold">1</span>;
+    } <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">if</span> (a &gt; b) {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">1</span>;
+    } <span style="color:#fff;font-weight:bold">else</span> {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>;
+    }
+}
+</code></pre></div><p>那么问题来了，为什么如C这种编程语言需要<span class="heti-em">显式</span>的类型约束呢？</p>
+<h3 id="类型系统type-systemhttpsenwikipediaorgwikitype_system">类型系统(<a href="https://en.wikipedia.org/wiki/Type_system">Type system</a>)</h3>
+<h4 id="类型内存布局type-memory-layout">类型内存布局(Type Memory Layout)</h4>
+<p>当应用的数据在内存中存储时，操作系统看到的只是一串比特序列，数据类型就是给这串比特序列一定的意义。比如有显式类型含义的编程语言中如C中的<code>int8</code>就会把比如<code>11111111</code>这串比特序列看作十进制的<code>127</code>，而<code>uint8</code>就会把这串比特序列看作十进制的<code>255</code>。显然同一串内存比特序列的含义因类型而异。这样就可以理解为什么C语言中的compare函数只能处理<code>int</code>而无法处理<code>long</code>了，因为编译成机器指令的代码只能处理<code>int</code>类型的数据。</p>
+<p>在JavaScript中<code>Number</code>的内存大小是8个字节，而<code>String</code>的内存大小是16个字节，但只是一个指针引用，具体的内容大小是不确定的。</p>
+<p>但JavaScript的函数为何可以处理多种类型的数据呢？这是因为JavaScript是一个<code>弱类型</code>的<code>动态类型检查</code>编程语言，而C却是一个<code>弱类型</code></u>的<code>静态类型检查</code>编程语言。</p>
+<h4 id="类型检查">类型检查</h4>
+<ul>
+<li>强弱类型：如果一个编程语言有着严格的类型检查限制，那么可以说其是一个强类型的编程语言，反之则为弱类型。强类型的编程语言可以在类型不匹配时发生错误（编译与运行时都可能发生），而弱类型的语言在类型不匹配时会做隐式的类型转换，这会导致无法预料的运行时错误。强类型的拥护者认为严格类型检查可以带来类型安全、内存安全的好处，这方面的极致就是Rust为首的语言，而弱类型的拥护者认为过分夸大了类型和内存不安全带来的缺陷。</li>
+<li>静动检查：<q>动态类型一时爽，重构代码火葬场</q>。开发过大型项目的人一定会对这句话深有体会。动态与静态的区别在于类型检查发生的阶段，动态是在编译阶段，静态是在运行时。但实际上一些编程语言是混合的类型检查，比如在C#中开发者可以通过关键字来标识此数据类型检查是动态还是静态的。不少静态类型检查的编程语言也有动态的类型检查，比如Java中既有编译阶段的静态类型检查，又有运行时的动态类型检查（如父类与子类的<u title="Downcasting与Liskov Substitution principle">互相转换</u>）。</li>
+<li>类型推导：一些编程语言虽然不需要开发者显示定义数据类型，但编译器能够做类型推导，帮助开发者定义数据类型，如Scala与Kotlin。</li>
+</ul>
+<pre><code class="language-markmap" data-lang="markmap"># 类型检查
+## 强类型
+- C#
+- Java
+- Swift
+- Rust
+- Elixir
+- Clojure
+- Go
+- Python
+- Ruby
+## 弱类型
+- C
+- C++
+- PHP
+- JavaScript
+## 动态类型检查
+- Elixir
+- Clojure
+- Python
+- Ruby
+- JavaScript
+- PHP
+## 静态类型检查
+- C
+- C++
+- C#
+- Scala
+- Java
+- Rust
+- Swift
+- Go
+</code></pre><p>现在再回到起初的那个问题上，我们可以看到C与JavaScript同为<code>弱类型</code>的编程语言，真正的区别在于<code>动态类型检查</code>上。这让JavaScript的函数可以不受类型检查的限制，而C却受到了编译阶段的类型检查。</p>
+<p>以Go语言为例，类型检查发生在编译阶段，如下：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">flowchart LR
+  词法分析 --&gt; 语法分析 --&gt; type-check(类型检查) --&gt; 中间代码生成 --&gt; 代码优化 --&gt; 机器码生成
+  style type-check fill:#48a,color:#fff
+</code></pre><blockquote>
+<p>思考一个问题：对一个强类型的编程语言来说，类型检查发生在编译阶段还是运行时分别有哪些<u title="我的理解是编译阶段会导致编译时间过长，而运行时会导致其运行性能变差">差异</u>？</p>
+</blockquote>
+<h3 id="非范型突破类型的限制">非范型突破类型的限制</h3>
+<p>由于类型检查对静态类型检查编程语言的限制，导致我们在实现一些算法时，由于这些算法对不同数据类型有着相同的处理流程，如果我们要实现一套针对所有类型都有效的算法库，就需要编写大量的重复代码。</p>
+<p>在编程语言没有范型特性的黑暗年代，存在这么一些古老的方法来解决对范型的需求。</p>
+<h4 id="手工复制manual-code-duplication">手工复制(Manual code duplication)</h4>
+<p>任何语言都可以通过这种最简单的方式手动实现范型的效果，除了对程序员很不友好之外，这种方法有以下一些优点：</p>
+<ul>
+<li>产生的重复代码相比自动生成的代码要少。</li>
+<li>相比运行时的方法性能要高。因直接调用函数开销比通过运行时做额外的类型检查要低。</li>
+</ul>
+<h4 id="代码生成code-generation">代码生成(Code generation)</h4>
+<p>Java的<a href="https://asm.ow2.io/">ASM</a>与Go的<a href="https://github.com/cheekybits/genny">genny</a>都可以做到自动代码生成，其他语言也都可以实现类似的功能。这种方法解放了程序员，虽然有以下的一些问题：</p>
+<ul>
+<li>需要一些集成的手段去使用这些库，可能让代码构建变的更复杂。</li>
+<li>增加了编译时间。</li>
+<li>增加了二进制包的体积。</li>
+</ul>
+<h4 id="类型断言type-assertation">类型断言(Type assertation)</h4>
+<p>这种方法通过将函数中的参数类型转换为<u title="或Any类型">根</u>类型（如Java中的<code>Object</code>或Go中的<code>interface{}</code>)，然后对根类型进行期望的类型断言。实现可参考Go的<a href="https://go.dev/play/p/ztlqzkbLTUt">类型断言示例代码</a>。</p>
+<p>这种方法有以下一些问题：</p>
+<ul>
+<li>调用方需要将参数包装或转换成根类型。</li>
+<li>实现方代码中耦合了大量的类型断言代码。</li>
+<li>失去了编译器的类型安全保障。</li>
+</ul>
+<h4 id="反射reflection">反射(Reflection)</h4>
+<p>与类型断言类似，不过是用反射的技术在运行时获取类型信息，通过对类型的枚举判断来实现。实现可参考Go的<a href="https://go.dev/play/p/Zf1W_t_-WHI">反射示例代码</a>。</p>
+<p>这种方法有以下一些问题：</p>
+<ul>
+<li>可读性可能不太好，因为用到了复杂的反射技术。</li>
+<li>会导致运行时性能差。运行时反射要比直接的代码多了很多指令操作，所以性能要慢很多。</li>
+<li>失去了编译器的类型安全保障。</li>
+</ul>
+<h4 id="接口interface">接口(Interface)</h4>
+<p><a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a>设计模式中的依赖倒置原则（Dependency Inversion Principle）要求软件接口在设计中应该依赖抽象而不是具体。比如在Java中方法参数可以设计成一个<code>interface</code>，之后可以针对此接口进行不同的实现，这样的设计也更容易写出可测试的代码。</p>
+<p>根据这个指导原则，我们也可以用此实现范型。</p>
+<pre><code class="language-mermaid" data-lang="mermaid">classDiagram
+      Comparable &lt;|-- ComparableInt
+      Comparable &lt;|-- ComparableFloat
+      Comparable: +len()
+      Comparable: +less()
+      Comparable: +elem()
+      class ComparableInt{
+          -[]int values
+          +len()
+          +less()
+          +elem()
+      }
+      class ComparableFloat{
+          -[]float values
+          +len()
+          +less()
+          +elem()
+      }
+</code></pre><p>这样在我们的范型方法里只需要依赖<code>Comparable</code>接口，调用方可以传入具体的类型如<code>ComparableInt</code>或<code>ComparableFloat</code>。</p>
+<p>这种方法有以下一些问题：</p>
+<ul>
+<li>可能需要定义很多数据类型。</li>
+</ul>
+<h2 id="实现范型">实现范型</h2>
+<p>准确的说这里的实现范型指的是在编译器及运行时的支持下，编程语言自动实现范型的功能。由于这些实现方式和运行时的一个概念强相关，这里提前介绍下动态派发(<a href="https://en.wikipedia.org/wiki/Dynamic_dispatch">Dynamic Dispatch</a>)的概念。</p>
+<p>派发目的是让程序运行时知道被执行的函数或方法所在的内存位置。派发分为：</p>
+<ul>
+<li>静态派发(Static dispatch/early binding)：当程序在编译时可以找到执行的函数。C++默认使用的是直接派发，加上<code>virtual</code>修饰符可以改成虚函数表(Vtable)派发。直接派发是最快的，原因是调用指令少，还可通过编译器进行内联等方式的优化。这种派发缺点是不灵活，无法实现一些面向对象所需的技术如多态性。</li>
+<li>动态派发(dynamic dispatch/run-time dispatch/virtual method call/late binding)：当程序在运行时可以找到执行的函数。Java默认使用的是虚函数表(Vtable)派发，通过<code>final</code>修饰符可改成直接派发。虚函数表派发是有动态性的，一个类里会用表来存储类成员函数的指针，子类重写(Override)父类的函数会替代父类的函数，子类添加的函数会被加到这个表里。当程序运行时派发时会从这个表中找到对应的函数，这样就可以实现动态派发。面向对象的编程语言正是靠此机制实现了多态性(Polymorphic)。</li>
+<li>消息机制(message passing)：通过消息传递来调用被执行的函数。这种机制是在运行时可以改变函数的行为，甚至函数可以未实现，也不会引发运行时错误。比如Objective-C中就是通过消息传递来调用被执行的函数，甚至可以在程序运行过程中实现热更新代码。</li>
+</ul>
+<p>以上三种派发方式都有其优劣：比如静态派发的速度是最快的，但并不灵活。而动态派发虽然比较慢，但却可以实现面向对象多态的功能。消息机制是最灵活的方式，但性能也最差。</p>
+<p>前面我们已经看了手工实现范型的多种方式。为了解放程序员，各静态类型检查的编程语言都实现了范型，走的路线却各不相同。如下图：</p>
+<pre><code class="language-markmap" data-lang="markmap"># 实现范型的方式
+## 装箱(Boxing)
+### 类型擦除(Type-erased) `Java`
+### 虚函数表(Vtable)
+#### Embedded vtable `Java`
+### 字典传递(Dictionary passing)
+#### `Go`
+#### Witness table `Swift`
+## 单态化(Monomorphization)
+### 代码生成(Code Generation) `C`
+### 模版(Template) `C++`
+### 蜡印(Stenciling)
+#### GC Shape Stenciling `Go`
+</code></pre><p>大致来说编译器实现范型的两种方式是装箱(Boxing)和单态化(Monomorphization)。</p>
+<h3 id="装箱boxing">装箱(Boxing)</h3>
+<p>装箱的思路是将所有类型包装成统一的类型，有了统一的类型就有了统一的内存模型，这样函数在调用时传递的是统一的数据类型，也就不会出现类型不匹配的问题。这种思路我们在手工实现的方式里就用到了，比如<a href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80type-assertation">类型断言(Type assertation)</a>、<a href="#%E5%8F%8D%E5%B0%84reflection">反射(Reflection)</a>与<a href="#%E6%8E%A5%E5%8F%A3interface">接口(Interface)</a>的实现。</p>
+<h4 id="类型擦除type-erased">类型擦除(Type-erased)</h4>
+<p>对Java来说统一的数据类型就是Object，在编译阶段做完类型检查后就将类型信息通过转换成Object进行擦除，这样只需要生成一份范型函数的副本即可。类型擦除保证了范型函数生成的字节码和非范型函数的是相同的，也符合Java对<u title="这对Java生态来说很重要，旧的代码不需要迁移即可调用新的范型库。但也让这个范型的能力和其他语言相比差了很多，有很多限制（如不支持基本类型）。">兼容性</u>的要求。不过类型擦除也给Java的范型带来了很多的<a href="https://en.wikipedia.org/wiki/Generics_in_Java#Problems_with_type_erasure">限制</a>。</p>
+<h4 id="虚函数表vtable">虚函数表(Vtable)</h4>
+<p>之前在动态派发中介绍了虚函数表，对Java来说通过类型擦除结合虚函数表就实现了范型的效果：运行时同样的数据类型<code>Object</code>，却能调用原始类型的方法。</p>
+<pre><code class="language-mermaid" data-lang="mermaid">classDiagram
+      direction RL
+      VTable0 &lt;|-- Object
+      VTable1 &lt;|-- String
+      VTable0: +equals()
+      VTable0: +hashCode()
+      VTable0: +getClass()
+      VTable0: +toString()
+      VTable1: +equals()
+      VTable1: +hashCode()
+      VTable1: +getClass()
+      VTable1: +toString()
+      VTable1: +length()
+      VTable1: +charAt()
+      class Object {
+          &lt;&lt;Data Layout&gt;&gt;
+          vptr
+          other Object data members
+      }
+      class String {
+          &lt;&lt;Data Layout&gt;&gt;
+          vptr
+          other Object data members
+          other String data members
+      }
+</code></pre><h4 id="字典dictionary">字典(Dictionary)</h4>
+<p>编译器在编译范型函数时只生成了一份函数副本，通过新增一个字典参数来供调用方传递类型参数(Type Parameters)，这种实现方式称为字典传递(Dictionary passing)。</p>
+<p>还记得Go范型的正式名称叫什么吗？类型参数(Type Parameters)！这也暗示了Go实现范型的方式，那就是在编译阶段，通过将类型信息以字典的方式传递给范型函数。当然这个字典不仅包含了类型信息，还包含了此类型的内存操作函数如<code>make/len/new</code>等。</p>
+<p>同样的Swift也通过字典传递了一种名为<code>Witness table</code>的数据结构，这种数据结构包含着类型的大小及类型的内存操作函数（移动、复制与释放）。如下图：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">classDiagram
+      direction RL
+      ValueWitnessTable &lt;|-- Int
+      ReferWitnessTable &lt;|-- MyClass
+      class ValueWitnessTable {
+        &lt;&lt;Vaule witeness Table for trival type, size 4, align 4&gt;&gt;
+        size: 4
+        alignment: 4
+        copy: memcpy
+        move: memcpy
+        destroy: no-op
+      }
+      class ReferWitnessTable {
+        &lt;&lt;Vaule witeness Table for reference type&gt;&gt;
+        size: 8
+        alignment: 8
+        copy: retain
+        move: trivial
+        destroy: release
+      }
+      class Int {
+        &lt;&lt;Metadata&gt;&gt;
+        value witness table
+        reflection information
+      }
+      class MyClass {
+        &lt;&lt;Metadata&gt;&gt;
+        value witness table
+        reflection information
+      }
+</code></pre><p>Swift在编译阶段通过在函数入参中以字典的形式把<code>Witness table</code>注入，达到了以统一的方式处理任何类型，而不用对类型进行装箱操作。这样一来，Swift就可以实现泛型，而且不需要单态化，虽然在运行时有动态查找的开销，但这种表结构节省了分配内存和缓存不一致性的成本。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#fff;font-weight:bold">func</span> getSecond&lt;T&gt;(<span style="color:#fff;font-weight:bold">_</span> pair: Pair&lt;T&gt;) -&gt; T { 
+  <span style="color:#fff;font-weight:bold">return</span> pair.second 
+}
+
+<span style="color:#007f7f">//上述函数编译后变成下面的函数，入参的T就是Witness table的数据结构</span>
+
+void getSecond(opaque *result, opaque *pair, type *T) { 
+  type *PairOfT = get_generic_metadata(&amp;Pair_pattern, T); 
+  const opaque *second = (pair + PairOfT-&gt;fields[<span style="color:#ff0;font-weight:bold">1</span>]); 
+  T-&gt;vwt-&gt;copy_init(result, second, T); 
+  PairOfT-&gt;vwt-&gt;destroy(pair, PairOfT); 
+}
+</code></pre></div><h3 id="单态化monomorphization">单态化(Monomorphization)</h3>
+<p>单态化的思路是自动生成多个类型的范型函数版本，看起来就是一个模版代码生成的过程，但是也需要考虑很多种情况。比如：</p>
+<ul>
+<li>生成所有类型的函数版本：这种最简单，但是会拖慢编译时间，也会让最终的二进制文件变得很庞大。</li>
+<li>生成调用类型的函数版本：这种需要编译器分阶段或多次编译，比如需要遍历寻找调用点来确定最终的类型列表，对于不同包的同名函数的处理等。</li>
+<li>是否支持独立编译：如果调用范型函数的类型与范型函数不在同一个包内，是否能支持范型函数独立的编译。</li>
+</ul>
+<h4 id="代码生成code-generation-1">代码生成(Code Generation)</h4>
+<p>这种技术是编译器不支持范型时可采用的最简单的方案，比如C语言的宏就可以实现代码生成范型函数的功能。不过这种技术实现的范型有很多边界问题和限制，只有在编程语言不支持范型特性的情况下才会使用。</p>
+<h4 id="模版template">模版(Template)</h4>
+<p>C++通过模板实现泛型类、方法和函数，这导致编译器为每个唯一的类型参数集编译了代码的单独副本。这种方法的一个关键优势是没有运行时性能开销，尽管它以增加二进制文件大小和编译时间为代价。</p>
+<h4 id="蜡印stenciling">蜡印(Stenciling)</h4>
+<p>蜡印其实就是模版，也是一种代码生成技术。但Go除了使用字典传递实现装箱外，还采用了<code>GC Shape Stenciling</code>的技术。这种看起来很高级的名词简单来说是为了解决蜡印或模版的问题，因为在蜡印的过程中，编译器会为每一个实例化的类型参数生成一套独立的代码，这种会有一个问题，请看下面的例子：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">type</span> a <span style="color:#fff;font-weight:bold">int</span>
+<span style="color:#fff;font-weight:bold">type</span> b <span style="color:#fff;font-weight:bold">int</span>
+</code></pre></div><p>虽然<code>a</code>和<code>b</code>是两个自定义的类型，但它们底层都是<code>int</code>类型，但编译器会为这两个类型而生成两套函数的版本（如对<code>max</code>范型函数来说会生成<code>max_a</code>与<code>max_b</code>两个函数版本）。这是一种浪费，还会生成庞大的二进制文件。<code>GC Shape</code>这种技术就是通过对类型的底层内存布局（从内存分配器或垃圾回收器的视角）分组，对拥有相同的类型内存布局的类型参数进行蜡印，这样就可以避免生成大量重复的代码。</p>
+<p>Go实现范型的方式混合了字典与蜡印技术，最终的流程如下：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">flowchart LR
+  开始编译 --&gt; 寻找范型函数调用 --&gt; 使用GCShape对类型分组 --&gt; 为类型生成实例化的函数 --&gt; 创建包含类型信息的字典 --&gt; 调用实例化的函数并传递入参与类型字典
+</code></pre><blockquote>
+<p>思考题：为什么Swift采用了和Go类似的字典装箱技术，却并没有混合使用蜡印技术？</p>
+</blockquote>
+<p>总的来说Go在1.18实现范型的方式和Rust挺类似的，如果感兴趣可以看这篇Rust范型的文章：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/ZA-_BARVAWe0Q4eM0lYgwg">透过 Rust 探索系统的本原：泛型</a></li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>对静态类型检查的编程语言，实现范型的方式有很多，如：</p>
+<ul>
+<li>C：通过<strong>宏定义</strong>来实现，简单方案却能满足大部分需求，还有着不错的性能。</li>
+<li>C++：通过<strong>模版</strong>实现，相比C的宏，模版显然更强大灵活。</li>
+<li>Java：通过<strong>类型擦除的装箱技术结合虚函数表</strong>实现，虽然类型擦除导致Java的范型实现不如人意，但这种代价确保了兼容性。</li>
+<li>Swift：通过<strong>字典传入的方式配合Witness table</strong>的实现，这种巧妙的方式在编译速度与运行时速度之间取得了不错的平衡。</li>
+<li>Go：通过<strong>字典传入的方式配合GC Shape的蜡印技术</strong>实现，这种方式在编译速度与运行时速度之间取得了不错的平衡。</li>
+</ul>
+<p>总的来说范型是个和编译技术强相关的概念，由于本文涉及了多种编程语言，文中可能存在一些因笔者能力有限而导致的错误，欢迎读者指正。同时一些编程语言如Go也在不断的改进自己实现范型的机制，所以此文也会存在一些时效性的问题。</p>
+<p>我希望能通过这篇文章帮助读者更好的理解范型，尤其是多种编程语言的实现机制，以及语言设计者在范型设计上的一些权衡利弊的考虑，这样也能有助于我们了解自己日常使用的编程语言，写出更好的代码。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://thume.ca/2019/07/14/a-tour-of-metaprogramming-models-for-generics/">Models of Generics and Metaprogramming: Go, Rust, Swift, D and More - Tristan Hume</a></li>
+<li><a href="https://www.thomasdenney.co.uk/blog/2016/11/13/comparing-the-implementation-of-generics/">Comparing the implementation of generics | Thomas Denney</a></li>
+<li><a href="https://youtu.be/ctS8FzqcRug">2017 LLVM Developers’ Meeting: “Implementing Swift Generics ”</a></li>
+<li><a href="https://github.com/golang/proposal/blob/master/design/generics-implementation-dictionaries-go1.18.md">proposal/generics-implementation-dictionaries-go1.18.md at master · golang/proposal</a></li>
+<li><a href="https://youtu.be/Rvq__lVVmQc">Go 1.18 type parameters | Let&rsquo;s Go generics</a></li>
+<li><a href="https://njkhanh.com/golang-generics-implementation-details-p5f3138353534">Golang Generics Implementation Details - njkhanh</a></li>
+<li><a href="https://lukasatkinson.de/2016/dynamic-vs-static-dispatch/">Dynamic vs. Static Dispatch | Lukas Atkinson</a></li>
+<li><a href="https://book.douban.com/subject/35635836/">Go语言设计与实现（@Draven）</a></li>
+<li><a href="https://colobu.com/2021/08/30/how-is-go-generic-implemented/">Go泛型是怎么实现的?</a></li>
+<li><a href="https://www.cnblogs.com/baitongtong/p/14762857.html">Swift - 派发机制</a></li>
+</ul>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/self/my-writing-story/250k/",
-        "title": "写在第二十五万字",
-        "description": "写了二十多万字的文章，本文分享我的一些写作经验。",
-        "publish-date": "2022-02-24 00:00:00 +0000 UTC"
+        "url": "/dev/deep-in-program-language/how-to-implement-generics/",
+        "title": "编程语言是如何实现范型的",
+        "description": "本文介绍Go/Java/C/C++/Swift等编程语言是如何实现范型的。",
+        "publish-date": "2022-03-25 00:00:00 +0000 UTC"
     }
 }

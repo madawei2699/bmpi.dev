@@ -1,0 +1,2922 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="马大伟">
+  
+  <meta name="description" content="本文介绍Go/Java/C/C&#43;&#43;/Swift等编程语言是如何实现范型的。">
+  
+  
+  
+  <meta name="keywords" content="自我提升、时间管理、GTD、写作、摄影、笔记管理、知识管理、财务管理、全栈开发、指数投资、基金、股票、债券、SEO、Affiliate、Media Buy、Niche、社交媒体、被动收入、网赚">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="编程语言是如何实现范型的"/>
+  <meta name="twitter:description" content="本文介绍Go/Java/C/C&#43;&#43;/Swift等编程语言是如何实现范型的。"/>
+  
+  
+  <meta property="twitter:image" content="https://img.bmpi.dev/8a530b2b-cc37-2b49-7601-cc7362be3d5c.png" />
+  
+
+  
+  <meta property="og:title" content="编程语言是如何实现范型的" />
+<meta property="og:description" content="本文介绍Go/Java/C/C&#43;&#43;/Swift等编程语言是如何实现范型的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-generics/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2022-03-25T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-03-27T00:10:41&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+
+
+  
+  <meta property="og:image" content="https://img.bmpi.dev/8a530b2b-cc37-2b49-7601-cc7362be3d5c.png" />
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "编程语言是如何实现范型的",
+      
+      "image": "https://img.bmpi.dev/8a530b2b-cc37-2b49-7601-cc7362be3d5c.png",
+      
+      "datePublished": "2022-03-25T00:00:00Z",
+      "dateModified": "2022-03-27T00:10:41+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "马大伟"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-generics/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/logo.png"
+        }
+      },
+      "description": "本文介绍Go/Java/C/C++/Swift等编程语言是如何实现范型的。",
+      "keywords": ["编程语言", "范型", "参数多态", "模版", "参数化类型"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-generics/">
+  
+  <title>
+  编程语言是如何实现范型的 · 构建我的被动收入
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-generics/">
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.3f6b19e948698fa2be93c8601e8b7c02aa06e606988efcd235533fc6392ba440.css" integrity="sha256-P2sZ6Uhpj6K&#43;k8hgHot8AqoG5gaYjvzSNVM/xjkrpEA="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.83a2010dac9f59f943b3004cd6c4f230507ad036da635d3621401d42ec4e2835.css" integrity="sha256-g6IBDayfWflDswBM1sTyMFB60DbaY102IUAdQuxOKDU="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.1.2/dist/index.min.js"></script>
+  <style>
+    code[class*="language-"], pre[class*="language-"] {
+      text-shadow: none !important;
+      font-size: initial !important;
+    }
+  </style>
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/flying-pages.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bmpi.dev/images/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bmpi.dev/images/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bmpi.dev/images/ico/favicon-16x16.png">
+  <link rel="manifest" href="https://www.bmpi.dev/images/ico/site.webmanifest">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/amp/dev/deep-in-program-language/how-to-implement-generics/" title="构建我的被动收入" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="preload" href="https://www.bmpi.dev/scss/tagcloud.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css"></noscript>
+
+  
+  <script defer src='https://platform-api.sharethis.com/js/sharethis.js#property=600a642fe0b9b900111a7f08&product=inline-share-buttons'></script>
+  <link rel="stylesheet" href="//unpkg.com/heti/umd/heti.min.css">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css"></noscript>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  
+
+  
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://www.bmpi.dev/">
+      构建我的被动收入
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/about/">关于</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/self/">学习</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/dev/">技术</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/money/">投资</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/project/">个人项目</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/goal/">长期目标</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/en/">English</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title heti">
+          <h1 class="title">编程语言是如何实现范型的</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2022-03-25T00:00:00Z'>
+                2022-03-25
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              29:44
+              
+            </span>
+            
+            <span class="post-word-count"> | 6542 字 | </span>
+            <span id="post-views"></span> 次阅读
+            
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/">编程技术</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E8%8C%83%E5%9E%8B/">范型</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%8F%82%E6%95%B0%E5%A4%9A%E6%80%81/">参数多态</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%A8%A1%E7%89%88/">模版</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%8F%82%E6%95%B0%E5%8C%96%E7%B1%BB%E5%9E%8B/">参数化类型</a></div>
+
+        </div>
+      </header>
+
+      
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <ul>
+<li><a href="#%E4%BB%8Ego%E5%BC%95%E5%85%A5%E8%8C%83%E5%9E%8B%E8%AF%B4%E8%B5%B7">从Go引入范型说起</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%8C%83%E5%9E%8B">什么是范型</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9Ftype-system">类型系统(Type system)</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80type-memory-layout">类型内存布局(Type Memory Layout)</a></li>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5">类型检查</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9D%9E%E8%8C%83%E5%9E%8B%E7%AA%81%E7%A0%B4%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%99%90%E5%88%B6">非范型突破类型的限制</a>
+<ul>
+<li><a href="#%E6%89%8B%E5%B7%A5%E5%A4%8D%E5%88%B6manual-code-duplication">手工复制(Manual code duplication)</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90code-generation">代码生成(Code generation)</a></li>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80type-assertation">类型断言(Type assertation)</a></li>
+<li><a href="#%E5%8F%8D%E5%B0%84reflection">反射(Reflection)</a></li>
+<li><a href="#%E6%8E%A5%E5%8F%A3interface">接口(Interface)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9E%E7%8E%B0%E8%8C%83%E5%9E%8B">实现范型</a>
+<ul>
+<li><a href="#%E8%A3%85%E7%AE%B1boxing">装箱(Boxing)</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4type-erased">类型擦除(Type-erased)</a></li>
+<li><a href="#%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8vtable">虚函数表(Vtable)</a></li>
+<li><a href="#%E5%AD%97%E5%85%B8dictionary">字典(Dictionary)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8D%95%E6%80%81%E5%8C%96monomorphization">单态化(Monomorphization)</a>
+<ul>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90code-generation-1">代码生成(Code Generation)</a></li>
+<li><a href="#%E6%A8%A1%E7%89%88template">模版(Template)</a></li>
+<li><a href="#%E8%9C%A1%E5%8D%B0stenciling">蜡印(Stenciling)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+<h2 id="从go引入范型说起">从Go引入范型说起</h2>
+<p><u title="2022/03/16">本月</u>，Go 1.18版本发布，一个大的变化是引入了正式的<a href="https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md">范型支持</a>。此时距离Go的第一次<a href="https://go.googlesource.com/proposal/+/master/design/15292/2010-06-type-functions.md">范型提案</a>已经过去了快<span class="heti-em">十二年</span>了！而花费如此长的时间引入的特性却引发了很多讨论与质疑。如在Reddit和Hacker News上这两个热门的帖子：</p>
+<ul>
+<li><a href="https://www.reddit.com/r/golang/comments/teu78z/118_is_released/">1.18 is released : golang</a></li>
+<li><a href="https://news.ycombinator.com/item?id=30688208">Go 1.18 | Hacker News</a></li>
+</ul>
+<p>Go为什么要引入范型？又为什么会花费如此长的时间？带着这个疑问让我们来看看编程语言中范型的魔力吧。</p>
+<h2 id="什么是范型">什么是范型</h2>
+<p>先看维基百科中对范型编程（<a href="https://en.wikipedia.org/wiki/Generic_programming">Generic programming</a>）的定义：</p>
+<blockquote>
+<p>Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. This approach permits writing common functions or types that differ only in the set of types on which they operate when used, thus reducing duplication.</p>
+</blockquote>
+<p>如果上面这个非常学术化的定义让你无法理解的话，让我们先从一个简单的例子来说明范型的作用。如下是个简单的C语言函数：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#fff;font-weight:bold">int</span> compare(<span style="color:#fff;font-weight:bold">int</span> a, <span style="color:#fff;font-weight:bold">int</span> b) {
+    <span style="color:#fff;font-weight:bold">if</span> (a &lt; b) {
+        <span style="color:#fff;font-weight:bold">return</span> -<span style="color:#ff0;font-weight:bold">1</span>;
+    } <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">if</span> (a &gt; b) {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">1</span>;
+    } <span style="color:#fff;font-weight:bold">else</span> {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>;
+    }
+}
+</code></pre></div><p>这个函数的存在的问题是不灵活，如果调用方需要比较两个浮点数，那还需要编写一个浮点数的函数，这样就导致了很多仅有类型差异但实现重复的代码。</p>
+<p>如果你写过JavaScript这种动态的编程语言就会发现根本不需要类型的约束。如下是JavaScript版本的算法：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#fff;font-weight:bold">function</span> compare(a, b) {
+    <span style="color:#fff;font-weight:bold">if</span> (a &lt; b) {
+        <span style="color:#fff;font-weight:bold">return</span> -<span style="color:#ff0;font-weight:bold">1</span>;
+    } <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">if</span> (a &gt; b) {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">1</span>;
+    } <span style="color:#fff;font-weight:bold">else</span> {
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>;
+    }
+}
+</code></pre></div><p>那么问题来了，为什么如C这种编程语言需要<span class="heti-em">显式</span>的类型约束呢？</p>
+<h3 id="类型系统type-systemhttpsenwikipediaorgwikitype_system">类型系统(<a href="https://en.wikipedia.org/wiki/Type_system">Type system</a>)</h3>
+<h4 id="类型内存布局type-memory-layout">类型内存布局(Type Memory Layout)</h4>
+<p>当应用的数据在内存中存储时，操作系统看到的只是一串比特序列，数据类型就是给这串比特序列一定的意义。比如有显式类型含义的编程语言中如C中的<code>int8</code>就会把比如<code>11111111</code>这串比特序列看作十进制的<code>127</code>，而<code>uint8</code>就会把这串比特序列看作十进制的<code>255</code>。显然同一串内存比特序列的含义因类型而异。这样就可以理解为什么C语言中的compare函数只能处理<code>int</code>而无法处理<code>long</code>了，因为编译成机器指令的代码只能处理<code>int</code>类型的数据。</p>
+<p>在JavaScript中<code>Number</code>的内存大小是8个字节，而<code>String</code>的内存大小是16个字节，但只是一个指针引用，具体的内容大小是不确定的。</p>
+<p>但JavaScript的函数为何可以处理多种类型的数据呢？这是因为JavaScript是一个<code>弱类型</code>的<code>动态类型检查</code>编程语言，而C却是一个<code>弱类型</code></u>的<code>静态类型检查</code>编程语言。</p>
+<h4 id="类型检查">类型检查</h4>
+<ul>
+<li>强弱类型：如果一个编程语言有着严格的类型检查限制，那么可以说其是一个强类型的编程语言，反之则为弱类型。强类型的编程语言可以在类型不匹配时发生错误（编译与运行时都可能发生），而弱类型的语言在类型不匹配时会做隐式的类型转换，这会导致无法预料的运行时错误。强类型的拥护者认为严格类型检查可以带来类型安全、内存安全的好处，这方面的极致就是Rust为首的语言，而弱类型的拥护者认为过分夸大了类型和内存不安全带来的缺陷。</li>
+<li>静动检查：<q>动态类型一时爽，重构代码火葬场</q>。开发过大型项目的人一定会对这句话深有体会。动态与静态的区别在于类型检查发生的阶段，动态是在编译阶段，静态是在运行时。但实际上一些编程语言是混合的类型检查，比如在C#中开发者可以通过关键字来标识此数据类型检查是动态还是静态的。不少静态类型检查的编程语言也有动态的类型检查，比如Java中既有编译阶段的静态类型检查，又有运行时的动态类型检查（如父类与子类的<u title="Downcasting与Liskov Substitution principle">互相转换</u>）。</li>
+<li>类型推导：一些编程语言虽然不需要开发者显示定义数据类型，但编译器能够做类型推导，帮助开发者定义数据类型，如Scala与Kotlin。</li>
+</ul>
+<pre><code class="language-markmap" data-lang="markmap"># 类型检查
+## 强类型
+- C#
+- Java
+- Swift
+- Rust
+- Elixir
+- Clojure
+- Go
+- Python
+- Ruby
+## 弱类型
+- C
+- C++
+- PHP
+- JavaScript
+## 动态类型检查
+- Elixir
+- Clojure
+- Python
+- Ruby
+- JavaScript
+- PHP
+## 静态类型检查
+- C
+- C++
+- C#
+- Scala
+- Java
+- Rust
+- Swift
+- Go
+</code></pre><p>现在再回到起初的那个问题上，我们可以看到C与JavaScript同为<code>弱类型</code>的编程语言，真正的区别在于<code>动态类型检查</code>上。这让JavaScript的函数可以不受类型检查的限制，而C却受到了编译阶段的类型检查。</p>
+<p>以Go语言为例，类型检查发生在编译阶段，如下：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">flowchart LR
+  词法分析 --&gt; 语法分析 --&gt; type-check(类型检查) --&gt; 中间代码生成 --&gt; 代码优化 --&gt; 机器码生成
+  style type-check fill:#48a,color:#fff
+</code></pre><blockquote>
+<p>思考一个问题：对一个强类型的编程语言来说，类型检查发生在编译阶段还是运行时分别有哪些<u title="我的理解是编译阶段会导致编译时间过长，而运行时会导致其运行性能变差">差异</u>？</p>
+</blockquote>
+<h3 id="非范型突破类型的限制">非范型突破类型的限制</h3>
+<p>由于类型检查对静态类型检查编程语言的限制，导致我们在实现一些算法时，由于这些算法对不同数据类型有着相同的处理流程，如果我们要实现一套针对所有类型都有效的算法库，就需要编写大量的重复代码。</p>
+<p>在编程语言没有范型特性的黑暗年代，存在这么一些古老的方法来解决对范型的需求。</p>
+<h4 id="手工复制manual-code-duplication">手工复制(Manual code duplication)</h4>
+<p>任何语言都可以通过这种最简单的方式手动实现范型的效果，除了对程序员很不友好之外，这种方法有以下一些优点：</p>
+<ul>
+<li>产生的重复代码相比自动生成的代码要少。</li>
+<li>相比运行时的方法性能要高。因直接调用函数开销比通过运行时做额外的类型检查要低。</li>
+</ul>
+<h4 id="代码生成code-generation">代码生成(Code generation)</h4>
+<p>Java的<a href="https://asm.ow2.io/">ASM</a>与Go的<a href="https://github.com/cheekybits/genny">genny</a>都可以做到自动代码生成，其他语言也都可以实现类似的功能。这种方法解放了程序员，虽然有以下的一些问题：</p>
+<ul>
+<li>需要一些集成的手段去使用这些库，可能让代码构建变的更复杂。</li>
+<li>增加了编译时间。</li>
+<li>增加了二进制包的体积。</li>
+</ul>
+<h4 id="类型断言type-assertation">类型断言(Type assertation)</h4>
+<p>这种方法通过将函数中的参数类型转换为<u title="或Any类型">根</u>类型（如Java中的<code>Object</code>或Go中的<code>interface{}</code>)，然后对根类型进行期望的类型断言。实现可参考Go的<a href="https://go.dev/play/p/ztlqzkbLTUt">类型断言示例代码</a>。</p>
+<p>这种方法有以下一些问题：</p>
+<ul>
+<li>调用方需要将参数包装或转换成根类型。</li>
+<li>实现方代码中耦合了大量的类型断言代码。</li>
+<li>失去了编译器的类型安全保障。</li>
+</ul>
+<h4 id="反射reflection">反射(Reflection)</h4>
+<p>与类型断言类似，不过是用反射的技术在运行时获取类型信息，通过对类型的枚举判断来实现。实现可参考Go的<a href="https://go.dev/play/p/Zf1W_t_-WHI">反射示例代码</a>。</p>
+<p>这种方法有以下一些问题：</p>
+<ul>
+<li>可读性可能不太好，因为用到了复杂的反射技术。</li>
+<li>会导致运行时性能差。运行时反射要比直接的代码多了很多指令操作，所以性能要慢很多。</li>
+<li>失去了编译器的类型安全保障。</li>
+</ul>
+<h4 id="接口interface">接口(Interface)</h4>
+<p><a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a>设计模式中的依赖倒置原则（Dependency Inversion Principle）要求软件接口在设计中应该依赖抽象而不是具体。比如在Java中方法参数可以设计成一个<code>interface</code>，之后可以针对此接口进行不同的实现，这样的设计也更容易写出可测试的代码。</p>
+<p>根据这个指导原则，我们也可以用此实现范型。</p>
+<pre><code class="language-mermaid" data-lang="mermaid">classDiagram
+      Comparable &lt;|-- ComparableInt
+      Comparable &lt;|-- ComparableFloat
+      Comparable: +len()
+      Comparable: +less()
+      Comparable: +elem()
+      class ComparableInt{
+          -[]int values
+          +len()
+          +less()
+          +elem()
+      }
+      class ComparableFloat{
+          -[]float values
+          +len()
+          +less()
+          +elem()
+      }
+</code></pre><p>这样在我们的范型方法里只需要依赖<code>Comparable</code>接口，调用方可以传入具体的类型如<code>ComparableInt</code>或<code>ComparableFloat</code>。</p>
+<p>这种方法有以下一些问题：</p>
+<ul>
+<li>可能需要定义很多数据类型。</li>
+</ul>
+<h2 id="实现范型">实现范型</h2>
+<p>准确的说这里的实现范型指的是在编译器及运行时的支持下，编程语言自动实现范型的功能。由于这些实现方式和运行时的一个概念强相关，这里提前介绍下动态派发(<a href="https://en.wikipedia.org/wiki/Dynamic_dispatch">Dynamic Dispatch</a>)的概念。</p>
+<p>派发目的是让程序运行时知道被执行的函数或方法所在的内存位置。派发分为：</p>
+<ul>
+<li>静态派发(Static dispatch/early binding)：当程序在编译时可以找到执行的函数。C++默认使用的是直接派发，加上<code>virtual</code>修饰符可以改成虚函数表(Vtable)派发。直接派发是最快的，原因是调用指令少，还可通过编译器进行内联等方式的优化。这种派发缺点是不灵活，无法实现一些面向对象所需的技术如多态性。</li>
+<li>动态派发(dynamic dispatch/run-time dispatch/virtual method call/late binding)：当程序在运行时可以找到执行的函数。Java默认使用的是虚函数表(Vtable)派发，通过<code>final</code>修饰符可改成直接派发。虚函数表派发是有动态性的，一个类里会用表来存储类成员函数的指针，子类重写(Override)父类的函数会替代父类的函数，子类添加的函数会被加到这个表里。当程序运行时派发时会从这个表中找到对应的函数，这样就可以实现动态派发。面向对象的编程语言正是靠此机制实现了多态性(Polymorphic)。</li>
+<li>消息机制(message passing)：通过消息传递来调用被执行的函数。这种机制是在运行时可以改变函数的行为，甚至函数可以未实现，也不会引发运行时错误。比如Objective-C中就是通过消息传递来调用被执行的函数，甚至可以在程序运行过程中实现热更新代码。</li>
+</ul>
+<p>以上三种派发方式都有其优劣：比如静态派发的速度是最快的，但并不灵活。而动态派发虽然比较慢，但却可以实现面向对象多态的功能。消息机制是最灵活的方式，但性能也最差。</p>
+<p>前面我们已经看了手工实现范型的多种方式。为了解放程序员，各静态类型检查的编程语言都实现了范型，走的路线却各不相同。如下图：</p>
+<pre><code class="language-markmap" data-lang="markmap"># 实现范型的方式
+## 装箱(Boxing)
+### 类型擦除(Type-erased) `Java`
+### 虚函数表(Vtable)
+#### Embedded vtable `Java`
+### 字典传递(Dictionary passing)
+#### `Go`
+#### Witness table `Swift`
+## 单态化(Monomorphization)
+### 代码生成(Code Generation) `C`
+### 模版(Template) `C++`
+### 蜡印(Stenciling)
+#### GC Shape Stenciling `Go`
+</code></pre><p>大致来说编译器实现范型的两种方式是装箱(Boxing)和单态化(Monomorphization)。</p>
+<h3 id="装箱boxing">装箱(Boxing)</h3>
+<p>装箱的思路是将所有类型包装成统一的类型，有了统一的类型就有了统一的内存模型，这样函数在调用时传递的是统一的数据类型，也就不会出现类型不匹配的问题。这种思路我们在手工实现的方式里就用到了，比如<a href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80type-assertation">类型断言(Type assertation)</a>、<a href="#%E5%8F%8D%E5%B0%84reflection">反射(Reflection)</a>与<a href="#%E6%8E%A5%E5%8F%A3interface">接口(Interface)</a>的实现。</p>
+<h4 id="类型擦除type-erased">类型擦除(Type-erased)</h4>
+<p>对Java来说统一的数据类型就是Object，在编译阶段做完类型检查后就将类型信息通过转换成Object进行擦除，这样只需要生成一份范型函数的副本即可。类型擦除保证了范型函数生成的字节码和非范型函数的是相同的，也符合Java对<u title="这对Java生态来说很重要，旧的代码不需要迁移即可调用新的范型库。但也让这个范型的能力和其他语言相比差了很多，有很多限制（如不支持基本类型）。">兼容性</u>的要求。不过类型擦除也给Java的范型带来了很多的<a href="https://en.wikipedia.org/wiki/Generics_in_Java#Problems_with_type_erasure">限制</a>。</p>
+<h4 id="虚函数表vtable">虚函数表(Vtable)</h4>
+<p>之前在动态派发中介绍了虚函数表，对Java来说通过类型擦除结合虚函数表就实现了范型的效果：运行时同样的数据类型<code>Object</code>，却能调用原始类型的方法。</p>
+<pre><code class="language-mermaid" data-lang="mermaid">classDiagram
+      direction RL
+      VTable0 &lt;|-- Object
+      VTable1 &lt;|-- String
+      VTable0: +equals()
+      VTable0: +hashCode()
+      VTable0: +getClass()
+      VTable0: +toString()
+      VTable1: +equals()
+      VTable1: +hashCode()
+      VTable1: +getClass()
+      VTable1: +toString()
+      VTable1: +length()
+      VTable1: +charAt()
+      class Object {
+          &lt;&lt;Data Layout&gt;&gt;
+          vptr
+          other Object data members
+      }
+      class String {
+          &lt;&lt;Data Layout&gt;&gt;
+          vptr
+          other Object data members
+          other String data members
+      }
+</code></pre><h4 id="字典dictionary">字典(Dictionary)</h4>
+<p>编译器在编译范型函数时只生成了一份函数副本，通过新增一个字典参数来供调用方传递类型参数(Type Parameters)，这种实现方式称为字典传递(Dictionary passing)。</p>
+<p>还记得Go范型的正式名称叫什么吗？类型参数(Type Parameters)！这也暗示了Go实现范型的方式，那就是在编译阶段，通过将类型信息以字典的方式传递给范型函数。当然这个字典不仅包含了类型信息，还包含了此类型的内存操作函数如<code>make/len/new</code>等。</p>
+<p>同样的Swift也通过字典传递了一种名为<code>Witness table</code>的数据结构，这种数据结构包含着类型的大小及类型的内存操作函数（移动、复制与释放）。如下图：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">classDiagram
+      direction RL
+      ValueWitnessTable &lt;|-- Int
+      ReferWitnessTable &lt;|-- MyClass
+      class ValueWitnessTable {
+        &lt;&lt;Vaule witeness Table for trival type, size 4, align 4&gt;&gt;
+        size: 4
+        alignment: 4
+        copy: memcpy
+        move: memcpy
+        destroy: no-op
+      }
+      class ReferWitnessTable {
+        &lt;&lt;Vaule witeness Table for reference type&gt;&gt;
+        size: 8
+        alignment: 8
+        copy: retain
+        move: trivial
+        destroy: release
+      }
+      class Int {
+        &lt;&lt;Metadata&gt;&gt;
+        value witness table
+        reflection information
+      }
+      class MyClass {
+        &lt;&lt;Metadata&gt;&gt;
+        value witness table
+        reflection information
+      }
+</code></pre><p>Swift在编译阶段通过在函数入参中以字典的形式把<code>Witness table</code>注入，达到了以统一的方式处理任何类型，而不用对类型进行装箱操作。这样一来，Swift就可以实现泛型，而且不需要单态化，虽然在运行时有动态查找的开销，但这种表结构节省了分配内存和缓存不一致性的成本。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#fff;font-weight:bold">func</span> getSecond&lt;T&gt;(<span style="color:#fff;font-weight:bold">_</span> pair: Pair&lt;T&gt;) -&gt; T { 
+  <span style="color:#fff;font-weight:bold">return</span> pair.second 
+}
+
+<span style="color:#007f7f">//上述函数编译后变成下面的函数，入参的T就是Witness table的数据结构</span>
+
+void getSecond(opaque *result, opaque *pair, type *T) { 
+  type *PairOfT = get_generic_metadata(&amp;Pair_pattern, T); 
+  const opaque *second = (pair + PairOfT-&gt;fields[<span style="color:#ff0;font-weight:bold">1</span>]); 
+  T-&gt;vwt-&gt;copy_init(result, second, T); 
+  PairOfT-&gt;vwt-&gt;destroy(pair, PairOfT); 
+}
+</code></pre></div><h3 id="单态化monomorphization">单态化(Monomorphization)</h3>
+<p>单态化的思路是自动生成多个类型的范型函数版本，看起来就是一个模版代码生成的过程，但是也需要考虑很多种情况。比如：</p>
+<ul>
+<li>生成所有类型的函数版本：这种最简单，但是会拖慢编译时间，也会让最终的二进制文件变得很庞大。</li>
+<li>生成调用类型的函数版本：这种需要编译器分阶段或多次编译，比如需要遍历寻找调用点来确定最终的类型列表，对于不同包的同名函数的处理等。</li>
+<li>是否支持独立编译：如果调用范型函数的类型与范型函数不在同一个包内，是否能支持范型函数独立的编译。</li>
+</ul>
+<h4 id="代码生成code-generation-1">代码生成(Code Generation)</h4>
+<p>这种技术是编译器不支持范型时可采用的最简单的方案，比如C语言的宏就可以实现代码生成范型函数的功能。不过这种技术实现的范型有很多边界问题和限制，只有在编程语言不支持范型特性的情况下才会使用。</p>
+<h4 id="模版template">模版(Template)</h4>
+<p>C++通过模板实现泛型类、方法和函数，这导致编译器为每个唯一的类型参数集编译了代码的单独副本。这种方法的一个关键优势是没有运行时性能开销，尽管它以增加二进制文件大小和编译时间为代价。</p>
+<h4 id="蜡印stenciling">蜡印(Stenciling)</h4>
+<p>蜡印其实就是模版，也是一种代码生成技术。但Go除了使用字典传递实现装箱外，还采用了<code>GC Shape Stenciling</code>的技术。这种看起来很高级的名词简单来说是为了解决蜡印或模版的问题，因为在蜡印的过程中，编译器会为每一个实例化的类型参数生成一套独立的代码，这种会有一个问题，请看下面的例子：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">type</span> a <span style="color:#fff;font-weight:bold">int</span>
+<span style="color:#fff;font-weight:bold">type</span> b <span style="color:#fff;font-weight:bold">int</span>
+</code></pre></div><p>虽然<code>a</code>和<code>b</code>是两个自定义的类型，但它们底层都是<code>int</code>类型，但编译器会为这两个类型而生成两套函数的版本（如对<code>max</code>范型函数来说会生成<code>max_a</code>与<code>max_b</code>两个函数版本）。这是一种浪费，还会生成庞大的二进制文件。<code>GC Shape</code>这种技术就是通过对类型的底层内存布局（从内存分配器或垃圾回收器的视角）分组，对拥有相同的类型内存布局的类型参数进行蜡印，这样就可以避免生成大量重复的代码。</p>
+<p>Go实现范型的方式混合了字典与蜡印技术，最终的流程如下：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">flowchart LR
+  开始编译 --&gt; 寻找范型函数调用 --&gt; 使用GCShape对类型分组 --&gt; 为类型生成实例化的函数 --&gt; 创建包含类型信息的字典 --&gt; 调用实例化的函数并传递入参与类型字典
+</code></pre><blockquote>
+<p>思考题：为什么Swift采用了和Go类似的字典装箱技术，却并没有混合使用蜡印技术？</p>
+</blockquote>
+<p>总的来说Go在1.18实现范型的方式和Rust挺类似的，如果感兴趣可以看这篇Rust范型的文章：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/ZA-_BARVAWe0Q4eM0lYgwg">透过 Rust 探索系统的本原：泛型</a></li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>对静态类型检查的编程语言，实现范型的方式有很多，如：</p>
+<ul>
+<li>C：通过<strong>宏定义</strong>来实现，简单方案却能满足大部分需求，还有着不错的性能。</li>
+<li>C++：通过<strong>模版</strong>实现，相比C的宏，模版显然更强大灵活。</li>
+<li>Java：通过<strong>类型擦除的装箱技术结合虚函数表</strong>实现，虽然类型擦除导致Java的范型实现不如人意，但这种代价确保了兼容性。</li>
+<li>Swift：通过<strong>字典传入的方式配合Witness table</strong>的实现，这种巧妙的方式在编译速度与运行时速度之间取得了不错的平衡。</li>
+<li>Go：通过<strong>字典传入的方式配合GC Shape的蜡印技术</strong>实现，这种方式在编译速度与运行时速度之间取得了不错的平衡。</li>
+</ul>
+<p>总的来说范型是个和编译技术强相关的概念，由于本文涉及了多种编程语言，文中可能存在一些因笔者能力有限而导致的错误，欢迎读者指正。同时一些编程语言如Go也在不断的改进自己实现范型的机制，所以此文也会存在一些时效性的问题。</p>
+<p>我希望能通过这篇文章帮助读者更好的理解范型，尤其是多种编程语言的实现机制，以及语言设计者在范型设计上的一些权衡利弊的考虑，这样也能有助于我们了解自己日常使用的编程语言，写出更好的代码。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://thume.ca/2019/07/14/a-tour-of-metaprogramming-models-for-generics/">Models of Generics and Metaprogramming: Go, Rust, Swift, D and More - Tristan Hume</a></li>
+<li><a href="https://www.thomasdenney.co.uk/blog/2016/11/13/comparing-the-implementation-of-generics/">Comparing the implementation of generics | Thomas Denney</a></li>
+<li><a href="https://youtu.be/ctS8FzqcRug">2017 LLVM Developers’ Meeting: “Implementing Swift Generics ”</a></li>
+<li><a href="https://github.com/golang/proposal/blob/master/design/generics-implementation-dictionaries-go1.18.md">proposal/generics-implementation-dictionaries-go1.18.md at master · golang/proposal</a></li>
+<li><a href="https://youtu.be/Rvq__lVVmQc">Go 1.18 type parameters | Let&rsquo;s Go generics</a></li>
+<li><a href="https://njkhanh.com/golang-generics-implementation-details-p5f3138353534">Golang Generics Implementation Details - njkhanh</a></li>
+<li><a href="https://lukasatkinson.de/2016/dynamic-vs-static-dispatch/">Dynamic vs. Static Dispatch | Lukas Atkinson</a></li>
+<li><a href="https://book.douban.com/subject/35635836/">Go语言设计与实现（@Draven）</a></li>
+<li><a href="https://colobu.com/2021/08/30/how-is-go-generic-implemented/">Go泛型是怎么实现的?</a></li>
+<li><a href="https://www.cnblogs.com/baitongtong/p/14762857.html">Swift - 派发机制</a></li>
+</ul>
+
+        </div>
+
+        <div id="article-info">
+          
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          更新时间:
+          
+          
+          
+          
+          
+              今日
+          
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/9d45e6d33b0a652f684008eee7dd961b94c77e5f">9d45e6d3</a>
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可</p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        <a href="https://twitter.com/madawei2699"><img style="box-shadow:none !important;width: 200px;" src="https://img.shields.io/twitter/follow/madawei2699?style=social"></a>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/dev/tech-stack-of-side-project/">我的个人项目技术栈</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="sharethis-inline-reaction-buttons"></div>
+<div class="sharethis-inline-share-buttons"></div>
+
+        <div style="color: darkgreen;">
+  <form style="border:1px dashed #ccc;padding:10px 10px;margin: 10px auto;text-align:center;width: 95%;" action="https://tinyletter.com/i365" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/i365', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+    
+    <span>每月一份邮件，分享我对如何构建被动收入的思考、推荐文章及资源，欢迎订阅</span>
+    
+    <p style="margin: 10px 0;"><input type="text" style="width:240px;text-align: center;" name="email" id="tlemail" placeholder="Email"/></p>
+    <input type="hidden" value="1" name="embed"/>
+    
+    <input type="submit" value="订阅" />
+    
+  </form>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://utteranc.es/client.js"
+  repo= "bmpi-dev/bmpi.dev"
+  issue-term="title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script>
+      </footer>
+    </article>
+    <template><span id="control"></span></template>
+    <div id="toast"></div>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div style="margin-bottom: 10px;">
+      <a href="https://wiki.bmpi.dev/">Wiki</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/talk/">Talk</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/invest/">Invest</a>
+      ⚔️
+      <a href="https://tg.bmpi.dev">Think</a>
+    </div>
+    <div>
+      <a href= /affiliate >Affiliate</a>
+      ⚡️
+      <a href= /tool >Tool</a>
+      ⚡️
+      <a href= /link >Link</a>
+    </div>
+  </div>
+  <div class="footer-taxonomy">
+    <a href= /tags style="color: #B36D61;">Tags</a>
+    👈
+    <a href= /categories style="color: #FF8C31;">Categories</a>
+    👉
+    <a href= /series style="color: #519A73;">Series</a>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2022
+    
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154678195-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154678195-1');
+  </script>
+  
+
+  
+  <script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BHuwaXciWicBjh6HQS2tfudv6IYQD11K9u1NUj7nuaEV9NoDT7ns9JjgqyYTflUv-m3TlD7ELY84AHMfgmPXNgU');</script>
+  
+
+  
+
+  
+  <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
+  <script>
+    
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
+    heti.autoSpacing(); 
+    
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js"></script>
+  <script>
+    
+    let mermaidBlocks = document.querySelectorAll('code[data-lang=mermaid]');
+    Array.prototype.forEach.call(mermaidBlocks, function(e) {
+      let text = e.textContent;
+      let mermaidDiv = document.createElement('div');
+      mermaidDiv.className = 'mermaid';
+      mermaidDiv.textContent = text;
+      e.parentElement.replaceWith(mermaidDiv);
+    });
+    window.mermaid.mermaidAPI.initialize(
+    window.mermaidOptions
+      ? window.mermaidOptions
+      : { securityLevel: "loose", theme: "base" });
+  </script>
+  
+
+  
+  <script>
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    var i = 0;
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      markupDiv.id = 'markmap-' + '-' + i;
+      e.parentElement.replaceWith(markupDiv);
+      i++;
+    });
+  </script>
+  
+
+</body>
+
+</html>
