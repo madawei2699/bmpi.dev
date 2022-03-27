@@ -8,7 +8,7 @@
   
   <meta name="author" content="马大伟">
   
-  <meta name="description" content="本文介绍Go/Java/C/C&#43;&#43;/Swift等编程语言是如何实现范型的。">
+  <meta name="description" content="本文介绍Go/Java/C/C&#43;&#43;/Swift等编程语言是如何实现泛型的。">
   
   
   
@@ -19,20 +19,20 @@
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:site" content="@BMPI11">
   <meta name="twitter:creator" content="@madawei2699">
-  <meta name="twitter:title" content="编程语言是如何实现范型的"/>
-  <meta name="twitter:description" content="本文介绍Go/Java/C/C&#43;&#43;/Swift等编程语言是如何实现范型的。"/>
+  <meta name="twitter:title" content="编程语言是如何实现泛型的"/>
+  <meta name="twitter:description" content="本文介绍Go/Java/C/C&#43;&#43;/Swift等编程语言是如何实现泛型的。"/>
   
   
   <meta property="twitter:image" content="https://img.bmpi.dev/8a530b2b-cc37-2b49-7601-cc7362be3d5c.png" />
   
 
   
-  <meta property="og:title" content="编程语言是如何实现范型的" />
-<meta property="og:description" content="本文介绍Go/Java/C/C&#43;&#43;/Swift等编程语言是如何实现范型的。" />
+  <meta property="og:title" content="编程语言是如何实现泛型的" />
+<meta property="og:description" content="本文介绍Go/Java/C/C&#43;&#43;/Swift等编程语言是如何实现泛型的。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-generics/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2022-03-25T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-03-27T00:10:41&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-03-27T11:45:47&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -47,12 +47,12 @@
       
       "@type": "BlogPosting",
       
-      "headline": "编程语言是如何实现范型的",
+      "headline": "编程语言是如何实现泛型的",
       
       "image": "https://img.bmpi.dev/8a530b2b-cc37-2b49-7601-cc7362be3d5c.png",
       
       "datePublished": "2022-03-25T00:00:00Z",
-      "dateModified": "2022-03-27T00:10:41+08:00",
+      "dateModified": "2022-03-27T11:45:47+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -69,8 +69,8 @@
           "url": "https://www.bmpi.dev/images/logo.png"
         }
       },
-      "description": "本文介绍Go/Java/C/C++/Swift等编程语言是如何实现范型的。",
-      "keywords": ["编程语言", "范型", "参数多态", "模版", "参数化类型"]
+      "description": "本文介绍Go/Java/C/C++/Swift等编程语言是如何实现泛型的。",
+      "keywords": ["编程语言", "泛型", "参数多态", "模版", "参数化类型"]
     }
     </script>
 
@@ -80,7 +80,7 @@
   <base href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-generics/">
   
   <title>
-  编程语言是如何实现范型的 · 构建我的被动收入
+  编程语言是如何实现泛型的 · 构建我的被动收入
 </title>
 
   
@@ -236,7 +236,7 @@
     <article>
       <header>
         <div class="post-title heti">
-          <h1 class="title">编程语言是如何实现范型的</h1>
+          <h1 class="title">编程语言是如何实现泛型的</h1>
         </div>
         <div class="post-meta">
           <div class="date">
@@ -255,7 +255,7 @@
               
             </span>
             
-            <span class="post-word-count"> | 6542 字 | </span>
+            <span class="post-word-count"> | 6544 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -267,7 +267,7 @@
   <i class="fas fa-tag"></i>
     <a href="https://www.bmpi.dev/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
       <span class="separator">•</span>
-    <a href="https://www.bmpi.dev/tags/%E8%8C%83%E5%9E%8B/">范型</a>
+    <a href="https://www.bmpi.dev/tags/%E6%B3%9B%E5%9E%8B/">泛型</a>
       <span class="separator">•</span>
     <a href="https://www.bmpi.dev/tags/%E5%8F%82%E6%95%B0%E5%A4%9A%E6%80%81/">参数多态</a>
       <span class="separator">•</span>
@@ -287,8 +287,8 @@
           
           
           <ul>
-<li><a href="#%E4%BB%8Ego%E5%BC%95%E5%85%A5%E8%8C%83%E5%9E%8B%E8%AF%B4%E8%B5%B7">从Go引入范型说起</a></li>
-<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%8C%83%E5%9E%8B">什么是范型</a>
+<li><a href="#%E4%BB%8Ego%E5%BC%95%E5%85%A5%E6%B3%9B%E5%9E%8B%E8%AF%B4%E8%B5%B7">从Go引入泛型说起</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%9B%E5%9E%8B">什么是泛型</a>
 <ul>
 <li><a href="#%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9Ftype-system">类型系统(Type system)</a>
 <ul>
@@ -296,7 +296,7 @@
 <li><a href="#%E7%B1%BB%E5%9E%8B%E6%A3%80%E6%9F%A5">类型检查</a></li>
 </ul>
 </li>
-<li><a href="#%E9%9D%9E%E8%8C%83%E5%9E%8B%E7%AA%81%E7%A0%B4%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%99%90%E5%88%B6">非范型突破类型的限制</a>
+<li><a href="#%E9%9D%9E%E6%B3%9B%E5%9E%8B%E7%AA%81%E7%A0%B4%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%99%90%E5%88%B6">非泛型突破类型的限制</a>
 <ul>
 <li><a href="#%E6%89%8B%E5%B7%A5%E5%A4%8D%E5%88%B6manual-code-duplication">手工复制(Manual code duplication)</a></li>
 <li><a href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90code-generation">代码生成(Code generation)</a></li>
@@ -307,7 +307,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#%E5%AE%9E%E7%8E%B0%E8%8C%83%E5%9E%8B">实现范型</a>
+<li><a href="#%E5%AE%9E%E7%8E%B0%E6%B3%9B%E5%9E%8B">实现泛型</a>
 <ul>
 <li><a href="#%E8%A3%85%E7%AE%B1boxing">装箱(Boxing)</a>
 <ul>
@@ -328,19 +328,19 @@
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
 </ul>
-<h2 id="从go引入范型说起">从Go引入范型说起</h2>
-<p><u title="2022/03/16">本月</u>，Go 1.18版本发布，一个大的变化是引入了正式的<a href="https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md">范型支持</a>。此时距离Go的第一次<a href="https://go.googlesource.com/proposal/+/master/design/15292/2010-06-type-functions.md">范型提案</a>已经过去了快<span class="heti-em">十二年</span>了！而花费如此长的时间引入的特性却引发了很多讨论与质疑。如在Reddit和Hacker News上这两个热门的帖子：</p>
+<h2 id="从go引入泛型说起">从Go引入泛型说起</h2>
+<p><u title="2022/03/16">本月</u>，Go 1.18版本发布，一个大的变化是引入了正式的<a href="https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md">泛型支持</a>。此时距离Go的第一次<a href="https://go.googlesource.com/proposal/+/master/design/15292/2010-06-type-functions.md">泛型提案</a>已经过去了快<span class="heti-em">十二年</span>了！而花费如此长的时间引入的特性却引发了很多讨论与质疑。如在Reddit和Hacker News上这两个热门的帖子：</p>
 <ul>
 <li><a href="https://www.reddit.com/r/golang/comments/teu78z/118_is_released/">1.18 is released : golang</a></li>
 <li><a href="https://news.ycombinator.com/item?id=30688208">Go 1.18 | Hacker News</a></li>
 </ul>
-<p>Go为什么要引入范型？又为什么会花费如此长的时间？带着这个疑问让我们来看看编程语言中范型的魔力吧。</p>
-<h2 id="什么是范型">什么是范型</h2>
-<p>先看维基百科中对范型编程（<a href="https://en.wikipedia.org/wiki/Generic_programming">Generic programming</a>）的定义：</p>
+<p>Go为什么要引入泛型？又为什么会花费如此长的时间？带着这个疑问让我们来看看编程语言中泛型的魔力吧。</p>
+<h2 id="什么是泛型">什么是泛型</h2>
+<p>先看维基百科中对泛型编程（<a href="https://en.wikipedia.org/wiki/Generic_programming">Generic programming</a>）的定义：</p>
 <blockquote>
 <p>Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. This approach permits writing common functions or types that differ only in the set of types on which they operate when used, thus reducing duplication.</p>
 </blockquote>
-<p>如果上面这个非常学术化的定义让你无法理解的话，让我们先从一个简单的例子来说明范型的作用。如下是个简单的C语言函数：</p>
+<p>如果上面这个非常学术化的定义让你无法理解的话，让我们先从一个简单的例子来说明泛型的作用。如下是个简单的C语言函数：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#fff;font-weight:bold">int</span> compare(<span style="color:#fff;font-weight:bold">int</span> a, <span style="color:#fff;font-weight:bold">int</span> b) {
     <span style="color:#fff;font-weight:bold">if</span> (a &lt; b) {
         <span style="color:#fff;font-weight:bold">return</span> -<span style="color:#ff0;font-weight:bold">1</span>;
@@ -370,7 +370,7 @@
 <h4 id="类型检查">类型检查</h4>
 <ul>
 <li>强弱类型：如果一个编程语言有着严格的类型检查限制，那么可以说其是一个强类型的编程语言，反之则为弱类型。强类型的编程语言可以在类型不匹配时发生错误（编译与运行时都可能发生），而弱类型的语言在类型不匹配时会做隐式的类型转换，这会导致无法预料的运行时错误。强类型的拥护者认为严格类型检查可以带来类型安全、内存安全的好处，这方面的极致就是Rust为首的语言，而弱类型的拥护者认为过分夸大了类型和内存不安全带来的缺陷。</li>
-<li>静动检查：<q>动态类型一时爽，重构代码火葬场</q>。开发过大型项目的人一定会对这句话深有体会。动态与静态的区别在于类型检查发生的阶段，动态是在编译阶段，静态是在运行时。但实际上一些编程语言是混合的类型检查，比如在C#中开发者可以通过关键字来标识此数据类型检查是动态还是静态的。不少静态类型检查的编程语言也有动态的类型检查，比如Java中既有编译阶段的静态类型检查，又有运行时的动态类型检查（如父类与子类的<u title="Downcasting与Liskov Substitution principle">互相转换</u>）。</li>
+<li>静动检查：<q>动态类型一时爽，重构代码火葬场</q>。开发过大型项目的人一定会对这句话深有体会。动态与静态的区别在于类型检查发生的阶段，动态是在运行时阶段，静态是在编译阶段。但实际上一些编程语言是混合的类型检查，比如在C#中开发者可以通过关键字来标识此数据类型检查是动态还是静态的。不少静态类型检查的编程语言也有动态的类型检查，比如Java中既有编译阶段的静态类型检查，又有运行时的动态类型检查（如父类与子类的<u title="Downcasting与Liskov Substitution principle">互相转换</u>）。</li>
 <li>类型推导：一些编程语言虽然不需要开发者显示定义数据类型，但编译器能够做类型推导，帮助开发者定义数据类型，如Scala与Kotlin。</li>
 </ul>
 <pre><code class="language-markmap" data-lang="markmap"># 类型检查
@@ -413,11 +413,11 @@
 </code></pre><blockquote>
 <p>思考一个问题：对一个强类型的编程语言来说，类型检查发生在编译阶段还是运行时分别有哪些<u title="我的理解是编译阶段会导致编译时间过长，而运行时会导致其运行性能变差">差异</u>？</p>
 </blockquote>
-<h3 id="非范型突破类型的限制">非范型突破类型的限制</h3>
+<h3 id="非泛型突破类型的限制">非泛型突破类型的限制</h3>
 <p>由于类型检查对静态类型检查编程语言的限制，导致我们在实现一些算法时，由于这些算法对不同数据类型有着相同的处理流程，如果我们要实现一套针对所有类型都有效的算法库，就需要编写大量的重复代码。</p>
-<p>在编程语言没有范型特性的黑暗年代，存在这么一些古老的方法来解决对范型的需求。</p>
+<p>在编程语言没有泛型特性的黑暗年代，存在这么一些古老的方法来解决对泛型的需求。</p>
 <h4 id="手工复制manual-code-duplication">手工复制(Manual code duplication)</h4>
-<p>任何语言都可以通过这种最简单的方式手动实现范型的效果，除了对程序员很不友好之外，这种方法有以下一些优点：</p>
+<p>任何语言都可以通过这种最简单的方式手动实现泛型的效果，除了对程序员很不友好之外，这种方法有以下一些优点：</p>
 <ul>
 <li>产生的重复代码相比自动生成的代码要少。</li>
 <li>相比运行时的方法性能要高。因直接调用函数开销比通过运行时做额外的类型检查要低。</li>
@@ -447,7 +447,7 @@
 </ul>
 <h4 id="接口interface">接口(Interface)</h4>
 <p><a href="https://en.wikipedia.org/wiki/SOLID">SOLID</a>设计模式中的依赖倒置原则（Dependency Inversion Principle）要求软件接口在设计中应该依赖抽象而不是具体。比如在Java中方法参数可以设计成一个<code>interface</code>，之后可以针对此接口进行不同的实现，这样的设计也更容易写出可测试的代码。</p>
-<p>根据这个指导原则，我们也可以用此实现范型。</p>
+<p>根据这个指导原则，我们也可以用此实现泛型。</p>
 <pre><code class="language-mermaid" data-lang="mermaid">classDiagram
       Comparable &lt;|-- ComparableInt
       Comparable &lt;|-- ComparableFloat
@@ -466,13 +466,13 @@
           +less()
           +elem()
       }
-</code></pre><p>这样在我们的范型方法里只需要依赖<code>Comparable</code>接口，调用方可以传入具体的类型如<code>ComparableInt</code>或<code>ComparableFloat</code>。</p>
+</code></pre><p>这样在我们的泛型方法里只需要依赖<code>Comparable</code>接口，调用方可以传入具体的类型如<code>ComparableInt</code>或<code>ComparableFloat</code>。</p>
 <p>这种方法有以下一些问题：</p>
 <ul>
 <li>可能需要定义很多数据类型。</li>
 </ul>
-<h2 id="实现范型">实现范型</h2>
-<p>准确的说这里的实现范型指的是在编译器及运行时的支持下，编程语言自动实现范型的功能。由于这些实现方式和运行时的一个概念强相关，这里提前介绍下动态派发(<a href="https://en.wikipedia.org/wiki/Dynamic_dispatch">Dynamic Dispatch</a>)的概念。</p>
+<h2 id="实现泛型">实现泛型</h2>
+<p>准确的说这里的实现泛型指的是在编译器及运行时的支持下，编程语言自动实现泛型的功能。由于这些实现方式和运行时的一个概念强相关，这里提前介绍下动态派发(<a href="https://en.wikipedia.org/wiki/Dynamic_dispatch">Dynamic Dispatch</a>)的概念。</p>
 <p>派发目的是让程序运行时知道被执行的函数或方法所在的内存位置。派发分为：</p>
 <ul>
 <li>静态派发(Static dispatch/early binding)：当程序在编译时可以找到执行的函数。C++默认使用的是直接派发，加上<code>virtual</code>修饰符可以改成虚函数表(Vtable)派发。直接派发是最快的，原因是调用指令少，还可通过编译器进行内联等方式的优化。这种派发缺点是不灵活，无法实现一些面向对象所需的技术如多态性。</li>
@@ -480,8 +480,8 @@
 <li>消息机制(message passing)：通过消息传递来调用被执行的函数。这种机制是在运行时可以改变函数的行为，甚至函数可以未实现，也不会引发运行时错误。比如Objective-C中就是通过消息传递来调用被执行的函数，甚至可以在程序运行过程中实现热更新代码。</li>
 </ul>
 <p>以上三种派发方式都有其优劣：比如静态派发的速度是最快的，但并不灵活。而动态派发虽然比较慢，但却可以实现面向对象多态的功能。消息机制是最灵活的方式，但性能也最差。</p>
-<p>前面我们已经看了手工实现范型的多种方式。为了解放程序员，各静态类型检查的编程语言都实现了范型，走的路线却各不相同。如下图：</p>
-<pre><code class="language-markmap" data-lang="markmap"># 实现范型的方式
+<p>前面我们已经看了手工实现泛型的多种方式。为了解放程序员，各静态类型检查的编程语言都实现了泛型，走的路线却各不相同。如下图：</p>
+<pre><code class="language-markmap" data-lang="markmap"># 实现泛型的方式
 ## 装箱(Boxing)
 ### 类型擦除(Type-erased) `Java`
 ### 虚函数表(Vtable)
@@ -494,13 +494,13 @@
 ### 模版(Template) `C++`
 ### 蜡印(Stenciling)
 #### GC Shape Stenciling `Go`
-</code></pre><p>大致来说编译器实现范型的两种方式是装箱(Boxing)和单态化(Monomorphization)。</p>
+</code></pre><p>大致来说编译器实现泛型的两种方式是装箱(Boxing)和单态化(Monomorphization)。</p>
 <h3 id="装箱boxing">装箱(Boxing)</h3>
 <p>装箱的思路是将所有类型包装成统一的类型，有了统一的类型就有了统一的内存模型，这样函数在调用时传递的是统一的数据类型，也就不会出现类型不匹配的问题。这种思路我们在手工实现的方式里就用到了，比如<a href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80type-assertation">类型断言(Type assertation)</a>、<a href="#%E5%8F%8D%E5%B0%84reflection">反射(Reflection)</a>与<a href="#%E6%8E%A5%E5%8F%A3interface">接口(Interface)</a>的实现。</p>
 <h4 id="类型擦除type-erased">类型擦除(Type-erased)</h4>
-<p>对Java来说统一的数据类型就是Object，在编译阶段做完类型检查后就将类型信息通过转换成Object进行擦除，这样只需要生成一份范型函数的副本即可。类型擦除保证了范型函数生成的字节码和非范型函数的是相同的，也符合Java对<u title="这对Java生态来说很重要，旧的代码不需要迁移即可调用新的范型库。但也让这个范型的能力和其他语言相比差了很多，有很多限制（如不支持基本类型）。">兼容性</u>的要求。不过类型擦除也给Java的范型带来了很多的<a href="https://en.wikipedia.org/wiki/Generics_in_Java#Problems_with_type_erasure">限制</a>。</p>
+<p>对Java来说统一的数据类型就是Object，在编译阶段做完类型检查后就将类型信息通过转换成Object进行擦除，这样只需要生成一份泛型函数的副本即可。类型擦除保证了泛型函数生成的字节码和非泛型函数的是相同的，也符合Java对<u title="这对Java生态来说很重要，旧的代码不需要迁移即可调用新的泛型库。但也让这个泛型的能力和其他语言相比差了很多，有很多限制（如不支持基本类型）。">兼容性</u>的要求。不过类型擦除也给Java的泛型带来了很多的<a href="https://en.wikipedia.org/wiki/Generics_in_Java#Problems_with_type_erasure">限制</a>。</p>
 <h4 id="虚函数表vtable">虚函数表(Vtable)</h4>
-<p>之前在动态派发中介绍了虚函数表，对Java来说通过类型擦除结合虚函数表就实现了范型的效果：运行时同样的数据类型<code>Object</code>，却能调用原始类型的方法。</p>
+<p>之前在动态派发中介绍了虚函数表，对Java来说通过类型擦除结合虚函数表就实现了泛型的效果：运行时同样的数据类型<code>Object</code>，却能调用原始类型的方法。</p>
 <pre><code class="language-mermaid" data-lang="mermaid">classDiagram
       direction RL
       VTable0 &lt;|-- Object
@@ -527,8 +527,8 @@
           other String data members
       }
 </code></pre><h4 id="字典dictionary">字典(Dictionary)</h4>
-<p>编译器在编译范型函数时只生成了一份函数副本，通过新增一个字典参数来供调用方传递类型参数(Type Parameters)，这种实现方式称为字典传递(Dictionary passing)。</p>
-<p>还记得Go范型的正式名称叫什么吗？类型参数(Type Parameters)！这也暗示了Go实现范型的方式，那就是在编译阶段，通过将类型信息以字典的方式传递给范型函数。当然这个字典不仅包含了类型信息，还包含了此类型的内存操作函数如<code>make/len/new</code>等。</p>
+<p>编译器在编译泛型函数时只生成了一份函数副本，通过新增一个字典参数来供调用方传递类型参数(Type Parameters)，这种实现方式称为字典传递(Dictionary passing)。</p>
+<p>还记得Go泛型的正式名称叫什么吗？类型参数(Type Parameters)！这也暗示了Go实现泛型的方式，那就是在编译阶段，通过将类型信息以字典的方式传递给泛型函数。当然这个字典不仅包含了类型信息，还包含了此类型的内存操作函数如<code>make/len/new</code>等。</p>
 <p>同样的Swift也通过字典传递了一种名为<code>Witness table</code>的数据结构，这种数据结构包含着类型的大小及类型的内存操作函数（移动、复制与释放）。如下图：</p>
 <pre><code class="language-mermaid" data-lang="mermaid">classDiagram
       direction RL
@@ -574,42 +574,42 @@ void getSecond(opaque *result, opaque *pair, type *T) {
   PairOfT-&gt;vwt-&gt;destroy(pair, PairOfT); 
 }
 </code></pre></div><h3 id="单态化monomorphization">单态化(Monomorphization)</h3>
-<p>单态化的思路是自动生成多个类型的范型函数版本，看起来就是一个模版代码生成的过程，但是也需要考虑很多种情况。比如：</p>
+<p>单态化的思路是自动生成多个类型的泛型函数版本，看起来就是一个模版代码生成的过程，但是也需要考虑很多种情况。比如：</p>
 <ul>
 <li>生成所有类型的函数版本：这种最简单，但是会拖慢编译时间，也会让最终的二进制文件变得很庞大。</li>
 <li>生成调用类型的函数版本：这种需要编译器分阶段或多次编译，比如需要遍历寻找调用点来确定最终的类型列表，对于不同包的同名函数的处理等。</li>
-<li>是否支持独立编译：如果调用范型函数的类型与范型函数不在同一个包内，是否能支持范型函数独立的编译。</li>
+<li>是否支持独立编译：如果调用泛型函数的类型与泛型函数不在同一个包内，是否能支持泛型函数独立的编译。</li>
 </ul>
 <h4 id="代码生成code-generation-1">代码生成(Code Generation)</h4>
-<p>这种技术是编译器不支持范型时可采用的最简单的方案，比如C语言的宏就可以实现代码生成范型函数的功能。不过这种技术实现的范型有很多边界问题和限制，只有在编程语言不支持范型特性的情况下才会使用。</p>
+<p>这种技术是编译器不支持泛型时可采用的最简单的方案，比如C语言的宏就可以实现代码生成泛型函数的功能。不过这种技术实现的泛型有很多边界问题和限制，只有在编程语言不支持泛型特性的情况下才会使用。</p>
 <h4 id="模版template">模版(Template)</h4>
 <p>C++通过模板实现泛型类、方法和函数，这导致编译器为每个唯一的类型参数集编译了代码的单独副本。这种方法的一个关键优势是没有运行时性能开销，尽管它以增加二进制文件大小和编译时间为代价。</p>
 <h4 id="蜡印stenciling">蜡印(Stenciling)</h4>
 <p>蜡印其实就是模版，也是一种代码生成技术。但Go除了使用字典传递实现装箱外，还采用了<code>GC Shape Stenciling</code>的技术。这种看起来很高级的名词简单来说是为了解决蜡印或模版的问题，因为在蜡印的过程中，编译器会为每一个实例化的类型参数生成一套独立的代码，这种会有一个问题，请看下面的例子：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">type</span> a <span style="color:#fff;font-weight:bold">int</span>
 <span style="color:#fff;font-weight:bold">type</span> b <span style="color:#fff;font-weight:bold">int</span>
-</code></pre></div><p>虽然<code>a</code>和<code>b</code>是两个自定义的类型，但它们底层都是<code>int</code>类型，但编译器会为这两个类型而生成两套函数的版本（如对<code>max</code>范型函数来说会生成<code>max_a</code>与<code>max_b</code>两个函数版本）。这是一种浪费，还会生成庞大的二进制文件。<code>GC Shape</code>这种技术就是通过对类型的底层内存布局（从内存分配器或垃圾回收器的视角）分组，对拥有相同的类型内存布局的类型参数进行蜡印，这样就可以避免生成大量重复的代码。</p>
-<p>Go实现范型的方式混合了字典与蜡印技术，最终的流程如下：</p>
+</code></pre></div><p>虽然<code>a</code>和<code>b</code>是两个自定义的类型，但它们底层都是<code>int</code>类型，但编译器会为这两个类型而生成两套函数的版本（如对<code>max</code>泛型函数来说会生成<code>max_a</code>与<code>max_b</code>两个函数版本）。这是一种浪费，还会生成庞大的二进制文件。<code>GC Shape</code>这种技术就是通过对类型的底层内存布局（从内存分配器或垃圾回收器的视角）分组，对拥有相同的类型内存布局的类型参数进行蜡印，这样就可以避免生成大量重复的代码。</p>
+<p>Go实现泛型的方式混合了字典与蜡印技术，最终的流程如下：</p>
 <pre><code class="language-mermaid" data-lang="mermaid">flowchart LR
-  开始编译 --&gt; 寻找范型函数调用 --&gt; 使用GCShape对类型分组 --&gt; 为类型生成实例化的函数 --&gt; 创建包含类型信息的字典 --&gt; 调用实例化的函数并传递入参与类型字典
+  开始编译 --&gt; 寻找泛型函数调用 --&gt; 使用GCShape对类型分组 --&gt; 为类型生成实例化的函数 --&gt; 创建包含类型信息的字典 --&gt; 调用实例化的函数并传递入参与类型字典
 </code></pre><blockquote>
 <p>思考题：为什么Swift采用了和Go类似的字典装箱技术，却并没有混合使用蜡印技术？</p>
 </blockquote>
-<p>总的来说Go在1.18实现范型的方式和Rust挺类似的，如果感兴趣可以看这篇Rust范型的文章：</p>
+<p>总的来说Go在1.18实现泛型的方式和Rust挺类似的，如果感兴趣可以看这篇Rust泛型的文章：</p>
 <ul>
 <li><a href="https://mp.weixin.qq.com/s/ZA-_BARVAWe0Q4eM0lYgwg">透过 Rust 探索系统的本原：泛型</a></li>
 </ul>
 <h2 id="总结">总结</h2>
-<p>对静态类型检查的编程语言，实现范型的方式有很多，如：</p>
+<p>对静态类型检查的编程语言，实现泛型的方式有很多，如：</p>
 <ul>
 <li>C：通过<strong>宏定义</strong>来实现，简单方案却能满足大部分需求，还有着不错的性能。</li>
 <li>C++：通过<strong>模版</strong>实现，相比C的宏，模版显然更强大灵活。</li>
-<li>Java：通过<strong>类型擦除的装箱技术结合虚函数表</strong>实现，虽然类型擦除导致Java的范型实现不如人意，但这种代价确保了兼容性。</li>
+<li>Java：通过<strong>类型擦除的装箱技术结合虚函数表</strong>实现，虽然类型擦除导致Java的泛型实现不如人意，但这种代价确保了兼容性。</li>
 <li>Swift：通过<strong>字典传入的方式配合Witness table</strong>的实现，这种巧妙的方式在编译速度与运行时速度之间取得了不错的平衡。</li>
 <li>Go：通过<strong>字典传入的方式配合GC Shape的蜡印技术</strong>实现，这种方式在编译速度与运行时速度之间取得了不错的平衡。</li>
 </ul>
-<p>总的来说范型是个和编译技术强相关的概念，由于本文涉及了多种编程语言，文中可能存在一些因笔者能力有限而导致的错误，欢迎读者指正。同时一些编程语言如Go也在不断的改进自己实现范型的机制，所以此文也会存在一些时效性的问题。</p>
-<p>我希望能通过这篇文章帮助读者更好的理解范型，尤其是多种编程语言的实现机制，以及语言设计者在范型设计上的一些权衡利弊的考虑，这样也能有助于我们了解自己日常使用的编程语言，写出更好的代码。</p>
+<p>总的来说泛型是个和编译技术强相关的概念，由于本文涉及了多种编程语言，文中可能存在一些因笔者能力有限而导致的错误，欢迎读者指正。同时一些编程语言如Go也在不断的改进自己实现泛型的机制，所以此文也会存在一些时效性的问题。</p>
+<p>我希望能通过这篇文章帮助读者更好的理解泛型，尤其是多种编程语言的实现机制，以及语言设计者在泛型设计上的一些权衡利弊的考虑，这样也能有助于我们了解自己日常使用的编程语言，写出更好的代码。</p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><a href="https://thume.ca/2019/07/14/a-tour-of-metaprogramming-models-for-generics/">Models of Generics and Metaprogramming: Go, Rust, Swift, D and More - Tristan Hume</a></li>
@@ -638,7 +638,7 @@ void getSecond(opaque *result, opaque *pair, type *T) {
               今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/9d45e6d33b0a652f684008eee7dd961b94c77e5f">9d45e6d3</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/37d0b9ee4f64e254eec1ae28bbd6e207f17d3fe9">37d0b9ee</a>
         </div>
         
 

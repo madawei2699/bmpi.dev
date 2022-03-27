@@ -1,8 +1,8 @@
 {
     "latest-post": {
         "url": "/dev/deep-in-program-language/how-to-implement-generics/",
-        "title": "编程语言是如何实现范型的",
-        "description": "本文介绍Go/Java/C/C++/Swift等编程语言是如何实现范型的。",
+        "title": "编程语言是如何实现泛型的",
+        "description": "本文介绍Go/Java/C/C++/Swift等编程语言是如何实现泛型的。",
         "publish-date": "2022-03-25 00:00:00 +0000 UTC"
     }
 }
