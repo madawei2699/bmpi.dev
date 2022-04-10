@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>编程语言是如何实现并发的之操作系统篇</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/os-scheduling/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/deep-in-program-language\/",
+          "name": "deep-in-program-language"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/deep-in-program-language\/how-to-implement-concurrency\/",
+          "name": "how-to-implement-concurrency"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  7 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/deep-in-program-language\/how-to-implement-concurrency\/os-scheduling\/",
+          "name": "os-scheduling"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>编程语言是如何实现并发的之操作系统篇</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2022-04-10T00:00:00Z'>
+                2022-04-10
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#%E4%BB%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E8%AF%B4%E8%B5%B7">从操作系统运行程序说起</a></li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%AF%E6%8C%81">操作系统的支持</a>
+<ul>
+<li><a href="#%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6process-scheduling">进程调度(Process Scheduling)</a></li>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8Bthread-model">线程模型(Thread Model)</a></li>
+<li><a href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2context-switching">上下文切换(Context switching)</a></li>
+<li><a href="#%E7%94%A8%E6%88%B7%E7%BA%BF%E7%A8%8Buser-level-thread">用户线程(User-level Thread)</a></li>
+<li><a href="#io%E6%A8%A1%E5%9E%8Bio-model">I/O模型(I/O Model)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B9%B6%E5%8F%91%E8%BF%98%E6%98%AF%E5%B9%B6%E8%A1%8C">并发还是并行</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+
+<div class="notices info" ><p>这篇文章处于草稿状态，如果你对本文有任何意见，请留言评论，感谢！</p>
+</div>
+<h2 id="从操作系统运行程序说起">从操作系统运行程序说起</h2>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/8ceed233-b0d8-f20c-b59d-cd916308d00b.png" alt="" layout="fill"></amp-img></div></p>
+<p>这是一台拥有2个虚拟CPU核心的<u title="无特别说明，本文都是基于Linux内核的设计而介绍的">Linux</u>服务器的<u title="htop">系统监控界面</u>。其中红框①中<code>PPID</code>代表父进程ID，<code>PID</code>代表进程或线程ID。红框②中<code>CPU</code>代表当前线程运行的CPU核心编号。红框③中是程序的运行命令，其中绿色代表的是<u title="之所以这里都用进程PID来代表，是因为从内核的视角看，用户态的线程其实是内核态的轻量级进程（LWP），这和普通进程在内核态是没有区别的，它们在内核中又叫做内核线程">线程，白色为进程</u>。</p>
+<p>以PID为1375的进程为例，它的父进程为1086，可以通过PPID不断追溯至PID为1的<u title="Linux系统启动后，PID为0的进程创建了1号进程的init和2号进程的kthreadd，其中init负责用户线程的创建，kthreadd负责内核线程的创建"><code>init</code></u>进程。从这可以看出Linux通过<u title="通过复制PCB的数据来创建进程"><code>fork()</code></u>的系统调用不断的复制出大量的需要被执行的程序进程。</p>
+<p>进程是操作系统进行<u title="如文件、I/O设备等系统资源">资源分配</u>的一个独立单位，而实际在CPU运行调度的是线程。以进程1375为例，它又创建了7个线程，如下：</p>
+<pre><code class="language-ascii" data-lang="ascii">$ ls /proc/1375/task/
+1375  1429  1430  1431  1432  1433  1488
+$ ls /proc/1375/task/1429
+arch_status  cgroup      cmdline             cpuset   exe     gid_map  loginuid  mountinfo  ns         oom_score      patch_state  root       sessionid  smaps_rollup  statm    uid_map
+attr         children    comm                cwd      fd      io       maps      mounts     numa_maps  oom_score_adj  personality  sched      setgroups  stack         status   wchan
+auxv         clear_refs  cpu_resctrl_groups  environ  fdinfo  limits   mem       net        oom_adj    pagemap        projid_map   schedstat  smaps      stat          syscall
+</code></pre><p>其中线程1430与1432是调度运行在2号CPU核心上的，如果持续观察这个监控界面，会发现同一个线程会不定时在两个CPU核心之间来回切换，这实际正是操作系统对这些线程在多核CPU上进行抢占式调度。</p>
+<p>操作系统之所以能用有限的CPU核心去运行非常多的程序，并且用户感觉这些程序是在同时运行。一方面操作系统（内核）可以通过一些方法实现并发处理任务（程序），另外一方面得益于多个CPU核心，操作系统还可以并行处理任务。</p>
+<p>本文并不是研究操作系统是怎么实现并发的，但在搞清楚编程语言是怎么实现并发处理之前，很有必要提前对操作系统支持并发提供的一些重要特性做一个全面的介绍。操作系统为了支持多任务处理，提供了进程管理与调度，同时在I/O上提供了多种访问文件或网络的系统调用方式。</p>
+<h2 id="操作系统的支持">操作系统的支持</h2>
+<pre><code class="language-markmap" data-lang="markmap"># 操作系统
+## 进程(Process)
+### 执行方式
+- 用户线程(User-level Thread)
+  - Coroutine
+    - Goroutine
+    - Verticle
+  - Erlang process
+  - Green Thread(Java)
+- 内核线程(Kernel-level Thread)
+- Fiber
+### 调度方式
+- 抢占式(Preemptive)
+- 协作式(Cooperative)
+## I/O
+- 同步(Synchronous)
+  - 阻塞式(Blocking)
+  - 非阻塞式(Non-blocking)
+  - 多路复用(Multiplexing)
+  - 信号驱动(Signal Driven)
+- 异步(Asynchronous)
+</code></pre><figure >
+    <a href="https://docs.oracle.com/cd/E19620-01/805-3024/6j2sumi1a/index.html">
+        <div class="fixed-container"><amp-img src="https://img.bmpi.dev/681c60d0-0ad4-23ec-a736-21048c875406.png" class="contain" alt="线程和轻量级进程(Threads and Lightweight Processes)" layout="fill"></amp-img></div>
+    </a>
+    
+    <figcaption>
+        <p>
+        线程和轻量级进程(Threads and Lightweight Processes)
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+<ul>
+<li>轻量级进程(Light-weight process)：用户线程和内核线程之间的接口。也可被认为是一个调度用户线程执行的虚拟CPU。当用户线程发出系统调用时，运行该线程的LWP调用内核并保持绑定到该线程至少直到系统调用完成。当LWP在内核中运行时，代表用户线程执行系统调用时，它会运行一个内核线程。因此，每个LWP都与一个内核线程相关联。只有在用户线程完全由轻量级进程构成时，才可以说轻量级进程就是线程。</li>
+<li>线程(Thread)
+<ul>
+<li>用户线程(User-level Thread)
+<ul>
+<li>协程(Coroutines - Cooperative User-Level Threads)：应用程序通过线程库自行实现的<strong>协作式调度</strong>的用户线程，代表性的有Go语言的Goroutine，Vert.x框架中的Verticle。</li>
+<li>Erlang process：Erlang VM(BEAM)管理的用户线程，与协程相比的优势在于它可以做到<strong>公平调度</strong>，不会出现协程中某个用户线程占用过多CPU周期。</li>
+<li>绿色线程(Green Thread)：类似于协程，是由<u title="版本1.1中引入，之后又在1.3中移除">Java JDK实现</u>的。</li>
+</ul>
+</li>
+<li>内核线程(Kernel-level Thread)：操作系统内核管理的<strong>抢占式调度</strong>的线程。</li>
+<li>纤程(Fibers)：操作系统内核管理的<strong>协作式调度</strong>的线程。</li>
+</ul>
+</li>
+</ul>
+<p>从上可以看出，除了Erlang比较特殊的设计出了类似操作系统内核的抢占式调度，用户线程大多是编程语言通过线程库实现的协作式调度。</p>
+<h3 id="进程调度process-scheduling">进程调度(Process Scheduling)</h3>
+<p>进程调度主要有抢占式调度和协作式调度两种：抢占式(Preemptive)与协作式(Cooperative)。</p>
+<figure >
+    <a href="https://www.slanglabs.in/blog/python-microservices-01-tornado-asyncio-lint-test-coverage-project-setup">
+        <div class="fixed-container"><amp-img src="https://img.bmpi.dev/4791979c-5de3-508a-f900-f9c7ed2bb55e.png" class="contain" alt="抢占式与协作式任务调度(Preemptive Multitasking vs. Cooperative Multitasking)" layout="fill"></amp-img></div>
+    </a>
+    
+    <figcaption>
+        <p>
+        抢占式与协作式任务调度(Preemptive Multitasking vs. Cooperative Multitasking)
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+<p>抢占式调度是指操作系统在每个时间片到来时，会把当前运行的进程放到CPU上，然后CPU会根据进程的优先级和时间片长度，选择一个进程来运行。在抢占式模型中，任务可以被强行挂起。这是由CPU上的中断引发的，这些中断可能来自外部系统，也可能来自系统时钟。</p>
+<p>协作式调度也叫非抢占式调度，是指当一个进程正在CPU上执行时，即使有某个更为重要或紧迫的进程进入就绪队列，仍然让正在执行的进程继续执行，直到该进程完成或发生某种事件而进入阻塞状态时，才把CPU分配给更为重要或紧迫的进程。与抢占式调度的区别在于任务不会被强行挂起，除非其主动出让控制权给其他任务。</p>
+<h3 id="线程模型thread-model">线程模型(Thread Model)</h3>
+<p>可能有人会疑惑，用户线程与内核线程是一一映射的吗？我们知道轻量级进程（LWP）与内核线程是一一映射的，但用户线程可以是很轻量级的，比如多个用户线程对应一个轻量级进程这种情况。总的来说有以下三种线程模型：</p>
+<figure >
+    <a href="https://medium.com/swlh/different-threading-models-why-i-feel-goroutine-is-better-though-with-some-limitations-b73863ba4dae">
+        <div class="fixed-container"><amp-img src="https://img.bmpi.dev/421a024f-d6ac-fa2a-b8f1-b1e9e1b98d0c.png" class="contain" alt="不同的线程模型(Different Threading Models)" layout="fill"></amp-img></div>
+    </a>
+    
+    <figcaption>
+        <p>
+        不同的线程模型(Different Threading Models)
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+<ul>
+<li>1:1 (kernel-level threading)：用户线程与轻量级进程是一一映射的，即用户线程与内核线程是一一映射的。这是最简单的模型。在这种语境下，用户线程中的线程就是我们常规意义上说的线程，当程序创建一个线程时，也会通过轻量级进程在内核中创建一个内核线程。早期的Linux内核的线程就是这种模型。</li>
+<li>N:1 (user-level threading)：多个用户线程与一个轻量级进程映射。在这种模型中，内核线程只有一个，在应用内部不存在内核线程切换的开销，程序的并发能力是很高的。但一旦某个用户线程被阻塞（发生网络或文件I/O系统调用），其他用户线程也会被阻塞。另外应用也无法从多核CPU上获得更好的并发性。</li>
+<li>M:N (hybrid threading)：多个用户线程与多个轻量级进程映射。这种模型最为复杂，但也是最强大的线程模型，不仅有着很好的并发能力，同时还能获得多核CPU的处理能力。Erlang VM和Go的运行时就是这类线程调度模型。</li>
+</ul>
+<p>应用程序为什么会费劲的设计出用户线程？操作系统提供的内核线程不香吗？</p>
+<p>因为操作系统内核的线程切换是重量级的操作，需要进行上下文切换，而这会很耗时。</p>
+<h3 id="上下文切换context-switching">上下文切换(Context switching)</h3>
+<p>在进程间切换需要消耗一定的CPU时间进行相关的状态管理工作，包括寄存器和内存映射的保存与读取、更新各种内部的表等。比如在Linux内核中，上下文切换需要涉及寄存器、栈指针、程序计数器的切换。</p>
+<p>在这篇<a href="https://blog.tsunanet.net/2010/11/how-long-does-it-take-to-make-context.html">How long does it take to make a context switch?</a>中可以看到一个结论是：</p>
+<blockquote>
+<p>Context switching is expensive. My rule of thumb is that it&rsquo;ll cost you about 30µs of CPU overhead&hellip;Applications that create too many threads that are constantly fighting for CPU time (such as Apache&rsquo;s HTTPd or many Java applications) can waste considerable amounts of CPU cycles just to switch back and forth between different threads&hellip;I think the sweet spot for optimal CPU use is to have the same number of worker threads as there are hardware threads, and write code in an asynchronous / non-blocking fashion.</p>
+</blockquote>
+<p>因为线程调度的上下文切换成本非常昂贵，所以最佳的做法是应用程序使用和CPU核心相同的线程数，这样每个线程都能充分利用CPU核心的时间片，避免了应用内部多个线程的上下文切换开销。</p>
+<p>但这样并没有解决应用程序的并发需求，应用程序有很多场景需要同时处理很多任务，这些任务的执行都需要多线程的支持，如果不能随意的生成内核线程去解决多任务处理的需求，还有什么办法呢？</p>
+<h3 id="用户线程user-level-thread">用户线程(User-level Thread)</h3>
+<p>那就是通过生成更轻量级的用户线程来解决。因为用户线程大多是采用协作调度的方式实现，本质上是<strong>同步执行在与CPU核心数量相同的内核线程上的</strong>，不仅能极大的降低了上下文开销，还能最佳的利用多核CPU的计算能力。</p>
+<p>用户线程的轻量除了提现在调度的上下文切换开销上，还体现了在对内存的需求上。如果要在4核心4GB内存的笔记本电脑中测试同时生成100万个线程的话，不同编程语言对内存的需求：</p>
+<ul>
+<li>Elixir: 0.48 GB (Process)</li>
+<li>Golang: 1.91 GB (Goroutine)</li>
+<li>Java: 977 GB (Thread)</li>
+<li>PHP: 6836 GB (Laravel Request)</li>
+</ul>
+<blockquote>
+<p>数据来源：Programming Elixir<sup>Chapter 15</sup></p>
+</blockquote>
+<p>用户线程的轻量级让应用程序能够极大的提高并发性，但也会有一些问题，比如某个用户线程中发起一个网络请求导致底层的内核线程被阻塞，因为多个用户线程在共用这个内核线程，最终导致大量的用户线程被阻塞。</p>
+<p>解决这个问题需要了解操作系统的I/O模型。</p>
+<h3 id="io模型io-model">I/O模型(I/O Model)</h3>
+<p>当应用程序需要访问文件或者网络资源时，应用内的线程将会花费大量的时间来等待数据的到来。如下图所示：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/e56407b8-7e10-59eb-208a-feafc399440c.png" alt="" layout="fill"></amp-img></div></p>
+<p>如果把CPU处理计算机指令的速度类比成高铁的速度，那线程一次文件或网络的访问将会和蜗牛一样慢，这相当于你在高铁上让蜗牛去帮你取快递，对CPU来说是巨大的浪费。现代操作系统已经提供了多种I/O模型来解决这个问题。常见的I/O模型有：</p>
+<figure >
+    <a href="https://www.4e00.com/blog/linux/2017/09/29/unix-network-programming-charpter-6-io-multiplexing.html">
+        <div class="fixed-container"><amp-img src="https://img.bmpi.dev/93d0d0d8-7a37-625c-2b75-cd2af7931493.png" class="contain" alt="五种I/O模型对比(Comparison of the five I/O models)" layout="fill"></amp-img></div>
+    </a>
+    
+    <figcaption>
+        <p>
+        五种I/O模型对比(Comparison of the five I/O models)
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+<ul>
+<li>同步(Synchronous)
+<ul>
+<li>阻塞式(Blocking)：同步阻塞式是最常见的I/O模型。线程在访问文件或网络资源时，会因发起了内核的系统调用被挂起，内核会检查文件描述符是否可读，当文件描述符中存在数据时，内核会将数据复制给线程并交回控制权，线程从挂起状态切换成可运行状态等到内核调度运行。</li>
+<li>非阻塞式(Non-blocking)：线程在访问文件或网络资源时，因文件描述符是非阻塞的，线程在检查数据是否可读的阶段是非阻塞的。此模型需要线程不停的通过轮询(polling)的方式检查文件描述符是否可读。但之所以属于同步I/O，是因为在最终读取数据(<code>recvfrom</code>)时需要从内核态中拷贝数据(<code>recvfrom</code>)到用户态中，这个阶段线程依旧被阻塞住无法处理其他指令。</li>
+<li>多路复用(Multiplexing)：和非阻塞式的区别在于，多路复用模型的线程可以同时访问多个文件描述符，这很适合构建高并发的Web服务器或中间件。但此模型会在检查文件描述符时会被阻塞(<u title="Linux中比select好的系统调用是epoll，因后者只会返回有数据的文件描述符，前者会把所有的文件描述符返回，如果文件描述符很多，每次遍历一遍的时间开销也很高"><code>select</code></u>)，并且在读取数据(<code>recvfrom</code>)时也会被阻塞。和多路复用模型相似的是使用多线程和阻塞I/O，但当线程产生很多时会消耗大量的内存资源以及线程调度产生的上下文切换开销，所以多路复用模型一般只使用单线程模型。</li>
+<li>信号驱动(Signal Driven)：和上面的模型区别在于，之前的模型都需要线程主动轮询，信号驱动模型需要监听内核的<code>SIGIO</code>事件，通过注册事件处理函数，之后线程可以继续执行其他任务。当数据可读时，线程处理函数会以阻塞的方式从内核态复制数据到用户态。</li>
+</ul>
+</li>
+<li>异步(Asynchronous)：此模型和同步模型最大的区别在于，不仅在获取文件操作符时不会被阻塞，数据从内核态复制到用户态也不会被阻塞，因为内核会去做这个复制数据的工作，线程只需要在回调函数中使用数据即可。</li>
+</ul>
+<p>关于I/O模型的更多细节，请参考：</p>
+<ul>
+<li><a href="https://rickhw.github.io/2019/02/27/ComputerScience/IO-Models/">Study Notes - I/O Models</a></li>
+<li><a href="https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch06lev1sec2.html">I/O Models</a></li>
+</ul>
+<blockquote>
+<p>思考一个问题：如果用户线程不可避免的需要被挂起进（如访问共享资源但没有获得锁）而导致内核线程被挂起，如何调度可以让此内核线程上的用户线程可以继续运行？</p>
+</blockquote>
+<h2 id="并发还是并行">并发还是并行</h2>
+<p>前面讨论了很多和I/O相关的概念，并不是所有的计算机任务都是和I/O相关(I/O bound)的，比如很多算法都需要CPU做大量的计算，这时候CPU核心根本不会因为等待外部资源而空转，如果在这种计算密集型(CPU bound)任务中使用多线程技术，那么就会产生大量的线程上下文切换开销，最终会导致处理任务的性能变慢。</p>
+<p>在这篇<a href="https://www.ardanlabs.com/blog/2018/12/scheduling-in-go-part3.html">Scheduling In Go : Part III - Concurrency</a>文章中，作者对比了两种类型工作在并发和并行模式的对比，并提供了一些经验总结：</p>
+<ul>
+<li>CPU密集型(CPU bound)：如果任务是CPU密集型的，那么使用并行的方式来解决问题，这样可以最大的利用CPU核心的算力。如果使用并发的方式去处理，反而会增加<u title="需要合理的分解任务">复杂度</u>。</li>
+<li>I/O密集型(I/O bound)：如果任务时I/O密集型的，那么使用并发的方式来解决问题，这样可以提升单个CPU核心的吞吐量(Throughput)。</li>
+</ul>
+<blockquote>
+<p>并发(Concurrent)与并行(Parallel)：并发是指同时处理(dealing with)很多事情，并行是指同时做(doing)很多事情。并行是并发的特殊情况，只能在计算机多核环境中实现。</p>
+<p>同步(Sync)与异步(Async)：一种编程模型。区别在于同步是可预测(predictable)的，异步是不可预测(unpredictable)的编程模型。</p>
+</blockquote>
+<h2 id="总结">总结</h2>
+<p>本篇从操作系统的视角介绍编程语言实现并发的底层概念，包括进程调度与I/O模型等。下篇开始介绍常见的并发模型。</p>
+<pre><code class="language-markmap" data-lang="markmap">## 并发模型
+### 多进程(Multiprocessing)
+- Fork
+### 多线程(Multithreaded)
+- Lock
+- STM
+- Fork/Join
+### 函数并行(Functional Parallelism)
+- Async/Await
+### 事件驱动(Event Driven)
+- Reactive
+  - ReactiveX
+  - Project Reactor
+- Event Loop 
+  with Multiplexing
+  - Nginx
+  - V8
+  - Redis
+  - Twisted(Python)
+  - Netty(Java)
+- CSP
+  - Go/Channel
+- Actor
+  - Erlang/OTP
+  - Akka
+  - Vert.x
+### Lambda
+</code></pre>
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

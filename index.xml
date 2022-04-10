@@ -6,7 +6,21 @@
     <description>Recent content on 构建我的被动收入</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 25 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编程语言是如何实现并发的之操作系统篇</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/os-scheduling/</link>
+      <pubDate>Sun, 10 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/os-scheduling/</guid>
+      <description>本文从操作系统的视角介绍编程语言实现并发的底层概念，包括进程调度与I/O模型等。</description>
+    </item>
+    
     <item>
       <title>编程语言是如何实现泛型的</title>
       
