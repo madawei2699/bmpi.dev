@@ -313,7 +313,14 @@ amp-img.contain img {
         <blockquote>
 <p>本文属于<a href="https://www.bmpi.dev/series/%E9%9B%B6%E6%88%90%E6%9C%AC%E6%90%AD%E5%BB%BA%E7%8E%B0%E4%BB%A3%E5%8D%9A%E5%AE%A2%E6%8C%87%E5%8D%97/">零成本搭建现代博客指南</a>系列第五篇【优化国内访问速度篇】。</p>
 </blockquote>
-<p><strong><span style="color:red">更新自2020年12月29日</span></strong></p>
+<p><strong><span style="color:red">更新自2022年04月15日</span></strong></p>
+<p>最近将博客部署的CDN从Vercel更换为<a href="https://pages.cloudflare.com/">Cloudflare Pages</a>，从测试的结果以及用户的反馈看，国内访问的速度更快了（如果你所在的地区响应很慢，请留言告知）。</p>
+<p>现在的博客架构图如下：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/d867de0f-a759-96db-ca45-e3f614344f12.png" alt="" layout="fill"></amp-img></div></p>
+<p>这个旧图并没有体现出网站部署到Cloudflare Pages，目前Vercel唯一的作用是将<code>bmpi.dev</code>的请求301重定向到<code>www.bmpi.dev</code>（域名在AWS Route53上管理），实际静态页面是从Cloudflare Pages获取的。</p>
+<p>所以用户的请求实际上是这样的：</p>
+<pre><code class="language-ascci" data-lang="ascci">Browser -&gt; bmpi.dev -&gt; AWS Route53 -&gt; Vercel -&gt; www.bmpi.dev -&gt; Cloudflare Pages
+</code></pre><p><strong><span style="color:red">更新自2020年12月29日</span></strong></p>
 <hr>
 <p>在V2EX发了该篇文章的帖子<a href="https://www.v2ex.com/t/739279">优化托管在国外博客的国内访问速度</a>后，一些回复中多次提到使用 <a href="https://vercel.com/">vercel</a> 部署的站在国内访问速度很快，而阿里云会产生如下问题：</p>
 <blockquote>
