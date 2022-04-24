@@ -3,13 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2022-04-16T11:15:28+08:00</lastmod>
+    <loc>https://www.bmpi.dev/tags/etf/</loc>
+    <lastmod>2022-04-24T15:58:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/series/%E6%8A%95%E8%B5%84%E5%AE%9E%E8%AF%81/</loc>
+    <lastmod>2022-04-24T15:58:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
+    <lastmod>2022-04-24T15:58:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%AE%9A%E6%8A%95/</loc>
+    <lastmod>2022-04-24T15:58:24+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2022-04-16T11:15:28+08:00</lastmod>
+    <lastmod>2022-04-24T15:58:24+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -20,6 +35,21 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/money/passive-income-protfolio/2022q1/</loc>
+    <lastmod>2022-04-24T15:58:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/categories/%E8%A2%AB%E5%8A%A8%E6%94%B6%E5%85%A5%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
+    <lastmod>2022-04-24T15:58:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2022-04-16T11:15:28+08:00</lastmod>
   </url>
 
   <url>
@@ -133,33 +163,8 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/etf/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/money/passive-income-protfolio/2021q4/</loc>
     <lastmod>2022-01-01T21:03:37+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/series/%E6%8A%95%E8%B5%84%E5%AE%9E%E8%AF%81/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%AE%9A%E6%8A%95/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/categories/%E8%A2%AB%E5%8A%A8%E6%94%B6%E5%85%A5%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
   </url>
 
   <url>
