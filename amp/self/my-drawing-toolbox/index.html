@@ -528,6 +528,26 @@ skinparam monochrome true
 <p>这类工具都可以绘制各类你想要的配图，唯一限制的就是你的想象力了。</p>
 <p>在线绘图工具如 <a href="https://docs.google.com/drawings">Google Drawings</a> 的多人实时协作功能更是团队协作绘图利器。这篇<a href="https://ericfu.me/timestamp-in-distributed-trans/#more">《分布式事务中的时间戳》</a>中的配图就是用 Google Drawings 绘制的。</p>
 <h2 id="代码绘图">代码绘图</h2>
+<h3 id="plotly">Plotly</h3>
+<p><a href="https://plotly.com/javascript/">Plotly</a>是一个基于<a href="https://d3js.org/">d3.js</a>与<a href="https://github.com/stackgl">stack.gl</a>的图形库，它可以用来绘制各种类型的图表，比如散点图、折线图、饼图、柱状图甚至3D图形等。</p>
+
+
+<div id="/self/my-drawing-toolbox/scatter3d.json" class="plotly" style="height:400px"></div>
+<script>
+Plotly.d3.json("/self/my-drawing-toolbox/scatter3d.json", function(err, fig) {
+    Plotly.plot('\/self\/my-drawing-toolbox\/scatter3d.json', fig.data, fig.layout, {responsive: true});
+});
+</script>
+<blockquote>
+<ul>
+<li>
+<p>与Hugo的集成可参考这篇<a href="https://mertbakir.gitlab.io/hugo/plotly-with-hugo/">Plotly &amp; Hugo</a>。</p>
+</li>
+<li>
+<p>如果是想基于各类数据库做商业数据分析的话还可以使用如<a href="https://github.com/metabase/metabase">Metabase</a>这类开源方案。</p>
+</li>
+</ul>
+</blockquote>
 <h3 id="python-jupyter-notebook">Python Jupyter Notebook</h3>
 <p>我用这个绘制一些数据分析的图，比如这种：</p>
 <p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/19c641b7-581b-1952-2ed3-d2e23f3d807e.png" alt="" layout="fill"></amp-img></div></p>
