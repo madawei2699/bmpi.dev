@@ -3,6 +3,96 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/en/dev/glimpse-of-web3/</loc>
+    <lastmod>2022-05-13T17:47:55+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/dev/glimpse-of-web3/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/dev/glimpse-of-web3/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/bitcoin/</loc>
+    <lastmod>2022-05-13T17:47:55+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/blockchain/</loc>
+    <lastmod>2022-05-13T17:47:55+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/</loc>
+    <lastmod>2022-05-13T17:47:55+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/dao/</loc>
+    <lastmod>2022-05-13T17:47:55+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/dao/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/dao/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/decentralization/</loc>
+    <lastmod>2022-05-13T17:47:55+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/eth/</loc>
+    <lastmod>2022-05-13T17:47:55+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/eth/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/eth/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/web3/</loc>
+    <lastmod>2022-05-13T17:47:55+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/web3/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/web3/"
+                />
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/en/dev/guide-to-k8s-cloud-native/</loc>
     <lastmod>2021-11-20T12:27:51+08:00</lastmod>
     <xhtml:link
@@ -14,21 +104,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://www.bmpi.dev/en/dev/guide-to-k8s-cloud-native/"
-                />
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/en/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/"
                 />
   </url>
 

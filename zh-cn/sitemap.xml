@@ -105,16 +105,46 @@
   <url>
     <loc>https://www.bmpi.dev/tags/dao/</loc>
     <lastmod>2022-02-18T14:55:58+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/dao/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/dao/"
+                />
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/eth/</loc>
     <lastmod>2022-05-01T09:28:45+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/eth/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/eth/"
+                />
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/web3/</loc>
     <lastmod>2022-02-18T14:55:58+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/web3/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/web3/"
+                />
   </url>
 
   <url>
@@ -140,6 +170,16 @@
   <url>
     <loc>https://www.bmpi.dev/dev/glimpse-of-web3/</loc>
     <lastmod>2022-02-18T14:55:58+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/dev/glimpse-of-web3/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/dev/glimpse-of-web3/"
+                />
   </url>
 
   <url>

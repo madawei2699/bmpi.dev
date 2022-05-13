@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/en/dev/guide-to-k8s-cloud-native/",
-        "title": "Adventures in K8S Cloud Native App Development",
-        "description": "This post shares my experience in using K8S cloud native technology to develop side projects.",
-        "publish-date": "2021-11-11 00:00:00 +0000 UTC"
+        "url": "/en/dev/glimpse-of-web3/",
+        "title": "A Glimpse of Web3",
+        "description": "This post introduces Web3 from the perspective of Web2.",
+        "publish-date": "2022-05-13 00:00:00 +0000 UTC"
     }
 }
