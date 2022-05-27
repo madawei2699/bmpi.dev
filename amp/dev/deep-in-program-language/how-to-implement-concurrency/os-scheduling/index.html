@@ -318,7 +318,9 @@ amp-img.contain img {
   <i class="fas fa-tag"></i>
     <a href="https://www.bmpi.dev/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
       <span class="separator">•</span>
-    <a href="https://www.bmpi.dev/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a></div>
+    <a href="https://www.bmpi.dev/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/">线程安全</a></div>
 
         </div>
       </header>
@@ -529,35 +531,8 @@ auxv         clear_refs  cpu_resctrl_groups  environ  fdinfo  limits   mem      
 <p>同步(Sync)与异步(Async)：一种编程模型。区别在于同步是可预测(predictable)的，异步是不可预测(unpredictable)的编程模型。</p>
 </blockquote>
 <h2 id="总结">总结</h2>
-<p>本篇从操作系统的视角介绍编程语言实现并发的底层概念，包括进程调度与I/O模型等。下篇开始介绍常见的并发模型。</p>
-<pre><code class="language-markmap" data-lang="markmap">## 并发模型
-### 多进程(Multiprocessing)
-- Fork
-### 多线程(Multithreaded)
-- Lock
-- STM
-- Fork/Join
-### 函数并行(Functional Parallelism)
-- Async/Await
-### 事件驱动(Event Driven)
-- Reactive
-  - ReactiveX
-  - Project Reactor
-- Event Loop 
-  with Multiplexing
-  - Nginx
-  - V8
-  - Redis
-  - Twisted(Python)
-  - Netty(Java)
-- CSP
-  - Go/Channel
-- Actor
-  - Erlang/OTP
-  - Akka
-  - Vert.x
-### Lambda
-</code></pre>
+<p>本篇从操作系统的视角介绍编程语言实现并发的底层概念，包括进程调度与I/O模型等。下篇开始介绍常见的<a href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/">并发模型</a>。</p>
+
 <div class="notices info" ><p><strong>更新日志</strong></br>
 2022-04-15：根据此<a href="https://www.v2ex.com/t/846178#reply20">讨论帖</a>修改更新。（感谢<a href="https://www.v2ex.com/member/lxdlam">@lxdlam</a>）</br>
 2022-04-10：初稿发布。</p>

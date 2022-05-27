@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="马大伟">
+  
+  <meta name="description" content="本文介绍多种并发模型包括锁、STM、CSP、Actor及I/O多路复用等，还有对Java、Go、Erlang/Elixir与Clojure等对这些模型的实现的介绍。">
+  
+  
+  
+  <meta name="keywords" content="life,dev,trade,passive income,money,developer,Self-management,IT technology,investment transactions">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="编程语言是如何实现并发的之并发模型篇"/>
+  <meta name="twitter:description" content="本文介绍多种并发模型包括锁、STM、CSP、Actor及I/O多路复用等，还有对Java、Go、Erlang/Elixir与Clojure等对这些模型的实现的介绍。"/>
+  
+  
+  <meta name="twitter:image" content="https://www.bmpi.dev/images/bg2.png">
+  
+
+  
+  <meta property="og:title" content="编程语言是如何实现并发的之并发模型篇" />
+<meta property="og:description" content="本文介绍多种并发模型包括锁、STM、CSP、Actor及I/O多路复用等，还有对Java、Go、Erlang/Elixir与Clojure等对这些模型的实现的介绍。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2022-05-27T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-05-27T23:55:39&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+
+
+  
+  <meta name="og:image" content="https://www.bmpi.dev/images/bg2.png">
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "编程语言是如何实现并发的之并发模型篇",
+      
+      "image": "https://www.bmpi.dev/images/logo.png",
+      
+      "datePublished": "2022-05-27T00:00:00Z",
+      "dateModified": "2022-05-27T23:55:39+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "马大伟"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/logo.png"
+        }
+      },
+      "description": "本文介绍多种并发模型包括锁、STM、CSP、Actor及I/O多路复用等，还有对Java、Go、Erlang/Elixir与Clojure等对这些模型的实现的介绍。",
+      "keywords": ["编程语言", "并发编程", "线程安全"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/">
+  
+  <title>
+  编程语言是如何实现并发的之并发模型篇 · 构建我的被动收入
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/">
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.0ab5a4f968dc066eb532458d96a556d15842feb10ca133c4d01018cd619b8d9c.css" integrity="sha256-CrWk&#43;WjcBm61MkWNlqVW0VhC/rEMoTPE0BAYzWGbjZw="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.a2fdc25deb82b741f3a807e38508c2dea269fc900c2b37ee8af380d97ea4d7a8.css" integrity="sha256-ov3CXeuCt0HzqAfjhQjC3qJp/JAMKzfuivOA2X6k16g="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.1.2/dist/index.min.js"></script>
+  <style>
+    code[class*="language-"], pre[class*="language-"] {
+      text-shadow: none !important;
+      font-size: initial !important;
+    }
+  </style>
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/flying-pages.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bmpi.dev/images/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bmpi.dev/images/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bmpi.dev/images/ico/favicon-16x16.png">
+  <link rel="manifest" href="https://www.bmpi.dev/images/ico/site.webmanifest">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/amp/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/" title="构建我的被动收入" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="preload" href="https://www.bmpi.dev/scss/tagcloud.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css"></noscript>
+
+  
+  <script defer src='https://platform-api.sharethis.com/js/sharethis.js#property=600a642fe0b9b900111a7f08&product=inline-share-buttons'></script>
+  <link rel="stylesheet" href="//unpkg.com/heti/umd/heti.min.css">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css"></noscript>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  
+
+  
+
+  
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://www.bmpi.dev/">
+      构建我的被动收入
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/about/">关于</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/self/">学习</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/dev/">技术</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/money/">投资</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/project/">个人项目</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/goal/">长期目标</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/en/">English</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title heti">
+          <h1 class="title">编程语言是如何实现并发的之并发模型篇</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2022-05-27T00:00:00Z'>
+                2022-05-27
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              26:52
+              
+            </span>
+            
+            <span class="post-word-count"> | 5911 字 | </span>
+            <span id="post-views"></span> 次阅读
+            
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">并发编程</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/">线程安全</a></div>
+
+        </div>
+      </header>
+
+      
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          
+<div class="notices info" ><p><strong>初稿征集意见中</strong></br>
+本文处于初稿状态，可能存在很多错误，如果你有不同的看法，欢迎不吝赐教，先行感谢！</p>
+</div>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B">常见的并发模型</a>
+<ul>
+<li><a href="#%E5%A4%9A%E8%BF%9B%E7%A8%8Bmultiprocessing">多进程(Multiprocessing)</a></li>
+<li><a href="#%E5%A4%9A%E7%BA%BF%E7%A8%8Bmultithreaded">多线程(Multithreaded)</a>
+<ul>
+<li><a href="#%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E9%80%9A%E4%BF%A1shared-memory-communication">共享内存通信(Shared memory communication)</a>
+<ul>
+<li><a href="#lock">Lock</a></li>
+<li><a href="#stm">STM</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E9%80%9A%E4%BF%A1message-passing-communication">消息传递通信(Message passing communication)</a>
+<ul>
+<li><a href="#csp">CSP</a></li>
+<li><a href="#actor">Actor</a>
+<ul>
+<li><a href="#vertx">Vert.x</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8event-driven">事件驱动(Event Driven)</a>
+<ul>
+<li><a href="#event-loop-with-multiplexing">Event Loop with Multiplexing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AE%9E%E7%8E%B0">编程语言的实现</a>
+<ul>
+<li><a href="#java">Java</a></li>
+<li><a href="#go">Go</a></li>
+<li><a href="#erlangelixir">Erlang/Elixir</a></li>
+<li><a href="#clojure">Clojure</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B5%B0%E5%90%91%E9%AB%98%E5%B9%B6%E5%8F%91">走向高并发</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+<p>在<a href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/os-scheduling/">操作系统篇</a>中介绍了从操作系统的视角中不同编程语言实现并发的共同的一些概念。本文将会介绍常见的并发模型及不同编程语言是如何实现的。</p>
+<h2 id="常见的并发模型">常见的并发模型</h2>
+<pre><code class="language-markmap" data-lang="markmap">## 并发模型
+### 多进程(Multiprocessing)
+- Fork
+### 多线程(Multithreaded)
+- 共享内存通信
+  - Lock
+    - Java/Go/Clojure/C
+  - STM
+    - Clojure
+- 消息传递通信
+  - CSP
+    - Go
+  - Actor
+    - Erlang/OTP
+    - Scala/Akka
+    - Vert.x    
+### 事件驱动(Event Driven)
+- Event Loop 
+  with Multiplexing
+  - Nginx
+  - Node.js
+  - Redis
+  - Twisted(Python)
+  - Netty(Java)
+</code></pre><h3 id="多进程multiprocessing">多进程(Multiprocessing)</h3>
+<p>多进程模型是利用操作系统的进程模型来实现并发的。典型的是Apache Web Server，每个用户请求接入的时候都会创建一个进程，这样应用就可以同时支持多个用户。</p>
+<p><img data-src="https://img.bmpi.dev/d6496d0b-af3e-4924-e8e0-8f06820451a6.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>如上图，在Linux系统中PID为1的名为P0的进程通过<code>fork()</code>系统调用创建了3个子进程。在多处理器的系统中，这些子进程可以并行运行在多个处理器上，当然这些进程也可以被同一个处理器通过<a href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/os-scheduling/#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2context-switching">上下文切换</a>进行CPU分时共享。</p>
+<p>在图中M1、M2与M3都代表内存资源，在多进程中如果不同进程想共享内存中的数据必须通过<a href="https://en.wikipedia.org/wiki/Inter-process_communication">进程间通信</a>的方式来实现。</p>
+<p>多进程模型的缺点在于创建进程的开销非常高，如果进程过多会很快消耗光系统资源，并且上下文切换在进程间的开销也很高，在<a href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/os-scheduling/#%E5%B9%B6%E5%8F%91%E8%BF%98%E6%98%AF%E5%B9%B6%E8%A1%8C">I/O密集型任务</a>的应用中，此并发模型很难满足需求。</p>
+<h3 id="多线程multithreaded">多线程(Multithreaded)</h3>
+<p>在操作系统的视角看，比如Linux中，在进程中创建线程是通过<code>clone()</code>系统调用来实现，这和创建子进程的区别不大。线程与进程的区别在于同一个进程内的线程共享着进程分配的资源，线程不被分配资源，只是操作系统调度执行任务的抽象的最小单元。</p>
+<p>比如下图中，PID为10的进程P0通过<code>clone()</code>系统调用创建了3个线程，这些线程都可以访问进程分配的内存资源M0。</p>
+<p><img data-src="https://img.bmpi.dev/87f3c616-04ed-8fd3-0f9d-dfa2fc203e73.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>我们也可以通过<code>htop</code>命令在Linux中看到这些进程及线程的运行信息，比如下图中所示PID为339328进程（它是一个基于JVM的Clojure应用）及其创建的线程信息：</p>
+<p><img data-src="https://img.bmpi.dev/35c6a45e-c9d0-b4d4-f4b6-70c526610df8.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>也可以通过<code>/proc</code>文件系统获取进程创建的线程的信息：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ ls /proc/339328/task/
+<span style="color:#ff0;font-weight:bold">1043773</span>  <span style="color:#ff0;font-weight:bold">339340</span>  <span style="color:#ff0;font-weight:bold">339342</span>  <span style="color:#ff0;font-weight:bold">339344</span>  <span style="color:#ff0;font-weight:bold">339346</span>  <span style="color:#ff0;font-weight:bold">339348</span>  <span style="color:#ff0;font-weight:bold">339350</span>  <span style="color:#ff0;font-weight:bold">339357</span>  <span style="color:#ff0;font-weight:bold">339359</span>  <span style="color:#ff0;font-weight:bold">339361</span>  <span style="color:#ff0;font-weight:bold">339363</span>  <span style="color:#ff0;font-weight:bold">339367</span>  <span style="color:#ff0;font-weight:bold">339380</span>  <span style="color:#ff0;font-weight:bold">339388</span>  <span style="color:#ff0;font-weight:bold">788478</span>  <span style="color:#ff0;font-weight:bold">975443</span>  <span style="color:#ff0;font-weight:bold">991563</span>
+<span style="color:#ff0;font-weight:bold">339328</span>   <span style="color:#ff0;font-weight:bold">339341</span>  <span style="color:#ff0;font-weight:bold">339343</span>  <span style="color:#ff0;font-weight:bold">339345</span>  <span style="color:#ff0;font-weight:bold">339347</span>  <span style="color:#ff0;font-weight:bold">339349</span>  <span style="color:#ff0;font-weight:bold">339353</span>  <span style="color:#ff0;font-weight:bold">339358</span>  <span style="color:#ff0;font-weight:bold">339360</span>  <span style="color:#ff0;font-weight:bold">339362</span>  <span style="color:#ff0;font-weight:bold">339364</span>  <span style="color:#ff0;font-weight:bold">339378</span>  <span style="color:#ff0;font-weight:bold">339382</span>  <span style="color:#ff0;font-weight:bold">424498</span>  <span style="color:#ff0;font-weight:bold">975439</span>  <span style="color:#ff0;font-weight:bold">991561</span>
+</code></pre></div><p>相比多进程模型来说，因为线程比进程创建的系统开销小，所以多线程模型是很常见的实现并发的方式。但此种模型存在一个必须解决的问题，就是线程间通信的问题。但线程为什么要通信呢？那是因为大部分业务系统问题的解空间在用冯·诺伊曼计算机去实现的时候，都存在并发计算时线程间数据共享的问题。要数据共享有两种方式：</p>
+<ul>
+<li>共享内存通信(Shared memory communication)：不同线程间可以访问同一内存地址空间，并可修改此地址空间的数据。</li>
+<li>消息传递通信(Message passing communication)：不同线程间只能通过收发消息的形式去通信，数据只能被拥有它的线程修改。</li>
+</ul>
+<h4 id="共享内存通信shared-memory-communication">共享内存通信(Shared memory communication)</h4>
+<p><img data-src="https://img.bmpi.dev/bc2a2ffb-9c1c-3113-eb77-ee0bfaf1d253.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>因为线程间共享内存资源，在访问临界区域时会出现数据竞争（发生竞态条件，即代码的行为取决于各操作的时序）的问题，如果不能正确的处理此问题，程序会产生线程不安全的问题，最终导致程序崩溃或无法正常运行。</p>
+<p>解决竞态条件的方式是对数据进行同步(<a href="https://en.wikipedia.org/wiki/Synchronization_(computer_science)">Synchronize</a>)访问。要实现同步访问常见的方式有：</p>
+<ul>
+<li>锁(<a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Lock</a>)：通过锁定临界区域来实现同步访问。</li>
+<li>信号量(<a href="https://en.wikipedia.org/wiki/Semaphore_(programming)">Semaphores</a>)：可以通过信号量的增减控制对一个或多个线程对临界区域的访问。</li>
+<li>同步屏障(<a href="https://en.wikipedia.org/wiki/Barrier_(computer_science)">Barriers</a>)：通过设置屏障控制不同线程执行周期实现同步访问。</li>
+</ul>
+<h5 id="lock">Lock</h5>
+<p><img data-src="https://img.bmpi.dev/7cd4cc16-8de5-5a78-7105-74dd19bde16c.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>锁(Lock)，也叫互斥量(Mutex)。线程在操作临界区域资源时，需要先获取锁，然后才能操作，当操作完成后，需要释放锁。此模型利用了对底层硬件运行过程的形式化，这让其即简单又复杂。从锁的种类就可以看出来其复杂性：</p>
+<ul>
+<li>自旋锁</li>
+<li>递归锁</li>
+<li>乐观/悲观锁</li>
+<li>公平/非公平锁</li>
+<li>独享/共享锁</li>
+<li>偏向/轻量级/重量锁</li>
+<li>分段锁</li>
+</ul>
+<p>对锁的使用不当还会产生死锁问题(<a href="https://en.wikipedia.org/wiki/Deadlock">Deadlock</a>)。在实际开发过程中，能不用锁就不用锁，可以考虑使用一些轻量级的替代方案如原子变量(Atomic)，或<a href="https://www.baeldung.com/lock-free-programming">无锁(lock-free)非阻塞(non-blocking)算法</a>实现的数据结构。</p>
+<blockquote>
+<p>原子变量的更新为何是线程安全的？因为CPU提供了CAS(<a href="https://en.wikipedia.org/wiki/Compare-and-swap">Compare-and-swap</a>)的指令来更新原子变量，这条指令从硬件上确保了此操作是线程安全的。</p>
+</blockquote>
+<p>此模型的优点：</p>
+<ul>
+<li>大多编程语言都支持此模型；</li>
+<li>贴近硬件架构，使用得当性能很高；</li>
+<li>是其他并发模型的基础；</li>
+</ul>
+<p>此模型的缺点：</p>
+<ul>
+<li>不支持分布式内存模型，只解决了进程内的并发同步；</li>
+<li>不好调试与测试，想用好不容易；</li>
+</ul>
+<h5 id="stm">STM</h5>
+<p>锁模型是一种悲观的并发同步机制，但实际上冲突发生的概率并不高，所以乐观的并发同步机制性能更好。STM(Software transactional memory)就是这样一种用来代替锁模型的乐观并发同步机制。STM是用软件的方式去实现事务内存(Transactional memory)，而事务内存中的事务(Transactional)正是关系型数据库中的概念，一个事务必须满足<a href="https://en.wikipedia.org/wiki/ACID">ACID</a>性质，如下图所示：</p>
+<p><img data-src="https://img.bmpi.dev/b65bf712-79f1-5de5-f9d7-e330fa9d2d5f.png" alt="" class="lazyload" loading="lazy"/></p>
+<blockquote>
+<p>在t0时刻，T1、T2与T3线程同时获取要操作的同一数据的快照v0，之后T1线程在自己的事务里于t1时刻提交自己的写入值v1，之后T2线程在自己的事务里提交自己的写入值v2，由于在提交时刻会做冲突检测，此事务发现操作数据的快照已经发生变化，于是回滚自己的提交。之后开启新的事务重新获取最新的快照v1，并于时刻t2成功提交自己的写入值v2。在线程v3中由于是读取操作，并没有数据修改，所以在它的事务中使用的是最早的快照v0。</p>
+</blockquote>
+<p>在STM的事务中尽可能避免副作用，比如在事务中去修改原子变量这种操作，可能会导致事务回滚失败。</p>
+<p>STM实现的一种方式是基于MVCC(<a href="http://en.wikipedia.org/wiki/Multiversion_concurrency_control">Multiversion concurrency control</a>)。很多编程语言提供了这种并发模型的实现。</p>
+<p>此模型的优点：</p>
+<ul>
+<li>相比锁模型更简单；</li>
+<li>大部分情况下更高效；</li>
+</ul>
+<p>此模型的缺点：</p>
+<ul>
+<li>在事务内需要避免产生副作用；</li>
+<li>不支持分布式内存模型，只解决了进程内的并发同步；</li>
+</ul>
+<h4 id="消息传递通信message-passing-communication">消息传递通信(Message passing communication)</h4>
+<p>在锁模型中，生产者和消费者之间的通信是通过共享内存而完成的，要实现安全通信，必须给共享内存所属的临界区加锁。那如果生产者和消费者是通过消息传递完成通信的呢？那样我们就可以摆脱锁模型的限制了。</p>
+<blockquote>
+<p>Do not communicate by sharing memory. Instead, share memory by communicating. Communication forces coordination. (Ivo Balbaert)</p>
+</blockquote>
+<h5 id="csp">CSP</h5>
+<p>通信顺序进程(<a href="https://en.wikipedia.org/wiki/Communicating_sequential_processes">CSP(Communicating sequential processes)</a>)是一种形式语言，用来描述基于消息传递通信的安全并发模型。如下图所示：</p>
+<p><img data-src="https://img.bmpi.dev/6b08f567-8225-8ac0-1230-0114b8507abb.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>这些任务块之间的通信是基于通道(Channel)来完成的，当创建了一个通道之后，不同的任务块就可以通过持有这个通道来通信，通道可以被不同的任务块共享。通道两端任务块的通信可以是同步的，也可以是异步的。</p>
+<p>在这里的任务块不是如Java里重量级的线程类，在运行时是非常轻量级的代码块。这些代码块可以被调度到不同的线程中，最终被多个CPU内核并发执行。</p>
+<p>此模型的优点：</p>
+<ul>
+<li>相比锁模型更简单；</li>
+<li>很容易实现高并发；</li>
+</ul>
+<p>此模型的缺点：</p>
+<ul>
+<li>不支持分布式内存模型，只解决了进程内的并发同步；</li>
+</ul>
+<h5 id="actor">Actor</h5>
+<p>演员模型(<a href="https://en.wikipedia.org/wiki/Actor_model">Actor</a>)是一种类似面向对象编程思想的安全并发模型。在面向对象的世界里，对象是一种封装了状态及行为的实体，对象间通过消息去通信（通过对象调用其方法）。而在Actor模型中，一切皆Actor，每个Actor中都有自己的状态，其他Actor只能通过通信的方式来获取或修改被通信Actor的状态。Actor通信的方式类似收发邮件，它有自己的收件箱，如下图所示：</p>
+<p><img data-src="https://img.bmpi.dev/09ad43e4-47b7-0b15-a113-7a1b051aba3c.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>在上述图中，我们可以看到相比CSP模型，Actor模型可以跨节点在分布式集群中运行。实际上Actor模型的代表Erlang正是天然分布式容错的编程语言。</p>
+<p>此模型的优点：</p>
+<ul>
+<li>相比锁模型更简单；</li>
+<li>很容易实现高并发；</li>
+<li>支持分布式内存模型，能实现跨节点的并发同步；</li>
+</ul>
+<p>此模型的缺点：</p>
+<ul>
+<li>存在信箱满后消息丢失的问题;</li>
+</ul>
+<h6 id="vertx">Vert.x</h6>
+<p><a href="https://vertx.io/">Vert.x</a>是一个基于JVM的反应式模型的工具包，在解决并发同步的问题上它采用了类似Actor模型的方式，如下图所示：</p>
+<p><img data-src="https://img.bmpi.dev/76cd7e8b-c066-58f3-208c-0b248316a90c.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>在它的架构里最基本的计算单元名为Verticle，这些Verticle之间通过事件总线(Event Bus)进行异步通信，当然也可以像Actor一样跨节点通信。和Actor模型不同的地方在于Vert.x支持多种语言，因为Event Bus解耦了实现Verticle的语言限制。</p>
+<h3 id="事件驱动event-driven">事件驱动(Event Driven)</h3>
+<p>在多线程方式实现的并发模型中，我们解决问题的方式是通过创建更多的线程来提高系统的并发处理能力。但线程创建的开销及线程间上下文调度切换的开销并不是很小，所以纵使系统的硬件资源很充足，也存在一定的上限。那么有没有可能只创建一个线程，而且这个线程可以同时处理很多个任务呢？当然是可以的，这正是基于I/O多路复用的事件循环处理并发模型的解法，通过单线程来并发处理I/O密集型的任务。</p>
+<blockquote>
+<p>Less is more.</p>
+</blockquote>
+<h4 id="event-loop-with-multiplexing">Event Loop with Multiplexing</h4>
+<p><img data-src="https://img.bmpi.dev/cddadc71-1b1f-56fa-74f6-a7f653e1682f.png" alt="" class="lazyload" loading="lazy"/></p>
+<p>此模型巧妙的利用了系统内核提供的I/O多路复用系统调用，将多个socket连接转换成一个事件队列(event queue)，只需要单个线程即可循环处理这个事件队列。当然这个线程是有可能被阻塞或长期占用的，针对这种类型的任务处理可以单独使用一个<a href="https://www.nginx.com/blog/thread-pools-boost-performance-9x/">线程池</a>去做，这样就不会阻塞Event Loop的线程了。</p>
+<p>此模型的优点：</p>
+<ul>
+<li>单线程对系统资源的占用很小；</li>
+<li>很容易实现高并发；</li>
+</ul>
+<p>此模型的缺点：</p>
+<ul>
+<li>不支持分布式内存模型，只解决了进程内的并发同步；</li>
+</ul>
+<h2 id="编程语言的实现">编程语言的实现</h2>
+<p>许多编程语言标准库或三方库都已支持上述大多数的并发模型，但因为一些历史原因带来的兼容性问题，开发者的使用体验好坏不一。以下仅简单介绍下各种编程语言标准库对并发模型的实现及流行三方库的扩展支持。</p>
+<h3 id="java">Java</h3>
+<p>Java是一门面向对象的编程语言，标准库对并发的支持是<strong>基于共享内存通信的锁模型</strong>，因此用Java的标准库来实现高并发是一件非常有挑战的事情，想不踩坑太难。</p>
+<p>想深入了解Java的并发模型，可以参考<a href="https://book.douban.com/subject/10484692/">《Java并发编程实战》</a>。</p>
+<p>当然基于Java的三方库实现了很多并发模型，如：</p>
+<ul>
+<li>Actor: <a href="https://doc.akka.io/docs/akka/current/?language=java">Akka</a></li>
+<li>Event Loop with Multiplexing
+<ul>
+<li><a href="https://netty.io/">Netty</a></li>
+<li><a href="https://github.com/nginx-clojure/nginx-clojure/">Nginx-Clojure</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="go">Go</h3>
+<p>在Go流行的时期流传着一个故事：一个PHP的普通开发者在一周内学会了Go语言，之后开发出了一个高并发的Web应用，要用Java实现同样的性能，至少需要多年的经验。</p>
+<p>暂且不论这个故事是否合理，但它展示了Go语言的两大亮点：</p>
+<ul>
+<li>语法简单易学；</li>
+<li>天然支持高并发模型；</li>
+</ul>
+<p>Go在语言层面实现了<strong>CSP并发模型</strong>，因此能让开发者以非常低的成本写出高并发的Web应用。在对CSP并发模型的实现中，Go任务块一般是一个函数，这个函数的调度是由Go语言的调度器来完成，可以被调度在不同的线程中。如果在这个函数中出现了阻塞线程的如网络I/O的操作，调度器会委托给Netpoller去执行，而Netpoller的底层正是对操作系统I/O多路复用技术的封装。</p>
+<p>Go高并发的秘诀在于它的G-P-M运行时调度模型，详细的设计可参考这篇文章：<a href="https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html">Scheduling In Go : Part II - Go Scheduler</a>。</p>
+<h3 id="erlangelixir">Erlang/Elixir</h3>
+<p>Erlang是一门天然分布式、高并发、容错的编程语言，它是<strong>Actor并发模型</strong>的代表编程语言。Elixir是基于Erlang虚拟机(BEAM)的一种不纯粹的、动态类型的函数式语言。它们自然原生支持Actor并发模型，所以在开发高并发的分布式容错应用时，可以考虑使用Elixir，它强大的并发模型及富有表达力的语法可以提供非常好的开发体验。</p>
+<p>Erlang的虚拟机在运行时实现了<u title="这可能是目前工业界在应用层面最强的调度模型">软实时抢占式调度</u>，详细的信息可参考这篇文章：<a href="https://jlouisramblings.blogspot.com/2013/01/how-erlang-does-scheduling.html">How Erlang does scheduling</a>。</p>
+<h3 id="clojure">Clojure</h3>
+<p>Clojure是基于JVM平台的Lisp方言，是不纯粹的、动态类型的函数式语言（这点倒和Elixir类似）。Clojure可以直接调用Java的库，这让其可支持非常多的并发模型，但最有特色的就是它的标准库实现了STM的并发模型，官方提供的异步库<a href="https://github.com/clojure/core.async">core.async</a>也实现了CSP的并发模型。当然还可以通过<a href="https://github.com/nginx-clojure/nginx-clojure/">Nginx-Clojure</a>实现基于I/O多路复用的高并发模型。</p>
+<p>Clojure支持非常多的并发原语，想了解可参考这篇文章：<a href="https://ericnormand.me/guide/clojure-concurrency">Clojure Concurrency Tutorial</a>。</p>
+<h2 id="走向高并发">走向高并发</h2>
+<p>1999年的时候<a href="https://en.wikipedia.org/wiki/C10k_problem">C10K</a>的问题被提出，当时在单机上并发处理上万的连接是一件富有挑战的事情，最终借助操作系统提供的一些支持如进程调度与I/O模型，通过一些高并发的模型如I/O多路复用，我们可以在单机上支持上万甚至更多的并发连接。</p>
+<p>二十多年过去了，互联网从Web1走向了<a href="https://www.bmpi.dev/dev/glimpse-of-web3/">Web3</a>，联网的设备从PC走向了IoT，我们已经到了万物互联的时代。C10K的问题已经转变为<strong>C10M</strong>的问题，如何在单机上支持百万乃至千万的连接呢？</p>
+<p>在这篇<a href="https://phoenixframework.org/blog/the-road-to-2-million-websocket-connections">The Road to 2 Million Websocket Connections in Phoenix</a>中我们可以看到如何用Elixir的Web框架Phoenix在一台40核128GB内存的机器上支撑两百万的Websocket长链接，最终因Linux内核的限制而无法进一步提高并发链接数，并没有达到服务器的极限。</p>
+<p>Migratorydata甚至使用Java在一台12核96GB内存的机器上支撑了上千万的Websocket长连接，更多细节见这两篇文章：</p>
+<ul>
+<li><a href="https://migratorydata.com/blog/migratorydata-solved-the-c10m-problem/">How MigratoryData solved the C10M problem: 10 Million Concurrent Connections on a Single Commodity Server</a></li>
+<li><a href="https://arxiv.org/pdf/1712.09876.pdf">Reliable Messaging to Millions of Users with MigratoryData</a></li>
+</ul>
+<p>当单机并发达10K时，内核是解决方案，当单机并发达10M时，内核是瓶颈。比如Linux内核需要32GB内存来维护上千万的Socket连接。所以在单机千万级的解决方案需要在内核之外的应用层去做更多的事情，感兴趣的读者可以看这篇文章：<a href="http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html">The Secret to 10 Million Concurrent Connections -The Kernel is the Problem, Not the Solution</a>。</p>
+<h2 id="总结">总结</h2>
+<p>在软件开发过程中，安全至关重要。编程的两大安全难题是<u title="纯粹个人观点">线程安全与内存安全</u>。这个系列的两篇文章都是在尝试介绍不同编程语言是如何解决线程安全从而更容易的实现高并发。</p>
+<p>另外一个想借助这篇文章分享的一个观点是：问题可以被更复杂的方案去解决，当然也可以通过另一种截然不同的思路去更简单的解决。当你觉得一个方案很复杂的时候，试着去找一个完全不同方向的方案，也许会更容易一些。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a href="https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch06lev1sec2.html">I/O Models</a></li>
+<li><a href="https://web.archive.org/web/20160423223903/http://concur.rspace.googlecode.com/hg/talk/concur.html#slide-5">Concurrency is not Parallelism (it&rsquo;s better)</a></li>
+<li><a href="https://www.loginradius.com/blog/engineering/callback-vs-promises-vs-async-await/">Callback vs Promises vs Async Await</a></li>
+<li><a href="https://betterprogramming.pub/sync-vs-async-vs-concurrent-vs-parallel-5754cdb60f66">Sync vs. Async vs. Concurrent vs. Parallel</a></li>
+<li><a href="https://www.thegeekstuff.com/2013/11/linux-process-and-threads/">What are Linux Processes, Threads, Light Weight Processes, and Process State</a></li>
+<li><a href="https://gist.github.com/jboner/2841832">Latency Numbers Every Programmer Should Know</a></li>
+<li><a href="https://www.cs.uaf.edu/2015/fall/cs301/lecture/11_16_thread_user.html">Cooperative User-Level Threads (Coroutines)</a></li>
+<li><a href="https://en.m.wikipedia.org/wiki/Green_threads">Green threads - Wikipedia</a></li>
+<li><a href="https://stackoverflow.com/questions/5878231/what-exactly-makes-erlang-process-green-thread-coroutine-lighter-than-kernel">multithreading</a></li>
+<li><a href="https://news.ycombinator.com/item?id=193440">Ask HN: Erlang and network connections?</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Thread_(computing)#Threading_models">Thread (computing) - Wikipedia</a></li>
+<li><a href="https://berb.github.io/diploma-thesis/community/index.html">Concurrent Programming for Scalable Web Architectures</a></li>
+<li><a href="http://tutorials.jenkov.com/java-concurrency/concurrency-models.html">Concurrency Models</a></li>
+<li><a href="http://java.ociweb.com/mark/stm/article.html">Software Transactional Memory</a></li>
+<li><a href="https://naghavi.me/blog/vertx-concurrency-model/">Vert.x concurrency model</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop">The event loop - JavaScript | MDN</a></li>
+<li><a href="https://v8.dev/blog/fast-async">Faster async functions and promises · V8</a></li>
+<li><a href="https://mp.weixin.qq.com/s/9g0wVT-5PpmXRoKJZo-skA">透过 rust 探索系统的本原：并发篇</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/137339439">并发模型</a></li>
+<li><a href="https://book.douban.com/subject/26337939/">七周七并发模型</a></li>
+</ul>
+
+<div class="notices info" ><p><strong>更新日志</strong></br>
+2022-05-27：初稿发布。<br>
+2022-05-07：开始写作。</p>
+</div>
+
+        </div>
+
+        <div id="article-info">
+          
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          更新时间:
+          
+          
+          
+          
+          
+              今日
+          
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/6f224072052fdae723f6a3b84ea351359419a9f7">6f224072</a>
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可</p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        <a href="https://twitter.com/madawei2699"><img style="box-shadow:none !important;width: 200px;" src="https://img.shields.io/twitter/follow/madawei2699?style=social"></a>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/os-scheduling/">编程语言是如何实现并发的之操作系统篇</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="sharethis-inline-reaction-buttons"></div>
+<div class="sharethis-inline-share-buttons"></div>
+
+        <div style="color: darkgreen;">
+  <form style="border: 1px dashed transparent;padding:10px 10px;margin: 10px auto;text-align:center;width: 95%;border-image: linear-gradient(to right,green,red,hotpink,violet,gold,green);border-image-slice: 1%;" action="https://tinyletter.com/i365" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/i365', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+    
+    <span>每月一份邮件，分享我对如何构建被动收入的思考、推荐文章及资源，欢迎订阅</span>
+    
+    <p style="margin: 10px 0;"><input type="text" style="width:240px;text-align: center;" name="email" id="tlemail" placeholder="Email"/></p>
+    <input type="hidden" value="1" name="embed"/>
+    
+    <input type="submit" value="订阅" />
+    
+  </form>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://utteranc.es/client.js"
+  repo= "bmpi-dev/bmpi.dev"
+  issue-term="title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
+</script>
+      </footer>
+    </article>
+    <template><span id="control"></span></template>
+    <div id="toast"></div>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div style="margin-bottom: 10px;">
+      <a href="https://wiki.bmpi.dev/">Wiki</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/talk/">Talk</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/invest/">Invest</a>
+      ⚔️
+      <a href="https://tg.bmpi.dev">Think</a>
+    </div>
+    <div>
+      <a href= /affiliate >Affiliate</a>
+      ⚡️
+      <a href= /tool >Tool</a>
+      ⚡️
+      <a href= /link >Link</a>
+    </div>
+  </div>
+  <div class="footer-taxonomy">
+    <a href= /tags style="color: #B36D61;">Tags</a>
+    👈
+    <a href= /categories style="color: #FF8C31;">Categories</a>
+    👉
+    <a href= /series style="color: #519A73;">Series</a>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2022
+    
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154678195-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154678195-1');
+  </script>
+  
+
+  
+  <script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BHuwaXciWicBjh6HQS2tfudv6IYQD11K9u1NUj7nuaEV9NoDT7ns9JjgqyYTflUv-m3TlD7ELY84AHMfgmPXNgU');</script>
+  
+
+  
+
+  
+  <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
+  <script>
+    
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
+    heti.autoSpacing(); 
+    
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js"></script>
+  <script>
+    
+    let mermaidBlocks = document.querySelectorAll('code[data-lang=mermaid]');
+    Array.prototype.forEach.call(mermaidBlocks, function(e) {
+      let text = e.textContent;
+      let mermaidDiv = document.createElement('div');
+      mermaidDiv.className = 'mermaid';
+      mermaidDiv.textContent = text;
+      e.parentElement.replaceWith(mermaidDiv);
+    });
+    window.mermaid.mermaidAPI.initialize(
+    window.mermaidOptions
+      ? window.mermaidOptions
+      : { securityLevel: "loose", theme: "base" });
+  </script>
+  
+
+  
+  <script>
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    var i = 0;
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      markupDiv.id = 'markmap-' + '-' + i;
+      e.parentElement.replaceWith(markupDiv);
+      i++;
+    });
+  </script>
+  
+
+</body>
+
+</html>

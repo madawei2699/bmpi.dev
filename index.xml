@@ -6,7 +6,21 @@
     <description>Recent content on 构建我的被动收入</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 24 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编程语言是如何实现并发的之并发模型篇</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/</link>
+      <pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/</guid>
+      <description>本文介绍多种并发模型包括锁、STM、CSP、Actor及I/O多路复用等，还有对Java、Go、Erlang/Elixir与Clojure等对这些模型的实现的介绍。</description>
+    </item>
+    
     <item>
       <title>疫情与战争 # 组合季报(2022Q1)</title>
       

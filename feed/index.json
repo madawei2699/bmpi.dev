@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/money/passive-income-protfolio/2022q1/",
-        "title": "疫情与战争 # 组合季报(2022Q1)",
-        "description": "被动收入投资组合2022年Q1季报",
-        "publish-date": "2022-04-24 00:00:00 +0000 UTC"
+        "url": "/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/",
+        "title": "编程语言是如何实现并发的之并发模型篇",
+        "description": "本文介绍多种并发模型包括锁、STM、CSP、Actor及I/O多路复用等，还有对Java、Go、Erlang/Elixir与Clojure等对这些模型的实现的介绍。",
+        "publish-date": "2022-05-27 00:00:00 +0000 UTC"
     }
 }
