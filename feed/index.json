@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/",
-        "title": "编程语言是如何实现并发的之并发模型篇",
-        "description": "本文介绍多种并发模型包括锁、STM、CSP、Actor及I/O多路复用等，还有对Java、Go、Erlang/Elixir与Clojure等对这些模型的实现的介绍。",
-        "publish-date": "2022-05-27 00:00:00 +0000 UTC"
+        "url": "/dev/learning-from-puzzles/",
+        "title": "从技术难题中学习",
+        "description": "本文通过一个难题的解决场景分享我解决技术难题的一些思路及从中不断学习提升的个人经验。",
+        "publish-date": "2022-06-24 00:00:00 +0000 UTC"
     }
 }

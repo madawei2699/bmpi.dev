@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>从技术难题中学习</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/learning-from-puzzles/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/learning-from-puzzles\/",
+          "name": "learning-from-puzzles"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>从技术难题中学习</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2022-06-24T00:00:00Z'>
+                2022-06-24
+              </time>
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/">如何学习</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%8A%80%E6%9C%AF%E6%96%B9%E6%B3%95%E8%AE%BA/">技术方法论</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/">自我提升</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#%E9%9A%BE%E9%A2%98%E7%9A%84%E6%88%90%E5%9B%A0">难题的成因</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E7%9B%AE%E6%A0%87">设置目标</a></li>
+<li><a href="#%E7%A1%AE%E5%AE%9A%E9%97%AE%E9%A2%98%E8%BE%B9%E7%95%8C">确定问题边界</a>
+<ul>
+<li><a href="#%E5%88%86%E6%9E%90%E9%9A%BE%E9%A2%98">分析难题</a></li>
+<li><a href="#%E6%89%BE%E5%87%BA%E7%9F%9B%E7%9B%BE">找出矛盾</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AF%BB%E6%B1%82%E5%B8%AE%E5%8A%A9">寻求帮助</a>
+<ul>
+<li><a href="#%E4%BB%8E%E6%96%87%E6%A1%A3%E4%B8%AD%E6%89%BE%E7%AD%94%E6%A1%88">从文档中找答案</a></li>
+<li><a href="#%E4%BB%8E%E6%BA%90%E7%A0%81%E4%B8%AD%E6%89%BE%E7%AD%94%E6%A1%88">从源码中找答案</a></li>
+<li><a href="#%E6%8F%90%E9%97%AE%E7%9A%84%E6%99%BA%E6%85%A7">提问的智慧</a>
+<ul>
+<li><a href="#%E4%BB%8E%E5%91%A8%E5%9B%B4%E4%BA%BA%E5%AF%BB%E6%B1%82%E5%B8%AE%E5%8A%A9">从周围人寻求帮助</a></li>
+<li><a href="#%E4%BB%8E%E4%BA%92%E8%81%94%E7%BD%91%E4%B8%AD%E5%AF%BB%E6%B1%82%E5%B8%AE%E5%8A%A9">从互联网中寻求帮助</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%AE%B0%E5%BD%95%E5%B9%B6%E5%88%86%E4%BA%AB">记录并分享</a></li>
+<li><a href="#%E4%BB%8E%E8%A7%A3%E5%86%B3%E9%9A%BE%E9%A2%98%E4%B8%AD%E6%88%90%E9%95%BF">从解决难题中成长</a></li>
+</ul>
+<p>之前写过一篇<a href="https://www.bmpi.dev/dev/how-to-learn-tech/">如何学习一门技术</a>的文章，介绍了我在学习新技术的一些经验。不过这种按计划的学习方式效率可能并不高，真正高效的学习方式是在解决问题中实践所学的知识。作为工程技术人员，在项目中遇到问题的概率是高的，这给了我们机会去不断提升自己的能力边界。</p>
+<blockquote>
+<p>某天项目上生产系统突然出现了一个性能问题，监控不断的产生某个API响应时间超出阈值的告警。经过短暂的排查，发现是我们这个API在处理时请求的另外一个服务下线导致的响应时间大幅增长。这个API在处理时会发起多个异步的请求去获取需要的资源，看起来是这个HTTP客户端在异步请求无响应时会让整个API响应的时间大幅度增加。</p>
+</blockquote>
+<h2 id="难题的成因">难题的成因</h2>
+<p>一般的问题可能需要我们半天的时间就能得到解决，但难题的出场总让人一脸困惑。为什么会这样？一般有以下的原因：</p>
+<ul>
+<li>有限的时间；</li>
+<li>复杂的环境；</li>
+<li>知识的盲区；</li>
+</ul>
+<p>大多难题是伴随上述三个原因而出现的。如果时间是无限的，我自然可以慢慢去学习研究，消灭知识盲区，把复杂的环境搞清楚，问题自然也会得到解决；如果环境很简单，定位问题就很容易，那么问题也就不难；如果我对问题的解集不存在知识盲区，我当然知道问题的产生的技术原因，自然也能解决掉它。</p>
+<p>而解决难题的方法就诞生于对这三个原因的逐个攻破。</p>
+<blockquote>
+<p>初步分析后，我们发现这个问题发生的原因很奇怪。因为对HTTP客户端做超时时间的限制了，也就是所有的异步请求都不应该超出这个时间限制，但实际上API的响应时间增长了很多。这个问题的复杂之处在于：整个API在跑在一个Nginx Worker进程上的JVM的一个线程里，这个线程又会调用一个线程池做I/O任务的处理，整个代码又是Clojure语言开发的。因为我们的服务是公共服务，这个问题是因集群中某个服务下线触发的一个性能问题，而服务的下线又是一个很可能发生的事情，所以时间也有限制。整个难题的出现完全满足环境复杂、知识盲区与时间限制。</p>
+</blockquote>
+<h2 id="设置目标">设置目标</h2>
+<p>难题之所以难，是因为需在对此知识有盲区的前提下，在有限的时间内解决。在对难题解决的第一步是确定时间的限制，如果问题很紧急，那我们需要先找到一个方法把紧急的时间限制转变为一个较宽松的。比如可以先把线上出问题的版本回滚，或采取更容易驾驭的技术方案，或制定新的发布计划等。</p>
+<p>在将难题的时间限制放宽松后，难题依旧可能有复杂的环境和知识的盲区，而这两个要素会使问题难以解决，最终影响整个项目的正常交付开发。所以在这一步要给自己或团队设置一个阶段性的目标，比如花费一定的时间将难题所处复杂的环境转变为在简单的环境可复现问题，如果在这个时间段依旧解决不了问题，就转而去寻求外部的帮助。这样可以将问题的影响限制到预期范围内。</p>
+<blockquote>
+<p>由于是线上出现的问题，我们的代码并没有做过修改，是因为所依赖的某个服务下线导致的突发问题。这时候只能先把这个下线的服务临时再次上线让线上环境先正常运行。这时候我们有了充足的时间来解决这个问题了。</p>
+</blockquote>
+<h2 id="确定问题边界">确定问题边界</h2>
+<p>确定难题的边界是解决复杂环境要素的第一步。因为难题的根因和表象距离可能很远，从表象去分析问题很可能会浪费时间。这时候需要通过一些方法去找到问题的边界。</p>
+<blockquote>
+<p>由于是线上出现的问题，第一步要做的就是在线下或非生产环境重现这个问题。幸运的是这个问题在线下得到了重现，如果不能重现那就是一个更难的问题了。但无法解释的还是为什么HTTP客户端异步请求的超时时间没有生效。难道是最终阻塞等待的函数有问题？也可能是底层多线程池的问题？或者是这个库在某种特定的场景下会出现这个Bug？</p>
+</blockquote>
+<h3 id="分析难题">分析难题</h3>
+<p>对难题初步的分析可能会引发多个方向的猜测，而这些猜测很多都是错误的，如果一个个试错，成本太高。这时候需要利用已有的经验去分析问题，无论是个人或团队都可以通过头脑风暴去分析难题，寻找矛盾。在这个过程中要大胆假设，小心求证，也需要对习以为常的经验抱有怀疑态度，因为一不小心就掉入知识盲区的陷阱里了。</p>
+<blockquote>
+<p>在经过一段时间的讨论分析之后，我们尝试过一些方法。比如我们测试发现HTTP客户端在同步请求模式下超时时间设置是正确的，无论请求的Socket链接是否能正常建立，都可以在规定的超时时间生效，那就可以在外部通过多线程的方式用这个HTTP客户端的同步请求模式。因为Clojure的core.async库支持类似Go语言的<a href="dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/#csp">CSP并发模型</a>，于是我们测试了这种方案，甚至上线了一个版本。最终又在线上发现这个版本会导致底层Nginx的Worker进程异常退出，看起来陷入了另一个知识盲区里了。经过搜索后发现core.async库使用了协程的方式，但它并不会像Go语言的运行时一样将阻塞的I/O请求使用I/O多路复用来处理，所以无法在它的Go任务块里执行阻塞I/O请求。最终经历了一圈尝试，发现问题依旧没有得到解决。</p>
+</blockquote>
+<h3 id="找出矛盾">找出矛盾</h3>
+<p>找出问题的矛盾点是解决知识盲区这个要素有力的武器。任何问题都有矛盾点，这个矛盾点就是问题的根因。如何找出矛盾？在复杂环境中寻找矛盾会受到很多干扰因素的影响，所以需要通过简化环境的办法寻找矛盾。比如通过在本地搭建一个最简的环境来模拟问题产生的环境，也可以将复杂的功能或组件通过删除或注销的方式停止。</p>
+<blockquote>
+<p>既然core.async的方案行不通，甚至陷入了新的知识盲区，那就是我们对业务系统所使用的Nginx-Clojure框架并不了解，看起来要解决这个问题，不仅要考虑业务代码使用的库，还需要考虑其所运行的Nginx环境。在查阅了其官方文档后，发现Nginx-Clojure已经考虑到这个问题了，甚至提供了多种解决方案，我们选择了其中的协程的方案。并在本地环境配置好了，但更奇怪的问题出现了，按照官方的指导配置，实际压测的结果却非常的差。这个结果一度让我们很迷茫，看着这个star不多的库，想到在配置的过程中遇到很多按文档操作不成功的例子，只能通过issue和源码的方式去找可用的方式。难道只能推倒重来，重写解决问题？</p>
+<p>为了进一步排除可能是知识盲区导致的问题，我们又用Go语言重写了一个Goroutine的版本做压测的基准对比，也与业务系统的其他API做对比，结果显示这个协程版本的压测结果都差到难以接受。</p>
+<p>看来只能寻求外部帮助了。</p>
+</blockquote>
+<h2 id="寻求帮助">寻求帮助</h2>
+<p>以上都是用已有的经验去诊断未知的问题，如果运气不好或问题无法被上面的方法所锁定，那我们只能去寻求外部帮助了。外部帮助是解决知识盲区有效的办法，前提是能找的正确的知识或人。</p>
+<h3 id="从文档中找答案">从文档中找答案</h3>
+<p>最基本的知识盲区是我们不了解所用的技术，解决这类盲区可以通过查阅官方文档，最起码要了解所用技术最基本的用法，这样就算找人问也可以清楚的描述问题。如果文档极其的多，那可以利用一定的<a href="https://www.bmpi.dev/self/build-personal-knowledge-system/#google-%E6%90%9C%E7%B4%A2">搜索技巧</a>，比如尝试关联的关键词去搜索相关的文档。</p>
+<h3 id="从源码中找答案">从源码中找答案</h3>
+<p>当文档不准确或者过于简单，只能通过阅读相关的源码来了解一些底层的实现。阅读源码是一种很好的提高自己技术能力的方式，这也是难题给我们创造了一种可能不得不读源码来解决问题的场景。从这个角度看，难题是能提高我们对底层框架实现的了解。如何更好的读代码，可以阅读这篇文章：</p>
+<ul>
+<li><a href="https://lenshood.github.io/2022/05/22/how-i-read-code/">我是怎么读代码的</a></li>
+</ul>
+<blockquote>
+<p>为了确定是否是HTTP客户端的影响，我走读了clj-http的源码，发现它在异步请求模式下底层封装了HttpAsyncClients。于是写了一个Java版本做对比，发现存在相同的问题，很可能是因为异步模式下需要做很多重量级的初始化工作导致的问题。于是给提了一个<a href="https://github.com/dakrone/clj-http/issues/610">issue</a>，但没有得到回复。</p>
+</blockquote>
+<h3 id="提问的智慧">提问的智慧</h3>
+<p>当文档和源码都无法告诉我们答案时，唯一的办法是去咨询更厉害的人。当然找人帮助，需要一些好的提问技巧。</p>
+<h4 id="从周围人寻求帮助">从周围人寻求帮助</h4>
+<p>当周围人有相关的经验时，最简单是找这些人帮忙。但在找之前，准备好必要的上下文（如果是公司项目，需考虑脱敏），必要时可以<a href="https://www.bmpi.dev/self/my-drawing-toolbox/">画一些流程图或技术图</a>，这样可以更高效的获取有效的帮助。</p>
+<h4 id="从互联网中寻求帮助">从互联网中寻求帮助</h4>
+<p>在互联网上寻求帮助，要想免费得到答案，需要一些<a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md">提问的智慧</a>。至少也需要在问题中详细的描述所做的尝试及相关的环境、测试等信息，这些都能帮助其他人快速的了解到我们的问题。</p>
+<blockquote>
+<p>最终我在做了很多测试后，不得不给Nginx-Clojure提了一个<a href="https://github.com/nginx-clojure/nginx-clojure/issues/263">issue</a>。这个issue也得到了作者的回复及最终解决问题的办法。这个难题得到了最终的答案。</p>
+</blockquote>
+<h2 id="记录并分享">记录并分享</h2>
+<p>在解决难题的过程中，我们学习了很多未知的知识，甚至做了很多技术尝试。这些过程如果被记录下来，那会是不错的<a href="https://www.bmpi.dev/self/note-system/">笔记</a>。如果能写成文章，不仅能帮助他人，也能收获影响力。这种学习方式被称之为<a href="https://www.swyx.io/learn-in-public/">Learn In Public</a>。</p>
+<h2 id="从解决难题中成长">从解决难题中成长</h2>
+<p>解决难题是一种非常高效的主动学习方式。难题是一面镜子，能反映我们的知识盲区。在解决难题的过程中，不仅可以解决知识盲区，还能提升解决问题的能力，甚至能得到更厉害的人的帮助，也有可能收获影响力。</p>
+<figure >
+    <a href="https://github.com/GoogleContainerTools/kaniko/pull/1693">
+        <div class="fixed-container"><amp-img src="https://img.bmpi.dev/c58ce8a8-36b5-3150-5f20-44f45292e120.png" class="contain" alt="因解决某个“难题”而给K8S容器镜像构建工具Kaniko提的PR" layout="fill"></amp-img></div>
+    </a>
+    
+    <figcaption>
+        <p>
+        因解决某个“难题”而给K8S容器镜像构建工具Kaniko提的PR
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>
