@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>Google软件工程之文化篇</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/software-engineering-at-google/culture/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/software-engineering-at-google\/",
+          "name": "software-engineering-at-google"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/software-engineering-at-google\/culture\/",
+          "name": "culture"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>Google软件工程之文化篇</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2022-07-20T00:00:00Z'>
+                2022-07-20
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/tech-lead/">Tech Lead</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#%E7%BC%96%E7%A8%8B%E4%B8%8E%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B">编程与软件工程</a></li>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%8F%91%E5%B1%95%E5%8F%B2">软件工程发展史</a></li>
+<li><a href="#google%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E6%96%87%E5%8C%96">Google软件工程文化</a>
+<ul>
+<li><a href="#%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E7%9A%84%E5%9F%BA%E7%9F%B3">团队协作的基石</a></li>
+<li><a href="#%E6%89%93%E9%80%A0%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB%E6%96%87%E5%8C%96">打造知识共享文化</a></li>
+<li><a href="#%E9%A2%86%E5%AF%BC%E5%9B%A2%E9%98%9Ftech-lead">领导团队（Tech Lead）</a></li>
+<li><a href="#%E5%B7%A5%E7%A8%8B%E6%95%88%E7%8E%87%E6%B5%8B%E9%87%8F">工程效率测量</a></li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+<p>在软件工程的概念被提出之前，IT行业经历了<a href="https://zh.m.wikipedia.org/zh-hans/%E8%BD%AF%E4%BB%B6%E5%8D%B1%E6%9C%BA">软件危机</a>。当时IT行业开发的软件正在经历从小规模到大规模的过程，而没有系统化的方法论指导大规模软件的开发过程，导致软件工程师之间的协作非常的低效且质量难以得到保证。</p>
+<p>直到IT行业意识到软件需要一种工程化的方法论来指导开发过程。</p>
+<blockquote>
+<p>软件工程是将系统化的、规范的、可度量的方法用于软件的开发、运行和维护的过程，即将工程化应用于软件开发中（IEEE，1993）。</p>
+</blockquote>
+<h2 id="编程与软件工程">编程与软件工程</h2>
+<p>编程是利用某个编程语言实现某个算法或技术方案从而来解决某类问题，但这类问题规模一般很小，也不太会随着时间产生变化，或者其生命周期也很短，不需要考虑长期维护的问题。但软件工程与编程的区别在于前者需考虑时间与规模带来变化的影响。</p>
+<p>时间的因素使软件工程需要考虑质量的问题，糟糕的质量会产生很多认知负荷，最终难以长期维护。规模的因素使软件工程需要考虑协作的问题，低效的协作可能与沟通方式有关，最终拖垮交付进度。</p>
+<h2 id="软件工程发展史">软件工程发展史</h2>
+<p>早期的软件工程借鉴了项目管理的流程，而传统的项目管理关注生产过程大过于人。</p>
+<pre><code class="language-markmap" data-lang="markmap"># 传统软件工程
+## 软件开发过程
+### 需求
+### 设计
+### 开发
+### 测试
+### 集成
+### 部署
+### 维护
+## 软件项目管理
+### 范围管理
+### 成本管理
+### 时间管理
+### 风险管理
+### 干系人管理
+### 沟通管理
+### 人力资源管理
+### 质量管理
+</code></pre><p>以过程为中心的软件工程过程方法论主要有瀑布式与统一软件开发过程。这种软件开发过程需要产生大量的正式文档，通过严格的流程管理控制软件的开发过程。但软件开发过程却是一个知识密集型的生产过程，过于关注流程而忽略人的因素导致这类方法论很难适应需求变化，花费很多时间开发出的产品很难满足变化迅速的市场，最终逐渐被淘汰。</p>
+<p>以人为中心的软件开发过程是为适应需求变化的代码编写和团队组织方法论。这类逐渐产生以极限编程与敏捷过程两种方法论。</p>
+<pre><code class="language-markmap" data-lang="markmap"># 软件开发过程方法论
+### 以过程为中心
+- 瀑布式（Waterfall）
+- 统一软件开发过程（RUP）
+### 以人为中心
+- 极限编程（XP）
+- 敏捷（Agile）
+</code></pre><p>这里以敏捷过程为例，敏捷开发至今已经成为很主流的软件开发过程。</p>
+<pre><code class="language-markmap" data-lang="markmap"># 敏捷过程
+## 价值观
+- 个体和互动高于流程和工具
+- 工作的软件高于详尽的文档
+- 客户合作高于合同谈判
+- 响应变化高于遵循计划
+## 框架
+### Scrum
+### Kanban
+## 实践
+- 沟通
+  - 每日站会
+  - 迭代计划会议（IPM）
+  - 成果展示（Showcase）
+  - 回顾（Retrospective）
+  - 反馈（Feedback）
+- 进度
+  - Sprint
+  - Backlog
+  - Story
+    - User Story
+    - Story Point
+    - Story Kickoff
+    - Story Desk Check
+- 质量
+  - 测试驱动开发（TDD）
+  - 持续集成交付（CI/CD）
+  - 代码评审（Code Diff）
+  - 结对编程（Pair Programming）
+  - 知识分享（Session）
+  - 工作坊（Workshop）
+</code></pre><p>敏捷开发倡导信任人而非死板的流程与计划管理，通过一系列如上所示的实践来营造一个信任为主的文化土壤，从而打造一个高效的研发团队，最终开发出高质量的软件成品。</p>
+<p>当然本文不是介绍敏捷开发过程的，而是介绍Google公司的软件工程实践。</p>
+<p>Google是一家伟大的互联网公司，同时研发出来了大量知名的软件产品。Google是怎么做到的？在2020年Google的三位工程师<a href="https://twitter.com/TitusWinters">@TitusWinters</a> <a href="https://twitter.com/manshreck">@manshreck</a> <a href="https://twitter.com/hyrumwright">@hyrumwright</a>出版了《<a href="https://abseil.io/resources/swe-book">Software Engineering at Google</a>》这本书来介绍Google的软件工程实践，这给了我们一个机会一窥究竟。</p>
+<p>本文是Google软件工程系列的上篇之文化篇，来介绍软件工程最重要的一个基石：文化要素。</p>
+<h2 id="google软件工程文化">Google软件工程文化</h2>
+<blockquote>
+<p>以下是《Software Engineering at Google》一书第二部分文化篇的思维导图，由于此部分占全书近20%，所以本文不会详细的介绍其中的概念，想详细了解的读者建议阅读原书。本文会结合此书这部分内容分享作者的个人理解及相关经验。</p>
+</blockquote>
+<pre><code class="language-markmap" data-lang="markmap"># Google软件工程
+## 文化
+### 团队协作的基石
+- 谦虚（Humility）
+- 尊重（Respect）
+- 信任（Trust）
+### 打造知识共享文化
+- 专业知识共享的挑战
+  - 缺乏心理安全
+  - 知识孤岛
+  - 知识单点故障
+  - 团队知识断层
+  - 鹦鹉行为
+  - 知识禁区
+- 塑造团队学习文化
+  - 营造心理安全的环境
+    - 导师制度
+    - 群组交流模式
+  - 个人学习成长
+    - 从遗留知识中学习
+    - 问好问题
+      - 群组
+      - 邮件列表
+      - 内部社区
+    - 以教促学
+      - 技术演讲
+      - 技术文档
+      - 代码
+        - 注释
+        - 评审
+  - 团队知识沉淀
+    - 知识库（Wiki）
+    - 社区（Community）
+    - 代码库（Codebase）
+    - 简报（Newsletter）
+### 领导团队（Tech Lead）
+- 核心能力
+  - 领导力
+    - 职权（Authority）
+    - 非职权
+      - 团队成员
+      - 项目干系人
+  - 开发
+  - 架构
+- 反面模式
+  - 招聘听话的团队成员
+  - 忽视表现差的团队成员
+  - 忽视人性问题
+  - 做老好人
+  - 打破招聘门槛
+  - 把团队成员当孩子看待
+- 正面模式
+  - 不自我
+    - 谦虚不自大
+    - 信任团队成员
+    - 接受团队成员反馈
+    - 当犯错时及时道歉
+  - 做一个禅师
+    - 始终保持冷静
+    - 通过提问帮助成员解决问题
+  - 做团队催化剂
+    - 构建团队共识
+  - 扫清团队绊脚石
+    - 技术问题
+    - 非技术问题
+    - 委托对的人解决问题
+  - 成为团队老师和导师
+    - 给团队成员成长机会
+    - 量体裁衣式指导团队成员
+  - 给团队设定清晰目标
+  - 真诚
+    - 友善富有同理心的提出反馈
+    - 正面提出负面反馈
+  - 追踪团队成员幸福感
+    - 心情曲线
+    - 匿名收集反馈
+    - 一对一与成员沟通
+    - 与团队成员沟通职业规划
+  - 其它建议
+    - 委托任务但也与团队成员一块解决问题
+    - 培养可替换自己的第二梯队成员
+    - 在问题发酵膨胀前解决掉它
+    - 保护团队成员免受无关因素干扰
+    - 让团队成员知道当他们做的好时
+    - 在可控范围内给团队成员提供试错的机会
+- 大规模团队领导力
+  - 总是在做决策
+    - 识别盲点
+    - 权衡利弊
+    - 决策，然后迭代
+  - 总是不在场
+    - 建立自驱团队
+    - 划分问题空间
+  - 总是在扩大规模
+    - 通过成功的循环模式解决难题
+    - 解决重要的委托，委托紧急的问题
+    - 学会放弃
+    - 保护好精力
+### 工程效率测量
+- 是否值得测量
+  - 期望的结果是什么？为什么？
+  - 如果数据符合预期，会采取什么行动？
+  - 如果结果与预期相反，会采取什么行动？
+  - 谁在何时决定对结果采取行动？
+- GSM框架
+  - 目标（Goals）
+    - 代码质量（Quality of the code）
+    - 工程师注意力（Attention from engineers）
+    - 认知复杂度（Intellectual complexity）
+    - 节奏和速度（Tempo and velocity）
+    - 满意度（Satisfaction）
+  - 信号（Signals）
+  - 指标（Metrics）
+    - 定量指标（Quantitative）
+    - 定性指标（Qualitative）
+## 过程
+## 工具
+</code></pre><p>文化为何是软件工程很重要的一个要素？我在刚入IT行业时对软件开发的理解只是学习某个编程语言来写代码。之后经过多年多个项目的历练，我逐渐对整个软件开发的全貌有了一定的理解。但还是停留在对软件开发过程的了解及相关工具的使用，直到读完这本书的文化篇后才意识到了文化的重要性。</p>
+<p>文化虽然是和技术没有直接关系的一些软性的东西，但文化就像水一样，利用好它的力量，可以让软件开发变得更高效、高质。</p>
+<h3 id="团队协作的基石">团队协作的基石</h3>
+<p>软件开发早已不是单兵作战的时代了，虽然人们喜欢听黑客奇迹般的故事，但现在的中大型软件都是团队的集体智慧产出。</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/63d3f7fb-9e20-7d21-6ea1-d7601259b3f5.png" alt="" layout="fill"></amp-img></div></p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/414a14e0-e5b5-84c2-5a15-b17526d84e00.png" alt="" layout="fill"></amp-img></div></p>
+<p>如上是两大顶级开源基金会 <a href="https://twitter.com/TheASF">@TheASF</a> 与 <a href="https://twitter.com/linuxfoundation">@linuxfoundation</a> 的知名项目，成千上万的软件工程师的集体协作开发了达上亿的代码行数最终才诞生了这些伟大的项目。</p>
+<p>而团队协作最重要的是成员间的谦虚、尊重与信任。如果没有这些最基本的条件，集体协作将会困难重重，团队成员无法形成稳固的合作关系，时间和精力很容易被内耗完。</p>
+<h3 id="打造知识共享文化">打造知识共享文化</h3>
+<p>软件工程与传统工程的区别在于其是一项知识密集型的活动，其中涉及到了大量的知识管理工作。<a href="https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/">知识管理</a>很容易做差，最终产生了以下的一些问题：</p>
+<ul>
+<li>缺乏心理安全：当一个新成员进入组织的时候，会因为缺乏心理安全感而不敢暴露自己不懂的知识，这会阻碍该成员的个人成长，最终也会传导到团队的开发效率上来。</li>
+<li>知识孤岛：知识没有分享的文化土壤，每个团队都闷头搞自己的项目，会逐渐产生很多重复造轮子的现象。</li>
+<li>知识单点故障：团队内的重要信息只有一个人知道，而这个人又没有分享给其他人，一旦这个人不在场，团队将无法正常运转。</li>
+<li>团队知识断层：团队内的技术专家并没有意愿将个人的经验传授给团队其它成员，导致团队的运转离不开一小部分技术专家，一旦这些人离开，整个团队将无法正常运转。</li>
+<li>鹦鹉行为：这种很容易出现在团队新成员，由于经验限制或背景上下文了解有限，而在不了解其原理的情况下复制一些代码。虽然系统可以运行，但潜在的埋下了一些问题。</li>
+<li>知识禁区：团队成员由于经验限制或不了解背景上下文，而不敢修改代码库的某些遗留代码。</li>
+</ul>
+<p>这些都是组织学习文化中会遇到的一些挑战。Google在打造知识共享文化上做了很多尝试，比如营造安全的学习环境，鼓励新人通过提问与分享来提高个人的技术。这些实践在敏捷过程中也可以看到，比如：</p>
+<ul>
+<li>鼓励个人反馈的文化（Feedback）。对事不对人，根据事实对成员提供建设性的反馈，帮助成员变的更好。</li>
+<li>鼓励团队成员定期做分享（Session）。比如每周某个成员可以做某个主题的Session，这种实践能让分享者对分享的主题有更深的了解。</li>
+<li>每日站会同步工作进度。不仅可以让其它成员了解你所工作的范围，还能告知其它成员潜在的交付风险。</li>
+<li>定期回顾（Retro）。团队定期举行迭代回顾的会议，回顾最近工作中好的、不好的的方面及相关建议，最终制定出一些行动来提升团队的工作效率、质量与幸福感。</li>
+<li>团队Wiki工作区。团队知识沉淀的体现，新人可以通过查阅这些资料迅速了解项目背景上下文。</li>
+<li>代码评审（Code Diff）。代码评审在Google的软件工程中是一项全员必须执行的实践。代码评审可以提高团队成员的编码水平，发掘代码潜在Bug，识别代码坏味道，形成统一的编码风格，共享业务与技术知识，消减团队知识断层的影响，甚至可以解决鹦鹉行为与知识禁区的问题。比如我所在的项目上团队所有开发成员每天会拿出一小时做集体的Code Diff，虽然成本不低，但其收益也很高。</li>
+<li>结对编程（Pair Programming）。结对编程看起来是两个人在做一个人的活，但一般也有两种模式：乒乓模式（Ping-Pong）与领航员观察者模式（Navigator-Observer），前者适合以TDD的方式开发，后者适合老带新。结对编程是成本高但非常高效的知识共享的实践，需结合项目实际的带宽决定当前是否采用此模式开发。比如我们项目会在交付时间不紧张时采用此开发模式。</li>
+</ul>
+<p>以上的一些实践需结合组织或项目的实际带宽来决定是否使用，比如Code Diff一般是建议或者强制的，而结对编程是可选的，分享（Session）和回顾可能是定期或不定期的。</p>
+<h3 id="领导团队tech-lead">领导团队（Tech Lead）</h3>
+<p>当做了一段时间独立贡献者（Individual Contributor）后，可能有机会做Tech Lead了。Tech Lead是一个团队必备的角色，具有一定的职权影响力，当然更多的是采用非职权影响力去带领团队。</p>
+<p>如何领导团队是个复杂的工作，对技术人员来说，从技术到管理是很难的事情。</p>
+<pre><code class="language-markmap" data-lang="markmap"># 领导团队（Tech Lead）
+- 核心能力
+  - 领导力
+    - 职权（Authority）
+    - 非职权
+      - 团队成员
+      - 项目干系人
+  - 开发
+  - 架构
+- 反面模式
+  - 招聘听话的团队成员
+  - 忽视表现差的团队成员
+  - 忽视人性问题
+  - 做老好人
+  - 打破招聘门槛
+  - 把团队成员当孩子看待
+- 正面模式
+  - 不自我
+    - 谦虚不自大
+    - 信任团队成员
+    - 接受团队成员反馈
+    - 当犯错时及时道歉
+  - 做一个禅师
+    - 始终保持冷静
+    - 通过提问帮助成员解决问题
+  - 做团队催化剂
+    - 构建团队共识
+  - 扫清团队绊脚石
+    - 技术问题
+    - 非技术问题
+    - 委托对的人解决问题
+  - 成为团队老师和导师
+    - 给团队成员成长机会
+    - 量体裁衣式指导团队成员
+  - 给团队设定清晰目标
+  - 真诚
+    - 友善富有同理心的提出反馈
+    - 正面提出负面反馈
+  - 追踪团队成员幸福感
+    - 心情曲线
+    - 匿名收集反馈
+    - 一对一与成员沟通
+    - 与团队成员沟通职业规划
+  - 其它建议
+    - 委托任务但也与团队成员一块解决问题
+    - 培养可替换自己的第二梯队成员
+    - 在问题发酵膨胀前解决掉它
+    - 保护团队成员免受无关因素干扰
+    - 让团队成员知道当他们做的好时
+    - 在可控范围内给团队成员提供试错的机会
+- 大规模团队领导力
+  - 总是在做决策
+    - 识别盲点
+    - 权衡利弊
+    - 决策，然后迭代
+  - 总是不在场
+    - 建立自驱团队
+    - 划分问题空间
+  - 总是在扩大规模
+    - 通过成功的循环模式解决难题
+    - 解决重要的委托，委托紧急的问题
+    - 学会放弃
+    - 保护好精力
+</code></pre><p>对于此我的个人经验也不是很丰富，所以想了解此部分的推荐阅读此书原文。当然下面这些文章也不错：</p>
+<ul>
+<li><a href="https://www.patkua.com/blog/the-definition-of-a-tech-lead/">The Definition of a Tech Lead</a></li>
+<li><a href="http://allyouneedisbackend.com/blog/2018/08/03/what-does-a-tech-lead-do/">What Does a Software Tech Lead Do?</a></li>
+<li><a href="https://icodebook.com/tags/tl/">Tech Lead</a></li>
+</ul>
+<h3 id="工程效率测量">工程效率测量</h3>
+<p><q>没有测量就没有优化</q>。只有测量到团队的工程效率后，我们才有可能制定提升效率的行动。Google设计出了GSM框架来测量工程效率。</p>
+<pre><code class="language-markmap" data-lang="markmap">- GSM框架
+  - 目标（Goals）
+    - 代码质量（Quality of the code）
+    - 工程师注意力（Attention from engineers）
+    - 认知复杂度（Intellectual complexity）
+    - 节奏和速度（Tempo and velocity）
+    - 满意度（Satisfaction）
+  - 信号（Signals）
+  - 指标（Metrics）
+    - 定量指标（Quantitative）
+    - 定性指标（Qualitative）
+</code></pre><p>工程效率的测量一般发生在大规模团队或组织级别，我所经历的项目上并没有此实践。对小型团队来说，可以通过简单的一些问卷调查这类定性的方式来收集团队成员的反馈，当然也可以通过一些量化的指标如流水线构建速度、迭代开发速率、代码静态分析结果、测试覆盖率等指标测量团队的工程效率。</p>
+<h2 id="总结">总结</h2>
+<p>软件工程是一项复杂的知识工程，这让其区别于传统的项目管理。Google的软件工程文化与以人为中心的敏捷过程所倡导的理念有很多相似之处。</p>
+<p>但反观国内很多软件公司虽然也用上了敏捷过程的方法论，但底层的文化土壤还是以过程为中心的方法论，对团队成员的不信任，没有分享文化，团队领导一言堂还是存在的。希望这种现象能随着国内IT行业的逐渐成熟越来越少吧。</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>
