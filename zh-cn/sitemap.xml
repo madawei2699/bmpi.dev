@@ -29,7 +29,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2022-07-08T11:50:19+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -48,23 +48,28 @@
   </url>
 
   <url>
+    <loc>https://www.bmpi.dev/categories/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/</loc>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/dev/learning-from-puzzles/</loc>
-    <lastmod>2022-07-06T21:27:48+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-07-06T21:27:48+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8A%80%E6%9C%AF%E6%96%B9%E6%B3%95%E8%AE%BA/</loc>
-    <lastmod>2022-07-06T21:27:48+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2022-07-06T21:27:48+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -79,7 +84,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</loc>
-    <lastmod>2022-05-28T09:15:23+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -129,12 +134,17 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%86%99%E4%BD%9C/</loc>
-    <lastmod>2022-05-14T06:58:53+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/self/my-writing-story/250k/</loc>
-    <lastmod>2022-05-14T06:58:53+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/categories/%E6%8A%80%E6%9C%AF%E5%86%99%E4%BD%9C/</loc>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -154,7 +164,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/eth/</loc>
-    <lastmod>2022-05-01T09:28:45+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -184,12 +194,12 @@
 
   <url>
     <loc>https://www.bmpi.dev/categories/%E4%BB%80%E4%B9%88%E6%98%AFx/</loc>
-    <lastmod>2022-02-18T19:34:36+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2022-02-18T19:34:36+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -259,72 +269,77 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/lamport-timestamp/</loc>
-    <lastmod>2022-02-18T19:34:36+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/dev/time-in-distributed-system/</loc>
-    <lastmod>2022-02-18T19:34:36+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%90%91%E9%87%8F%E6%97%B6%E9%92%9F/</loc>
-    <lastmod>2022-02-18T19:34:36+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%B7%B7%E5%90%88%E9%80%BB%E8%BE%91%E6%97%B6%E9%92%9F/</loc>
-    <lastmod>2022-02-18T19:34:36+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%89%A9%E7%90%86%E6%97%B6%E9%92%9F/</loc>
-    <lastmod>2022-02-18T19:34:36+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E9%80%BB%E8%BE%91%E6%97%B6%E9%92%9F/</loc>
-    <lastmod>2022-02-18T19:34:36+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/jwt/</loc>
-    <lastmod>2022-01-11T22:42:15+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%87%AD%E8%AF%81/</loc>
-    <lastmod>2022-01-11T22:42:15+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/</loc>
-    <lastmod>2022-01-11T22:42:15+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8E%88%E6%9D%83/</loc>
-    <lastmod>2022-01-11T22:42:15+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E8%AE%A4%E8%AF%81/</loc>
-    <lastmod>2022-01-11T22:42:15+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/webrtc/</loc>
-    <lastmod>2022-05-06T21:56:39+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/dev/how-to-learn-tech/</loc>
-    <lastmod>2022-05-06T21:56:39+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/cloud-native/</loc>
-    <lastmod>2022-07-08T11:50:19+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -339,7 +354,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/k8s/</loc>
-    <lastmod>2022-07-08T11:50:19+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -354,7 +369,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/</loc>
-    <lastmod>2022-07-08T11:50:19+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -369,7 +384,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/kubernetes/</loc>
-    <lastmod>2022-07-08T11:50:19+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -384,7 +399,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E4%BA%91%E5%8E%9F%E7%94%9F%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2022-07-08T11:50:19+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -409,7 +424,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/series/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -419,7 +434,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E8%B4%A2%E5%8A%A1%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -434,7 +449,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/aws/</loc>
-    <lastmod>2022-05-01T09:28:45+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -449,7 +464,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/aws-cloud9/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -464,7 +479,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/github-codespaces/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -479,7 +494,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/ide/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -494,7 +509,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/pulumi/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -509,7 +524,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/vscode/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -524,7 +539,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/dev/vscode-on-cloud/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -554,7 +569,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -614,52 +629,52 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/clojure/</loc>
-    <lastmod>2021-05-25T07:52:10+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/fdd/</loc>
-    <lastmod>2021-05-25T07:52:10+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/functional-programming/</loc>
-    <lastmod>2021-05-25T07:52:10+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/dev/failure-driven-development/</loc>
-    <lastmod>2021-05-25T07:52:10+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/series/%E6%8A%80%E6%9C%AF%E6%B4%9E%E8%A7%81/</loc>
-    <lastmod>2021-05-25T07:52:10+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/btc/</loc>
-    <lastmod>2022-05-01T09:28:45+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/xmr/</loc>
-    <lastmod>2022-05-01T09:28:45+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%8A%A0%E5%AF%86%E5%B8%81/</loc>
-    <lastmod>2022-05-01T09:28:45+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/dev/guide-to-mining/</loc>
-    <lastmod>2022-05-01T09:28:45+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8C%96%E7%9F%BF/</loc>
-    <lastmod>2022-05-01T09:28:45+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -669,7 +684,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/gtd/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -684,42 +699,42 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/note/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/okr/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/self/okr-gtd-note-logseq/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/series/%E4%BA%BA%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%9B%AE%E6%A0%87%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%AC%94%E8%AE%B0%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2022-06-10T20:40:11+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/infrastructure-as-code/</loc>
-    <lastmod>2022-04-29T21:24:31+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -734,27 +749,27 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/saas/</loc>
-    <lastmod>2022-04-29T21:24:31+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/</loc>
-    <lastmod>2022-04-29T21:24:31+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/dev/tech-stack-of-side-project/</loc>
-    <lastmod>2022-04-29T21:24:31+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8A%80%E6%9C%AF%E6%A0%88/</loc>
-    <lastmod>2022-04-29T21:24:31+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%9B%91%E6%8E%A7%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2022-04-29T21:24:31+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -764,12 +779,12 @@
 
   <url>
     <loc>https://www.bmpi.dev/self/life-in-plain-text/</loc>
-    <lastmod>2021-10-15T20:37:31+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%BA%AF%E6%96%87%E6%9C%AC/</loc>
-    <lastmod>2021-10-15T20:37:31+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -789,7 +804,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/lambda/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -804,7 +819,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/serverless/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -839,7 +854,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%97%A0%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -849,52 +864,52 @@
 
   <url>
     <loc>https://www.bmpi.dev/series/%E9%9B%B6%E6%88%90%E6%9C%AC%E6%90%AD%E5%BB%BA%E7%8E%B0%E4%BB%A3%E5%8D%9A%E5%AE%A2%E6%8C%87%E5%8D%97/</loc>
-    <lastmod>2022-04-15T16:10:03+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E4%B8%AA%E4%BA%BA%E5%93%81%E7%89%8C/</loc>
-    <lastmod>2022-02-03T11:35:57+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%A6%82%E4%BD%95%E5%86%99%E4%BD%9C/</loc>
-    <lastmod>2022-02-03T11:35:57+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2022-02-03T11:35:57+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-02-03T11:35:57+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/self/build-personal-knowledge-system/</loc>
-    <lastmod>2022-02-03T11:35:57+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB/</loc>
-    <lastmod>2022-02-03T11:35:57+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2022-02-16T22:18:18+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2022-02-03T11:35:57+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%BB%88%E8%BA%AB%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-02-03T11:35:57+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -959,92 +974,92 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/draw.io/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/excel/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/google-drawings/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/omnigraffle/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/plantuml/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/ppt/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/python-jupyter-notebook/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/sketch/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/wbs/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/self/my-drawing-toolbox/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%97%B6%E5%BA%8F%E5%9B%BE/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%9E%B6%E6%9E%84%E5%9B%BE/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%94%98%E7%89%B9%E5%9B%BE/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%99%BD%E6%9D%BF%E7%BB%98%E5%9B%BE/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%BA%BF%E6%A1%86%E5%9B%BE/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%BB%98%E5%9B%BE%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E9%83%A8%E7%BD%B2%E5%9B%BE/</loc>
-    <lastmod>2022-07-04T21:52:04+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -1069,7 +1084,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/aws-ecs/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -1084,7 +1099,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/devops/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -1099,7 +1114,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/docker/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -1114,7 +1129,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/dev/guide-to-serverless/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -1129,7 +1144,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/terraform/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -1439,7 +1454,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/markdown/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -1459,17 +1474,17 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/latex/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8E%92%E7%89%88/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/dev/what-markdown-can-do/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -1734,67 +1749,67 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/bison/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/bnf/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/dsl/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/flex/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/jison/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/lex/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/parser%E8%A7%A3%E6%9E%90%E5%99%A8/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/dev/parser_black_magic/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/yacc/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -1839,12 +1854,12 @@
 
   <url>
     <loc>https://www.bmpi.dev/self/road_to_life_games/</loc>
-    <lastmod>2021-01-22T21:01:13+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%85%83%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2021-01-22T21:01:13+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -1869,12 +1884,12 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/github-pages/</loc>
-    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/hexo/</loc>
-    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -1904,7 +1919,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%9B%BE%E5%BA%8A/</loc>
-    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
@@ -1924,7 +1939,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/self/build-write-tool-v1/</loc>
-    <lastmod>2022-02-24T18:06:10+08:00</lastmod>
+    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>
