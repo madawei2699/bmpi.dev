@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/software-engineering-at-google/culture/",
-        "title": "Google软件工程之文化篇",
-        "description": "本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程中人的因素，也就是文化部分。",
-        "publish-date": "2022-07-20 00:00:00 +0000 UTC"
+        "url": "/dev/software-engineering-at-google/process/",
+        "title": "Google软件工程之过程篇",
+        "description": "本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程的过程，主要包括Code Review、技术文档与自动化测试（单元、集成、E2E）。",
+        "publish-date": "2022-08-08 00:00:00 +0000 UTC"
     }
 }

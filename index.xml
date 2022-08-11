@@ -6,7 +6,21 @@
     <description>Recent content on 构建我的被动收入</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google软件工程之过程篇</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/dev/software-engineering-at-google/process/</link>
+      <pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/dev/software-engineering-at-google/process/</guid>
+      <description>本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程的过程，主要包括Code Review、技术文档与自动化测试（单元、集成、E2E）。</description>
+    </item>
+    
     <item>
       <title>Google软件工程之文化篇</title>
       

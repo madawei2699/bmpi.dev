@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>Google软件工程之过程篇</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/software-engineering-at-google/process/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/software-engineering-at-google\/",
+          "name": "software-engineering-at-google"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/software-engineering-at-google\/process\/",
+          "name": "process"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>Google软件工程之过程篇</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2022-08-08T00:00:00Z'>
+                2022-08-08
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/style-guide/">Style Guide</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/code-review/">Code Review</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/technical-documentation/">Technical Documentation</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/unit-test/">Unit Test</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/test-pyramid/">Test Pyramid</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/deprecation/">Deprecation</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97style-guide">风格指南(Style Guide)</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E8%AF%84%E5%AE%A1code-review">代码评审(Code Review)</a>
+<ul>
+<li><a href="#code-review-vs-code-diff">Code Review v.s. Code Diff</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3technical-documentation">技术文档(Technical Documentation)</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95testing">测试(Testing)</a>
+<ul>
+<li><a href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95unit-testing">单元测试(Unit Testing)</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E6%9B%BF%E8%BA%ABtest-doubles">测试替身(Test Doubles)</a></li>
+<li><a href="#%E8%BE%83%E5%A4%A7%E5%9E%8B%E7%9A%84%E6%B5%8B%E8%AF%95larger-testing">较大型的测试(Larger Testing)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BC%83%E7%94%A8deprecation">弃用(Deprecation)</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+<p><a href="https://www.bmpi.dev/dev/software-engineering-at-google/culture/">上篇</a>介绍了Google软件工程中的文化部分，本篇介绍软件工程中主要的过程部分，包括编码风格指南、代码评审、技术文档、自动化测试（单元测试、集成测试与较大型测试）与弃用。</p>
+<blockquote>
+<p>以下是《Software Engineering at Google》一书第三部分过程篇的思维导图，由于此部分占全书近40%，所以本文不会详细的介绍其中的概念，想详细了解的读者建议阅读原书。本文会结合此书这部分内容分享作者的个人理解及相关经验。</p>
+</blockquote>
+<pre><code class="language-markmap" data-lang="markmap"># Google软件工程
+## 文化(Culture)
+## 过程(Process)
+- Style Guide
+- Code Review
+  - 好处
+    - 代码正确性
+    - 代码可读性
+    - 代码一致性
+    - 促进团队知识共享
+    - 塑造团队工程文化
+  - 最佳实践(Best Practices)
+    - 友善且专业
+    - 小的变更
+    - 清晰的变更描述
+    - 小规模评审
+    - 尽可能自动化
+    - 金字塔模型
+  - 评审类型
+    - 特性代码
+    - 优化代码
+    - Bug Fixes
+    - 重构
+- Technical Documentation
+  - 一些实践
+    - 文档即代码
+    - 文档流程化
+    - 了解受众
+    - 文档评审
+  - 文档类型
+    - 引用类(Reference)
+    - 设计类(Design)
+    - 教程类(Tutorial)
+    - 概念类(Conceptual)
+    - 登陆页(Landing Page)
+  - 文档写作最佳实践
+    - 5W+1H
+    - 三段式
+    - 好文档的特征
+    - 弃用文档
+- Testing
+  - 测试概述
+    - 测试代码的好处
+      - 更少的Debugging
+      - 提升对代码变更的信心
+      - 测试代码是更好的文档
+      - 让代码评审更简单
+      - 好的测试反向提升代码设计
+      - 自动化测试让持续交付变的更容易
+    - 设计测试套件
+      - 测试大小
+        - 小
+        - 中
+        - 大
+        - 实践
+      - 测试范围
+        - 窄范围测试
+        - 中范围测试
+        - 广范围测试
+        - 实践
+          - 金字塔模型
+          - 反模式
+          - 测试模型的选择
+      - The Beyoncé Rule
+        - 测试原则：测试所有不想被破坏的东西
+        - 测什么
+      - 关于测试覆盖率
+        - 仅测量单元测试覆盖率
+        - 覆盖率目标是底线
+        - 考虑被测试的行为
+      - 测试套件的陷阱
+        - 脆弱的测试
+        - 缓慢的测试
+    - Google测试文化的历史
+      - 针对新员工的专项课程
+      - 测试认证计划
+      - 在厕所推广测试(TotT)
+    - 自动化测试的局限
+      - 无法取代人工探索性测试
+  - 单元测试(Unit Testing)
+    - 优势
+    - 提高可维护性
+      - 脆弱的测试
+      - 不清晰的测试
+    - 好的实践
+      - 测试行为而非方法
+      - 测试名称应提现测试行为
+      - 测试不应包含逻辑
+      - DAMP原则
+  - 测试替身(Test Doubles)
+    - 基本概念
+      - 缝(Seams)
+      - Mocking框架
+    - 测试替身技术
+      - 伪造(Faking)
+        API的轻量级实现
+      - 打桩(Stubbing)
+        赋予函数行为的过程
+      - 交互测试(Interaction Testing)
+        验证函数调用行为及参数
+    - 何时使用
+      - 真实实现
+      - 伪造(Faking)
+      - 打桩(Stubbing)
+      - 交互测试(Interaction Testing)
+  - 较大型的测试
+    - 为什么需要
+    - 挑战
+    - 结构
+    - 类型
+    - 工作流
+- Deprecation
+  - 为什么
+    - 代码是负债而非资产
+      因为需要维护
+    - 过时的系统需要弃用
+      - 维护成本太高
+      - 功能无用、重复或被替代
+    - 旧不意味着过时
+    - 代码越少，功能越多
+  - 困难
+    - 系统用户越多，越难弃用
+    - 系统启用，代码保留
+    - 被弃用的，和没有准备好的
+    - 演进而非弃用
+  - 在设计时考虑弃用
+    - 谨慎启动新项目
+  - 类型
+    - 咨询
+    - 强制
+    - 警告
+      - hope is not a strategy
+      - alert fatigue
+  - 流程
+    - Owner
+    - 里程碑
+    - 工具
+      - How/By who
+      - Code Search
+      - Testing
+## 工具(Tool)
+</code></pre><h2 id="风格指南style-guide">风格指南(Style Guide)</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">We value “simple to read&#34; over &#34;simple to write.&#34; (Software Engineering at Google - Style Guides and Rules)
+</code></pre></div><p>代码可能只会被写一次，但会被读很多次。如果团队成员的代码风格都不统一，可读性会很差，所以保持团队代码风格统一很重要。</p>
+<p>历史证明，能写的很飘逸的编程语言使用人数一般都不会很多，典型的如古老的Perl语言，可以达到“一人千面”的代码风格。而写起来中规中矩甚至没有啥高级技巧的语言如Java、Go等在工业上反而用的很多。</p>
+<p>Google的代码风格指南不太适合一般规模的公司，所以此部分不做过多介绍。从我的个人经验来说，一般项目上会配置一套自动化的代码风格检查工具（如<a href="https://github.com/checkstyle/checkstyle">checkstyle</a>），甚至会集成到流水线（Pipeline）中强制团队保持一致的代码风格。某些编程语言如Go在构建工具中也提供了gofmt的代码格式化工具。</p>
+<p>代码风格指南只能解决一些很基本的可读性问题，如代码缩进、函数命名风格、代码行数限制等。但代码的可读性可不只体现在这些表面，更深层次的可读性问题如API语义的可读性该怎么解决？一个可行的实践是代码评审。</p>
+<h2 id="代码评审code-review">代码评审(Code Review)</h2>
+<p>代码评审是如此重要，以至于其在Google是必须做的一个实践过程。它能提供以下的好处：</p>
+<ul>
+<li>代码正确性：评审人员可能发现评审代码中的逻辑问题，从而提前消除一些潜在的Bug；</li>
+<li>代码可读性：代码能否被其他人很容易的理解？API语义设计是否合理？是否包含测试？是否有必要的文档与注释？</li>
+<li>代码一致性：代码风格是否与团队和组织保持一致？</li>
+<li>促进团队知识共享：代码评审可以让团队其他成员了解你所做工作的上下文；</li>
+<li>塑造团队工程文化：团队保持代码评审的实践，本身也是团队工程文化的一部分，能让新的成员迅速适应团队工程文化；</li>
+</ul>
+<p>代码评审的最佳实践有以下：</p>
+<ul>
+<li>友善且专业</li>
+<li>小的变更</li>
+<li>清晰的变更描述</li>
+<li>小规模评审</li>
+<li>尽可能自动化</li>
+<li>金字塔模型</li>
+</ul>
+<p>代码评审金字塔模型如下图所示：</p>
+<figure >
+    <a href="https://www.morling.dev/blog/the-code-review-pyramid/">
+        <div class="fixed-container"><amp-img src="https://img.bmpi.dev/94f914a6-e7cd-1075-062b-dfbdf3880f15.png" class="contain" alt="图片来源：《The Code Review Pyramid - Gunnar Morling》" layout="fill"></amp-img></div>
+    </a>
+    
+    <figcaption>
+        <p>
+        图片来源：《The Code Review Pyramid - Gunnar Morling》
+        
+            
+        
+        </p> 
+    </figcaption>
+    
+</figure>
+<p>代码评审的反模式是倒金字塔模型，也就是很多时间花费在了可以自动化执行的部分比如代码风格的统一、自动化测试等，但在金字塔模型里，代码评审应该把主要的精力放在API语义、实现语义及文档等部分。</p>
+<h3 id="code-review-vs-code-diff">Code Review v.s. Code Diff</h3>
+<p>Diff 和 Review 的区别在于前者是一个团队集体行动，团队成员一块看某个开发者前一天写的代码，这样的好处在于每个人都能反馈，也能了解其他人做的工作，防止一些信息不同步的问题。代码评审一般是一两个人（可能甚至是团队外部的人）去审查对方要合入主干分支的代码，更适合外部人员提交代码到主干这种 GitHub PR 分支管理模式。</p>
+<p>我所在项目的团队每天会做 Code Diff ，这是个必须的实践。团队规模在几人以内可以让每个人都有时间讲解自己的代码，如果代码太多，那可以给每个人一个时间限制。如果团队太大那可以拆分成多个 stream 来管理，总之 Diff 的人员不能太多，但每天都应该花时间做，因为收益要高于成本，可以统一代码风格，保证可读性，提高成员技术水平。</p>
+<h2 id="技术文档technical-documentation">技术文档(Technical Documentation)</h2>
+<pre><code class="language-markmap" data-lang="markmap">- Technical Documentation
+  - 一些实践
+    - 文档即代码
+    - 文档流程化
+    - 了解受众
+    - 文档评审
+  - 文档类型
+    - 引用类(Reference)
+    - 设计类(Design)
+    - 教程类(Tutorial)
+    - 概念类(Conceptual)
+    - 登陆页(Landing Page)
+  - 文档写作最佳实践
+    - 5W+1H
+    - 三段式
+    - 好文档的特征
+      - 完整
+      - 准确
+      - 清晰
+    - 弃用文档
+</code></pre><p>技术文档与代码一样应该得到开发者同等的重视，但有太多文档与代码不同步的场景出现，导致文档的可用性大大降低。为什么会出现这种问题？一方面是因为开发者重视度不够的问题，另外一方面是因为写一份好的技术文档并不是一件简单的事情。</p>
+<p>如何写一份好的技术文档？推荐阅读如下的文章：</p>
+<ul>
+<li><a href="https://css-tricks.com/technical-writing-for-developers/">Technical Writing for Developers</a></li>
+<li><a href="https://developers.google.com/tech-writing/overview">Technical Writing | Google Developers</a></li>
+<li><a href="https://www.semrush.com/blog/seo-copywriting/">SEO Copywriting Guide</a></li>
+</ul>
+<p>开发人员不喜欢文档的另外一个原因在于，代码和文档的工作流程并不相同，一般文档都存放在与代码不同的位置，比如某个FTP目录以Word的格式存在。要是文档的编写可以和代码在同一套工作流里，就能极大的降低开发者的心智负担，这正是<a href="https://www.writethedocs.org/guide/docs-as-code/">Docs-as-code</a>的设计理念，具体的流程实践可以看这篇文章：</p>
+<ul>
+<li><a href="https://blog.cloudflare.com/our-docs-as-code-approach/">Working in public — our docs-as-code approach</a></li>
+</ul>
+<h2 id="测试testing">测试(Testing)</h2>
+<pre><code class="language-markmap" data-lang="markmap">- 测试概述
+    - 测试代码的好处
+      - 更少的Debugging
+      - 提升对代码变更的信心
+      - 测试代码是更好的文档
+      - 让代码评审更简单
+      - 好的测试反向提升代码设计
+      - 自动化测试让持续交付变的更容易
+    - 设计测试套件
+      - 测试大小
+        - 小
+          - 单线程
+          - 无法执行阻塞线程的操作
+            （测试替身）
+          - 类比单元测试
+        - 中
+          - 可跨进程但不能跨机器
+          - 类比集成测试
+        - 大
+          - 可跨机器
+          - 主要验证环境配置
+          - 在构建和发布时执行此类测试
+          - 类比E2E测试
+        - 实践
+          - 测试之间应隔离
+          - 清晰简单的测试
+      - 测试范围
+        - 窄范围测试
+          - 验证代码逻辑
+          - 类比单元测试
+        - 中范围测试
+          - 验证系统组件交互
+          - 类比单元测试
+        - 广范围测试
+          - 验证系统间交互
+          - 类比E2E测试
+        - 实践
+          - 金字塔模型
+            - 80%单元测试
+            - 15%集成测试
+            - 5%E2E测试
+          - 反模式
+            - 冰激凌甜筒模型
+            - 沙漏模型
+          - 测试模型的选择
+            - 工程生产力
+            - 产品信心
+      - The Beyoncé Rule
+        - 测试原则：测试所有不想被破坏的东西
+        - 测什么
+          - 性能
+          - 行为正确性
+          - 可用性
+          - 安全
+          - 异常与错误
+      - 关于测试覆盖率
+        - 仅测量单元测试覆盖率
+        - 覆盖率目标是底线
+        - 考虑被测试的行为
+          - 对系统的正常工作有信心
+          - 对依赖的破坏性更新有信心
+          - 测试稳定可靠吗
+      - 测试套件的陷阱
+        - 脆弱的测试
+          - 糟糕的测试代码
+          - 滥用Mock
+        - 缓慢的测试
+          - 处理大数据集
+          - 启动系统
+          - 同步等待其他依赖
+    - Google测试文化的历史
+      - 针对新员工的专项课程
+      - 测试认证计划
+      - 在厕所推广测试(TotT)
+    - 自动化测试的局限
+      - 无法取代人工探索性测试
+</code></pre><p>测试是软件工程过程中很重要的一个组成部分，而这里的测试主要指自动化测试过程，人工测试占比很少。测试也有一个金字塔模型，如下图所示：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/ca9e23e9-b0c0-3b22-bce3-abbdcabc684f.png" alt="" layout="fill"></amp-img></div></p>
+<p>关于测试金字塔的细节，推荐阅读这篇文章：</p>
+<ul>
+<li><a href="https://martinfowler.com/articles/practical-test-pyramid.html">The Practical Test Pyramid</a></li>
+</ul>
+<p>开发人员写自动化测试有如下好处：</p>
+<ul>
+<li>更少的Debugging：有了自动化测试后，系统的很多行为可以通过测试代码观察到。当然Bug一旦产生说明测试代码覆盖不全面，需要补上相关的测试，久而久之，测试代码就形成了非常全面的防护网。</li>
+<li>提升对代码变更的信心：当有了测试防护网后，对代码一旦产生破坏性的更新，测试代码会失败，这就给开发人员机会在部署前去修复此问题。</li>
+<li>测试代码是更好的文档：当面对一个完全陌生的代码库时，除了有限的文档，另外一个了解系统行为的方式就是看测试代码。测试代码相比文档，有着更全面清晰的业务细节，能给予开发人员更多的信息去了解此业务系统。</li>
+<li>让代码评审更简单：测试代码相比生产代码更接近业务视角，能让评审人员从业务系统对外行为的视角去了解生产代码的意图。这样也能让评审人员做出更有效的反馈意见。</li>
+<li>好的测试反向提升代码设计：要让系统模块具备一定的测试性才能写出测试代码，所以有测试的代码从设计的角度看，其可读性与解耦度相比没有测试代码的要更高。敏捷实践中推崇的TDD(Test Driven Development)就是一种通过测试驱动出好的实现代码的实践。</li>
+<li>自动化测试让持续交付变的更容易：如果没有自动化测试的帮助，代码部署上去后出Bug的概率要更高，这会提高系统交付的时间。</li>
+</ul>
+<blockquote>
+<p>没有测试代码的系统是遗留系统。</p>
+</blockquote>
+<h3 id="单元测试unit-testing">单元测试(Unit Testing)</h3>
+<pre><code class="language-markmap" data-lang="markmap">- 单元测试(Unit Testing)
+    - 优势
+      - 小且快，能立即获得反馈
+      - 容易编写
+      - 能提高测试覆盖率
+      - 失败时能快速定位问题
+      - 能作为技术文档
+    - 提高可维护性
+      - 脆弱的测试
+        - 不变的测试
+          - 重构
+            （不应修改测试）
+          - 新特性
+            （不应修改测试）
+          - Bug Fixes
+            （不应修改测试）
+          - 业务行为改变
+            （只有在此情况下才修改测试）
+        - 测试公开接口
+          - 避免测试具体实现
+          - 合适的测试范围
+            - 局部支持类无需独立测试
+            - 只测试公开的接口
+            - 通用支持类需有独立测试
+        - 测试状态而非交互
+      - 不清晰的测试
+        - 编写完整简洁的测试
+          - 通过冗余提供完整的信息
+          - 不包含无关的信息
+    - 好的实践
+      - 测试行为而非方法
+        - given
+        - when
+        - then
+      - 测试名称应提现测试行为
+        - 测试行动
+        - 结果预期
+      - 测试不应包含逻辑
+        - 测试代码简单直接
+        - 适当冗余而非精简
+      - DAMP原则
+        Descriptive And Meaningful Phrases
+        当在测试代码共享代码和数据时采用此规则
+</code></pre><p>单元测试作为占比测试金字塔最大部分的底座，重要性不言而喻。它的优势很多，但Google在多年的实践中发现，提高单元测试的可维护性非常重要。而难以维护的测试代码主要有两方面造成：</p>
+<ul>
+<li>测试脆弱：当在代码重构、添加新特性及修复Bug时，会出现一些测试无法跑通，只能通过修改测试的方式来解决，这说明已有的测试很脆弱。好的测试应该只有在系统的业务行为发生改变时，才需要修改生产代码和测试代码。造成测试脆弱的原因有很多种，可能的原因包括测试隔离没做好，比如依赖了很多共享的全局性状态，或者测试了非公开的函数或方法，又或者测试的粒度过细，把很多实现细节给测试了。</li>
+<li>测试不清晰：不清晰的原因也有很多方面，比如测试的名称并没有体现其测试意图，在单个测试中测试了一些不必要的行为，又或包含了很多无关的信息。</li>
+</ul>
+<p>要提高可维护性，一些好的实践包括以下方面：</p>
+<ul>
+<li>测试行为而非方法：很多测试框架如Junit都倡导Given/When/Then三段式测试编写方式，这样可以从验收标准(Acceptance Criteria)的业务视角去编写测试，而非针对单个函数或方法去编写测试（这很容易写出脆弱的测试）。</li>
+<li>测试名称应提现测试行为：当单元测试失败时，最先看到的就是测试失败单元的名称，好的测试名称能以最直接的方式体现该测试意图，所以测试名称长一些也可以。</li>
+<li>测试不应包含逻辑：因为测试单元本身并没有额外的测试，如果测试包含了比较复杂的逻辑，可能会导致测试代码的Bug。所以测试代码中尽可能不包含逻辑计算的过程。</li>
+<li>DAMP(Descriptive And Meaningful Phrases)原则：在生产代码上业界倡导<a href="https://zh.wikipedia.org/wiki/%E4%B8%80%E6%AC%A1%E4%B8%94%E4%BB%85%E4%B8%80%E6%AC%A1">DRY</a>(Don&rsquo;t repeat yourself)的基本原则。而在测试代码中，正如上面几条实践表明，一定程度上的代码冗余是有必要的，这能帮助我们编写出简单而清晰的测试代码。</li>
+</ul>
+<p>单元测试的代码执行速度一定要快，但在要测试的生产代码中，可能包含了执行速度很慢的代码，比如网络或文件等I/O操作，又或者对数据库的请求，甚至需要整个应用启动来获得完整的执行环境。如何将这类慢的代码与真正要测试业务逻辑的代码隔离开来？那就是接下来要介绍的测试替身技术。</p>
+<h3 id="测试替身test-doubles">测试替身(Test Doubles)</h3>
+<pre><code class="language-markmap" data-lang="markmap">- 测试替身(Test Doubles)
+    - 基本概念
+      - 缝(Seams)
+        通过使用测试替身
+        实现可测试性的技术
+        - 依赖注入(Dependency Injection)
+      - Mocking框架
+    - 测试替身技术
+      - 伪造(Faking)
+        API的轻量级实现
+      - 打桩(Stubbing)
+        赋予函数行为的过程
+      - 交互测试(Interaction Testing)
+        验证函数调用行为及参数
+    - 何时使用
+      - 真实实现
+        - 执行时间快
+        - 确定性的
+        - 实例构造简单
+      - 伪造(Faking)
+        - 权衡维护成本与收益
+        - 当真实实现不可用时
+        - 考虑伪造的保真度
+        - 需要写测试
+      - 打桩(Stubbing)
+        - 谨慎使用打桩
+          - 可能会让测试意图不清晰
+          - 可能让测试变得脆弱
+            测试代码包含了实现细节
+          - 可能让测试变得低效
+            难以测试有副作用的状态
+        - 在真实实现和伪造不可用时
+        - 少量函数仅依赖返回值时
+      - 交互测试(Interaction Testing)
+        - 容易让测试变得脆弱
+          测试代码包含了实现细节
+          尽可能测试状态而非交互
+        - 需测试函数副作用时使用
+        - 需测试函数调用次序时使用
+        - 不要过度测试
+          仅测试必须测试的信息
+</code></pre><p>测试替身能通过一些模拟或伪造的技术来控制被测试代码的执行路径，比如在OOP中我们可以通过接口的多个实现，来完成生产代码与测试代码的不同实现。</p>
+<p>由于测试替身技术本身非常成熟，所以本文不做基本的介绍，推荐阅读这篇文章进一步了解：</p>
+<ul>
+<li><a href="https://martinfowler.com/bliki/TestDouble.html">TestDouble</a></li>
+</ul>
+<p>在Google的多年实践中发现，测试替身很容易被滥用，造成很多脆弱的测试，而被滥用最多的就是打桩(Stubbing)技术。不同替身技术都有其适用场景，推荐的一个决策流程是：</p>
+<ul>
+<li>如果生产代码的执行时间足够快，那就不需要替身技术，直接测试生产代码；</li>
+<li>如果伪造（Faking）的实现成本很低，且伪造的保真度够高（能尽可能模拟真实的使用场景），则推荐使用伪造替身技术；</li>
+<li>如果在前两者都不可用的情况下，仅被测试代码只依赖少量函数或方法的返回值时，可以使用打桩(Stubbing)替身技术；</li>
+<li>交互测试(Interaction Testing)替身技术谨慎使用，如果要用也仅在需测试函数副作用或调用次序时使用，并且不要过度测试不必要的数据；</li>
+</ul>
+<h3 id="较大型的测试larger-testing">较大型的测试(Larger Testing)</h3>
+<pre><code class="language-markmap" data-lang="markmap">- 较大型的测试
+    - 为什么需要
+      - 单元测试保真度的问题
+      - 环境配置的问题
+      - 负载下的问题
+      - 预期外的行为与副作用
+      - 紧急行为和真空效应
+        - 意外的修改
+        - 单元测试覆盖不到的位置
+    - 挑战
+      - 维护与归属的问题
+      - 缺乏开发标准
+    - 结构
+      - SUT
+        - 契约测试(Contract test)
+      - 测试数据
+        - 种子数据
+        - 测试流量
+        - 采样数据
+        - 手工数据
+        - 真实基线
+      - 验证
+        - 手工
+        - 断言
+    - 类型
+      - 功能性测试
+      - 浏览器和设备测试
+      - 性能测试
+      - 部署配置测试
+      - 探索性测试
+        - Bug Bash
+      - A/B测试
+      - 用户验收测试(UAT)
+      - 混沌测试(Chaos)
+    - 工作流
+      - 编写
+      - 运行
+        - 加速测试
+          - 降低内部系统超时和延迟
+          - 优化测试构建时
+        - 驱除松散性
+          - 密封的SUT环境
+        - 使测试易于理解
+          - 清晰的故障定位信息
+          - 尽可能减少定位问题的成本
+            如日志打印分布式追踪ID而非堆栈信息
+          - 提供支持和联系信息
+      - 维护
+</code></pre><p>在测试金字塔的顶端是占比只有20%的集成测试与E2E测试，虽然占比少，但其却可解决单元测试的以下问题：</p>
+<ul>
+<li>保真度的问题：单元测试因使用测试替身来加速执行时间，但替身与实现本身就存在保真度的问题，一旦被替身的实现发生改变，单元测试因模拟行为未变，可能造成一些意想不到的Bugs。</li>
+<li>环境配置的问题：环境的问题只能在接近生产环境的测试环境（如UAT）环境中去测试与发现问题，这是单元测试无法覆盖的测试范围。如Google的一些重大全球性的Bug都和环境配置问题有关系。</li>
+<li>负载下的问题：在压力测试下，系统的行为表现如何？性能是否能达到业务要求？这类非功能性的需求测试只能在E2E测试中完成。</li>
+<li>预期外的行为与副作用：单元测试是在开发者预期的视角下完成的，所以存在一定的视角盲区。在一个接近生产环境的测试环境测试是发现这类问题最好的办法。</li>
+<li>紧急行为和真空效应：如果系统的运行时环境发生一些意外的修改，如集群网络配置或部署配置发生变更，这类问题也只能在集成环境中发现。</li>
+</ul>
+<p>较大型测试的编写与维护都是成本高昂的，在我们项目实践中，一般和业务系统强相关的集成测试和部分E2E测试都是业务开发团队完成的。但一些公共的E2E测试，比如某个全局性的功能性测试，可能由一个独立的小组完成，也可能只完成一个MVP的版本，之后由业务系统维护团队开发完成。</p>
+<h2 id="弃用deprecation">弃用(Deprecation)</h2>
+<pre><code class="language-markmap" data-lang="markmap">- Deprecation
+  - 为什么
+    - 代码是负债而非资产
+      因为需要维护
+    - 过时的系统需要弃用
+      - 维护成本太高
+      - 功能无用、重复或被替代
+    - 旧不意味着过时
+    - 代码越少，功能越多
+  - 困难
+    - 系统用户越多，越难弃用
+    - 系统启用，代码保留
+    - 被弃用的，和没有准备好的
+    - 演进而非弃用
+  - 在设计时考虑弃用
+    - 谨慎启动新项目
+  - 类型
+    - 咨询
+    - 强制
+    - 警告
+      - hope is not a strategy
+      - alert fatigue
+  - 流程
+    - Owner
+    - 里程碑
+    - 工具
+      - How/By who
+      - Code Search
+      - Testing
+</code></pre><p>代码是资产还是负债？Google的答案是负债，因为代码需要不断的维护才能正常工作。负债是有高昂的利息，降低负债最好的办法就是在不需要的时候砍掉它。而这就是弃用过程的价值。</p>
+<p>对开发人员来说，弃用是个难以接受的过程，因为幸苦写的代码，很难下定决心去销毁它。所以一个中庸之道是在代码将要被弃用前，想办法通过演进的方式给予其二次生命。如果非要弃用，也只是停止维护和运行，旧的代码依旧会在代码仓库中可被搜索到，历史记录也会被保留。</p>
+<p>我的个人项目实践是，下线一个系统是一件需要重视的过程。一个系统一旦被发布，它被使用的场景就很难以想象，API的用户可能会以意想不到的方式去使用它。所以尽可能通过代码搜索去找到其被使用的场景，之后再给充足的Deadline广而告之，甚至可以主动与用户沟通，确保不会让其出现大的损失。</p>
+<h2 id="总结">总结</h2>
+<p>代码可能只会被写一次，但会被读很多次。所以软件工程中的过程部分主要致力于解决代码可读性的问题。无论是风格指南、代码评审、文档甚至自动化测试，很大程度上都在为提高代码可读性。</p>
+<p>写代码很容易，能写出易懂的代码却有难度。所以从这个角度看，写代码是个入门简单精通却难的技能，需要我们不断的精进，通过多种实践去提高这个技能。希望这篇文章能让你对写代码这件事有更多的理解。</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>
