@@ -29,7 +29,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/</loc>
-    <lastmod>2022-05-13T18:04:29+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -154,7 +154,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/aws/</loc>
-    <lastmod>2022-02-18T09:32:20+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -304,7 +304,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/dev/guide-to-serverless/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -319,7 +319,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/aws-ecs/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -334,7 +334,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/devops/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -349,7 +349,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/docker/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -364,7 +364,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/infrastructure-as-code/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -379,7 +379,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/lambda/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -394,7 +394,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/serverless/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -409,12 +409,12 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/serverless-architecture/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/terraform/</loc>
-    <lastmod>2021-02-14T16:04:53+08:00</lastmod>
+    <lastmod>2022-09-11T23:20:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
