@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/software-engineering-at-google/process/",
-        "title": "Google软件工程之过程篇",
-        "description": "本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程的过程，主要包括Code Review、技术文档与自动化测试（单元、集成、E2E）。",
-        "publish-date": "2022-08-08 00:00:00 +0000 UTC"
+        "url": "/money/invest-alchemy/",
+        "title": "投资炼金术",
+        "description": "投资炼金术系统支持多种投资交易策略，可评估用户的投资交易水平，自动计算用户投资组合的净值，从而提升用户的投资交易水平。",
+        "publish-date": "2022-09-12 00:00:00 +0000 UTC"
     }
 }
