@@ -3,6 +3,46 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/tags/%E6%97%B6%E9%97%B4%E6%9D%A0%E6%9D%86/</loc>
+    <lastmod>2022-09-15T22:04:54+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/</loc>
+    <lastmod>2022-09-15T22:04:54+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/self/build-leverage/</loc>
+    <lastmod>2022-09-15T22:04:54+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/series/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
+    <lastmod>2022-09-15T22:04:54+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%AE%A4%E7%9F%A5%E6%9D%A0%E6%9D%86/</loc>
+    <lastmod>2022-09-15T22:04:54+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%B4%A2%E5%8A%A1%E6%9D%A0%E6%9D%86/</loc>
+    <lastmod>2022-09-15T22:04:54+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E7%AD%96%E7%95%A5/</loc>
     <lastmod>2022-09-12T14:56:14+08:00</lastmod>
   </url>
@@ -20,21 +60,6 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
     <lastmod>2022-09-12T14:56:14+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2022-09-12T14:56:14+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/"
-                />
   </url>
 
   <url>
@@ -500,11 +525,6 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8C%96%E8%B4%A2app/</loc>
     <lastmod>2022-02-18T09:32:20+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/series/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2022-08-24T07:40:51+08:00</lastmod>
   </url>
 
   <url>
