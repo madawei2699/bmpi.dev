@@ -224,10 +224,10 @@
       
       
       
-      <link>https://www.bmpi.dev/dev/time-in-distributed-system/</link>
+      <link>https://www.bmpi.dev/dev/distributed-system/time/</link>
       <pubDate>Fri, 24 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://www.bmpi.dev/dev/time-in-distributed-system/</guid>
+      <guid>https://www.bmpi.dev/dev/distributed-system/time/</guid>
       <description>本文梳理在分布式系统中时间对事件序列的影响，介绍逻辑时钟、向量时钟及混合逻辑时钟等不同算法的解决思路。</description>
     </item>
     
@@ -238,10 +238,10 @@
       
       
       
-      <link>https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/</link>
+      <link>https://www.bmpi.dev/dev/distributed-system/authentication-and-authorization/</link>
       <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://www.bmpi.dev/dev/authentication-and-authorization-in-a-distributed-system/</guid>
+      <guid>https://www.bmpi.dev/dev/distributed-system/authentication-and-authorization/</guid>
       <description>本文从高层次梳理在不同架构演进中认证、授权及凭证这些和架构安全相关的技术的发展过程。</description>
     </item>
     
@@ -588,10 +588,10 @@
       
       
       
-      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-5/</link>
+      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/5/</link>
       <pubDate>Sat, 26 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-5/</guid>
+      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/5/</guid>
       <description>网站部署国外又不想备案，国内访问速度太慢怎么办？本文教你优化国外部署网站在国内的访问速度。</description>
     </item>
     
@@ -742,10 +742,10 @@
       
       
       
-      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-4/</link>
+      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/4/</link>
       <pubDate>Sun, 19 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-4/</guid>
+      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/4/</guid>
       <description>博客搭建好后，如何优化加载速度？本文告诉你答案</description>
     </item>
     
@@ -756,10 +756,10 @@
       
       
       
-      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-3/</link>
+      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/3/</link>
       <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-3/</guid>
+      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/3/</guid>
       <description>个人博客搭建好后，如何让你的读者第一时间收到文章更新？本文告诉你答案</description>
     </item>
     
@@ -784,10 +784,10 @@
       
       
       
-      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-2/</link>
+      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/2/</link>
       <pubDate>Fri, 13 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-2/</guid>
+      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/2/</guid>
       <description>如何能让搜索引擎给我们带来免费而源源不断的SEO流量？如何给新建的站做基本的SEO？如何分析老站的流量现状通过一些优化方法来提高SEO流量？如何做关键词研究？如何做网站竞品研究？如何做面向SEO搜索意图的内容创作？本文告诉你答案</description>
     </item>
     
@@ -812,10 +812,10 @@
       
       
       
-      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-1/</link>
+      <link>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/1/</link>
       <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost-1/</guid>
+      <guid>https://www.bmpi.dev/dev/guide-to-setup-blog-site-with-zero-cost/1/</guid>
       <description>本文介绍了如何零成本搭建一个自由独立的写作平台-基于GitHub的个人技术博客搭建指南</description>
     </item>
     
