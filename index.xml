@@ -6,7 +6,21 @@
     <description>Recent content on 构建我的被动收入</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 15 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 16 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google软件工程之工具篇</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/dev/software-engineering-at-google/tool/</link>
+      <pubDate>Fri, 16 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/dev/software-engineering-at-google/tool/</guid>
+      <description>本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程的相关工具，主要包括版本控制、分支管理、代码搜索、构建系统、代码静态化分析、依赖管理与CI/CD等。</description>
+    </item>
+    
     <item>
       <title>构建自己的杠杆</title>
       

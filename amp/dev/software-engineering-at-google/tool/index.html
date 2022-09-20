@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>Google软件工程之工具篇</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/software-engineering-at-google/tool/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/software-engineering-at-google\/",
+          "name": "software-engineering-at-google"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/software-engineering-at-google\/tool\/",
+          "name": "tool"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>Google软件工程之工具篇</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2022-09-16T00:00:00Z'>
+                2022-09-16
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">分支管理</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/">构建系统</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E4%BB%A3%E7%A0%81%E6%90%9C%E7%B4%A2/">代码搜索</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/">静态分析</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">依赖管理</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">持续集成</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98/">持续交付</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%BF%98%E6%98%AF%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1">软件工程还是软件设计</a></li>
+<li><a href="#google%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E4%B8%AD%E7%9A%84%E5%B7%A5%E5%85%B7">Google软件工程中的工具</a>
+<ul>
+<li><a href="#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6version-control">版本控制(Version control)</a>
+<ul>
+<li><a href="#cvcs-vs-dvcs">CVCS vs DVCS</a>
+<ul>
+<li><a href="#%E5%8D%95%E4%B8%80%E4%BB%A3%E7%A0%81%E4%BB%93monorepo">单一代码仓(Monorepo)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86branch-management">分支管理(Branch management)</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E6%90%9C%E7%B4%A2%E6%9E%84%E5%BB%BA%E4%B8%8E%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90code-search--build-system--static-analysis">代码搜索、构建与静态分析(Code search &amp;&amp; Build system &amp;&amp; Static analysis)</a></li>
+<li><a href="#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86dependency-management">依赖管理(Dependency management)</a></li>
+<li><a href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98continuous-integration--continuous-delivery">持续集成与持续交付(Continuous Integration &amp;&amp; Continuous Delivery)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E">写在最后</a></li>
+</ul>
+<p>这是<a href="https://www.bmpi.dev/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">Google软件工程系列</a>的最后一篇，这篇主要是分享软件工程中常用的工具，这些工具支撑了软件工程中的流程。但在开始之前，我们先思考一个问题：软件的研发到底是工程还是设计？</p>
+<h2 id="软件工程还是软件设计">软件工程还是软件设计</h2>
+<p>传统工程的流程比如土木工程是设计师先设计好图纸，然后工程队按照设计图纸去施工建造，所以这里的工程既包含设计又包含建造，但负责设计的人员明显与建造的人员不是同一类人，甚至有着非常大的差异。</p>
+<p>那软件的生产流程是什么呢？以敏捷开发流程为例，组建一个软件开发队伍，先进行Inception确定好开发的需求及范围，之后根据需求拆分故事卡，开发人员根据故事卡实现产品需求。在实现故事卡的过程中，开发人员每天会写一部分代码并在本地做自测，之后会对代码做<a href="https://www.bmpi.dev/dev/software-engineering-at-google/process/#code-review-vs-code-diff">Code Diff</a>，在这个过程中又可能重新修改设计与实现。不断重复这个过程，直到最终这部分代码进入集成环境被测试人员验收，最终会上线到生产环境。那么这个过程中既包含了设计又包含了实现（或者说建造），或者说这实际上是个不断设计的过程。</p>
+<p>以下两篇文章推荐阅读，可能会让你对这个问题有更好的理解：</p>
+<ul>
+<li><a href="https://www.hillelwayne.com/post/are-we-really-engineers/">Are We Really Engineers?</a></li>
+<li><a href="https://www.developerdotstar.com/mag/articles/reeves_design.html#:~:text=The%20final%20goal,source%20code%20listings.">What Is Software Design?</a></li>
+</ul>
+<h2 id="google软件工程中的工具">Google软件工程中的工具</h2>
+<blockquote>
+<p>以下是《Software Engineering at Google》一书第四部分工具篇的思维导图，由于此部分占全书近40%，所以本文不会详细地介绍其中的概念，想详细了解的读者建议阅读原书。本文会结合此书这部分内容分享作者的个人理解及相关经验。</p>
+</blockquote>
+<pre><code class="language-markmap" data-lang="markmap"># Google软件工程
+## 文化(Culture)
+## 过程(Process)
+## 工具(Tool)
+- 版本控制
+  - 分类
+    - 集中式(Centralized VCS)
+    - 分布式(Distributed VCS)
+  - 存储类型
+    - Monorepo
+    - Polyrepo
+  - 分支管理
+    - Git Flow
+    - GitHub Flow
+    - Trunk-Based Development
+    - Scaled Trunk-Based Development
+- 代码搜索
+- 构建系统
+  - 基于任务的构建系统
+    - Ant
+    - Make
+  - 基于制品的构建系统
+    - Bazel
+    - Gradle
+    - Nx
+- 静态分析
+- 依赖管理
+  - 问题
+    - 钻石依赖
+    - 兼容性
+    - 安全性
+    - 许可证
+    - 运营
+  - 管理方式
+    - 静态依赖模型
+    - 语义化版本
+    - 绑定分发模式
+    - Live at Head
+- 持续集成
+- 持续交付
+</code></pre><h3 id="版本控制version-control">版本控制(Version control)</h3>
+<p>在众多软件工程所用的工具中，最重要的我觉得就是版本控制系统了（Version Control System）。版本控制系统从字面意思就可以看出来是控制源代码的版本的，VCS就像时间宝石一样让开发人员在源代码历史中穿梭，为什么这种能力很重要？</p>
+<p>其实这和本文开头那个问题相关，如果说软件开发是一个设计的过程，那这个设计可能需要不断修改，能最低成本地在不同版本间切换非常重要，更重要的是这种能力可以让多人协作完成软件的设计与开发。</p>
+<blockquote>
+<p>Development is inherently a branch-and-merge process, both when coordinating between multiple developers or a single developer at different points in time. (Software Engineering at Google)</p>
+</blockquote>
+<p>版本控制也让软件开发过程中产生了Code Diff或Code Review的过程进而促进团队知识共享，而这又是软件工程中文化的一部分。版本控制也影响了软件的部署过程，比如结合Pipeline与Artifact Repository，可以构建出不同环境不同版本的软件制品。</p>
+<h4 id="cvcs-vs-dvcs">CVCS vs DVCS</h4>
+<p>早期的版本控制系统是集中式(CVCS)的，比如Subversion，现在更流行的是分布式的（DVCS），比如Git。这两者的区别可以看这篇文章：</p>
+<ul>
+<li><a href="https://git.wiki.kernel.org/index.php/GitSvnComparison">GitSvnComparison</a></li>
+</ul>
+<p>CVCS与DVCS仅仅是适用的场景不同，并不意味着后者是前者更好的替代。比如很多大的公司或组织，如Google、Microsoft与FreeBSD都在用CVCS。一般来说大的公司更偏向于用CVCS，与CVCS密切相关的就是单一代码仓(Monorepo)了。</p>
+<blockquote>
+<p>分布式版本控制系统如Git，其实是没有中央存储库的。我们在GitHub克隆某个仓库到本地，其中的<code>origin</code>其实是刻意约定设置成中央仓库的，但我们可以在本地仓库中添加多个远端中央仓库，也可以<code>rebase</code>多个远端仓库的代码到本地仓库。</p>
+</blockquote>
+<h5 id="单一代码仓monorepo">单一代码仓(Monorepo)</h5>
+<p>Monorepo简单理解就是把整个组织的所有项目的代码都放入一个仓库中。初看不可思议，但Monorepo并不仅仅是把代码放一块就行了，它需要一整套的流程与工具链支撑，比如不同团队协作模式、代码库之间的依赖管理、目录的权限配置、构建与发布等。</p>
+<p>与以Git为主的Polyrepo（一个项目一个代码存储库）存储库模型相比，Monorepo有如下的好处：</p>
+<ul>
+<li>代码共享：所有人都可以看到其他人的代码，能降低重复代码；</li>
+<li>统一依赖：不会出现多个项目依赖相同三方包的不同版本导致的冲突问题；</li>
+<li>跨项目修改简单：大规模跨项目的重构更简单了，能一次修改多个项目的代码；</li>
+<li>共享构建发布流程：能共享同一套构建发布流程，简化基础设施的复杂性；</li>
+</ul>
+<blockquote>
+<p>Developers within an organization must not have a choice where to commit, or which version of an existing component to depend upon.  (Software Engineering at Google)</p>
+</blockquote>
+<p>进一步了解，强烈推荐阅读这篇文档：</p>
+<ul>
+<li><a href="https://monorepo.tools/">Monorepo Explained</a></li>
+</ul>
+<h4 id="分支管理branch-management">分支管理(Branch management)</h4>
+<p>版本控制系统不仅可以让开发人员具备<q>时间穿梭</q>的能力，还具备开辟<q>多重宇宙</q>的能力，这就是分支(Branch)的功能。分支不仅仅是代码的不同版本，它还深刻的影响了开发部署的流程。</p>
+<p>早期流行复杂的<a href="https://nvie.com/posts/a-successful-git-branching-model/">Git Flow</a>分支模型，但这种模型带来了很复杂的维护成本，包括分支的管理、冲突的解决等问题。最终逐渐演变出更简单的主干分支开发(<a href="https://trunkbaseddevelopment.com/">Truck Based Development</a>)模型。</p>
+<blockquote>
+<p>主干开发分支在实践中可能存在的问题是，主干分支与流水线（Pipeline）的集成，一般会有不同环境，如CI、INT、UAT、PROD等。当开发人员要在集成环境测试时，如果有紧急的Hotfix代码要推送到生产环境，这时候主干分支中还包含着集成环境的开发代码，就算有特性开关(feature toggle)的支持，也不敢直接把这些代码推入到生产环境。此时能做到就是回滚(git revert)这部分代码回去。这个问题本质还是因为测试环境有限，无法做到一个代码变更部署到一个临时创建的测试环境中，这时候主干开发分支可能需要做一定的调整，比如用Release分支来发布，主干分支做开发代码的Single Source of Truth。</p>
+</blockquote>
+<p>不同分支模型的介绍，推荐这篇文章：</p>
+<ul>
+<li><a href="https://reviewpad.com/blog/github-flow-trunk-based-development-and-code-reviews/">Git(Hub) Flow, Trunk Based Development, and Code reviews</a></li>
+</ul>
+<h3 id="代码搜索构建与静态分析code-search--build-system--static-analysis">代码搜索、构建与静态分析(Code search &amp;&amp; Build system &amp;&amp; Static analysis)</h3>
+<p>代码搜索可以用最简单的<code>grep -r</code>命令或者IDE的搜索功能来实现，但要在多个代码仓库间高效地对某些代码进行跨仓库搜索，那这些工具可能很难满足需求。</p>
+<p>Google自研了一套代码搜索的工具，这个代码搜索工具甚至可以和其他系统如日志查看系统集成。</p>
+<p><a href="https://sourcegraph.com/search">Sourcegraph</a>是一个开源免费的代码搜索云服务，可以与GitHub集成，提供良好的代码阅读体验。</p>
+<p>Google同样实现了自己的基于制品的构建工具<a href="https://bazel.build/">Bazel</a>，Bazel也是支持Monorepo很好的构建工具，同样的还有<a href="https://nx.dev/">Nx</a>与<a href="https://gradle.org/">Gradle</a>。</p>
+<p>代码静态分析就像自动化的Code Review一样，能帮助发现代码中的质量与安全问题，减少不必要的Review时间，提升代码质量。流行的代码静态分析工具中，<a href="https://www.sonarqube.org/">SonarQube</a>是推荐的。</p>
+<h3 id="依赖管理dependency-management">依赖管理(Dependency management)</h3>
+<p>依赖管理可能是软件工程中最复杂的问题之一（短期编程代码无需考虑此问题）。现代软件是建立在大量的依赖库或框架之上的，这些外部代码很多并不受开发人员的控制，当软件变得越来越庞大时，大量的依赖可能会形成复杂的依赖树（如在Gradle项目中，<code>gradle dependencies</code>命令可以打印出应用的依赖树）。</p>
+<p>依赖问题最多的可能是钻石依赖问题，简单说就是同一个包的不同版本共存的问题，这在某些编程语言如Java中影响并不大，因为多个版本可以共存，除非在某些特殊的场景下，不同的包可能会造成一些很诡异的Bug。</p>
+<p>在<a href="https://github.com/blackducksoftware">Black Duck</a>中又把依赖的问题分为三大类：</p>
+<ul>
+<li>许可证(License Risk)：商业应用对依赖包的License有限制，比如无法使用GPL类的License。</li>
+<li>安全(Security Risk)：依赖包经常会被爆出重大的安全<a href="https://nvd.nist.gov/vuln/search/results?form_type=Basic&amp;results_type=overview&amp;search_type=all&amp;isCpeNameSearch=false">CVE</a>问题，有时候因兼容性的问题很难去通过版本升级来修复。</li>
+<li>运营(Operational Risk)：一些小众的编程语言如Clojure的很多包，经常无人维护或者缺乏更新，导致存在潜在的运营风险。</li>
+</ul>
+<p>另外一个主要的问题就是兼容性的问题，比如API出现破坏性的更新，或者ABI无法兼容。</p>
+<blockquote>
+<p>编程语言ABI(Application binary interface)兼容性：与API(Application programming interface)类似，是描述二进制文件的兼容性。比如Java有ABI兼容性的保证，意味着基于新版本JDK的代码可以安全地调用老版本JDK的Jar包。</p>
+</blockquote>
+<p>在解决API变化导致的依赖问题上，业界一个流行的方案是语义化版本：<a href="https://semver.org/lang/zh-CN/">SemVer</a>。通过将版本拆分为三部分，如<code>x.y.z</code>，x是破坏性更新版本号，y是特性版本号，z是Bug修复的版本号。我们可以在依赖配置文件如<code>package.json</code>中通过<code>^</code>或<code>~</code>符号来指定依赖的最大版本号范围。</p>
+<p>依赖管理的问题也可能和代码设计有关。比如应用对某个外部服务有依赖，如何降低外部API变化对应用代码的影响？这个问题可以从设计模式的角度去解决，比如创建一个适配层（如<a href="https://martinfowler.com/articles/gateway-pattern.html">Gateway</a>模式），通过定义一个抽象的接口层去实现，而非依赖具体的外部API去实现。</p>
+<h3 id="持续集成与持续交付continuous-integration--continuous-delivery">持续集成与持续交付(Continuous Integration &amp;&amp; Continuous Delivery)</h3>
+<p>CI是一种团队开发软件的实践，在代码变更集成到主代码分支前尽早的捕捉变更带来的问题，流程主要有<a href="https://www.bmpi.dev/dev/software-engineering-at-google/process/#%E6%B5%8B%E8%AF%95testing">自动化的测试</a>与构建，CI工具可以帮助开发人员快速获得代码变更是否正确的反馈。</p>
+<p>常用的CI工具有：<a href="https://github.com/features/actions">GitHub Actions</a>，<a href="https://www.gocd.org/">GoCD</a>与<a href="https://www.jenkins.io/">Jekins</a>。这些工具也称为流水线（Pipeline)，不仅支持UI的操作，还支持<a href="https://www.thoughtworks.com/radar/techniques/pipelines-as-code">Pipeline as Code</a>。</p>
+<blockquote>
+<p>实际的CI工具一般受制于服务器资源的限制，很难做到一个代码变更(Code Commit)自动部署一个测试验证环境（这也被称为<a href="https://insights.thoughtworks.cn/real-agile-workflow-github-flow/#:~:text=%E9%83%BD%E8%A2%AB%E6%89%A7%E8%A1%8C%E3%80%82-,%E6%97%A0%E9%99%90%E7%8E%AF%E5%A2%83">无限环境CI</a>）。目前只有少数的云服务可以支持前端项目的无限环境CI，比如<a href="https://pages.cloudflare.com/">Cloudflare Pages</a>，<a href="https://vercel.com/">Vercel</a>与<a href="https://www.netlify.com/">Netlify</a>等。</p>
+</blockquote>
+<p>CD发生在代码集成后，包括从代码集成后到发布变更的软件给用户的过程，良好的CD实践既可以快速进行价值交付，又可以快速获得用户反馈。持续交付的原则和<a href="https://www.bmpi.dev/dev/software-engineering-at-google/culture/#:~:text=%E8%BF%99%E9%87%8C%E4%BB%A5-,%E6%95%8F%E6%8D%B7,-%E8%BF%87%E7%A8%8B%E4%B8%BA%E4%BE%8B">敏捷的方法论</a>有一些重合的部分：</p>
+<ul>
+<li>敏捷：小而频繁地发布过程，快速获取反馈。</li>
+<li>自动化：通过自动化的手段降低发布的时间成本。</li>
+<li>隔离：采用模块化的架构设计使需求变更和故障排除更简单。</li>
+<li>可靠：通过技术监控提高系统的可靠性。</li>
+<li>数据驱动：使用埋点或A/B测试获取用户反馈的数据，通过数据做决策。</li>
+<li>分步发布：产品特性先灰度发布，确保无误后再全量推送给用户。</li>
+</ul>
+<h2 id="写在最后">写在最后</h2>
+<p>软件工程或者说软件设计是个复杂的活动，其中既涉及文化相关的东西，又有很复杂的流程及一系列的工具集。如果把这些过程与相关工具结合到一起看，就会出现这么一幅复杂的全景图：</p>
+<p><a href="https://casberw.medium.com/evolution-of-the-software-development-life-cycle-sdlc-the-future-of-devops-38d1f68c6812"><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/50335ea3-4e20-5811-dc55-6ff1e7148001.png" alt="" layout="fill"></amp-img></div></a></p>
+<p>从这个角度看，《Google软件工程》这本书只是从大纲的角度去介绍这些知识，真正的问题还需要我们在研发软件的实践中去体会。这系列文章也只是结合作者自己的知识经验去理解这本书，如有错误，欢迎指正。</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

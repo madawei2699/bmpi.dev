@@ -1,0 +1,2984 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="马大伟">
+  
+  <meta name="description" content="本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程的相关工具，主要包括版本控制、分支管理、代码搜索、构建系统、代码静态化分析、依赖管理与CI/CD等。">
+  
+  
+  
+  <meta name="keywords" content="life,dev,trade,passive income,money,developer,Self-management,IT technology,investment transactions">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="Google软件工程之工具篇"/>
+  <meta name="twitter:description" content="本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程的相关工具，主要包括版本控制、分支管理、代码搜索、构建系统、代码静态化分析、依赖管理与CI/CD等。"/>
+  
+  
+  <meta name="twitter:image" content="https://og.bmpi.dev/Google软件工程之工具篇.png">
+  
+
+  
+  <meta property="og:title" content="Google软件工程之工具篇" />
+<meta property="og:description" content="本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程的相关工具，主要包括版本控制、分支管理、代码搜索、构建系统、代码静态化分析、依赖管理与CI/CD等。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/dev/software-engineering-at-google/tool/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2022-09-16T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-09-20T09:38:05&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+
+
+  
+  <meta name="og:image" content="https://og.bmpi.dev/Google软件工程之工具篇.png">
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "Google软件工程之工具篇",
+      
+      "image": "https://www.bmpi.dev/images/logo.png",
+      
+      "datePublished": "2022-09-16T00:00:00Z",
+      "dateModified": "2022-09-20T09:38:05+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "马大伟"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/dev/software-engineering-at-google/tool/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/logo.png"
+        }
+      },
+      "description": "本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程的相关工具，主要包括版本控制、分支管理、代码搜索、构建系统、代码静态化分析、依赖管理与CI/CD等。",
+      "keywords": ["软件工程", "分支管理", "构建系统", "代码搜索", "静态分析", "依赖管理", "持续集成", "持续交付"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/dev/software-engineering-at-google/tool/">
+  
+  <title>
+  Google软件工程之工具篇 · 构建我的被动收入
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/dev/software-engineering-at-google/tool/">
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.0b3ac9a538605117d35ff727091a6d6e44f092a14b92bc8bd7f2d7f93b02023e.css" integrity="sha256-CzrJpThgURfTX/cnCRptbkTwkqFLkryL1/LX&#43;TsCAj4="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.a2fdc25deb82b741f3a807e38508c2dea269fc900c2b37ee8af380d97ea4d7a8.css" integrity="sha256-ov3CXeuCt0HzqAfjhQjC3qJp/JAMKzfuivOA2X6k16g="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.1.2/dist/index.min.js"></script>
+  <style>
+    code[class*="language-"], pre[class*="language-"] {
+      text-shadow: none !important;
+      font-size: initial !important;
+    }
+  </style>
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/flying-pages.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bmpi.dev/images/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bmpi.dev/images/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bmpi.dev/images/ico/favicon-16x16.png">
+  <link rel="manifest" href="https://www.bmpi.dev/images/ico/site.webmanifest">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/amp/dev/software-engineering-at-google/tool/" title="构建我的被动收入" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="preload" href="https://www.bmpi.dev/scss/tagcloud.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css"></noscript>
+
+  
+  <link rel="stylesheet" href="//unpkg.com/heti/umd/heti.min.css">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css"></noscript>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  
+
+  
+
+  
+
+  <script async defer data-website-id="356d3289-e627-409c-a9d7-a272cf789f0b" src="https://umami.bmpi.dev/umami.js"></script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://www.bmpi.dev/">
+      构建我的被动收入
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/about/">关于</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/self/">学习</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/dev/">技术</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/money/">投资</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/project/">个人项目</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/goal/">长期目标</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/en/">English</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title heti">
+          <h1 class="title">Google软件工程之工具篇</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2022-09-16T00:00:00Z'>
+                2022-09-16
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              20:31
+              
+            </span>
+            
+            <span class="post-word-count"> | 4516 字 | </span>
+            <span id="post-views"></span> 次阅读
+            
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/">分支管理</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F/">构建系统</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E4%BB%A3%E7%A0%81%E6%90%9C%E7%B4%A2/">代码搜索</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90/">静态分析</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">依赖管理</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">持续集成</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98/">持续交付</a></div>
+
+        </div>
+      </header>
+
+      
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <ul>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E8%BF%98%E6%98%AF%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1">软件工程还是软件设计</a></li>
+<li><a href="#google%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E4%B8%AD%E7%9A%84%E5%B7%A5%E5%85%B7">Google软件工程中的工具</a>
+<ul>
+<li><a href="#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6version-control">版本控制(Version control)</a>
+<ul>
+<li><a href="#cvcs-vs-dvcs">CVCS vs DVCS</a>
+<ul>
+<li><a href="#%E5%8D%95%E4%B8%80%E4%BB%A3%E7%A0%81%E4%BB%93monorepo">单一代码仓(Monorepo)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86branch-management">分支管理(Branch management)</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E6%90%9C%E7%B4%A2%E6%9E%84%E5%BB%BA%E4%B8%8E%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90code-search--build-system--static-analysis">代码搜索、构建与静态分析(Code search &amp;&amp; Build system &amp;&amp; Static analysis)</a></li>
+<li><a href="#%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86dependency-management">依赖管理(Dependency management)</a></li>
+<li><a href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E4%B8%8E%E6%8C%81%E7%BB%AD%E4%BA%A4%E4%BB%98continuous-integration--continuous-delivery">持续集成与持续交付(Continuous Integration &amp;&amp; Continuous Delivery)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E">写在最后</a></li>
+</ul>
+<p>这是<a href="https://www.bmpi.dev/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">Google软件工程系列</a>的最后一篇，这篇主要是分享软件工程中常用的工具，这些工具支撑了软件工程中的流程。但在开始之前，我们先思考一个问题：软件的研发到底是工程还是设计？</p>
+<h2 id="软件工程还是软件设计">软件工程还是软件设计</h2>
+<p>传统工程的流程比如土木工程是设计师先设计好图纸，然后工程队按照设计图纸去施工建造，所以这里的工程既包含设计又包含建造，但负责设计的人员明显与建造的人员不是同一类人，甚至有着非常大的差异。</p>
+<p>那软件的生产流程是什么呢？以敏捷开发流程为例，组建一个软件开发队伍，先进行Inception确定好开发的需求及范围，之后根据需求拆分故事卡，开发人员根据故事卡实现产品需求。在实现故事卡的过程中，开发人员每天会写一部分代码并在本地做自测，之后会对代码做<a href="https://www.bmpi.dev/dev/software-engineering-at-google/process/#code-review-vs-code-diff">Code Diff</a>，在这个过程中又可能重新修改设计与实现。不断重复这个过程，直到最终这部分代码进入集成环境被测试人员验收，最终会上线到生产环境。那么这个过程中既包含了设计又包含了实现（或者说建造），或者说这实际上是个不断设计的过程。</p>
+<p>以下两篇文章推荐阅读，可能会让你对这个问题有更好的理解：</p>
+<ul>
+<li><a href="https://www.hillelwayne.com/post/are-we-really-engineers/">Are We Really Engineers?</a></li>
+<li><a href="https://www.developerdotstar.com/mag/articles/reeves_design.html#:~:text=The%20final%20goal,source%20code%20listings.">What Is Software Design?</a></li>
+</ul>
+<h2 id="google软件工程中的工具">Google软件工程中的工具</h2>
+<blockquote>
+<p>以下是《Software Engineering at Google》一书第四部分工具篇的思维导图，由于此部分占全书近40%，所以本文不会详细地介绍其中的概念，想详细了解的读者建议阅读原书。本文会结合此书这部分内容分享作者的个人理解及相关经验。</p>
+</blockquote>
+<pre><code class="language-markmap" data-lang="markmap"># Google软件工程
+## 文化(Culture)
+## 过程(Process)
+## 工具(Tool)
+- 版本控制
+  - 分类
+    - 集中式(Centralized VCS)
+    - 分布式(Distributed VCS)
+  - 存储类型
+    - Monorepo
+    - Polyrepo
+  - 分支管理
+    - Git Flow
+    - GitHub Flow
+    - Trunk-Based Development
+    - Scaled Trunk-Based Development
+- 代码搜索
+- 构建系统
+  - 基于任务的构建系统
+    - Ant
+    - Make
+  - 基于制品的构建系统
+    - Bazel
+    - Gradle
+    - Nx
+- 静态分析
+- 依赖管理
+  - 问题
+    - 钻石依赖
+    - 兼容性
+    - 安全性
+    - 许可证
+    - 运营
+  - 管理方式
+    - 静态依赖模型
+    - 语义化版本
+    - 绑定分发模式
+    - Live at Head
+- 持续集成
+- 持续交付
+</code></pre><h3 id="版本控制version-control">版本控制(Version control)</h3>
+<p>在众多软件工程所用的工具中，最重要的我觉得就是版本控制系统了（Version Control System）。版本控制系统从字面意思就可以看出来是控制源代码的版本的，VCS就像时间宝石一样让开发人员在源代码历史中穿梭，为什么这种能力很重要？</p>
+<p>其实这和本文开头那个问题相关，如果说软件开发是一个设计的过程，那这个设计可能需要不断修改，能最低成本地在不同版本间切换非常重要，更重要的是这种能力可以让多人协作完成软件的设计与开发。</p>
+<blockquote>
+<p>Development is inherently a branch-and-merge process, both when coordinating between multiple developers or a single developer at different points in time. (Software Engineering at Google)</p>
+</blockquote>
+<p>版本控制也让软件开发过程中产生了Code Diff或Code Review的过程进而促进团队知识共享，而这又是软件工程中文化的一部分。版本控制也影响了软件的部署过程，比如结合Pipeline与Artifact Repository，可以构建出不同环境不同版本的软件制品。</p>
+<h4 id="cvcs-vs-dvcs">CVCS vs DVCS</h4>
+<p>早期的版本控制系统是集中式(CVCS)的，比如Subversion，现在更流行的是分布式的（DVCS），比如Git。这两者的区别可以看这篇文章：</p>
+<ul>
+<li><a href="https://git.wiki.kernel.org/index.php/GitSvnComparison">GitSvnComparison</a></li>
+</ul>
+<p>CVCS与DVCS仅仅是适用的场景不同，并不意味着后者是前者更好的替代。比如很多大的公司或组织，如Google、Microsoft与FreeBSD都在用CVCS。一般来说大的公司更偏向于用CVCS，与CVCS密切相关的就是单一代码仓(Monorepo)了。</p>
+<blockquote>
+<p>分布式版本控制系统如Git，其实是没有中央存储库的。我们在GitHub克隆某个仓库到本地，其中的<code>origin</code>其实是刻意约定设置成中央仓库的，但我们可以在本地仓库中添加多个远端中央仓库，也可以<code>rebase</code>多个远端仓库的代码到本地仓库。</p>
+</blockquote>
+<h5 id="单一代码仓monorepo">单一代码仓(Monorepo)</h5>
+<p>Monorepo简单理解就是把整个组织的所有项目的代码都放入一个仓库中。初看不可思议，但Monorepo并不仅仅是把代码放一块就行了，它需要一整套的流程与工具链支撑，比如不同团队协作模式、代码库之间的依赖管理、目录的权限配置、构建与发布等。</p>
+<p>与以Git为主的Polyrepo（一个项目一个代码存储库）存储库模型相比，Monorepo有如下的好处：</p>
+<ul>
+<li>代码共享：所有人都可以看到其他人的代码，能降低重复代码；</li>
+<li>统一依赖：不会出现多个项目依赖相同三方包的不同版本导致的冲突问题；</li>
+<li>跨项目修改简单：大规模跨项目的重构更简单了，能一次修改多个项目的代码；</li>
+<li>共享构建发布流程：能共享同一套构建发布流程，简化基础设施的复杂性；</li>
+</ul>
+<blockquote>
+<p>Developers within an organization must not have a choice where to commit, or which version of an existing component to depend upon.  (Software Engineering at Google)</p>
+</blockquote>
+<p>进一步了解，强烈推荐阅读这篇文档：</p>
+<ul>
+<li><a href="https://monorepo.tools/">Monorepo Explained</a></li>
+</ul>
+<h4 id="分支管理branch-management">分支管理(Branch management)</h4>
+<p>版本控制系统不仅可以让开发人员具备<q>时间穿梭</q>的能力，还具备开辟<q>多重宇宙</q>的能力，这就是分支(Branch)的功能。分支不仅仅是代码的不同版本，它还深刻的影响了开发部署的流程。</p>
+<p>早期流行复杂的<a href="https://nvie.com/posts/a-successful-git-branching-model/">Git Flow</a>分支模型，但这种模型带来了很复杂的维护成本，包括分支的管理、冲突的解决等问题。最终逐渐演变出更简单的主干分支开发(<a href="https://trunkbaseddevelopment.com/">Truck Based Development</a>)模型。</p>
+<blockquote>
+<p>主干开发分支在实践中可能存在的问题是，主干分支与流水线（Pipeline）的集成，一般会有不同环境，如CI、INT、UAT、PROD等。当开发人员要在集成环境测试时，如果有紧急的Hotfix代码要推送到生产环境，这时候主干分支中还包含着集成环境的开发代码，就算有特性开关(feature toggle)的支持，也不敢直接把这些代码推入到生产环境。此时能做到就是回滚(git revert)这部分代码回去。这个问题本质还是因为测试环境有限，无法做到一个代码变更部署到一个临时创建的测试环境中，这时候主干开发分支可能需要做一定的调整，比如用Release分支来发布，主干分支做开发代码的Single Source of Truth。</p>
+</blockquote>
+<p>不同分支模型的介绍，推荐这篇文章：</p>
+<ul>
+<li><a href="https://reviewpad.com/blog/github-flow-trunk-based-development-and-code-reviews/">Git(Hub) Flow, Trunk Based Development, and Code reviews</a></li>
+</ul>
+<h3 id="代码搜索构建与静态分析code-search--build-system--static-analysis">代码搜索、构建与静态分析(Code search &amp;&amp; Build system &amp;&amp; Static analysis)</h3>
+<p>代码搜索可以用最简单的<code>grep -r</code>命令或者IDE的搜索功能来实现，但要在多个代码仓库间高效地对某些代码进行跨仓库搜索，那这些工具可能很难满足需求。</p>
+<p>Google自研了一套代码搜索的工具，这个代码搜索工具甚至可以和其他系统如日志查看系统集成。</p>
+<p><a href="https://sourcegraph.com/search">Sourcegraph</a>是一个开源免费的代码搜索云服务，可以与GitHub集成，提供良好的代码阅读体验。</p>
+<p>Google同样实现了自己的基于制品的构建工具<a href="https://bazel.build/">Bazel</a>，Bazel也是支持Monorepo很好的构建工具，同样的还有<a href="https://nx.dev/">Nx</a>与<a href="https://gradle.org/">Gradle</a>。</p>
+<p>代码静态分析就像自动化的Code Review一样，能帮助发现代码中的质量与安全问题，减少不必要的Review时间，提升代码质量。流行的代码静态分析工具中，<a href="https://www.sonarqube.org/">SonarQube</a>是推荐的。</p>
+<h3 id="依赖管理dependency-management">依赖管理(Dependency management)</h3>
+<p>依赖管理可能是软件工程中最复杂的问题之一（短期编程代码无需考虑此问题）。现代软件是建立在大量的依赖库或框架之上的，这些外部代码很多并不受开发人员的控制，当软件变得越来越庞大时，大量的依赖可能会形成复杂的依赖树（如在Gradle项目中，<code>gradle dependencies</code>命令可以打印出应用的依赖树）。</p>
+<p>依赖问题最多的可能是钻石依赖问题，简单说就是同一个包的不同版本共存的问题，这在某些编程语言如Java中影响并不大，因为多个版本可以共存，除非在某些特殊的场景下，不同的包可能会造成一些很诡异的Bug。</p>
+<p>在<a href="https://github.com/blackducksoftware">Black Duck</a>中又把依赖的问题分为三大类：</p>
+<ul>
+<li>许可证(License Risk)：商业应用对依赖包的License有限制，比如无法使用GPL类的License。</li>
+<li>安全(Security Risk)：依赖包经常会被爆出重大的安全<a href="https://nvd.nist.gov/vuln/search/results?form_type=Basic&amp;results_type=overview&amp;search_type=all&amp;isCpeNameSearch=false">CVE</a>问题，有时候因兼容性的问题很难去通过版本升级来修复。</li>
+<li>运营(Operational Risk)：一些小众的编程语言如Clojure的很多包，经常无人维护或者缺乏更新，导致存在潜在的运营风险。</li>
+</ul>
+<p>另外一个主要的问题就是兼容性的问题，比如API出现破坏性的更新，或者ABI无法兼容。</p>
+<blockquote>
+<p>编程语言ABI(Application binary interface)兼容性：与API(Application programming interface)类似，是描述二进制文件的兼容性。比如Java有ABI兼容性的保证，意味着基于新版本JDK的代码可以安全地调用老版本JDK的Jar包。</p>
+</blockquote>
+<p>在解决API变化导致的依赖问题上，业界一个流行的方案是语义化版本：<a href="https://semver.org/lang/zh-CN/">SemVer</a>。通过将版本拆分为三部分，如<code>x.y.z</code>，x是破坏性更新版本号，y是特性版本号，z是Bug修复的版本号。我们可以在依赖配置文件如<code>package.json</code>中通过<code>^</code>或<code>~</code>符号来指定依赖的最大版本号范围。</p>
+<p>依赖管理的问题也可能和代码设计有关。比如应用对某个外部服务有依赖，如何降低外部API变化对应用代码的影响？这个问题可以从设计模式的角度去解决，比如创建一个适配层（如<a href="https://martinfowler.com/articles/gateway-pattern.html">Gateway</a>模式），通过定义一个抽象的接口层去实现，而非依赖具体的外部API去实现。</p>
+<h3 id="持续集成与持续交付continuous-integration--continuous-delivery">持续集成与持续交付(Continuous Integration &amp;&amp; Continuous Delivery)</h3>
+<p>CI是一种团队开发软件的实践，在代码变更集成到主代码分支前尽早的捕捉变更带来的问题，流程主要有<a href="https://www.bmpi.dev/dev/software-engineering-at-google/process/#%E6%B5%8B%E8%AF%95testing">自动化的测试</a>与构建，CI工具可以帮助开发人员快速获得代码变更是否正确的反馈。</p>
+<p>常用的CI工具有：<a href="https://github.com/features/actions">GitHub Actions</a>，<a href="https://www.gocd.org/">GoCD</a>与<a href="https://www.jenkins.io/">Jekins</a>。这些工具也称为流水线（Pipeline)，不仅支持UI的操作，还支持<a href="https://www.thoughtworks.com/radar/techniques/pipelines-as-code">Pipeline as Code</a>。</p>
+<blockquote>
+<p>实际的CI工具一般受制于服务器资源的限制，很难做到一个代码变更(Code Commit)自动部署一个测试验证环境（这也被称为<a href="https://insights.thoughtworks.cn/real-agile-workflow-github-flow/#:~:text=%E9%83%BD%E8%A2%AB%E6%89%A7%E8%A1%8C%E3%80%82-,%E6%97%A0%E9%99%90%E7%8E%AF%E5%A2%83">无限环境CI</a>）。目前只有少数的云服务可以支持前端项目的无限环境CI，比如<a href="https://pages.cloudflare.com/">Cloudflare Pages</a>，<a href="https://vercel.com/">Vercel</a>与<a href="https://www.netlify.com/">Netlify</a>等。</p>
+</blockquote>
+<p>CD发生在代码集成后，包括从代码集成后到发布变更的软件给用户的过程，良好的CD实践既可以快速进行价值交付，又可以快速获得用户反馈。持续交付的原则和<a href="https://www.bmpi.dev/dev/software-engineering-at-google/culture/#:~:text=%E8%BF%99%E9%87%8C%E4%BB%A5-,%E6%95%8F%E6%8D%B7,-%E8%BF%87%E7%A8%8B%E4%B8%BA%E4%BE%8B">敏捷的方法论</a>有一些重合的部分：</p>
+<ul>
+<li>敏捷：小而频繁地发布过程，快速获取反馈。</li>
+<li>自动化：通过自动化的手段降低发布的时间成本。</li>
+<li>隔离：采用模块化的架构设计使需求变更和故障排除更简单。</li>
+<li>可靠：通过技术监控提高系统的可靠性。</li>
+<li>数据驱动：使用埋点或A/B测试获取用户反馈的数据，通过数据做决策。</li>
+<li>分步发布：产品特性先灰度发布，确保无误后再全量推送给用户。</li>
+</ul>
+<h2 id="写在最后">写在最后</h2>
+<p>软件工程或者说软件设计是个复杂的活动，其中既涉及文化相关的东西，又有很复杂的流程及一系列的工具集。如果把这些过程与相关工具结合到一起看，就会出现这么一幅复杂的全景图：</p>
+<p><a href="https://casberw.medium.com/evolution-of-the-software-development-life-cycle-sdlc-the-future-of-devops-38d1f68c6812"><img data-src="https://img.bmpi.dev/50335ea3-4e20-5811-dc55-6ff1e7148001.png" alt="" class="lazyload" loading="lazy"/></a></p>
+<p>从这个角度看，《Google软件工程》这本书只是从大纲的角度去介绍这些知识，真正的问题还需要我们在研发软件的实践中去体会。这系列文章也只是结合作者自己的知识经验去理解这本书，如有错误，欢迎指正。</p>
+
+        </div>
+
+        <div id="article-info">
+          
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          更新时间:
+          
+          
+          
+          
+          
+              今日
+          
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/3cfd2d5dc892626c84611167bc410d1b01b108f5">3cfd2d5d</a>
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可</p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        <a id="follow-my-twitter" href="https://twitter.com/madawei2699"><img style="box-shadow:none !important;width: 200px;" src="https://img.shields.io/twitter/follow/madawei2699?style=social"></a>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/dev/software-engineering-at-google/process/">Google软件工程之过程篇</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/dev/software-engineering-at-google/culture/">Google软件工程之文化篇</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="share-twitter-container">
+  <a target="_blank" href="https://twitter.com/intent/tweet?text=%e6%9c%ac%e6%96%87%e6%98%af%e3%80%8aSoftware%20Engineering%20at%20Google%e3%80%8b%e7%9a%84%e8%af%bb%e4%b9%a6%e7%ac%94%e8%ae%b0%ef%bc%8c%e5%90%8c%e6%97%b6%e4%bc%9a%e7%a9%bf%e6%8f%92%e5%88%86%e4%ba%ab%e6%88%91%e5%af%b9%e8%bd%af%e4%bb%b6%e5%b7%a5%e7%a8%8b%e7%9a%84%e7%90%86%e8%a7%a3%e3%80%82%e6%9c%ac%e6%96%87%e4%b8%bb%e8%a6%81%e4%bb%8b%e7%bb%8d%e8%bd%af%e4%bb%b6%e5%b7%a5%e7%a8%8b%e7%9a%84%e7%9b%b8%e5%85%b3%e5%b7%a5%e5%85%b7%ef%bc%8c%e4%b8%bb%e8%a6%81%e5%8c%85%e6%8b%ac%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6%e3%80%81%e5%88%86%e6%94%af%e7%ae%a1%e7%90%86%e3%80%81%e4%bb%a3%e7%a0%81%e6%90%9c%e7%b4%a2%e3%80%81%e6%9e%84%e5%bb%ba%e7%b3%bb%e7%bb%9f%e3%80%81%e4%bb%a3%e7%a0%81%20%e2%80%a6&amp;url=https%3a%2f%2fwww.bmpi.dev%2fdev%2fsoftware-engineering-at-google%2ftool%2f&amp;via=madawei2699">Share on Twitter</a>
+  <span class="share-twitter-container-dashed">·</span>
+  <a target="_blank" href="https://twitter.com/search?q=https%3a%2f%2fwww.bmpi.dev%2fdev%2fsoftware-engineering-at-google%2ftool%2f">Discuss on Twitter</a>
+</div>
+
+        <div style="color: darkgreen;">
+  <form style="border: 1px dashed transparent;padding:10px 10px;margin: 10px auto;text-align:center;width: 95%;border-image: linear-gradient(to right,green,red,hotpink,violet,gold,green);border-image-slice: 1%;" action="https://tinyletter.com/i365" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/i365', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+    
+    <span>每月一份邮件，分享我对如何构建被动收入的思考、推荐文章及资源，欢迎订阅</span>
+    
+    <p style="margin: 10px 0;"><input type="text" style="width:240px;text-align: center;" name="email" id="tlemail" placeholder="Email"/></p>
+    <input type="hidden" value="1" name="embed"/>
+    
+    <input type="submit" value="订阅" />
+    
+  </form>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://giscus.app/client.js"
+        data-repo="bmpi-dev/bmpi.dev"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMjM3NTQzNDU="
+        data-category="Announcements"
+        data-category-id="DIC_kwDODVY4ac4CQdzV"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </footer>
+    </article>
+    <template><span id="control"></span></template>
+    <div id="toast"></div>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div style="margin-bottom: 10px;">
+      <a href="https://wiki.bmpi.dev/">Wiki</a>
+      ⚔️
+      <a href="https://www.bmpi.dev/talk/">Talk</a>
+      ⚔️
+      <a href="https://money.bmpi.dev/">Invest</a>
+      ⚔️
+      <a href="https://tg.bmpi.dev">Think</a>
+    </div>
+    <div>
+      <a href="https://note.bmpi.dev/#/all-pages">Note</a>
+      ⚡️
+      <a href= /tool >Tool</a>
+      ⚡️
+      <a href= /link >Link</a>
+      ⚡️
+      <a href="https://umami.bmpi.dev/share/ilNU9n5W/bmpi.dev">Stats</a>
+    </div>
+  </div>
+  <div class="footer-taxonomy">
+    <a href= /tags style="color: #B36D61;">Tags</a>
+    👈
+    <a href= /categories style="color: #FF8C31;">Categories</a>
+    👉
+    <a href= /series style="color: #519A73;">Series</a>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2022
+    
+    
+  </section>
+</footer>
+
+  </main>
+  
+  <div id="the-modal" class="modal">
+    <span class="the-modal-close">&times;</span>
+    <img class="modal-content" id="the-modal-img01">
+  </div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154678195-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154678195-1');
+  </script>
+  
+
+  
+  <script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BHuwaXciWicBjh6HQS2tfudv6IYQD11K9u1NUj7nuaEV9NoDT7ns9JjgqyYTflUv-m3TlD7ELY84AHMfgmPXNgU');</script>
+  
+
+  
+
+  
+  <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
+  <script>
+    
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
+    heti.autoSpacing(); 
+    
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+  
+
+  
+  <script>
+    
+    let markups = document.querySelectorAll('code[data-lang=markmap]');
+    var i = 0;
+    Array.prototype.forEach.call(markups, function(e) {
+      let text = e.textContent;
+      let markupDiv = document.createElement('div');
+      markupDiv.className = 'markmap';
+      markupDiv.textContent = text;
+      markupDiv.id = 'markmap-' + 'software-engineering-at-google-tool-' + i;
+      e.parentElement.replaceWith(markupDiv);
+      i++;
+    });
+  </script>
+  
+
+</body>
+
+</html>
