@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/software-engineering-at-google/tool/",
-        "title": "Google软件工程之工具篇",
-        "description": "本文是《Software Engineering at Google》的读书笔记，同时会穿插分享我对软件工程的理解。本文主要介绍软件工程的相关工具，主要包括版本控制、分支管理、代码搜索、构建系统、代码静态化分析、依赖管理与CI/CD等。",
-        "publish-date": "2022-09-16 00:00:00 +0000 UTC"
+        "url": "/money/passive-income-protfolio/2022q3/",
+        "title": "我的巨亏经历 # 组合季报(2022Q3)",
+        "description": "被动收入投资组合2022年Q3季报",
+        "publish-date": "2022-10-07 00:00:00 +0000 UTC"
     }
 }
