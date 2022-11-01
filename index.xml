@@ -6,7 +6,21 @@
     <description>Recent content on 构建我的被动收入</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 07 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 31 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Real-time Web应用开发新体验</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/dev/real-time-web/</link>
+      <pubDate>Mon, 31 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/dev/real-time-web/</guid>
+      <description>本文介绍Real-time Web用户体验的演进、相关开发技术的迭代及存在的分布式技术难题，最后介绍Elixir是如何解决这些难题带来新的开发体验。</description>
+    </item>
+    
     <item>
       <title>我的巨亏经历 # 组合季报(2022Q3)</title>
       

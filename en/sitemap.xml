@@ -640,6 +640,16 @@
   <url>
     <loc>https://www.bmpi.dev/en/tags/elixir/</loc>
     <lastmod>2020-01-15T16:02:40+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/elixir/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/elixir/"
+                />
   </url>
 
 
