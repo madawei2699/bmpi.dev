@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/real-time-web/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2022-10-31T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-11-01T18:35:44&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-11-02T07:40:35&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2022-10-31T00:00:00Z",
-      "dateModified": "2022-11-01T18:35:44+08:00",
+      "dateModified": "2022-11-02T07:40:35+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -246,11 +246,11 @@
               
               
               
-              19:33
+              19:47
               
             </span>
             
-            <span class="post-word-count"> | 4302 字 | </span>
+            <span class="post-word-count"> | 4353 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -318,7 +318,7 @@
     </figcaption>
     
 </figure>
-<p>这在变迁的驱动是由底层技术发展而带来了的，进而提升了Web类应用的用户交互体验。比如Web应用前后端通信协议从单向的HTTP REST到双向的WebSockets的发展，带来了Web用户体验更快的更新速度与更强的交互能力。</p>
+<p>这种变迁的驱动是由底层技术发展而带来了的，进而提升了Web类应用的用户交互体验。比如Web应用前后端通信协议从单向的HTTP REST到双向的WebSockets的发展，带来了Web用户体验更快的更新速度与更强的交互能力。</p>
 <p>按照更新与交互的差异，Real-time Web又可以分为如下两个类型。</p>
 <p>实时更新类：</p>
 <ul>
@@ -336,8 +336,8 @@
 <li>在线游戏：多个用户可在同一房间玩实时对战游戏；</li>
 </ul>
 <h2 id="real-time带来的技术难题">Real-time带来的技术难题</h2>
-<p>Real-time相比之前的HTTP推拉机制(GET/POST)，对服务端来说，挑战从如何管理大量的短连接，变成了管理大量的长连接。</p>
-<p>在多种<a href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/">并发模型</a>的支持下，虽然可能需要做一些特殊的<a href="https://github.com/bmpi-dev/invest-assistant/blob/master/IaC/aws/backend/ansible/playbooks/templates/kernel-tuning">内核调优(kernel tuning)</a>，但现在的后端服务可以用HTTP协议在单机里并发服务上百万的短连接请求，更多详见这篇文章：</p>
+<p>Real-time相比之前的HTTP推拉机制(GET/POST)，对服务端来说，挑战从如何处理大量的短连接，变成了管理大量的长连接。</p>
+<p>在各类编程语言多种<a href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/concurrency-model/">并发模型</a>的支持下，再加上一些<a href="https://github.com/bmpi-dev/invest-assistant/blob/master/IaC/aws/backend/ansible/playbooks/templates/kernel-tuning">内核调优(kernel tuning)</a>配置，现在的后端服务可以用HTTP协议在单机里并发处理上百万的短连接请求，更多详见这篇文章：</p>
 <ul>
 <li><a href="https://talawah.io/blog/extreme-http-performance-tuning-one-point-two-million/">Extreme HTTP Performance Tuning: 1.2M API req/s on a 4 vCPU EC2 Instance | talawah.io</a></li>
 </ul>
@@ -346,16 +346,16 @@
 <ul>
 <li><a href="https://matttomasetti.medium.com/websocket-performance-comparison-10dc89367055">Websocket Performance Comparison</a></li>
 </ul>
-<p>Real-time相比传统Web来说，除了连接从短变成了长，每个用户的交互时间也变得更长。如果一个用户至少用一个长连接，那单机的架构很快就成为了瓶颈，唯一的办法就是通过集群扩容解决单机资源瓶颈的问题。</p>
-<p>但分布式架构的引入却带来了更复杂的问题，比如集群的扩容、数据状态的管理等。</p>
+<p>Real-time相比传统Web来说，除了连接从短变成了长，每个用户的交互时间也变得更长。如果一个用户至少用一个长连接，那单机的架构很快就成为了瓶颈，唯一的办法是通过集群扩容解决单机资源瓶颈的问题。</p>
+<p>但集群分布式架构的引入可能会带来更复杂的架构问题，如集群的扩容、数据状态的管理等。</p>
 <h3 id="分布式集群扩容">分布式集群扩容</h3>
-<p>在分布式架构中，无状态的服务，可以很容易通过水平扩容(Horizontal Scaling)来提高服务吞吐量(Throughput)。如果是有状态的话，优先采用垂直扩容(Vertical Scaling)，比如提升单机的硬件性能的方式，如果还是无法达到系统要求，则通过数据分区(Partitioning)的方式将数据分散存储在多个节点中。</p>
+<p>在分布式架构中，无状态的服务，可以很容易通过水平扩容(Horizontal Scaling)来提高服务吞吐量(Throughput)。如果是有状态的话，可先采用垂直扩容(Vertical Scaling)，比如提升单机的硬件性能的方式，如果还是无法达到系统要求，则通过数据分区(Partitioning)的方式将数据分散存储在多个节点中。</p>
 <h4 id="数据状态的难题">数据状态的难题</h4>
 <p>由于数据分区很容易产生更复杂的分布式难题，比如节点添加删除导致的数据分区再平衡问题、数据一致性问题、分布式事务与共识问题等。所以尽可能把运行时的服务与数据拆分开，把服务做成无状态的，数据通过流处理系统如一些中间件去处理。但引入中间件又会带来额外的维护开销，也会让架构变的更为复杂。</p>
 <p>而且Real-time类型的应用架构一般是基于异步事件驱动，而非实时数据同步的方式去实现的。异步事件驱动的架构在可观测性(Observability)上更困难一些，比如要在系统运行时去查看某事件流引发的系统行为，很难通过有限的日志去观测系统所有组件的运行时状态。</p>
 <h4 id="im集群的例子">IM集群的例子</h4>
 <p>以IM聊天应用Tinode为例，它的集群是这么设计的：</p>
-<p>假设集群有S1、S2与S3三个节点，假设有A、B与C三个用户，A加入了聊天室(T1, T3)，B加入了(T2, T4)，C加入了(T3, T6)。S1服务处理聊天室(T1, T2)，S2处理(T3, T4)，S3处理(T5, T6)。用户的客户端可以接入集群任意一个节点的API Endpoint。此时的数据处理链路如下：</p>
+<p>假设集群有S1、S2与S3三个节点，有A、B与C三个用户，A加入了聊天室(T1, T3)，B加入了(T2, T4)，C加入了(T3, T6)。S1节点处理聊天室(T1, T2)，S2处理(T3, T4)，S3处理(T5, T6)。用户的客户端可以接入集群任意一个节点的API Endpoint。此时的数据处理链路如下：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">A(T1, T3) -&gt; S1(T1, T2) .(forward). T3 -&gt; S2
 B(T2, T4) -&gt; S2(T3, T4) .(forward). T2 -&gt; S1
 C(T3, T6) -&gt; S3(T5, T6) .(forward). T3 -&gt; S2
@@ -398,11 +398,11 @@ C(T3, T6) -&gt; S3(T5, T6, T3)
 <p>如图所示，左侧是常规的Web页面渲染机制，数据通过网络从服务端拉取，前端通过数据控制页面组件的渲染。而Phoenix的<a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html">LiveView</a>可以让后端开发者摆脱写Javascript的困扰，所有的逻辑都在服务端完成，页面的渲染也是通过服务端计算页面更新的差异，将小部分差异通过WebSocket推送给浏览器。</p>
 <p>Elixir让一切Live起来！</p>
 <h3 id="让分布式变得简单起来">让分布式变得简单起来</h3>
-<p>除了优异的长连接管理能力，得益于Erlang/OTP天然分布式的能力，Elixir服务组建集群更是非常的简单。简单到不需要过多赘述，发布一个多节点的集群只需要几分钟的时间，具体可参考这篇简短的配置说明：</p>
+<p>除了优异的长连接管理能力，得益于Erlang/OTP天然分布式的能力，相比流行的集群技术如<a href="https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/">K8S</a>（也叫容器编排），Elixir组建集群更是非常的简单。简单到不需要过多赘述，发布一个多节点的集群只需要几分钟的时间，具体可参考Fly.io这篇配置文档：</p>
 <ul>
 <li><a href="https://fly.io/docs/elixir/getting-started/clustering/">Clustering Your Application · Fly Docs</a></li>
 </ul>
-<p>Elixir的集群可以做到非常细粒度的控制，比如创建一组Process（此进程并非操作系统级别的进程，而是Erlang VM管理的轻量级用户线程），可以将其通过一致性哈希分布到其他节点的Erlang VM上，目前这种操作在其他语言上是无法实现的。具体可参考这些项目的介绍：</p>
+<p>Elixir的集群能做到非常细粒度的控制，比如在节点上创建一组Process（此进程并非操作系统级别的进程，而是Erlang VM管理的<a href="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/os-scheduling/#%E7%94%A8%E6%88%B7%E7%BA%BF%E7%A8%8Buser-level-thread">轻量级用户线程</a>），可以将其通过一致性哈希分布到其他节点的Erlang VM上，目前这种操作在其他编程语言（非Erlang/OTP类）上是无法实现的。具体可参考这些项目的介绍：</p>
 <ul>
 <li><a href="https://github.com/derekkraan/horde">derekkraan/horde: Horde is a distributed Supervisor and Registry backed by DeltaCrdt</a></li>
 <li><a href="https://github.com/NetComposer/nkdist">NetComposer/nkdist: Erlang distributed registration and load balancing</a></li>
@@ -413,17 +413,17 @@ C(T3, T6) -&gt; S3(T5, T6, T3)
 <p><img data-src="https://img.bmpi.dev/f746dc54-890b-1ace-5144-45812a0b39ff.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>进一步我们可以查看某个Process的状态，比如此Process的PID为<code>&lt;0.2243.0&gt;</code>，第一位0表示这是一个本地进程，如果是非0，则是一个远程节点的Process。</p>
 <p><img data-src="https://img.bmpi.dev/e54665f7-b21d-ebab-381f-2869e02e5f56.png" alt="" class="lazyload" loading="lazy"/></p>
-<p>当然目前这些还不算啥惊人的部分。惊人的地方在于我们可以与这些Process在线实时交互，比如获取它们当前的状态，给它们发消息获取处理后的状态，这些在排查运行时问题时非常有帮助。比如我远程接入到集群某个节点中：</p>
+<p>当然目前这些还不算啥惊人的部分。惊人的地方在于我们可以与这些Process在线实时交互，比如获取它们当前的状态，给它们发消息获取处理后的状态，这些在排查运行时问题时非常有帮助。比如我远程接入到集群某个节点的Erlang VM中：</p>
 <p><img data-src="https://img.bmpi.dev/868d9ff5-586c-4351-afd5-65471b9f63bc.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>如上图，我在接入此节点后，可以与此Process通信并修改它的状态，甚至能找到某个负责与Web端通信的WebSocket的Process，通过此Process可以直接给Web端推送数据。</p>
-<p>你可能注意到了上面两个图中Process的PID并不相同，第一个是<code>&lt;42700.16451.14&gt;</code>，第二个是<code>&lt;0.16451.14&gt;</code>，这是因为前者是我在另外一个节点上查看此节点的Process，当然就是一个remote的Process了，第二个是我接入了当前这个节点截的图，一旦组建好集群，集群内的节点都能很容易获取其他节点的运行时数据。</p>
+<p>你可能注意到了上面两个图中Process的PID并不相同，第一个是<code>&lt;42700.16451.14&gt;</code>，第二个是<code>&lt;0.16451.14&gt;</code>，这是因为前者是我在另外一个节点上查看此节点的Process，当然就是一个remote的Process了，后者是我接入了此Process所在的节点。一旦组建好集群，集群内的节点都能很容易获取其他节点的运行时数据。</p>
 <h3 id="elixir版im集群的例子">Elixir版IM集群的例子</h3>
 <p>上面介绍了Tinode的集群设计，因为Tinode是用Go开发的，它的集群是自己实现的。但用Elixir就不需要这么复杂了，<a href="https://github.com/madawei2699/free4chat">free4chat</a>是我开发的一个开源的基于WebRTC的语音聊天室Web应用，它是基于Elixir开发的，目前服务端是两个节点的集群，上面的截图就是来自它的Elixir后端集群。</p>
 <p>free4chat的集群实现非常简单，利用Elixir的强大的集群管理能力，当某个用户通过某个节点接入到某个房间后，该节点从集群全局注册表中查找是否存在该房间的Process，如果不存在就创建，存在就获取该房间的Process，无论该Process是否在本地，用户都可以在该房间与其他人聊天，不同节点Process间的通信由Erlang/OTP自动实现。</p>
 <h2 id="总结">总结</h2>
-<p>Real-time Web开发本身不复杂，复杂的是Real-time叠加分布式带来的难题，当然难题永远是在同一维度间对比带来的感受，当脱离该纬度进入更高维度时，这些难题也许就被轻松化解了。</p>
-<p>分布式领域有非常复杂的经典问题，Erlang/OTP在该领域深耕了很多年，已经有了工业级的解决方案，站在Erlang/OTP巨人肩膀上的Elixir不仅继承了其强大的分布式解决方案，还在多个领域开辟了新的开发体验，比如Phoenix LiveView另辟蹊径带来了新的Web开发体验。</p>
-<p>本文没有提到的是，上述的例子并没有考虑数据库的问题，如果再引入传统的数据库，会让问题变得更为复杂。数据库如何给Realtime Web带来新的开发体验？也许Rethinkdb这篇<a href="https://rethinkdb.com/blog/realtime-web">Advancing the realtime web</a>能给我们更多启发。</p>
+<p>Real-time Web开发本身不复杂，复杂的是Real-time叠加分布式带来的难题，当然难题一般只存在同一维度上，当脱离该纬度进入更高维度时，这些难题也许就被轻松解决了。</p>
+<p>分布式领域有非常复杂的经典问题，Erlang/OTP在该领域深耕了很多年，很多都有了工业级的解决方案，站在Erlang/OTP巨人肩膀上的Elixir不仅继承了其强大的分布式解决方案，还在多个领域开辟了新的开发体验，比如Phoenix LiveView另辟蹊径带来了新的Web开发体验。</p>
+<p>本文没有提到的是，上述的例子并没有考虑数据库的问题，如果再引入传统的数据库，会让问题变得更为复杂。数据库如何能给Realtime Web带来新的开发体验？也许Rethinkdb这篇<a href="https://rethinkdb.com/blog/realtime-web">Advancing the realtime web</a>能给我们更多启发。</p>
 
         </div>
 
@@ -439,7 +439,7 @@ C(T3, T6) -&gt; S3(T5, T6, T3)
               今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/9a3510e307702f713ee64b739036a0550876deda">9a3510e30</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/4758a31348363d7984b49b4a4cd796454904d795">4758a3134</a>
         </div>
         
 
