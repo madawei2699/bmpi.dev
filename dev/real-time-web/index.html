@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/real-time-web/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2022-10-31T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-11-03T10:02:40&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-11-08T09:13:03&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2022-10-31T00:00:00Z",
-      "dateModified": "2022-11-03T10:02:40+08:00",
+      "dateModified": "2022-11-08T09:13:03+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -396,6 +396,7 @@ C(T3, T6) -&gt; S3(T5, T6, T3)
     
 </figure>
 <p>如图所示，左侧是常规的Web页面渲染机制，数据通过网络从服务端拉取，前端通过数据控制页面组件的渲染。而Phoenix的<a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html">LiveView</a>可以让后端开发者摆脱写Javascript的困扰，所有的逻辑都在服务端完成，页面的渲染也是通过服务端计算页面更新的差异，将小部分差异通过WebSocket推送给浏览器。</p>
+<p><img data-src="https://img.bmpi.dev/6089c09e-ca07-e8fa-cf95-fd32a61980e4.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>Elixir让一切Live起来！</p>
 <h3 id="让分布式变得简单起来">让分布式变得简单起来</h3>
 <p>除了优异的长连接管理能力，得益于Erlang/OTP天然分布式的能力，相比流行的集群技术如<a href="https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/">K8S</a>（也叫容器编排），Elixir组建集群更是非常的简单。简单到不需要过多赘述，发布一个多节点的集群只需要几分钟的时间，具体可参考Fly.io这篇配置文档：</p>
@@ -443,7 +444,7 @@ C(T3, T6) -&gt; S3(T5, T6, T3)
               今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/6c36ff0ab0695153b02b96013ccf3eaf1045db0d">6c36ff0ab</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/40cf03f994ebac888196057d935dd80d4b32383b">40cf03f99</a>
         </div>
         
 

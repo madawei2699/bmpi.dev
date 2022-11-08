@@ -422,6 +422,7 @@ C(T3, T6) -&gt; S3(T5, T6, T3)
     
 </figure>
 <p>如图所示，左侧是常规的Web页面渲染机制，数据通过网络从服务端拉取，前端通过数据控制页面组件的渲染。而Phoenix的<a href="https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html">LiveView</a>可以让后端开发者摆脱写Javascript的困扰，所有的逻辑都在服务端完成，页面的渲染也是通过服务端计算页面更新的差异，将小部分差异通过WebSocket推送给浏览器。</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/6089c09e-ca07-e8fa-cf95-fd32a61980e4.png" alt="" layout="fill"></amp-img></div></p>
 <p>Elixir让一切Live起来！</p>
 <h3 id="让分布式变得简单起来">让分布式变得简单起来</h3>
 <p>除了优异的长连接管理能力，得益于Erlang/OTP天然分布式的能力，相比流行的集群技术如<a href="https://www.bmpi.dev/dev/guide-to-k8s-cloud-native/">K8S</a>（也叫容器编排），Elixir组建集群更是非常的简单。简单到不需要过多赘述，发布一个多节点的集群只需要几分钟的时间，具体可参考Fly.io这篇配置文档：</p>
