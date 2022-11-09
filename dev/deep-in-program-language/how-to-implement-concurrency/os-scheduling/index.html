@@ -34,7 +34,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/deep-in-program-language/how-to-implement-concurrency/os-scheduling/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2022-04-10T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2022-05-27T23:55:39&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2022-11-09T19:47:47&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -54,7 +54,7 @@
       "image": "https://img.bmpi.dev/976434c6-36a4-7142-7c75-19278ede92ab.png",
       
       "datePublished": "2022-04-10T00:00:00Z",
-      "dateModified": "2022-05-27T23:55:39+08:00",
+      "dateModified": "2022-11-09T19:47:47+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -378,7 +378,7 @@ auxv         clear_refs  cpu_resctrl_groups  environ  fdinfo  limits   mem      
 <p>用户线程与内核线程的区别在于用户线程的调度是发生在用户态，内核中无法感知到用户线程的存在，并且调度也发生在用户态，一般是由线程库或编程语言运行时自行实现的。而内核线程的调度是由内核完成的，一般是抢占式调度。</p>
 <h3 id="用户线程user-level-thread">用户线程(User-level Thread)</h3>
 <p>用户线程大多是采用协作调度的方式实现，本质上是<strong>同步执行在与CPU核心数量相同的内核线程上的</strong>，不仅能极大的降低了上下文开销，还能最佳的利用多核CPU的计算能力。</p>
-<p>用户线程的轻量除了提现在调度的上下文切换开销上，还体现了在对内存的需求上。如果要在4核心4GB内存的笔记本电脑中测试同时生成100万个线程的话，不同编程语言对内存的需求：</p>
+<p>用户线程的轻量除了体现在调度的上下文切换开销上，还体现了在对内存的需求上。如果要在4核心4GB内存的笔记本电脑中测试同时生成100万个线程的话，不同编程语言对内存的需求：</p>
 <ul>
 <li>Elixir: 0.48 GB (Process)</li>
 <li>Golang: 1.91 GB (Goroutine)</li>
@@ -507,9 +507,10 @@ auxv         clear_refs  cpu_resctrl_groups  environ  fdinfo  limits   mem      
           
           
           
-              5个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/6f224072052fdae723f6a3b84ea351359419a9f7">6f2240720</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/edcbaaf7135eb7882e6da7bd86cebdf2c2fab359">edcbaaf71</a>
         </div>
         
 
