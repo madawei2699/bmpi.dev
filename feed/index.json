@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/real-time-web/",
-        "title": "Real-time Web应用开发新体验",
-        "description": "本文介绍Real-time Web用户体验的演进、相关开发技术的迭代及存在的分布式技术难题，最后介绍Elixir是如何解决这些难题带来新的开发体验。",
-        "publish-date": "2022-10-31 00:00:00 +0000 UTC"
+        "url": "/self/use-github-better/",
+        "title": "善用GitHub",
+        "description": "用GitHub来学习、创作与展示。",
+        "publish-date": "2022-11-12 00:00:00 +0000 UTC"
     }
 }
