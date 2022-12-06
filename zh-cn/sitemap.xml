@@ -3,6 +3,51 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/self/ai-arrival/</loc>
+    <lastmod>2022-12-06T22:51:51+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/alphago/</loc>
+    <lastmod>2022-12-06T22:51:51+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/chatgpt/</loc>
+    <lastmod>2022-12-06T22:51:51+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/copilot/</loc>
+    <lastmod>2022-12-06T22:51:51+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/gpt-3/</loc>
+    <lastmod>2022-12-06T22:51:51+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/midjourney/</loc>
+    <lastmod>2022-12-06T22:51:51+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/</loc>
+    <lastmod>2022-12-06T22:51:51+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/"
+                />
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/tags/email/</loc>
     <lastmod>2022-11-24T23:02:17+08:00</lastmod>
   </url>
@@ -20,21 +65,6 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB/</loc>
     <lastmod>2022-11-24T23:02:17+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2022-12-04T14:13:29+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/"
-                />
   </url>
 
   <url>
