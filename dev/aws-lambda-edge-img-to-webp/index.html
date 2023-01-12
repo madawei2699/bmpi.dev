@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/aws-lambda-edge-img-to-webp/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2020-02-06T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-01-22T21:01:13&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2023-01-12T22:01:47&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2020-02-06T00:00:00Z",
-      "dateModified": "2021-01-22T21:01:13+08:00",
+      "dateModified": "2023-01-12T22:01:47+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -239,11 +239,11 @@
               
               
               
-              19:50
+              19:35
               
             </span>
             
-            <span class="post-word-count"> | 4366 字 | </span>
+            <span class="post-word-count"> | 4311 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -269,22 +269,8 @@
 
       
 
-      <div class="article">
-        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
-          
-          
-          
-          
-          <p>当你浏览一个网站页面的时候，浏览器开始了加载页面的过程，你当然希望立即看到这个网页的内容，如果网站加载过慢你可能会产生焦虑并直接关闭它，这对网站的影响是致命的，因为搜索引擎会统计网站的跳出率，进而影响网站的域名权重和排名，如果放任网页加载很慢会逐渐导致网站的自然搜索流量降低很多，所以一个好的网站应该加载时间越短越好，最长也不应该超过3秒。现代网站都会使用一些技术去提高网站加载速度，比如我们可以：</p>
-<ol>
-<li>提高域名DNS解析速度；</li>
-<li>通过一些打包工具压缩CSS和JS文件包的大小；</li>
-<li>JS延迟或异步加载；</li>
-<li>图片懒加载；</li>
-<li>静态资源加CDN支持；</li>
-<li>使用高压缩比的有损图片格式等。</li>
-</ol>
-<ins class="adsbygoogle"
+      <div>
+        <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"
      data-ad-format="fluid"
@@ -311,6 +297,23 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
 };
 })();
 </script>
+      </div>
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <p>当你浏览一个网站页面的时候，浏览器开始了加载页面的过程，你当然希望立即看到这个网页的内容，如果网站加载过慢你可能会产生焦虑并直接关闭它，这对网站的影响是致命的，因为搜索引擎会统计网站的跳出率，进而影响网站的域名权重和排名，如果放任网页加载很慢会逐渐导致网站的自然搜索流量降低很多，所以一个好的网站应该加载时间越短越好，最长也不应该超过3秒。现代网站都会使用一些技术去提高网站加载速度，比如我们可以：</p>
+<ol>
+<li>提高域名DNS解析速度；</li>
+<li>通过一些打包工具压缩CSS和JS文件包的大小；</li>
+<li>JS延迟或异步加载；</li>
+<li>图片懒加载；</li>
+<li>静态资源加CDN支持；</li>
+<li>使用高压缩比的有损图片格式等。</li>
+</ol>
 <h2 id="网站加载速度影响因素分析">网站加载速度影响因素分析</h2>
 <p>以上影响网站加载速度的因素中，图片资源过大是一个很重要的因素。在Web流量中，图片一直是大头，如何将图片压缩的更小却不损失一些细节是大家一直在研究的话题。为了更好的演示这个问题，我使用Google提供的Pagespeed Insights评估了下我博客的这篇文章页面<a href="https://www.bmpi.dev/money/my-accounting-tool/">《我的财务管理方案》</a>:</p>
 <p><img data-src="https://img.bmpi.dev/91eaa951-b7aa-1571-111a-2522a0893528.png" alt="" class="lazyload" loading="lazy"/></p>
@@ -471,9 +474,10 @@ compression formats</a>论文对比了BMP、TIFF、PNG、JPEG、JPEG 2000图片�
           
           
           
-              23个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5750fdef29285eb60bd558bc0522244f1fb90224">5750fdef2</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/6c7670696b5455312f4c39ed9121fb387386f13d">6c7670696</a>
         </div>
         
 

@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/calculates-similarity-distribution-of-website-by-tf-idf/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2020-01-18T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2021-01-22T21:01:13&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
+<meta property="article:modified_time" content="2023-01-12T22:01:47&#43;08:00" /><meta property="og:site_name" content="构建我的被动收入" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2020-01-18T00:00:00Z",
-      "dateModified": "2021-01-22T21:01:13+08:00",
+      "dateModified": "2023-01-12T22:01:47+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -239,11 +239,11 @@
               
               
               
-              3:57
+              3:27
               
             </span>
             
-            <span class="post-word-count"> | 872 字 | </span>
+            <span class="post-word-count"> | 762 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -265,15 +265,8 @@
 
       
 
-      <div class="article">
-        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
-          
-          
-          
-          
-          <p>如果你的网站网页重复或者相似页面过多将会影响你网站的排名，那么如何计算网站内网页的相似度分布？</p>
-<p>本文教你通过开发Python脚本使用TF-IDF算法计算网站全站页面相似度分布并可视化展示出来。</p>
-<ins class="adsbygoogle"
+      <div>
+        <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"
      data-ad-format="fluid"
@@ -300,6 +293,16 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
 };
 })();
 </script>
+      </div>
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <p>如果你的网站网页重复或者相似页面过多将会影响你网站的排名，那么如何计算网站内网页的相似度分布？</p>
+<p>本文教你通过开发Python脚本使用TF-IDF算法计算网站全站页面相似度分布并可视化展示出来。</p>
 <h2 id="0-tf-idf">0. TF-IDF</h2>
 <p>TF-IDF（英语：term frequency–inverse document frequency）是一种用于信息检索与文本挖掘的常用加权技术。TF-IDF是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。TF-IDF加权的各种形式常被搜索引擎应用，作为文件与用户查询之间相关程度的度量或评级。除了TF-IDF以外，互联网上的搜索引擎还会使用基于链接分析的评级方法，以确定文件在搜索结果中出现的顺序。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
 <h2 id="1-计算原理">1. 计算原理</h2>
@@ -331,33 +334,6 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
 <p>从上图可以看出全站相似度并不高，大部分页面相似分布在10%-20%之间，处于可接受范围。如果相似页面多，则热力图可能会出现如下情况：</p>
 <p><img data-src="https://img.bmpi.dev/3d01a59b-52e6-31ac-d73f-e7ef1db51c93.png" alt="" class="lazyload" loading="lazy"/></p>
 <p>红色区域表示这些相关页面相似度极高。</p>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-1886683614725279"
-     data-ad-slot="5360039010"></ins>
-<script type='text/javascript'>
-(function() {
-var done = false;
-var script = document.createElement('script');
-script.async = true;
-script.type = 'text/javascript';
-script.src = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-
-var createScript = setTimeout(
-function(){
-document.getElementsByTagName('HEAD').item(0).appendChild(script);
-}, 5000
-);
-
-script.onreadystatechange = script.onload = function(e) {
-if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
-(adsbygoogle = window.adsbygoogle || []).push({});
-}
-};
-})();
-</script>
 <h4 id="references"><em>References</em></h4>
 <section class="footnotes" role="doc-endnotes">
 <hr>
@@ -379,9 +355,10 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
           
           
           
-              23个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5750fdef29285eb60bd558bc0522244f1fb90224">5750fdef2</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/6c7670696b5455312f4c39ed9121fb387386f13d">6c7670696</a>
         </div>
         
 
