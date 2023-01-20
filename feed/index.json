@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/money/passive-income-protfolio/2022q4/",
-        "title": "2022亏了多少 # 组合季报(2022Q4)",
-        "description": "被动收入投资组合2022年Q4季报",
-        "publish-date": "2023-01-01 00:00:00 +0000 UTC"
+        "url": "/dev/renaissance-sqlite/",
+        "title": "SQLite的文艺复兴",
+        "description": "本文介绍史上最流行的数据库SQLite从进程内到分布式的的文艺复兴故事。",
+        "publish-date": "2023-01-19 00:00:00 +0000 UTC"
     }
 }

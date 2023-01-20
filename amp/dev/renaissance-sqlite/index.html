@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>SQLite的文艺复兴</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/renaissance-sqlite/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "构建我的被动收入",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/renaissance-sqlite\/",
+          "name": "renaissance-sqlite"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>SQLite的文艺复兴</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2023-01-19T00:00:00Z'>
+                2023-01-19
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E6%8A%80%E6%9C%AF/">分布式技术</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/database/">Database</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">分布式系统</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        
+<div class="notices info" ><p><strong>初稿征集意见中</strong></br>
+本文处于初稿状态，可能存在很多错误，如果你有不同的看法，欢迎不吝赐教，先行感谢！</p>
+</div>
+<ul>
+<li><a href="#sqlite%E7%9A%84%E6%95%85%E4%BA%8B">SQLite的故事</a></li>
+<li><a href="#sqlite%E7%9A%84%E6%9E%B6%E6%9E%84">SQLite的架构</a></li>
+<li><a href="#sqlite%E7%9A%84%E6%96%87%E8%89%BA%E5%A4%8D%E5%85%B4">SQLite的文艺复兴</a>
+<ul>
+<li><a href="#serverless--edge-computing">Serverless / Edge Computing</a></li>
+<li><a href="#browser-compatible">Browser-compatible</a></li>
+<li><a href="#clientserver">Client/Server</a></li>
+<li><a href="#olap">OLAP</a></li>
+<li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F">分布式</a></li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+<h2 id="sqlite的故事">SQLite的故事</h2>
+<p>第一次被SQLite震撼到的一个事是关于<a href="https://www.sqlite.org/testing.html">它的测试代码</a>，其源码有15多万行，但测试代码和脚本竟有九千多万行。作者Dwayne Richard Hipp是一个完美主义者，为了能自由的开发SQLite，他编写了底层的存储引擎、<a href="https://www.bmpi.dev/dev/parser_black_magic/">Parser</a>、源码托管工具<a href="https://www2.fossil-scm.org/home/doc/trunk/www/index.wiki">Fossil</a>，除了C编译器和一些底层库如libc外，Richard几乎从零构建了SQLite所依赖的库或工具。</p>
+<p>运行SQLite官网的Web服务器<a href="https://sqlite.org/althttpd/doc/trunk/althttpd.md">Althttpd</a>也是Richard开发的，所有代码仅在一个C文件中，除了标准C库之外没有依赖任何其他代码库。</p>
+<p>当然<a href="https://www.sqlite.org/">SQLite官网</a>使用的数据库自然也是SQLite了，网页的<a href="https://www.sqlite.org/src/timeline">动态数据</a>甚至是由200多条SQL语句查询后在0.01秒内渲染完成的。</p>
+<p>很难想象这种开发模式能够成功，但Richard做到了，他把SQLite推向了数十亿的设备与终端。由于绝大部分代码都是Richard一个人完成的，SQLite并不是一个开源协作的项目。虽然代码是开放的，但却并没有开源社区的贡献，甚至有人为此专门fork出了SQLite的开源协作版本：<a href="https://github.com/libsql/libsql">libSQL</a>。</p>
+<p>更多关于SQLite背后的故事可以听下这期Podcast：<a href="https://corecursive.com/066-sqlite-with-richard-hipp/">The Untold Story of SQLite</a>。</p>
+<h2 id="sqlite的架构">SQLite的架构</h2>
+<p>SQLite是一个数据库软件，但与绝大部分数据库系统拥有完全不同的运行方式。大部分数据库（MySQL、SQL Server、PostgreSQL或Oracle）系统是Client/Server的架构，客户端通过特定的协议比如JDBC/ODBC与数据库服务器通信，数据库服务器通过监听某个Socket端口去接收客户端的查询请求，之后将结果返回给客户端。</p>
+<p>与其他数据库网络通信的方式相比，SQLite是一个库，它是通过In-Process的方式来与应用程序通信的。当应用程序发出查询请求时，这些请求是通过函数调用的方式在与应用程序相同的线程内执行的。SQLite的数据库也是存放在磁盘上的单个文件。</p>
+<p>与其他数据库相比，SQLite的优势就是快，尤其是执行一些小的SQL查询语句，这也是为什么SQLite的官网动态数据能通过200多条SQL语句来查询获取的。SQLite也没有N+1查询性能的问题，原因就是没有其他数据库网络通信的开销：</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/e1ecd55c-bb43-40f4-84c9-d2f28f9a855d.png" alt="" layout="fill"></amp-img></div></p>
+<p>SQLite的架构如下：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">flowchart TB
+    sql[SQL]:::sqlClass
+    subgraph sl[SQLite Library]
+        direction LR
+        subgraph Compiler
+            direction LR
+            sl1[Parser] --&gt; sl2[Code Generator]
+        end
+        subgraph se[Storage Engine]
+            direction LR
+            sl4[B-tree] --&gt; sl5[Pager] --&gt; sl6[OS Interface \n /VFS]
+        end
+        Compiler --&gt; vm[Virtual Machine \n /Bytecode Engine]
+        vm --&gt; se
+    end
+    sql --&gt; sl
+    sl --&gt; os[Operating System] --&gt; df[Database File]
+    os --&gt; rj[Rollback Journal]
+    classDef sqlClass fill:#f96
+</code></pre><p>SQLite的架构主要包括三大部分：编译器、虚拟机与存储引擎。当应用程序发起查询请求时，SQL语句首先会被编译器解析，然后生成字节码，最后通过虚拟机执行。虚拟机的执行过程中，会调用存储引擎的接口来读取或写入数据。</p>
+<p>编译器的主要工作是将SQL语句解析成字节码，然后将字节码编译成可执行的机器码。编译器的主要组成部分是Parser与Code Generator，Parser负责将SQL语句解析成抽象语法树（AST），Code Generator负责将AST转换成字节码。查询计划的生成也是在Code Generator中完成的。</p>
+<p><a href="https://www.sqlite.org/opcode.html">虚拟机</a>是一个寄存器式虚拟机(Register-Based VM)，它的主要工作是执行字节码。另外查询优化(Query Optimization)也是在虚拟机中完成的。对此部分感兴趣的读者可阅读这篇文章：<a href="https://fly.io/blog/sqlite-virtual-machine/">How the SQLite Virtual Machine Works</a>。</p>
+<p>存储引擎的主要工作是读取或写入数据。存储引擎的主要组成部分是B-tree、Pager与OS Interface（也叫VFS）：</p>
+<ul>
+<li>B-tree：SQLite的索引以B-tree的数据结构存储，表数据是以B+tree的数据结构存储。对于此部分感兴趣的读者可阅读这篇文章：<a href="https://fly.io/blog/sqlite-internals-btree/">SQLite Internals: Pages &amp; B-trees</a>。</li>
+<li>Pager(Page cache)：B-tree模块与VFS模块之间的抽象层，提供读、写与缓存磁盘页面的功能。SQLite的原子性、隔离性、持久性都是通过Pager来实现的。
+<ul>
+<li>Pager提供了两种并发访问模式：<a href="https://www.sqlite.org/atomiccommit.html">回滚日志(Rollback Journal)</a>与预写日志<a href="https://www.sqlite.org/wal.html">(Write-ahead Log)</a>。与回滚日志相比，预写日志能提供更好的扩展性，能在写入数据时并发读取数据。在预写日志模式下，虽然一个数据库只能拥有一个预写日志文件(-wal文件)，一次只能允许有一个写入线程去更新这个文件，但在配置<a href="https://sqlite.org/c3ref/busy_timeout.html"><code>busy_timeout</code></a>后允许有多个写入线程同时运行，不过执行过程仍然是串行化的。</li>
+<li>对于此部分我推荐阅读这两篇文章：<a href="https://fly.io/blog/sqlite-internals-rollback-journal/">How SQLite helps you do ACID</a>与<a href="https://fly.io/blog/sqlite-internals-wal/">How SQLite Scales Read Concurrency</a>。</li>
+</ul>
+</li>
+<li>OS Interface(<a href="https://www.sqlite.org/vfs.html">VFS</a>)：为了提供跨操作系统的可移植性，SQLite使用了一个称为VFS的抽象层。VFS提供了打开、读取、写入和关闭磁盘文件的方法，以及其他特定于操作系统的功能。</li>
+</ul>
+<p>以上就是SQLite架构的简单介绍，如果你还希望进一步了解内部实现细节，可以阅读这本开源电子书：<a href="https://www.compileralchemy.com/books/sqlite-internals/">SQLite Internals: How The World&rsquo;s Most Used Database Works</a>。</p>
+<p>理解了这些，你就能够更好的了解下面这些把SQLite玩出花活的<q>文艺复兴</q>类开源项目了。</p>
+<h2 id="sqlite的文艺复兴">SQLite的文艺复兴</h2>
+<p>SQLite是个已经超过20岁高龄的并不新的软件，很多人对它的认知还停留在<q>一个玩具类的数据库，拿它用来做一些简单的本地存储或测试，很少用来在生产系统中使用</q>。但就是这样古老的软件，却长期在<a href="https://news.ycombinator.com/item?id=32478907">Hacker News</a>中被热议，因为一些有趣的项目，让SQLite老树逢春、文艺复兴。</p>
+<blockquote>
+<p>SQLite的极限测试，单机百万级并发压测：<a href="https://blog.expensify.com/2018/01/08/scaling-sqlite-to-4m-qps-on-a-single-server/">Scaling SQLite to 4M QPS on a Single Server (EC2 vs Bare Metal)</a>。</p>
+</blockquote>
+<h3 id="serverless--edge-computing">Serverless / Edge Computing</h3>
+<p>将静态页面发布到CDN中，然后使用API提供动态更新的能力，这种<a href="https://www.bmpi.dev/dev/pulumi-aws-serverless-hugo-site-vists/">Jamstack</a>架构的<a href="https://www.bmpi.dev/dev/guide-to-serverless/">Serverless</a>应用能给业务系统带来极高的伸缩性。这种架构的限制在于，数据需要存放在单独的托管数据库中，并且费用不便宜，而且数据库可能会成为一个性能瓶颈，因为当业务系统部署到多区域时，单节点的数据库的网络开销是个不容忽视的问题。</p>
+<p>那如果数据库与业务系统实例在同一个服务器上运行呢？🤯</p>
+<pre><code class="language-mermaid" data-lang="mermaid">flowchart TB
+    subgraph server1[Server - Singapore]
+        DB1[DB]
+        App1[App]
+    end
+    subgraph server2[Server - US East]
+        DB2[DB]
+        App2[App]
+    end
+    subgraph server3[Server - Frankfurt]
+        DB3[DB]
+        App3[App]
+    end
+    class server1,server2,server3 box
+    classDef box fill:#f96,margin: 10px 10px
+</code></pre><p>SQLite本身就是一个Serverless的数据库，它与应用程序运行在同一进程中。相比其他数据库，同样运行在与应用程序同一个服务器中，SQLite都比那些C/S架构网络通信类的数据库要更快。唯一的问题是，如何解决多实例读取与写入同一数据库？针对此问题有以下解决方案：</p>
+<p><a href="https://github.com/superfly/litefs">Litefs</a>，此项目是<a href="https://github.com/benbjohnson/litestream">Litestream</a>作者加入Fly.io后开发的新项目。</p>
+<p>Litestream能通过接管SQLite检查点过程(checkpointing process)从而控制对<code>wal</code>日志文件的管理，在预写日志(Write-ahead Log)模式下，litestream能持续的复制<code>wal</code>日志文件到备份的位置如S3中，从而实现了在线流式备份SQLite数据库文件。具体可以查看此文档介绍：<a href="https://litestream.io/how-it-works/">How it works - Litestream</a>。</p>
+<p>Litefs相比Litestream要更进一步。Litefs通过提供一个基于FUSE的文件系统给SQLite做VFS层，当Leader节点要更新数据库时，该节点的SQLite的Pager模块要调用VFS层写入数据时，Litefs能够在页面级别复制与这个事务相关的页面集合，通过把这些页面集合打包成一个LTX数据格式的文件包，然后通过HTTP协议将这个文件包发送给只读节点，完成了数据的跨节点同步。</p>
+<p>在Litefs的分布式集群中，只有主节点能够写入数据，只读节点可以通过将主节点地址转发给客户端，让客户端只在主节点写入数据。主节点的选举通过获取Consul的分布式租约(Distributed leases)来达成共识，也可以设置静态的主节点。</p>
+<p>具体的架构参考这篇文章：<a href="https://fly.io/docs/litefs/how-it-works/">How LiteFS Works · Fly Docs</a>。一个部署案例可以参考这篇文章：<a href="https://news.ycombinator.com/item?id=34267434">I Migrated from a Postgres Cluster to Distributed SQLite with LiteFS</a>。</p>
+<p>另外Cloudflare也推出了类似的商业解决方案<a href="https://developers.cloudflare.com/d1/">Cloudflare D1</a>。</p>
+<h3 id="browser-compatible">Browser-compatible</h3>
+<p>SQLite可以通过WebAssembly(WASM)技术运行在浏览器中，以下两个项目能让前端代码在浏览器中发起SQL查询：</p>
+<ul>
+<li><a href="https://github.com/sql-js/sql.js/">sql.js</a>：JS代码导入该库后，通过网络请求下载SQLite数据库文件到浏览器内存中，即可发起SQL查询获取数据结果。</li>
+<li><a href="https://github.com/jlongster/absurd-sql">absurd-sql</a>：和sql.js的区别在于，该项目可以使用浏览器的IndexedDB作为持久化存储，能对SQLite数据库文件进行读写操作。</li>
+</ul>
+<p>在浏览器中使用SQLite有什么好处？以我的这个<a href="https://github.com/bmpi-dev/invest-alchemy">Invest Alchemy</a>开源项目为例，它是一个ETF投资组合管理系统，它需要管理多个ETF投资组合，每个ETF投资组合的所有数据都存放在一个SQLite数据库中，而这个数据库文件存放的位置是在AWS S3中。每天都会有一个定时程序自动下载AWS S3桶中所有的SQLite数据库，之后更新这些组合的数据，最后再上传至S3中。当用户浏览某个投资组合的页面，以这个<a href="https://money.bmpi.dev/portfolio?t=robot_dma_v02&amp;p=dma_11_22">投资组合</a>为例，该页面在初始化渲染时会先从S3中下载SQLite数据库到浏览器内存，之后使用sql.js初始化SQLite数据库，最后发起多个SQL查询获取数据结果，然后渲染页面。</p>
+<p>这种架构的好处在于，浏览器页面只需要发起一次查询请求，就可以获取整个组合的全部数据。如果使用传统的数据库，一方面是费用的问题，另外一方面每次查询都需要经过网络传输，这样会增加页面的加载时间。</p>
+<p>最后，SQLite这种单数据库文件的方式，带来了很好的隔离性。比如在Invest Alchemy中，一个数据库代表一个投资组合，当然也可以把某个用户的所有个人数据存放至一个数据库中，再把这些数据库存放在AWS S3中不同的目录中，这样就可以很好的隔离不同用户的数据。</p>
+<h3 id="clientserver">Client/Server</h3>
+<p>SQLite也可以作为一个Client/Server架构的数据库。当然这种用法已经失去了SQLite的优势，增加了网络开销，但在某些场景可能有用，比如作为一个只读数据源，或者作为一个数据缓存，这种费用开销应该比较低。</p>
+<ul>
+<li><a href="https://github.com/benbjohnson/postlite">postlite</a>：一个网络代理库，支持PostgreSQL的通信协议，后端使用SQLite作为存储。</li>
+<li><a href="https://github.com/psanford/sqlite3vfshttp">sqlite3vfshttp</a>：一个SQLite VFS，支持通过HTTP协议访问SQLite数据库文件。相比sql.js需要下载整个SQLite数据库文件，该库只需要通过客户端指定<code>HTTP range</code>头即可获取指定范围的数据，在一个大的数据库文件中，这种优化可以节省大量的网络开销。</li>
+</ul>
+<h3 id="olap">OLAP</h3>
+<p>SQLite典型的用法是作为一个OLTP数据库，很少用它做OLAP。因为它的表数据存储是行式而非列式。为此<a href="https://github.com/duckdb/duckdb">duckdb</a>填充了这个空白，和SQLite相似的架构，只不过是列式存储，非常适合OLAP的业务场景。</p>
+<p>不过SQLite在<a href="https://www.sqlite.org/releaselog/3_38_0.html">3.38.0</a>版本中通过布隆过滤器(Bloom Filter)提升了大型分析查询语句的性能，这个特性也是为了支持OLAP的业务场景。当然更近一步的优化及与duckdb的对比可参考这篇论文：<a href="https://www.cidrdb.org/cidr2022/papers/p56-prammer.pdf">Introducing a Query Acceleration Path for Analytics in SQLite3</a>。</p>
+<h3 id="分布式">分布式</h3>
+<p>SQLite这种In-Process的架构看起来与分布式数据库完全不相关，而且分布式数据库本身就是一个非常复杂的领域，分布式带给数据库弹性扩容及高可用的能力，由于分布式事务的复杂性，常规的做法是尽可能通过单机垂直扩容的方式来解决扩容的问题，实在没办法再通过横向扩容（分片）的方式来解决。但依旧有以下令人惊艳的项目把SQLite带向了分布式的领域。</p>
+<ul>
+<li><a href="https://github.com/rqlite/rqlite">rqlite</a>：使用<a href="https://raft.github.io/">Raft</a>解决分布式集群节点达成共识的问题，写入是通过Leader节点完成的，其他复制节点可以将写入请求透传至Leader节点，读取则是通过任意节点完成的，所以这也算是一种<code>Leader-Replica</code>的分布式架构风格。
+<ul>
+<li>rqlite并没有提高写入的吞吐量，因为写入还是Leader完成的并且有额外的一致性检查开销，相比In-Process的单机SQLite，写入的吞吐量会有所下降。</li>
+<li>rqlite的数据API是通过HTTP公开提供的，所以它是一种Client/Server的架构风格。</li>
+<li>rqlite的节点间同步是通过复制命令的方式实现的，比如当写入命令发至Leader节点时，一旦命令提交至Raft Log，Leader节点会将写入命令复制至其他节点。</li>
+<li>设计文档见此：<a href="https://rqlite.io/docs/design/">Rqlite Design</a>。</li>
+</ul>
+</li>
+<li><a href="https://github.com/losfair/mvsqlite">mvsqlite</a>：此项目的精妙之处在于其通过<a href="https://github.com/apple/foundationdb">FoundationDB</a>作为SQLite的VFS层，极大的利用了FoundationDB提供的分布式特性（乐观无锁并发、分布式事务、同步异步复制、备份与恢复），实现了一个支持MVCC的分布式SQLite，不仅是<code>Leader-Replica</code>，还实现了多节点写入的并行化，<a href="https://su3.io/posts/mvsqlite-bench-20220930">提高了写入的吞吐量</a>。由于其实现了MVCC，所以甚至能实现在数据库层面的时间旅行(Time travel)。
+<ul>
+<li>推荐阅读作者的这两篇文章了解实现细节：1. <a href="https://su3.io/posts/mvsqlite">Turning SQLite into a distributed database</a>，2. <a href="https://su3.io/posts/mvsqlite-2">Storage and transaction in mvSQLite</a>。</li>
+<li>与同样通过VFS模块实现分布式的Litefs相比，mvsqlite需要额外部署<code>FoundationDB</code>集群与<code>mvstore</code>无状态实例，所以部署与运维成本更高。</li>
+<li>有趣的是，FoundationDB在<code>7.0.0</code>之前SSD存储引擎使用的是SQLite，不过在这之后，FoundationDB实现了自己的存储引擎<a href="https://youtu.be/nlus1Z7TVTI">Redwood</a>。</li>
+</ul>
+</li>
+<li><a href="https://github.com/vlcn-io/cr-sqlite">cr-sqlite</a>：前面项目如rqlite实现分布式的方式，是通过共识算法选举出某个Leader，之后由Leader对数据进行变更，实现了最终一致性。如果多个写入者同时对同一个数据库做修改而不发生冲突呢？我们知道实时协作领域中就存在一种解决多人实时协作的无冲突复制的数据结构：<a href="https://crdt.tech/">CRDT</a>。而这个cr-sqlite项目就巧妙的把CRDT带入了SQLite，最终实现了和mvsqlite一样的集群多节点并发写入特性。</li>
+<li><a href="https://github.com/Expensify/Bedrock">Bedrock</a>：Bedrock是一个建立在SQLite之上的网络和分布式事务层。它是为异地复制而设计的分布式关系数据库管理系统。采用P2P的分布式架构风格，数据最终被写入到所有节点的私有区块链中。🤯
+<ul>
+<li>Bedrock使用Paxos分布式共识算法选举集群Leader，Leader负责协调分布式两阶段提交事务。</li>
+<li>Bedrock的<a href="https://bedrockdb.com/synchronization.html">同步引擎</a>是一个<a href="https://bedrockdb.com/blockchain.html">私有区块链</a>。每个线程都有一个叫做journal的内部表，它有3个列，叫做id、query、hash。每次查询被提交到数据库时，都会在日志中插入一条新行。新行记录了查询，并根据前一行计算新的增量哈希值。当一个服务器连接到一个集群时，最新的ID和哈希值被广播出来。如果两台服务器对ID对应的哈希值意见不一，那么它们就知道它们在某个时间点上 &ldquo;分叉 &ldquo;了，并停止彼此的通信。Leader决定哪个分叉能成为新的主分支。</li>
+</ul>
+</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>SQLite为什么能在如此多领域有创新的项目出现？一方面得益于SQLite高质量的代码，近亿行的测试代码保证了其坚若磐石的可靠性，另一方面又得益其简单的架构，总共的实现源码也才15万行。</p>
+<p>对比其他数据库如MySQL有超过四百万行的源码，Oracle有超过上千万行的源码，就连Postgres的源码也超过百万行了。正如你很难让大象跳舞一样，个人开发者也很难单打独斗去在这种规模的代码上做创新。而SQLite的架构简单，代码量少，使得它成为了一个非常好的实验平台，让开发者可以在SQLite的基础上做出各种各样的创新。</p>
+<p>随着Serverless及运行在CDN上的Edge Computing的流行，SQLite这种轻量级的关系型数据库将会有更多的应用场景，也会有更多的创新出现。SQLite也是一个非常适合学习的数据库，它的源码非常简单，可以很好的帮助你理解数据库的原理。</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>
