@@ -320,7 +320,7 @@ amp-img.contain img {
 <li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
 <h2 id="sqlite的故事">SQLite的故事</h2>
-<p>第一次被SQLite震撼到的一个事是关于<a href="https://www.sqlite.org/testing.html">它的测试代码</a>，其源码有15多万行，但测试代码和脚本竟有九千多万行。作者Dwayne Richard Hipp是一个完美主义者，为了能自由的开发SQLite，他编写了底层的存储引擎、<a href="https://www.bmpi.dev/dev/parser_black_magic/">Parser</a>、源码托管工具<a href="https://www2.fossil-scm.org/home/doc/trunk/www/index.wiki">Fossil</a>，除了C编译器和一些底层库如libc外，Richard几乎从零构建了SQLite所依赖的库或工具。</p>
+<p>第一次被SQLite震撼到的一个是关于<a href="https://www.sqlite.org/testing.html">它的测试代码</a>，其源码有15多万行，但测试代码和脚本竟有九千多万行。作者Dwayne Richard Hipp是一个完美主义者，为了能自由的开发SQLite，他编写了底层的存储引擎、<a href="https://www.bmpi.dev/dev/parser_black_magic/">Parser</a>、源码托管工具<a href="https://www2.fossil-scm.org/home/doc/trunk/www/index.wiki">Fossil</a>，除了C编译器和一些底层库如libc外，Richard几乎从零构建了SQLite所依赖的库或工具。</p>
 <p>运行SQLite官网的Web服务器<a href="https://sqlite.org/althttpd/doc/trunk/althttpd.md">Althttpd</a>也是Richard开发的，所有代码仅在一个C文件中，除了标准C库之外没有依赖任何其他代码库。</p>
 <p>当然<a href="https://www.sqlite.org/">SQLite官网</a>使用的数据库自然也是SQLite了，网页的<a href="https://www.sqlite.org/src/timeline">动态数据</a>甚至是由200多条SQL语句查询后在0.01秒内渲染完成的。</p>
 <p>很难想象这种开发模式能够成功，但Richard做到了，他把SQLite推向了数十亿的设备与终端。由于绝大部分代码都是Richard一个人完成的，SQLite并不是一个开源协作的项目。虽然代码是开放的，但却并没有开源社区的贡献，甚至有人为此专门fork出了SQLite的开源协作版本：<a href="https://github.com/libsql/libsql">libSQL</a>。</p>
@@ -369,7 +369,15 @@ amp-img.contain img {
 <h2 id="sqlite的文艺复兴">SQLite的文艺复兴</h2>
 <p>SQLite是个已经超过20岁高龄的并不新的软件，很多人对它的认知还停留在<q>一个玩具类的数据库，拿它用来做一些简单的本地存储或测试，很少用来在生产系统中使用</q>。但就是这样古老的软件，却长期在<a href="https://news.ycombinator.com/item?id=32478907">Hacker News</a>中被热议，因为一些有趣的项目，让SQLite老树逢春、文艺复兴。</p>
 <blockquote>
-<p>SQLite的极限测试，单机百万级并发压测：<a href="https://blog.expensify.com/2018/01/08/scaling-sqlite-to-4m-qps-on-a-single-server/">Scaling SQLite to 4M QPS on a Single Server (EC2 vs Bare Metal)</a>。</p>
+<p>一些你可能觉得SQLite做不到的事：</p>
+<ul>
+<li>
+<p>SQLite单机百万TPS并发压测：<a href="https://blog.expensify.com/2018/01/08/scaling-sqlite-to-4m-qps-on-a-single-server/">Scaling SQLite to 4M QPS on a Single Server (EC2 vs Bare Metal)</a>。</p>
+</li>
+<li>
+<p>SQLite未来可支持多个并发写入: 官方出品的<a href="https://sqlite.org/hctree/doc/hctree/doc/hctree/index.html">SQLite HC-tree</a>，尝试替换老的<a href="https://sqlite.org/src4/doc/trunk/www/bt.wiki">B-tree</a>数据结构，能实现多写多读、分布式节点复制与更大的数据库大小限制，<a href="https://sqlite.org/hctree/doc/hctree/doc/hctree/threadtest.wiki">压测结果很不错</a>。</p>
+</li>
+</ul>
 </blockquote>
 <h3 id="serverless--edge-computing">Serverless / Edge Computing</h3>
 <p>将静态页面发布到CDN中，然后使用API提供动态更新的能力，这种<a href="https://www.bmpi.dev/dev/pulumi-aws-serverless-hugo-site-vists/">Jamstack</a>架构的<a href="https://www.bmpi.dev/dev/guide-to-serverless/">Serverless</a>应用能给业务系统带来极高的伸缩性。这种架构的限制在于，数据需要存放在单独的托管数据库中，并且费用不便宜，而且数据库可能会成为一个性能瓶颈，因为当业务系统部署到多区域时，单节点的数据库的网络开销是个不容忽视的问题。</p>
@@ -410,6 +418,7 @@ amp-img.contain img {
 <ul>
 <li><a href="https://github.com/benbjohnson/postlite">postlite</a>：一个网络代理库，支持PostgreSQL的通信协议，后端使用SQLite作为存储。</li>
 <li><a href="https://github.com/psanford/sqlite3vfshttp">sqlite3vfshttp</a>：一个SQLite VFS，支持通过HTTP协议访问SQLite数据库文件。相比sql.js需要下载整个SQLite数据库文件，该库只需要通过客户端指定<code>HTTP range</code>头即可获取指定范围的数据，在一个大的数据库文件中，这种优化可以节省大量的网络开销。</li>
+<li><a href="https://sqlite.org/cloudsqlite/doc/trunk/www/index.wiki">Cloud Backed SQLite</a>: 官方支持的云端SQLite，支持Azure和GCP，可以通过Storage Client直接读取或写入数据库，无需下载整个数据库。</li>
 </ul>
 <h3 id="olap">OLAP</h3>
 <p>SQLite典型的用法是作为一个OLTP数据库，很少用它做OLAP。因为它的表数据存储是行式而非列式。为此<a href="https://github.com/duckdb/duckdb">duckdb</a>填充了这个空白，和SQLite相似的架构，只不过是列式存储，非常适合OLAP的业务场景。</p>
