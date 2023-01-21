@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/en/dev/coding-anytime-anywhere/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2019-02-08T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2020-01-15T16:02:40&#43;08:00" />
+<meta property="article:modified_time" content="2023-01-21T11:24:13&#43;08:00" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2019-02-08T00:00:00Z",
-      "dateModified": "2020-01-15T16:02:40+08:00",
+      "dateModified": "2023-01-21T11:24:13+08:00",
       "author": {
         "@type": "Person",
         "name": "Dawei Ma"
@@ -233,11 +233,11 @@
               
               
               
-              0:24
+              0:6
               
             </span>
             
-            <span class="post-word-count"> | 90 words | </span>
+            <span class="post-word-count"> | 22 words | </span>
             <span id="post-views"></span> views
             
           </div>
@@ -288,18 +288,10 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
           
           
           
-          <h2 id="coding-anytime-anywhere">Coding Anytime Anywhere</h2>
+          <h2 id="coding-anytime-anywhere--elixir">Coding Anytime Anywhere 💗 Elixir</h2>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir">(<span style="color:#fff;font-weight:bold">for</span> x &lt;- [&lt;&lt;<span style="color:#ff0;font-weight:bold">65</span>&gt;&gt;&lt;&gt;<span style="color:#0ff;font-weight:bold">&#34;ny&#34;</span>], y &lt;- <span style="color:#0ff;font-weight:bold">~w(time where)</span>, <span style="color:#0ff;font-weight:bold">do</span>: x &lt;&gt; y)
 |&gt; Enum.reduce(<span style="color:#0ff;font-weight:bold">&#39;Co&#39;</span>++<span style="color:#0ff;font-weight:bold">~c(deing)</span>--[<span style="color:#ff0;font-weight:bold">101</span>], &amp;([&amp;2|[<span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\s</span><span style="color:#0ff;font-weight:bold">&#34;</span>|&amp;1]]))
 |&gt; IO.puts
-</code></pre></div><h2 id="data-transform">Data Transform</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir">File.read!(<span style="color:#0ff;font-weight:bold">&#34;./data.txt&#34;</span>) 
-|&gt; String.split(<span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span>) 
-|&gt; Enum.map(<span style="color:#fff;font-weight:bold">fn</span> x -&gt; {<span style="color:#0ff;font-weight:bold">:ok</span>, date, _} = DateTime.from_iso8601(<span style="color:#0ff;font-weight:bold">&#34;2019-08-12T&#34;</span> &lt;&gt; x &lt;&gt; <span style="color:#0ff;font-weight:bold">&#34;Z&#34;</span>); date <span style="color:#fff;font-weight:bold">end</span>) 
-|&gt; Enum.group_by(<span style="color:#fff;font-weight:bold">fn</span> x -&gt; x <span style="color:#fff;font-weight:bold">end</span>) 
-|&gt; Enum.map(<span style="color:#fff;font-weight:bold">fn</span> {k, v} -&gt; [k, length(v)] <span style="color:#fff;font-weight:bold">end</span>) 
-|&gt; Enum.sort(<span style="color:#fff;font-weight:bold">fn</span> l, r -&gt; l &lt;= r <span style="color:#fff;font-weight:bold">end</span>) 
-|&gt; Enum.reduce(<span style="color:#0ff;font-weight:bold">&#34;&#34;</span>, <span style="color:#fff;font-weight:bold">fn</span> x, acc -&gt; d = Enum.at(x, <span style="color:#ff0;font-weight:bold">0</span>); acc &lt;&gt; <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">#{</span>d.year<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">/</span><span style="color:#0ff;font-weight:bold">#{</span>d.month<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">/</span><span style="color:#0ff;font-weight:bold">#{</span>d.day<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold"> </span><span style="color:#0ff;font-weight:bold">#{</span>d.hour<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">:</span><span style="color:#0ff;font-weight:bold">#{</span>d.minute<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">:</span><span style="color:#0ff;font-weight:bold">#{</span>d.second<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span> &lt;&gt; <span style="color:#0ff;font-weight:bold">&#34;, </span><span style="color:#0ff;font-weight:bold">#{</span>Enum.at(x, <span style="color:#ff0;font-weight:bold">1</span>)<span style="color:#0ff;font-weight:bold">}</span><span style="color:#0ff;font-weight:bold">&#34;</span>  &lt;&gt; <span style="color:#0ff;font-weight:bold">&#34;</span><span style="color:#0ff;font-weight:bold">\n</span><span style="color:#0ff;font-weight:bold">&#34;</span> <span style="color:#fff;font-weight:bold">end</span>) |&gt; (<span style="color:#fff;font-weight:bold">fn</span> s -&gt; File.write(<span style="color:#0ff;font-weight:bold">&#34;./data.csv&#34;</span>, s) <span style="color:#fff;font-weight:bold">end</span>).()
 </code></pre></div>
         </div>
 
@@ -312,9 +304,10 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
           
           
           
-              36个月前
+              今日
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5059d67379bc6190768c4ff7f793d48dcd4617a4">5059d6737</a>
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/6ebf8ee79edd8da0e121ca4bdbff2cdd693e8b95">6ebf8ee79</a>
         </div>
         
 
@@ -325,7 +318,6 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
         </div>
 
         <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
-        <a id="follow-my-twitter" href="https://twitter.com/madawei2699"><img style="box-shadow:none !important;width: 200px;" src="https://img.shields.io/twitter/follow/madawei2699?style=social"></a>
         </div>
       </div>
 
@@ -805,17 +797,10 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
 
     <footer class="footer">
   <div class="footer-taxonomy">
-    <div style="margin-bottom: 10px;">
-      <a href="https://wiki.bmpi.dev/">Wiki</a>
-      ⚔️
-      <a href="https://www.bmpi.dev/talk/">Talk</a>
-      ⚔️
-      <a href="https://money.bmpi.dev/">Invest</a>
-      ⚔️
-      <a href="https://tg.bmpi.dev">Think</a>
-    </div>
     <div>
-      <a href="https://note.bmpi.dev/#/all-pages">Note</a>
+      <a href="https://www.bmpi.dev/talk/">Talk</a>
+      ⚡️
+      <a href="https://money.bmpi.dev/">Invest</a>
       ⚡️
       <a href= /en/tool >Tool</a>
       ⚡️
@@ -823,13 +808,6 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
       ⚡️
       <a href="https://umami.bmpi.dev/share/ilNU9n5W/bmpi.dev">Stats</a>
     </div>
-  </div>
-  <div class="footer-taxonomy">
-    <a href= /en/tags style="color: #B36D61;">Tags</a>
-    👈
-    <a href= /en/categories style="color: #FF8C31;">Categories</a>
-    👉
-    <a href= /en/series style="color: #519A73;">Series</a>
   </div>
   <section class="container">
     
