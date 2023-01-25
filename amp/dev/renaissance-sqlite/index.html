@@ -441,7 +441,11 @@ amp-img.contain img {
 <li>有趣的是，FoundationDB在<code>7.0.0</code>之前SSD存储引擎使用的是SQLite，不过在这之后，FoundationDB实现了自己的存储引擎<a href="https://youtu.be/nlus1Z7TVTI">Redwood</a>。</li>
 </ul>
 </li>
-<li><a href="https://github.com/vlcn-io/cr-sqlite">cr-sqlite</a>：前面项目如rqlite实现分布式的方式，是通过共识算法选举出某个Leader，之后由Leader对数据进行变更，实现了最终一致性。如果多个写入者同时对同一个数据库做修改而不发生冲突呢？我们知道实时协作领域中就存在一种解决多人实时协作的无冲突复制的数据结构：<a href="https://crdt.tech/">CRDT</a>。而这个cr-sqlite项目就巧妙的把CRDT带入了SQLite，最终实现了和mvsqlite一样的集群多节点并发写入特性。</li>
+<li><a href="https://github.com/vlcn-io/cr-sqlite">cr-sqlite</a>：前面项目如rqlite实现分布式的方式，是通过共识算法选举出某个Leader，之后由Leader对数据进行变更，实现了最终一致性。如果多个写入者同时对同一个数据库做修改而不发生冲突呢？我们知道实时协作领域中就存在一种解决多人实时协作的无冲突复制的数据结构：<a href="https://crdt.tech/">CRDT</a>。而这个cr-sqlite项目就巧妙的通过SQLite的<a href="https://www.sqlite.org/loadext.html">运行时扩展</a>把CRDT带入了SQLite，最终实现了和mvsqlite一样的集群多节点并发写入特性。
+<ul>
+<li>推荐阅读作者的这篇文章：<a href="https://tantaman.com/2022-08-23-why-sqlite-why-now.html">Why SQLite? Why Now?</a></li>
+</ul>
+</li>
 <li><a href="https://github.com/Expensify/Bedrock">Bedrock</a>：Bedrock是一个建立在SQLite之上的网络和分布式事务层。它是为异地复制而设计的分布式关系数据库管理系统。采用P2P的分布式架构风格，数据最终被写入到所有节点的私有区块链中。🤯
 <ul>
 <li>Bedrock使用Paxos分布式共识算法选举集群Leader，Leader负责协调分布式两阶段提交事务。</li>
