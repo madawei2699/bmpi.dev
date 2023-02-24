@@ -3,6 +3,56 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/en/</loc>
+    <lastmod>2023-02-24T22:40:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/database/</loc>
+    <lastmod>2023-02-24T22:40:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/database/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/database/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/distributed-systems/</loc>
+    <lastmod>2023-02-24T22:40:11+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/dev/renaissance-sqlite/</loc>
+    <lastmod>2023-02-24T22:40:11+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/dev/renaissance-sqlite/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/dev/renaissance-sqlite/"
+                />
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/en/dev/glimpse-of-web3/</loc>
     <lastmod>2022-05-13T18:04:29+08:00</lastmod>
     <xhtml:link
@@ -25,21 +75,6 @@
   <url>
     <loc>https://www.bmpi.dev/en/tags/blockchain/</loc>
     <lastmod>2022-05-13T18:04:29+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/en/</loc>
-    <lastmod>2023-01-21T11:24:13+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/"
-                />
   </url>
 
   <url>

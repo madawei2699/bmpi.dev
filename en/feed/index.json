@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/en/dev/glimpse-of-web3/",
-        "title": "A Glimpse of Web3",
-        "description": "Standing on Web2 and peering into Web3.",
-        "publish-date": "2022-05-13 00:00:00 +0000 UTC"
+        "url": "/en/dev/renaissance-sqlite/",
+        "title": "SQLite Renaissance",
+        "description": "This article presents the renaissance story of the most popular database, SQLite, from in-process to distributed.",
+        "publish-date": "2023-02-24 00:00:00 +0000 UTC"
     }
 }

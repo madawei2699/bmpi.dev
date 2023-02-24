@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>SQLite Renaissance</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/en/dev/renaissance-sqlite/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Build My Passive Income",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/",
+          "name": "en"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/dev\/renaissance-sqlite\/",
+          "name": "renaissance-sqlite"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>SQLite Renaissance</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2023-02-24T00:00:00Z'>
+                2023-02-24
+              </time>
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/en/tags/database/">Database</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/distributed-systems/">Distributed Systems</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#the-story-of-sqlite">The Story of SQLite</a></li>
+<li><a href="#architecture-of-sqlite">Architecture of SQLite</a></li>
+<li><a href="#the-renaissance-of-sqlite">The Renaissance of SQLite</a>
+<ul>
+<li><a href="#serverless--edge-computing">Serverless / Edge Computing</a></li>
+<li><a href="#browser-compatible">Browser-compatible</a></li>
+<li><a href="#clientserver">Client/Server</a></li>
+<li><a href="#olap">OLAP</a></li>
+<li><a href="#distributed">Distributed</a></li>
+</ul>
+</li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+<h2 id="the-story-of-sqlite">The Story of SQLite</h2>
+<p>One of the first times I was blown away by SQLite was by <a href="https://www.sqlite.org/testing.html">its test code</a>, whose source code has more than 150,000 lines, but the test code and scripts actually have more than 90 million lines. The author, Dwayne Richard Hipp, is a perfectionist and wrote the underlying storage engine, <a href="https://www.bmpi.dev/dev/parser_black_magic/">Parser</a>, the source hosting tool <a href="https://www2.fossil-scm.org/home/doc/trunk/www/index.wiki">Fossil</a>, Richard built the libraries or tools that SQLite depends on almost from scratch, except for the C compiler and some underlying libraries like libc.</p>
+<p>The web server <a href="https://sqlite.org/althttpd/doc/trunk/althttpd.md">Althttpd</a> that runs the official SQLite website was also built by Richard, with all the code in a single C file and no dependencies on any code libraries except the standard C library.</p>
+<p>Of course, the database used by the <a href="https://www.sqlite.org/">SQLite website</a> is also SQLite, and the <a href="https://www.sqlite.org/src/timeline">dynamic data</a> of the website is even rendered in 0.01 seconds after more than 200 SQL statements are queried.</p>
+<p>It&rsquo;s hard to imagine that this development model could work, but Richard did, and he pushed SQLite out to billions of devices and endpoints. Because the vast majority of the code was written by Richard alone, SQLite is not a collaborative open source project. While the code is open, there is no contribution from the open source community, and someone has even forked an open source collaborative version of SQLite specifically for this purpose: <a href="https://github.com/libsql/libsql">libSQL</a>.</p>
+<p>For more on the history of SQLite, listen to this podcast: <a href="https://corecursive.com/066-sqlite-with-richard-hipp/">The Untold Story of SQLite</a>.</p>
+<h2 id="architecture-of-sqlite">Architecture of SQLite</h2>
+<p>SQLite is a database software, but it has a completely different way of working than most database systems. Most database systems (MySQL, SQL Server, PostgreSQL or Oracle) have a client/server architecture, where the client communicates with the database server through a specific protocol such as JDBC/ODBC, and the database server receives the query requests from the client by listening to a socket port, and then returns the results to the client.</p>
+<p>Compared with other database network communication methods, SQLite is a library that communicates with the application through an in-process approach. SQLite&rsquo;s database is also a single file stored on disk.</p>
+<p>The advantage of SQLite over other databases is that it is fast, especially for executing small SQL query statements, which is why SQLite&rsquo;s official website can obtain dynamic data by querying over 200 SQL statements. SQLite also does not have the problem of N+1 query performance because there is no overhead of network communication with other databases:</p>
+<p><div class="fixed-container"><amp-img class="contain" src="https://img.bmpi.dev/e1ecd55c-bb43-40f4-84c9-d2f28f9a855d.png" alt="" layout="fill"></amp-img></div></p>
+<p>The architecture of SQLite is shown below.</p>
+<pre><code class="language-mermaid" data-lang="mermaid">flowchart TB
+    sql[SQL]:::sqlClass
+    subgraph sl[SQLite Library]
+        direction LR
+        subgraph Compiler
+            direction LR
+            sl1[Parser] --&gt; sl2[Code Generator]
+        end
+        subgraph se[Storage Engine]
+            direction LR
+            sl4[B-tree] --&gt; sl5[Pager] --&gt; sl6[OS Interface \n /VFS]
+        end
+        Compiler --&gt; vm[Virtual Machine \n /Bytecode Engine]
+        vm --&gt; se
+    end
+    sql --&gt; sl
+    sl --&gt; os[Operating System] --&gt; df[Database File]
+    os --&gt; rj[Rollback Journal]
+    classDef sqlClass fill:#f96
+</code></pre><p>The architecture of SQLite consists of three main parts: the compiler, the virtual machine and the storage engine. When the application initiates a query request, the SQL statement is first parsed by the compiler, then bytecode is generated, and finally executed by the virtual machine. During the execution of the virtual machine, the interface of the storage engine is called to read or write data.</p>
+<p>The compiler&rsquo;s main job is to parse the SQL statement into bytecode and then compile the bytecode into executable machine code. The main components of the compiler are Parser and Code Generator. Parser is responsible for parsing SQL statements into abstract syntax trees (ASTs), and Code Generator is responsible for converting ASTs into bytecode. The generation of query plans is also done in Code Generator.</p>
+<p>The <a href="https://www.sqlite.org/opcode.html">Virtual Machine</a> is a Register-Based VM, whose main job is to execute bytecode. Query Optimization is also done in the VM. Readers interested in this part can read this article: <a href="https://fly.io/blog/sqlite-virtual-machine/">How the SQLite Virtual Machine Works</a>.</p>
+<p>The main job of the storage engine is to read or write data. The main components of the storage engine are the B-tree, Pager and OS Interface (also called VFS).</p>
+<ul>
+<li>B-tree: SQLite&rsquo;s indexes are stored in B-tree data structure and table data are stored in B+tree data structure. Readers interested in this part can read this article: <a href="https://fly.io/blog/sqlite-internals-btree/">SQLite Internals: Pages &amp; B-trees</a>.</li>
+<li>Pager(Page cache): The abstraction layer between B-tree module and VFS module, provides the function of reading, writing and caching disk pages. atomicity, isolation and persistence of SQLite are achieved by Pager.
+<ul>
+<li>Pager provides two concurrent access modes: <a href="https://www.sqlite.org/atomiccommit.html">Rollback Journal</a> and pre-write-ahead log <a href="https://www.sqlite.org/wal.html">(Write-ahead Log)</a>. Compared to rollback logs, write-ahead logs provide better scalability and the ability to read data concurrently while writing data. In write-ahead logging mode, although a database can only have one write-ahead log file (-wal file) and only one write thread is allowed to update this file at a time, the configuration of <a href="https://sqlite.org/c3ref/busy_timeout.html"><code>busy_timeout</code></a> allows multiple write threads at the same time, but the execution is still serialized.</li>
+<li>I recommend reading these two articles for this section: <a href="https://fly.io/blog/sqlite-internals-rollback-journal/">How SQLite helps you do ACID</a> and <a href="https://fly.io/blog/sqlite-internals-wal/">How SQLite Scales Read Concurrency </a>.</li>
+</ul>
+</li>
+<li>OS Interface (<a href="https://www.sqlite.org/vfs.html">VFS</a>): To provide portability across operating systems, SQLite uses an abstraction layer called VFS. VFS provides methods for opening, reading, writing, and closing disk files, as well as other operating system-specific functionality.</li>
+</ul>
+<p>Above is a brief introduction to the SQLite architecture. If you want to further understand the internal implementation details, you can read this open-source e-book: <a href="https://www.compileralchemy.com/books/sqlite-internals/">SQLite Internals: How The World&rsquo;s Most Used Database Works</a>.</p>
+<p>With this understanding, you will be able to better appreciate the following open-source projects that creatively utilize SQLite and showcase its versatility.</p>
+<h2 id="the-renaissance-of-sqlite">The Renaissance of SQLite</h2>
+<p>SQLite is a not-so-new software that is over 20 years old, and many people still know it as <q>a toy-like database that is used for some simple local storage or testing, and rarely used in production</q>. But some interesting projects that have revived SQLite have been hotly discussed in <a href="https://news.ycombinator.com/item?id=32478907">Hacker News</a> for a long time.</p>
+<blockquote>
+<p>Some things you may not think SQLite can do.</p>
+<ul>
+<li>
+<p>SQLite on a Single Server Million TPS Concurrency Crush Test: <a href="https://blog.expensify.com/2018/01/08/scaling-sqlite-to-4m-qps-on-a-single-server/">Scaling SQLite to 4M QPS on a Single Server (EC2 vs Bare Metal)</a>.</p>
+</li>
+<li>
+<p>SQLite can support multiple concurrent writes in the future: the official <a href="https://sqlite.org/hctree/doc/hctree/doc/hctree/index.html">SQLite HC-tree</a>, trying to replace the old <a href="https://sqlite.org/src4/doc/trunk/www/bt.wiki">B-tree</a> data structure, which enables multiple writes, multiple reads, distributed node replication and larger database size limits, <a href="https://sqlite.org/hctree/doc/hctree/doc/hctree/threadtest.wiki">with good results in compression testing</a>.</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="serverless--edge-computing">Serverless / Edge Computing</h3>
+<p>Publishing static pages to a CDN and then using APIs to provide dynamic update capabilities, this Jamstack architecture of <a href="https://www.bmpi.dev/en/dev/guide-to-serverless/">Serverless</a> applications can bring extremely high scalability to business systems. The limitations of this architecture are that the data needs to be stored in a separate hosted database and is not cheap, and the database can be a performance bottleneck because the network overhead of a single-node database is a non-negligible problem when business systems are deployed to multiple regions.</p>
+<p>What if the database and the business system instance are running on the same server? 🤯</p>
+<pre><code class="language-mermaid" data-lang="mermaid">flowchart TB
+    subgraph server1[Server - Singapore]
+        DB1[DB]
+        App1[App]
+    end
+    subgraph server2[Server - US East]
+        DB2[DB]
+        App2[App]
+    end
+    subgraph server3[Server - Frankfurt]
+        DB3[DB]
+        App3[App]
+    end
+    class server1,server2,server3 box
+    classDef box fill:#f96,margin: 10px 10px
+</code></pre><p>SQLite is a Serverless database, which runs in the same process as the application. Compared to other databases, SQLite is faster than those with C/S architecture for network communication. The only problem is, how to solve the problem of multiple instances reading and writing to the same database? The following solutions are available for this problem.</p>
+<p><a href="https://github.com/superfly/litefs">Litefs</a>, this project is a new project developed by the author of <a href="https://github.com/benbjohnson/litestream">Litestream</a> after joining Fly.io.</p>
+<p>Litestream can control the management of <code>wal</code> log files by taking over the SQLite checkpointing process. In Write-ahead Log mode, litestream can continuously copy <code>wal</code> log files to the backup location such as S3, thus This enables online streaming backup of SQLite database files. See this document for details: <a href="https://litestream.io/how-it-works/">How it works - Litestream</a>.</p>
+<p>Litefs goes a step further than Litestream by providing a FUSE-based file system to SQLite as the VFS layer. Litefs is able to replicate the collection of pages related to this transaction at the page level, and completes the cross-node synchronization of data by packaging these page collections into a file package in LTX data format and then sending this file package to the read-only node via HTTP protocol.</p>
+<p>In the distributed cluster of Litefs, only the master node can write data, and the read-only node can let the client write data only at the master node by forwarding the address of the master node to the client. The master node is elected by obtaining distributed leases (Distributed leases) from Consul to reach consensus, and static master nodes can also be set.</p>
+<p>For the specific architecture, refer to this article: <a href="https://fly.io/docs/litefs/how-it-works/">How LiteFS Works - Fly Docs</a>. A deployment case can refer to this article: <a href="https://news.ycombinator.com/item?id=34267434">I Migrated from a Postgres Cluster to Distributed SQLite with LiteFS</a>.</p>
+<p>Also Cloudflare has released a similar commercial solution <a href="https://developers.cloudflare.com/d1/">Cloudflare D1</a>.</p>
+<h3 id="browser-compatible">Browser-compatible</h3>
+<p>SQLite can run in the browser via WebAssembly (WASM) technology, and the following two projects enable the use of SQL in the browser.</p>
+<ul>
+<li><a href="https://github.com/sql-js/sql.js/">sql.js</a>: Using this library, Javascript can download the SQLite database file into the browser&rsquo;s memory via network request, and later use SQL to retrieve the data results from the SQLite database file, all while happening just within the browser.</li>
+<li><a href="https://github.com/jlongster/absurd-sql">absurd-sql</a>: The difference with sql.js is that this project can use the browser&rsquo;s IndexedDB as persistent storage, and can read and write SQLite database files.</li>
+</ul>
+<blockquote>
+<p>What are the advantages of using SQLite in the browser? Take this open source project of mine <a href="https://github.com/bmpi-dev/invest-alchemy">Invest Alchemy</a> as an example, it is an ETF portfolio management system, it needs to manage multiple ETF portfolios, all the data of each ETF portfolio is stored in a SQLite database, and the location of this database file is stored in AWS S3. Every day, a scheduled program automatically downloads all SQLite databases to the AWS S3 bucket, after which the data of these portfolios is updated and finally uploaded to S3. When a user views a page of a portfolio, take this <a href="https://money.bmpi.dev/portfolio?t=robot_dma_v02&amp;p=dma_11_22">portfolio</a> as an example, the page will first download the SQLite database from S3 to the browser&rsquo;s memory when it is first rendered, and later use sql.js to initialize the SQLite database, and finally launch multiple SQL queries to get the data results and then render the page.</p>
+<p>The advantage of this architecture is that the browser page only needs to make one query request to get all the data for the entire portfolio. When using a traditional database, this is a matter of cost, and each query must be transmitted over the network, which increases the load time of the page.</p>
+<p>Finally, SQLite, a single database file approach, brings a good isolation. For example, in Invest Alchemy, one database represents one portfolio, and of course it is possible to store all the personal data of one user in one database, and then store these databases in different directories in AWS S3, so that the data of different users can be well isolated.</p>
+</blockquote>
+<h3 id="clientserver">Client/Server</h3>
+<p>SQLite can also be used as a Client/Server architecture database. Of course this usage has lost the advantages of SQLite and increases the network overhead, but it may be useful in some scenarios, such as as as a read-only data source, or as a data cache, where the overhead should be lower.</p>
+<ul>
+<li><a href="https://github.com/benbjohnson/postlite">postlite</a>: a web proxy library that supports PostgreSQL&rsquo;s communication protocol and uses SQLite as storage on the back end.</li>
+<li><a href="https://github.com/psanford/sqlite3vfshttp">sqlite3vfshttp</a>: a SQLite VFS that supports accessing SQLite database files via HTTP protocol. Compared to sql.js which needs to download the whole SQLite database file, this library only needs to specify the <code>HTTP range</code> header by the client to get the data of the specified range. In a large database file, this optimization can save a lot of network overhead.</li>
+<li><a href="https://sqlite.org/cloudsqlite/doc/trunk/www/index.wiki">Cloud Backed SQLite</a>: officially supported cloud SQLite, supports Azure and GCP, can read or write directly through Storage Client database without downloading the whole database.</li>
+</ul>
+<h3 id="olap">OLAP</h3>
+<p>SQLite is typically used as an OLTP database and rarely used for OLAP because its table data storage is row-based rather than column-based. For this reason <a href="https://github.com/duckdb/duckdb">duckdb</a> fills this gap with a similar architecture to SQLite, except that it is columnar storage, which is perfect for OLAP business scenarios.</p>
+<p>However, SQLite in <a href="https://www.sqlite.org/releaselog/3_38_0.html">3.38.0</a> improves the performance of large analytic query statements with Bloom Filter, a feature that is also designed to support OLAP business scenarios. Of course, more recent optimization and comparison with duckdb can be found in this paper: <a href="https://www.cidrdb.org/cidr2022/papers/p56-prammer.pdf">Introducing a Query Acceleration Path for Analytics in SQLite3</a>.</p>
+<h3 id="distributed">Distributed</h3>
+<p>SQLite in-process architecture seems to be totally irrelevant to distributed database, and distributed database itself is a very complex field, distributed brings the ability of elastic expansion and high availability of the database, due to the complexity of distributed transactions, the conventional practice is to solve the problem of expansion by means of vertical expansion of single machine as far as possible, and there&rsquo;s really no way to solve it by means of horizontal The problem can&rsquo;t be solved by horizontal scaling (slicing). However, there are still the following amazing projects that bring SQLite into the realm of distribution.</p>
+<ul>
+<li><a href="https://github.com/rqlite/rqlite">rqlite</a>: Using <a href="https://raft.github.io/">Raft</a> to solve the problem of reaching consensus among distributed cluster nodes, writing is done through the Leader node, and other replica nodes can pass through the write request to the Leader nodes, and reads are done by any node, so this is also a <code>Leader-Replica</code> style of distributed architecture.
+<ul>
+<li>rqlite does not improve write throughput because writes are still done by the Leader and there is additional consistency checking overhead, which reduces write throughput compared to the In-Process standalone SQLite.</li>
+<li>The rqlite data API is publicly available via HTTP, so it is a Client/Server style of architecture.</li>
+<li>The inter-node synchronization of rqlite is achieved by copying commands, e.g. when a write command is sent to the Leader node, once the command is submitted to Raft Log, the Leader node will copy the write command to other nodes.</li>
+<li>The design document is available here: <a href="https://rqlite.io/docs/design/">Rqlite Design</a>.</li>
+</ul>
+</li>
+<li><a href="https://github.com/losfair/mvsqlite">mvsqlite</a>: The subtlety of this project lies in its use of <a href="https://github.com/apple/foundationdb">FoundationDB</a> as the VFS layer of SQLite. It makes great use of the distributed features provided by FoundationDB (optimistic lock-free concurrency, distributed transactions, synchronous asynchronous replication, backup and recovery) to achieve a distributed SQLite with MVCC support, not only <code>Leader-Replica</code> but also parallelization of multi-node writes, <a href="https://su3.io/posts/mvsqlite-bench-20220930">increasing the throughput of writes</a>. Because of its implementation of MVCC, it even enables time travel at the database level (Time travel).
+<ul>
+<li>We recommend reading these two articles by the author for implementation details: 1. <a href="https://su3.io/posts/mvsqlite">Turning SQLite into a distributed database</a>, 2. <a href="https://su3.io/posts/mvsqlite-2">Storage and transaction in mvSQLite</a>.</li>
+<li>Compared with Litefs, which is also distributed through the VFS module, mvsqlite requires additional deployment of <code>FoundationDB</code> cluster and <code>mvstore</code> stateless instances, so the deployment and O&amp;M costs are higher.</li>
+<li>Interestingly, FoundationDB used SQLite as the SSD storage engine before <code>7.0.0</code>, but after that, FoundationDB implemented its own storage engine <a href="https://youtu.be/nlus1Z7TVTI">Redwood</a>.</li>
+</ul>
+</li>
+<li><a href="https://github.com/vlcn-io/cr-sqlite">cr-sqlite</a>: The previous project such as rqlite implements distributed in a way that a certain Leader is elected by consensus algorithm, after which the Leader makes changes to the data to achieve ultimate consistency. What if multiple writers make changes to the same database at the same time without conflict? We know that a data structure exists in the field of real-time collaboration to solve multiple people&rsquo;s real-time collaboration with conflict-free replication: <a href="https://crdt.tech/">CRDT</a>. This cr-sqlite project cleverly brings CRDT into SQLite through SQLite&rsquo;s <a href="https://www.sqlite.org/loadext.html">runtime extension</a>, and finally achieves the same cluster multi-node concurrent writing feature as mvsqlite.
+<ul>
+<li>I recommend reading this article by the author: <a href="https://tantaman.com/2022-08-23-why-sqlite-why-now.html">Why SQLite? Why Now?</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/Expensify/Bedrock">Bedrock</a>: Bedrock is a web and distributed transaction layer built on top of SQLite. It is a distributed relational database management system designed for offsite replication. Using a P2P style of distributed architecture, data is eventually written to a private blockchain of all nodes. 🤯
+<ul>
+<li>Bedrock uses the Paxos distributed consensus algorithm to elect cluster Leaders, who are responsible for coordinating distributed two-phase commit transactions.</li>
+<li>Bedrock&rsquo;s <a href="https://bedrockdb.com/synchronization.html">synchronization engine</a> is a <a href="https://bedrockdb.com/blockchain.html">private blockchain</a>. Each thread has an internal table called journal, which has 3 columns called id, query, and hash. Each time a query is committed to the database, a new row is inserted into the journal. The new row records the query and calculates a new incremental hash value based on the previous row. When a server connects to a cluster, the latest ID and hash values are broadcast. If two servers disagree on the hash value corresponding to the ID, then they know they &ldquo;forked&rdquo; at some point and stop communicating with each other. leader decides which fork can become the new master branch.</li>
+</ul>
+</li>
+</ul>
+<h2 id="summary">Summary</h2>
+<p>How is it that SQLite has become such an innovative project in so many areas? It is partly due to the high quality of the SQLite code, with nearly 100 million lines of test code to ensure its rock-solid reliability, and partly due to its simple architecture, with only 150,000 lines of source code in total.</p>
+<p>Compare this to other databases such as MySQL with over 4 million lines of source code, Oracle with over 10 million lines of source code, and even Postgres with over a million lines of source code. Just as it&rsquo;s hard to make an elephant dance, it&rsquo;s hard for individual developers to go it alone and innovate on code of this size. And SQLite&rsquo;s simple architecture and small amount of code make it a great platform for experimentation, allowing developers to do all kinds of innovation on top of SQLite.</p>
+<p>With the popularity of serverless and edge computing running on the CDN, SQLite, a lightweight relational database, will see more use cases and more innovation. SQLite is also a great database to learn, its source code is very simple and can help you understand the principles of the database.</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>
