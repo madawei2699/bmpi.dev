@@ -6,7 +6,21 @@
     <description>Recent content on BMPI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 19 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>我的 AI 阅读助手</title>
+      
+      
+      <category>Lifelong Learner</category>
+      
+      
+      <link>https://www.bmpi.dev/self/my-gpt-reader/</link>
+      <pubDate>Sun, 26 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/self/my-gpt-reader/</guid>
+      <description>基于 chatGPT 的聊天机器人，帮助你高效阅读。</description>
+    </item>
+    
     <item>
       <title>SQLite的文艺复兴</title>
       

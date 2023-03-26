@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/renaissance-sqlite/",
-        "title": "SQLite的文艺复兴",
-        "description": "本文介绍史上最流行的数据库SQLite从进程内到分布式的的文艺复兴故事。",
-        "publish-date": "2023-01-19 00:00:00 +0000 UTC"
+        "url": "/self/my-gpt-reader/",
+        "title": "我的 AI 阅读助手",
+        "description": "基于 chatGPT 的聊天机器人，帮助你高效阅读。",
+        "publish-date": "2023-03-26 00:00:00 +0000 UTC"
     }
 }

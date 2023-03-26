@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="马大伟">
+  
+  <meta name="description" content="基于 chatGPT 的聊天机器人，帮助你高效阅读。">
+  
+  
+  
+  <meta name="keywords" content="life,dev,trade,passive income,money,developer,Self-management,IT technology,investment transactions">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="我的 AI 阅读助手"/>
+  <meta name="twitter:description" content="基于 chatGPT 的聊天机器人，帮助你高效阅读。"/>
+  
+  
+  <meta name="twitter:image" content="https://og.bmpi.dev/我的 AI 阅读助手.png">
+  
+
+  
+  <meta property="og:title" content="我的 AI 阅读助手" />
+<meta property="og:description" content="基于 chatGPT 的聊天机器人，帮助你高效阅读。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/self/my-gpt-reader/" /><meta property="article:section" content="self" />
+<meta property="article:published_time" content="2023-03-26T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2023-03-26T18:42:36&#43;08:00" /><meta property="og:site_name" content="BMPI" />
+
+
+  
+  <meta name="og:image" content="https://og.bmpi.dev/我的 AI 阅读助手.png">
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "我的 AI 阅读助手",
+      
+      "image": "https://www.bmpi.dev/images/logo.png",
+      
+      "datePublished": "2023-03-26T00:00:00Z",
+      "dateModified": "2023-03-26T18:42:36+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "马大伟"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/self/my-gpt-reader/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/logo.png"
+        }
+      },
+      "description": "基于 chatGPT 的聊天机器人，帮助你高效阅读。",
+      "keywords": ["chatGPT", "信息输入", "自我提升", "知识管理"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/self/my-gpt-reader/">
+  
+  <title>
+  我的 AI 阅读助手 · BMPI
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/self/my-gpt-reader/">
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.6a80cb797dfdfd12e98400c531efd69dbcb23065e964b5e12bea45cddabd0357.css" integrity="sha256-aoDLeX39/RLphADFMe/WnbyyMGXpZLXhK&#43;pFzdq9A1c="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.a2fdc25deb82b741f3a807e38508c2dea269fc900c2b37ee8af380d97ea4d7a8.css" integrity="sha256-ov3CXeuCt0HzqAfjhQjC3qJp/JAMKzfuivOA2X6k16g="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/flying-pages.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bmpi.dev/images/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bmpi.dev/images/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bmpi.dev/images/ico/favicon-16x16.png">
+  <link rel="manifest" href="https://www.bmpi.dev/images/ico/site.webmanifest">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/amp/self/my-gpt-reader/" title="BMPI" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="preload" href="https://www.bmpi.dev/scss/tagcloud.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css"></noscript>
+
+  
+  <link rel="stylesheet" href="//unpkg.com/heti/umd/heti.min.css">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css"></noscript>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  
+
+  
+
+  
+
+  
+
+  <script async defer data-website-id="356d3289-e627-409c-a9d7-a272cf789f0b" src="https://umami.bmpi.dev/umami.js"></script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a id="site-title" class="navigation-title" href="https://www.bmpi.dev/">
+      BMPI
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://github.com/madawei2699">GitHub</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/self/">学习</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/dev/">技术</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/money/">投资</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/en/">English</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title heti">
+          <h1 class="title">我的 AI 阅读助手</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2023-03-26T00:00:00Z'>
+                2023-03-26
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              6:49
+              
+            </span>
+            
+            <span class="post-word-count"> | 1503 字 | </span>
+            <span id="post-views"></span> 次阅读
+            
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/chatgpt/">chatGPT</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E4%BF%A1%E6%81%AF%E8%BE%93%E5%85%A5/">信息输入</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/">自我提升</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/">知识管理</a></div>
+
+        </div>
+      </header>
+
+      
+
+      <div style="margin-bottom: 1.5rem;opacity: 70%">
+        <ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-1886683614725279"
+     data-ad-slot="5360039010"></ins>
+<script type='text/javascript'>
+(function() {
+var done = false;
+var script = document.createElement('script');
+script.async = true;
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+
+var createScript = setTimeout(
+function(){
+document.getElementsByTagName('HEAD').item(0).appendChild(script);
+}, 1500
+);
+
+script.onreadystatechange = script.onload = function(e) {
+if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+(adsbygoogle = window.adsbygoogle || []).push({});
+}
+};
+})();
+</script>
+
+      </div>
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <h2 id="ai-降临">AI 降临</h2>
+<p>今年你一定或多或少被 chatGPT 等 AI 模型的消息轰炸过。早在去年年底的时候我就被 chatGPT 的实力震撼过，为此还专门写过一篇文章：<a href="https://www.bmpi.dev/self/ai-arrival/">AI降临</a>，虽说 AI 模型是被人工训练出来的，但许多测试都表明它或多或少都有一些与人相似的智能，根据算力的演进速度，它的成长可能比很多人想象中的要快，所以所今年是 AI 降临年也不为过。如果你经常混迹推特，可能对此会更有体会，每天有数不尽的 AI 研究被公布，新的模型被发布，甚至 GPT-4 也被 OpenAI 发布了，而 chatGPT 只是 GPT-3.5 的一个调优版！</p>
+<p>虽然 2023 年是糟糕的一年，很多公司在裁员，经济比大家预期的要差。但 AI 技术的突破性成果让这一切看起来像是 iPhone 发布的初期，iPhone 在 2008 年发布，当年正是全球次贷危机爆发的一年，而且 PC 的发展在当时看也走到了尽头，是 iPhone 带领我们走向了移动互联网蓬勃发展的十年，谁也没能预料到 iPhone 给我们带来生活上的多大改变。所以乐观点看，也许 2023 年未来十年不错的开端，就算你此刻的处境也很糟糕，希望能坚持向前看，相信未来会更好。</p>
+<p>关注我的朋友都知道，我投入很多的精力在<a href="https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/">知识管理</a>上，也写了一些和信息获取的文章如<a href="https://www.bmpi.dev/self/my-info-input-channel/">构建高质量的信息输入渠道</a>与<a href="https://www.bmpi.dev/self/use-rss-email-read/">构建自己的信息简报</a>。这段时间我深深的意识到 AI 将会对我们未来的学习产生很深远的影响，从 chatGPT 能自由的切换语言到瞬间整理总结知识，这一切都看起来是如此的震撼。我为此专门测试了一些让 chatGPT 帮助我阅读总结整理书籍、文章、代码仓库，甚至与它结对编写代码。</p>
+<p><img data-src="https://img.bmpi.dev/a7714959-4d86-c666-37b7-970496409b4e.png" alt="" class="lazyload" loading="lazy"/></p>
+<h2 id="mygptreader">myGPTReader</h2>
+<p>在做完这些测试后，我意识到是时候革新我的知识管理流程和工具了，第一步就是从获取信息的阅读作为切入点，所以我花了十几天时间与 chatGPT 合作开发了我的个人 AI 阅读助手：<a href="https://github.com/madawei2699/myGPTReader">myGPTReader</a>，它是一个在 slack 聊天软件里的 bot，可以读取任何网页、电子书与文档，并根据与问题相关的内容做总结与分析处理，无论你给它的是什么语言的版本，它都能按你需要的语言去整理，这对平时阅读大量英文文章的我来说是一个效率的提升，当然这个 bot 背后还是 chatGPT，所以可以询问它任何问题。</p>
+<p>它能做什么？</p>
+<h3 id="功能特性">功能特性</h3>
+<ol>
+<li>在线读取任意网页内容包括视频（YouTube），并根据这些内容回答你提出的相关问题或总结相关内容。
+<img data-src="https://img.bmpi.dev/my-gpt-reader-read-web-page-1.gif" alt="" class="lazyload" loading="lazy"/>
+<img data-src="https://img.bmpi.dev/my-gpt-reader-read-web-page-2.gif" alt="" class="lazyload" loading="lazy"/></li>
+<li>支持读取电子书与文档（支持PDF、EPUB、DOCX、Markdown、TXT），并根据这些内容回答你提出的相关问题或总结相关内容。
+<img data-src="https://img.bmpi.dev/my-gpt-reader-read-pdf-1.gif" alt="" class="lazyload" loading="lazy"/>
+<img data-src="https://img.bmpi.dev/my-gpt-reader-read-epub-1.gif" alt="" class="lazyload" loading="lazy"/></li>
+<li>定时发送每日热榜新闻，无论新闻是中文还是其他语言，它都能使用 chatGPT 用中文自动总结新闻的内容，方便快速获取热点新闻信息。
+<img data-src="https://img.bmpi.dev/my-gpt-reader-read-hot-news-1.gif" alt="" class="lazyload" loading="lazy"/></li>
+<li>支持 <code>prompt</code> 模版，能根据消息历史记录的上下文回答你的问题，甚至能和你玩游戏。
+<img data-src="https://img.bmpi.dev/my-gpt-reader-prompt-template-1.gif" alt="" class="lazyload" loading="lazy"/></li>
+<li>支持多国语音交互（英文、中文、德语与日语），它会根据你的语言使用相关语言的声音来回答你的问题，从而帮助你训练外语能力，可以理解为它是你的私人外教。
+<img data-src="https://img.bmpi.dev/my-gpt-reader-voice-1.gif" alt="" class="lazyload" loading="lazy"/>
+<img data-src="https://img.bmpi.dev/my-gpt-reader-voice-2.gif" alt="" class="lazyload" loading="lazy"/>
+这是一个开源软件，意味着你可以私有部署它到你的 workspace 中，当然也可以加入我的 <a href="https://slack-redirect.i365.tech/">slack</a> 频道来免费体验它的强大。</li>
+</ol>
+<h2 id="ai-时代的学习范式">AI 时代的学习范式</h2>
+<p>当 AlphaGo 战胜了人类顶级棋手李世石那一刻，人类认为最复杂的棋类被 AI 淘汰了，当 Stable Diffusion 能够在一秒内画出人类画师一天的作品时，人类认为最复杂的艺术领域开始被 AI 攻克，当 chatGPT 能够在一秒内回答人类的任何问题时，人类认为最复杂的知识领域开始被 AI 攻克。</p>
+<p>如果 AI 能够迅速掌握很多我们人类需要数年掌握的知识，那学习的意义何在？</p>
+<p>如果把现今人类的知识领域看作冷兵器时代，那 chaGPT 的出现就如枪的诞生一样。一个带枪的人与冷兵器时代的人，谁更有优势？这个带枪的人就是<q>超级个体</q>，他能快速去实现自己的想法，而不需要去学习那么多细节性的知识，参加那么多无效的沟通会议，他能在短时间内实现以前一个团队才能实现的事情。</p>
+<p>如果我们的很多技能注定要被 AI 淘汰的话，最好的就是提前去与它共舞。当第一辆汽车问世的时候，很多马车夫不以为然，但也有人主动去学习它，去迎接一个新时代的来临。</p>
+
+        </div>
+
+        <div id="article-info">
+          
+          <div style="color: #5c7080;font-size: small;font-style: italic;">
+            
+            更新时间:
+            
+            
+            
+            
+            
+            
+                
+                  今日
+                
+            
+            
+            
+              版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/add58c41f96601d689df714800d8beef7835af0a">add58c41f</a>
+            
+          </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可</p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/self/my-info-input-channel/">构建高质量的信息输入渠道</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/self/build-personal-knowledge-system/">构建终身学习体系进行自我提升</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="share-twitter-container">
+  <a target="_blank" href="https://twitter.com/intent/tweet?text=%e5%9f%ba%e4%ba%8e%20chatGPT%20%e7%9a%84%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba%ef%bc%8c%e5%b8%ae%e5%8a%a9%e4%bd%a0%e9%ab%98%e6%95%88%e9%98%85%e8%af%bb%e3%80%82&amp;url=https%3a%2f%2fwww.bmpi.dev%2fself%2fmy-gpt-reader%2f&amp;via=madawei2699">Share on Twitter</a>
+  <span class="share-twitter-container-dashed">·</span>
+  <a target="_blank" href="https://twitter.com/search?q=https%3a%2f%2fwww.bmpi.dev%2fself%2fmy-gpt-reader%2f">Discuss on Twitter</a>
+</div>
+
+        <div style="color: darkgreen;">
+  <form style="border: 1px dashed transparent;padding:10px 10px;margin: 10px auto;text-align:center;width: 95%;border-image: linear-gradient(to right,green,red,hotpink,violet,gold,green);border-image-slice: 1%;" action="https://tinyletter.com/bmpi-dev" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/bmpi-dev', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true">
+    
+    <span>每月一份邮件，分享我对如何构建被动收入的思考、推荐文章及资源，欢迎订阅</span>
+    
+    <p style="margin: 10px 0;"><input type="text" style="width:240px;text-align: center;" name="email" id="tlemail" placeholder="Email"/></p>
+    <input type="hidden" value="1" name="embed"/>
+    
+    <input type="submit" value="订阅" />
+    
+  </form>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://giscus.app/client.js"
+        data-repo="bmpi-dev/bmpi.dev"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMjM3NTQzNDU="
+        data-category="Announcements"
+        data-category-id="DIC_kwDODVY4ac4CQdzV"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </footer>
+    </article>
+    <template><span id="control"></span></template>
+    <div id="toast"></div>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div>
+      <a href="https://www.bmpi.dev/talk/">Talk</a>
+      ⚡️
+      <a href="https://money.bmpi.dev/">Invest</a>
+      ⚡️
+      <a href= /tool >Tool</a>
+      ⚡️
+      <a href= /link >Link</a>
+      ⚡️
+      <a href="https://umami.bmpi.dev/share/ilNU9n5W/bmpi.dev">Stats</a>
+    </div>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2023
+    
+    
+  </section>
+</footer>
+
+  </main>
+  
+  <div id="the-modal" class="modal">
+    <span class="the-modal-close">&times;</span>
+    <img class="modal-content" id="the-modal-img01">
+  </div>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154678195-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154678195-1');
+  </script>
+  
+
+  
+  <script>(function(w,d, s, id) {w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BHuwaXciWicBjh6HQS2tfudv6IYQD11K9u1NUj7nuaEV9NoDT7ns9JjgqyYTflUv-m3TlD7ELY84AHMfgmPXNgU');</script>
+  
+
+  
+
+  
+  <script src="//unpkg.com/heti/umd/heti-addon.min.js"></script>
+  <script>
+    
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
+    heti.autoSpacing(); 
+    
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+  
+
+  
+
+  
+
+</body>
+
+</html>
