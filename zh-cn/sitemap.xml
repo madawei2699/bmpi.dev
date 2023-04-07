@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2023-03-28T19:52:45+08:00</lastmod>
+    <lastmod>2023-04-07T23:12:50+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,7 +19,17 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/chatgpt/</loc>
-    <lastmod>2023-03-28T19:52:45+08:00</lastmod>
+    <lastmod>2023-04-07T23:12:50+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/dev/chatgpt-development-notes/my-gpt-reader/</loc>
+    <lastmod>2023-04-07T23:12:50+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/categories/%E4%BB%80%E4%B9%88%E6%98%AFx/</loc>
+    <lastmod>2023-04-07T23:12:50+08:00</lastmod>
   </url>
 
   <url>
@@ -525,11 +535,6 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/tags/web3/"
                 />
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/categories/%E4%BB%80%E4%B9%88%E6%98%AFx/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
 
   <url>

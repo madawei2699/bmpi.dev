@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>ChatGPT应用开发小记</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/chatgpt-development-notes/my-gpt-reader/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "BMPI",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/chatgpt-development-notes\/",
+          "name": "chatgpt-development-notes"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/chatgpt-development-notes\/my-gpt-reader\/",
+          "name": "my-gpt-reader"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>ChatGPT应用开发小记</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2023-04-07T00:00:00Z'>
+                2023-04-07
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E4%BB%80%E4%B9%88%E6%98%AFx/">什么是X</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/chatgpt/">chatGPT</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#ai-%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86">AI 背景知识</a>
+<ul>
+<li><a href="#%E7%94%9F%E6%88%90%E5%BC%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8Bgpt-generative-pre-trained-transformer">生成式预训练模型（GPT: Generative Pre-trained Transformer）</a></li>
+<li><a href="#%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8Bllm-large-language-model">大语言模型（LLM: Large Language Model）</a></li>
+<li><a href="#%E8%AF%8D%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2">词向量检索</a></li>
+<li><a href="#prompt">Prompt</a></li>
+<li><a href="#embedding">Embedding</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-chatgpt-%E7%9A%84%E5%BA%94%E7%94%A8%E7%B1%BB%E5%9E%8B">基于 chatGPT 的应用类型</a>
+<ul>
+<li><a href="#%E5%A5%97%E5%A3%B3-chatgpt-%E5%BA%94%E7%94%A8">套壳 chatGPT 应用</a></li>
+<li><a href="#%E5%A2%9E%E5%BC%BA%E7%B1%BB-chatgpt-%E5%BA%94%E7%94%A8">增强类 chatGPT 应用</a></li>
+<li><a href="#prompt-%E7%B1%BB%E5%BA%94%E7%94%A8">Prompt 类应用</a></li>
+</ul>
+</li>
+<li><a href="#mygptreader-%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84">myGPTReader 应用架构</a></li>
+<li><a href="#mygptreader-%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B">myGPTReader 实现过程</a></li>
+<li><a href="#%E6%9C%80%E5%90%8E%E7%9A%84%E6%80%9D%E8%80%83">最后的思考</a></li>
+</ul>
+<p>如何开发一个基于 chatGPT 的应用？答案就在问题里，那就是用 chatGPT 来开发基于 chatGPT 的应用。本文以笔者的一个开源项目 <a href="https://github.com/madawei2699/myGPTReader">myGPTReader</a> 为例，分享我是如何基于 chatGPT 去开发这个系统的，这个系统的功能见这篇文章：<a href="https://www.bmpi.dev/self/my-gpt-reader/">我的 AI 阅读助手</a>。</p>
+<p>为了探索 chatGPT 辅助开发的可能性，我在项目开发之初就记录了与 chatGPT 对话的过程，将近一个月的开发日志都记录在 <a href="https://github.com/madawei2699/myGPTReader/blob/main/docs/CDDR.md">ChatGPT Driven Development Record</a> 这个文档里。</p>
+<p>从最终的结果看，我的角色从开发变成了产品设计与测试，整个项目的代码我个人亲自编写的可能不到 10%，从后端服务到前端页面，甚至连 Logo 都是 AI 来完成的，Logo 的设计过程我也记录到了 <a href="https://github.com/madawei2699/myGPTReader/blob/main/docs/MDDR.md">Midjourney Driven Design Record</a> 这个文件了。</p>
+<p>更有意思的是，这个项目因缺少部署文档，使一些不了解技术但又想独立部署该项目的网友犯难，但最终他们与 chatGPT 反向去研究这个项目，竟然也能成功部署。</p>
+<p>总之这是一个 chatGPT 含量极高的项目，无论是开发过程还是最终的功能。</p>
+<h2 id="ai-背景知识">AI 背景知识</h2>
+<p>chatGPT 是一个基于 GPT-3.5/4 的开放 API，它的背后技术是基于 Transformer 网络的大型无监督语言模型，通过预训练和微调两个阶段的训练，能够学习自然语言的规则和结构，并且在各种下游任务上表现出色。从更大范围来说，chatGPT 是属于自然语言处理 (Natural Language Processing) 领域的一个大语言模型（Large Language Model）。</p>
+<h3 id="生成式预训练模型gpt-generative-pre-trained-transformer">生成式预训练模型（GPT: Generative Pre-trained Transformer）</h3>
+<blockquote>
+<p>我: 你能给我说说chatGPT背后的技术吗？比如大语言模型，还有训练过程。</p>
+<p>chatGPT: 当谈到ChatGPT时，背后的技术通常是指OpenAI GPT（Generative Pre-trained Transformer）模型，这是一种使用Transformer网络架构进行预训练的大型语言模型。GPT是基于无监督学习技术构建的，该技术可以在没有标签的大量数据集上进行训练，以自动发现数据中的模式和结构。</p>
+<p>GPT模型的训练过程分为两个阶段：预训练和微调。</p>
+<p>预训练阶段使用一个大规模的无标签语料库，例如维基百科、新闻文章、小说等，通过预测给定文本序列中下一个单词的任务，对模型进行训练。这个任务被称为“语言模型”，因为模型被训练为理解自然语言中的上下文和语法规则，以便能够预测下一个单词。在这个过程中，GPT模型可以学习到自然语言的规则和结构，形成了通用的语言表示。</p>
+<p>在预训练完成后，微调阶段使用少量的标记数据对模型进行微调，以适应特定的下游任务，例如问答、文本分类、生成对话等。微调过程通过反向传播梯度更新模型的权重，以最小化特定任务的损失函数。微调的过程可以增强模型对特定任务的理解能力，并且可以使模型在下游任务上表现更好。</p>
+<p>总的来说，GPT模型的背后技术是基于Transformer网络的大型无监督语言模型，通过预训练和微调两个阶段的训练，能够学习自然语言的规则和结构，并且在各种下游任务上表现出色。</p>
+</blockquote>
+<h3 id="大语言模型llm-large-language-model">大语言模型（LLM: Large Language Model）</h3>
+<blockquote>
+<p>我: 大语言模型、GPT、Transformer三者的关系是？</p>
+<p>chatGPT: 大语言模型、GPT、Transformer三者是密切相关的概念，它们在自然语言处理和深度学习领域有着广泛的应用。具体关系如下：</p>
+<p>Transformer是一种基于注意力机制的神经网络架构，最初是为了机器翻译任务而设计的。它由编码器和解码器组成，可以对序列数据进行建模，适用于在输入和输出之间存在长距离依赖关系的任务。</p>
+<p>大语言模型是建立在Transformer架构基础上的语言模型，常见的大型预训练模型包括GPT、BERT等。大语言模型通过在大规模文本语料库上进行自监督预训练，能够捕捉到语言中的复杂结构与信息，从而在下游任务中取得很好的效果。</p>
+<p>GPT (Generative Pre-trained Transformer) 是一个基于Transformer架构和自监督预训练的句子级别自动生成模型，通常用于生成式任务，比如文本自动生成、摘要生成、对话系统等。</p>
+<p>因此，可以说，大语言模型是应用了Transformer架构并使用自监督预训练技术的模型，而GPT则是基于大语言模型构建的具体任务模型，两者都是Transformer架构在语言建模方面的应用。</p>
+</blockquote>
+<p>一个奇怪的问题是，基于Transformer这种设计之初是为了机器翻译任务的模型，为什么在编写代码方面也表现良好？</p>
+<blockquote>
+<p>我：为什么基于Transformer的GPT模型不仅可以用在翻译上，也能在在编写代码的任务上表现良好？</p>
+<p>chatGPT: 1. 基于文本流的代码生成能力：现代软件开发通常包括对源代码的有效管理。生成源代码的技术需要考虑各种软件开发标准、API接口以及所有相关部分间相互影响的复杂性。GPT模型强大的自然语言理解能力使其能够有效生成高质量的源代码。</p>
+<p>2.上下文理解：代码通常是一个非常上下文相关的环境，特别是在功能相似但又具有微妙区别的不同代码块之间。 GPT模型能够根据上下文生成出更加匹配语法、且更加可读的代码。</p>
+<p>3.词向量表达：源代码的语法是有结构的，并且它通常被认为属于DSL的元素构成的单词阵列。它的语法规则清晰，也容易编写非常明确的语义。GPT通过预训练的方式将从输入数据中获得的词向量检索作为核心基础，使用语言模型来编写高效、正确的代码。</p>
+<p>因此，GPT模型在生成高质量源代码的任务方面也有很好的应用价值。</p>
+</blockquote>
+<p>这里提到的一个关键技术：词向量检索，这在后面也会有所提及。</p>
+<h3 id="词向量检索">词向量检索</h3>
+<blockquote>
+<p>我: 什么是词向量检索？</p>
+<p>chatGPT: 词向量检索，也称为向量空间模型检索，是一种文本检索方法，其基本思想是将输入的文本转换为向量形式，并使用数学模型对文本相似度进行计算，从而寻找匹配的文本集合。</p>
+<p>通常情况下，词向量检索分为以下几个步骤：</p>
+<p>文本预处理：对原始文本进行分词、去除停用词等操作，以得到可供后续处理的单词列表。</p>
+<p>向量表示：利用某种算法（如 word2vec）将每个单词映射为一个向量。这些向量通常具有较高的维数，并包含了单词的语义信息。</p>
+<p>查询处理：将用户输入的查询文本转换为向量表示，与预处理过的文本向量进行相似度计算，以得到最相关的文本。</p>
+<p>结果呈现：将计算出来的相似度得分排列，呈现给用户最相关的文本列表。</p>
+<p>词向量检索在自然语言处理领域被广泛应用，常用于搜索引擎、推荐系统等场景。它能够通过对文本的向量化处理，更准确地衡量文本之间的相似度，达到更精确和快速的文本检索效果。</p>
+</blockquote>
+<h3 id="prompt">Prompt</h3>
+<blockquote>
+<p>我: 什么是AI中的Prompt？</p>
+<p>chatGPT: 在AI中，Prompt指的是提供给模型的文本或指令，可以用来初始化和引导模型生成一系列类似自然语言的输出。Prompt通常由一个或多个片段组成，其中每个片段都是一种语言形式或主题，用于定义AI模型需要生成的文本的内容和样式。</p>
+<p>Prompt可以以多种方式使用，例如：</p>
+<p>作为AI机器人对用户的响应：当一个用户与AI交互时，机器人会根据用户输入的信息和之前的上下文来生成回答。Prompt可以用作机器人生成响应的指南，确保AI产生的回复与预期的主题和风格相一致。</p>
+<p>作为生成AI初始文本的输入：某些AI工具（如GPT-3）可以根据给定的Prompt生成文本。这可以用于快速创建文章、电子邮件、Twitter帖子等等，并且可以扩展已有的草稿或以不同的风格和语言复述相同的消息。</p>
+<p>总之，Prompt在AI中是非常重要和有用的，因为它们可以让模型更加定向地生成特定类型或主题的字符串或句子。</p>
+</blockquote>
+<blockquote>
+<p>我: 为什么一定要用Prompt？Prompt未来还会存在吗？</p>
+<p>chatGPT: 在AI中，“Prompt”是指提供给模型的输入文本，它是用来启发模型生成输出的。Prompt通常是一些简短的话语或问题，向模型传递一些先验知识或上下文信息，以帮助模型更好地理解和执行任务。</p>
+<p>在许多自然语言处理(NLP)应用中，prompt对于准确预测输出至关重要。例如，一个对话系统可能需要给出一个明确的提示，让用户提供足够的上下文信息来回答问题，或者一个分类器需要在prompt下面添加一个标签，以便识别正确的类别。
+虽然在AI中，Prompt广泛使用并且非常有用，但未来是否会一直使用它们取决于技术的演进。可能会出现新的方式帮助模型更好的理解上下文信息，消除Prompt所起到的作用，但是现阶段仍然有很多领域弥补不了这个作用，因此Prompt仍然是一种不可替代的输入形式。</p>
+</blockquote>
+<h3 id="embedding">Embedding</h3>
+<blockquote>
+<p>我: openAI的embedding是什么？</p>
+<p>chatGPT: OpenAI的Embedding是一种将词语或句子转换成密集向量的技术。这些向量可以用于自然语言处理任务，如文本分类，情感分析和机器翻译等。</p>
+<p>在OpenAI的Embedding中，每个单词或句子都会被映射到一个向量空间中的点。与传统的one-hot编码不同，Embedding可捕获词语之间的相似性和关系，并使得机器学习算法能够更好地理解自然语言表达的含义。</p>
+<p>例如，在情感分析中，通过使用Embedding，我们可以将具有相似情感倾向的单词或短语映射到相似的向量空间中的位置。这样，我们就可以使用这些向量来训练机器学习模型，以帮助它们更准确地预测文本的情感。</p>
+</blockquote>
+<h2 id="基于-chatgpt-的应用类型">基于 chatGPT 的应用类型</h2>
+<p>由于 chatGPT 的功能实在过于强大，导致应用端能做的功能并不多，目前已知的一些应用类型有以下几种。</p>
+<h3 id="套壳-chatgpt-应用">套壳 chatGPT 应用</h3>
+<p>这类应用主要是对接 chatGPT 的 API 或调用 web 端的接口，自身并没有太多的功能，只是将 chatGPT 的功能进行了封装。而这类应用又细分为两种：</p>
+<ul>
+<li>工具类应用。需要用户提供自己的 OpenAI API Key 来使用，如很多APP或浏览器插件。</li>
+<li>代理服务类。不需要用户提供自己的 OpenAI API Key，而是通过代理服务来使用 chatGPT 的 API。</li>
+</ul>
+<h3 id="增强类-chatgpt-应用">增强类 chatGPT 应用</h3>
+<p>由于 chatGPT 本身不是联网的，无法获取最新的数据，且输入的 Token 也是有最大限制的，因此这类应用主要是为 chatGPT 突破这些限制而设计的，比如通过爬虫获取最新的数据，然后通过 chatGPT 来生成新的文本或总结这些文字，或者通过 Embedding 的方式将大量的文本向量化，然后把文本节点与向量化的组合存储到特殊设计的索引中，然后把用户输入的 Token 向量化后，通过词向量检索寻找相关的上下文，然后把这些上下文与用户输入的 Prompt 一同提交给 chatGPT 来获取答案。</p>
+<p>要应用自己去处理这么多繁琐的工作显然是没有必要的，因为已经有非常好的开源项目去实现这些功能了，代表就是 <a href="https://github.com/jerryjliu/llama_index">jerryjliu/llama_index</a>，使用这个库可以很容易实现这些增强功能，比如给 chatGPT 提供外部数据源，从而可以让它帮助我们分析网页、文档、新闻等等任务。</p>
+<p>一些相关的应用：</p>
+<ul>
+<li><a href="https://www.myreader.io/">myGPTReader</a>：myGPTReader 是 Slack 上的一个机器人，可以阅读和总结任何网页、文档（包括电子书）甚至来自 YouTube 的视频，它还可以通过语音与用户交流。</li>
+<li><a href="https://www.chatpdf.com/">chatpdf</a>：通过给 chatGPT 提供 PDF 文档，然后可以针对此文档进行问答，或者总结文档内容。类似的开源实现有：<a href="https://github.com/guangzhengli/ChatFiles">guangzhengli/ChatFiles</a>与<a href="https://github.com/arc53/DocsGPT">arc53/DocsGPT</a>。</li>
+<li><a href="https://app.copilothub.co/">Copilot Hub</a>：和上面的项目类似，不过多了能公开分享根据自己录入数据打造的问答机器人，比如能以乔布斯口吻回答问题的机器人。</li>
+<li><a href="https://github.com/binary-husky/chatgpt_academic">binary-husky/chatgpt_academic</a>：科研工作专用ChatGPT拓展，特别优化学术Paper润色体验。</li>
+</ul>
+<p>这些应用大多以 Embedding 为核心，当然也都存在共同的问题：因为 Embedding 是根据相似度去搜索相关文本的，如果问题非常宽泛，那么很难有效搜索到相关的问题，因此使用这些应用需要用户提供尽可能相关的问题，这样才能得到比较好的答案，也就是说需要用户提供好的 Prompt。</p>
+<p>当然 openAI 官方也提供了插件市场，这些功能也可以在插件中实现，但目前插件仅能在网页版使用，而且插件现在并没有完全开放，只有一些特定的用户才能使用。</p>
+<h3 id="prompt-类应用">Prompt 类应用</h3>
+<p>Prompt 是 GPT 技术的过渡产物，也许在未来我们都不需要 Prompt 了，但目前这也算 chatGPT 衍生出来的一类应用。比如收集好的 Prompt 然后分享给其他人使用，这类应用代表有：<a href="https://openprompt.co/">OpenPrompt</a>及很多<a href="https://github.com/f/awesome-chatgpt-prompts">awesome chatgpt prompts</a>类的开源Markdown项目。</p>
+<h2 id="mygptreader-应用架构">myGPTReader 应用架构</h2>
+<p>既然这是一篇chatGPT的文章，分析应用架构的工作自然也是用chatGPT来完成，我们直接把整个项目的代码导入给chatGPT，然后让它来分析应用架构。</p>
+<p>导入过程很简单，直接使用这个<a href="https://github.com/jerryjliu/llama_index/blob/main/examples/data_connectors/GithubRepositoryReaderDemo.ipynb">GithubRepositoryReaderDemo.ipynb</a>里的代码即可，导入我们要分析的项目代码，在这里就是<a href="https://github.com/madawei2699/myGPTReader">madawei2699/myGPTReader</a>这个Repo。</p>
+<p>导入后，让我们开始施展魔法吧！</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Prompt: Give me the handle_mentions (in app/server.py) function call flow, output Sequence diagrams using mermaid and markdown and comment the function name.
+</code></pre></div><pre><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+    participant App
+    participant Slack
+    participant Client
+    App-&gt;&gt;Slack: Send Event Subscription Request
+    Slack-&gt;&gt;App: Send Verification Request
+    App-&gt;&gt;Slack: Send Verification Response
+    Slack-&gt;&gt;App: Send Event
+    App-&gt;&gt;Client: Call handle_mentions()
+    Client-&gt;&gt;App: Process Event
+    App-&gt;&gt;Slack: Send Response
+</code></pre><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Prompt: Give me the bot_process (in app/server.py) function call flow, output Sequence diagrams using mermaid and markdown and comment the function name.
+</code></pre></div><pre><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+    participant User
+    participant App
+    participant BotProcess
+    participant FetchWebPost
+    participant GPT
+    User -&gt;&gt; App: Request
+    App -&gt;&gt; BotProcess: bot_process()
+    BotProcess -&gt;&gt; FetchWebPost: get_urls()
+    FetchWebPost -&gt;&gt; BotProcess: urls
+    BotProcess -&gt;&gt; FetchWebPost: scrape_website()
+    FetchWebPost -&gt;&gt; BotProcess: content
+    BotProcess -&gt;&gt; GPT: gpt_response()
+    GPT -&gt;&gt; BotProcess: response
+    BotProcess -&gt;&gt; App: response
+    App -&gt;&gt; User: Response
+</code></pre><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Prompt: Give me the get_answer_from_llama_file (in app.gpt module) function call flow, output Sequence diagrams using mermaid and markdown.
+</code></pre></div><pre><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+    participant User
+    participant App
+    participant GPTSimpleVectorIndex
+    participant LLMPredictor
+    participant SimpleDirectoryReader
+    participant Synthesizer
+    User-&gt;&gt;App: Get Answer from llama file
+    App-&gt;&gt;GPTSimpleVectorIndex: Get index from file cache
+    GPTSimpleVectorIndex-&gt;&gt;App: Return index
+    App-&gt;&gt;SimpleDirectoryReader: Load data from file
+    SimpleDirectoryReader-&gt;&gt;App: Return documents
+    App-&gt;&gt;GPTSimpleVectorIndex: Create index from documents
+    GPTSimpleVectorIndex-&gt;&gt;App: Return index
+    App-&gt;&gt;GPTSimpleVectorIndex: Query index
+    GPTSimpleVectorIndex-&gt;&gt;LLMPredictor: Get answer
+    LLMPredictor-&gt;&gt;App: Return answer
+    App-&gt;&gt;Synthesizer: Speak SSML
+    Synthesizer-&gt;&gt;App: Return audio
+    App-&gt;&gt;User: Return answer
+</code></pre><p>你没看错，这些时序图是chatGPT根据我们的Prompt而绘制的。由于这并不是一个复杂的系统，所以时序图足以给我们展示整个应用的架构及模块之间的关系。就算是一个大项目，我们依旧可以通过这种方式来分析应用架构。</p>
+<p>除了让它绘制图形来分析，我们还可以针对单个模块或函数让它以自然语言来解释代码的含义，比如：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Prompt: Explain get_answer_from_llama_file (in app.gpt module) function step by step.
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">chatGPT: get_answer_from_llama_file is a function that takes in a list of messages and a file path as parameters and returns an answer, the total number of tokens used by the LLM model, and the total number of tokens used by the embedding model.
+
+Step 1: The function starts by formatting the dialog messages into a single string.
+Step 2: It then gets the language code from the last message in the list of messages.
+Step 3: It then gets the index name from the file path.
+Step 4: It then checks if the index is already cached in the file cache directory. If it is, it loads the index from the cache. If not, it creates a new index from the documents in the file.
+Step 5: It then gets the prompt template for the language code.
+Step 6: It then uses the index and the LLM predictor to query the dialog messages with the prompt template.
+Step 7: It then uses the synthesizer to speak the SSML asynchronously and save the audio to a file.
+Step 8: It then gets the total number of tokens used by the LLM model and the total number of tokens used by the
+</code></pre></div><h2 id="mygptreader-实现过程">myGPTReader 实现过程</h2>
+<p>实现的过程我从第一个函数的实现开始到现在为止，已经将所有的Prompt及chatGPT的答案以日志的形式记录到了 <a href="https://github.com/madawei2699/myGPTReader/blob/main/docs/CDDR.md">ChatGPT Driven Development Record</a> 这个文档里，这里就不再赘述了。</p>
+<p>我在实现的过程保持着傻瓜式的开发方式，也就是chatGPT给我什么代码我就测试什么代码，遇到错误直接发给它让它来修复，在日志中也可以看出这种开发方式的特点。</p>
+<p>不仅后端代码是这样实现的，连前端页面也是这么开发出来的。对于前端网页的开发，一个难点就是需要写好的Prompt告诉chatGPT我想要的页面效果，我甚至把我要实现的一个页面的竞品网站的源码发给它，让它给我用我确定的技术栈实现。我的前端技术栈是React + TailwindCSS，最开始我让它把工程创建的步骤告诉我，我根据它的流程去把工程框架搭建出来。之后就是告诉它我要创建的页面类型，页面有几个部分，每个部分的内容是什么，它就会自动帮我创建好页面，然后我再根据自己的需求去修改页面的内容。</p>
+<p>前端的Prompt交互过程见 <a href="https://github.com/madawei2699/myGPTReader/blob/main/docs/CDDR.md?plain=1#L4444">ChatGPT Driven Development Record # 2023-03-28</a>。</p>
+<p>最终的效果是这样的：<a href="https://www.myreader.io/">myreader.io</a>。</p>
+<h2 id="最后的思考">最后的思考</h2>
+<p>经过一个月与chatGPT结对编程，还实现了一个完整的应用，我对chatGPT的感受是：传统编程这个行业最终会消失，甚至比我们想象中的要更快。或许未来还会有一小部分人作为非物质文化遗产的传承者，古法手工编写代码。</p>
+<p>当然不只编程，很多行业都会受到chatGPT这类技术的冲击，目前还很难评估它的边界在哪里，但是我相信它的边界会越来越大，最终会覆盖到我们现在所能想象的范围之外。</p>
+<p>如果真是这样的未来，我们现在能够做什么才能保证自己的经验不会快速贬值甚至无效？这是一个值得思考的问题。</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

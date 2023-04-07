@@ -6,7 +6,21 @@
     <description>Recent content on BMPI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 26 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ChatGPT应用开发小记</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/dev/chatgpt-development-notes/my-gpt-reader/</link>
+      <pubDate>Fri, 07 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/dev/chatgpt-development-notes/my-gpt-reader/</guid>
+      <description>本文分享了笔者使用 chatGPT 开发 myGPTReader 开源项目的过程。</description>
+    </item>
+    
     <item>
       <title>我的AI阅读助手</title>
       
