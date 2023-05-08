@@ -415,7 +415,7 @@ amp-img.contain img {
 <p>$$
 y=\begin{cases}
 0 &amp; w_1x_1+w_2x_2\leq \theta
-\<br>
+\\<br>
 1 &amp; w_1x_1+w_2x_2&gt;\theta
 \end{cases}
 $$</p>
@@ -532,7 +532,7 @@ $$</p>
 <p>RNN网络模型的问题主要在于，串行处理输入序列，无法并行计算，同时也无法捕捉到输入序列中的长距离依赖关系。而Transformer模型则是完全基于注意力机制来实现的，因此它不仅能够并行计算，而且能够更好地捕捉输入序列的长距离依赖关系，从而提升模型的性能。</p>
 <p>在RNN中，序列中的每个单元都是按顺序依次进行计算的，后一个单元的计算需要等待前一个单元计算完成后才能开始，因此无法并行化计算。而在 Transformer 中，自注意力机制的计算可以并行计算，因为每个单词的表示向量是独立计算的，它们的计算不需要等待其它单词的计算完成，因此可以同时进行。此外，注意力权重的计算也可以并行化，因为每个单词与其它单词的相似度可以同时计算，因此 Transformer 的自注意力机制可以更快地处理大规模序列数据。</p>
 <p>对比RNN，举例来解释Transformer的注意力机制：</p>
-<p>假设我们有一组输入序列，包含5个单词： &ldquo;I&rdquo;, &ldquo;like&rdquo;, &ldquo;to&rdquo;, &ldquo;eat&rdquo;, &ldquo;pizza&rdquo;。</p>
+<p>假设我们有一组输入序列，包含5个单词：&ldquo;I&rdquo;, &ldquo;like&rdquo;, &ldquo;to&rdquo;, &ldquo;eat&rdquo;, &ldquo;pizza&rdquo;。</p>
 <ol>
 <li>我们将每个单词转化为向量表示。可以使用词向量来表示每个单词。</li>
 <li>将每个单词向量应用于三个全连接层，以获得表示向量。每个全连接层都采用不同的权重矩阵，用于捕捉不同方面的单词特征。</li>
