@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/deep-learning/nlp-language-models/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2023-05-07T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2023-05-08T08:58:21&#43;08:00" /><meta property="og:site_name" content="BMPI" />
+<meta property="article:modified_time" content="2023-05-08T09:03:01&#43;08:00" /><meta property="og:site_name" content="BMPI" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2023-05-07T00:00:00Z",
-      "dateModified": "2023-05-08T08:58:21+08:00",
+      "dateModified": "2023-05-08T09:03:01+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -240,11 +240,11 @@
               
               
               
-              41:30
+              42:10
               
             </span>
             
-            <span class="post-word-count"> | 9133 字 | </span>
+            <span class="post-word-count"> | 9277 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -576,6 +576,12 @@ $$</p>
 <h3 id="生成式预训练">生成式预训练</h3>
 <p>Generative Pre-Training (GPT) 语言模型的训练过程是半监督的，使用了无监督预训练和有监督微调的组合方法，旨在学习一个通用的表征，以便在各种任务中进行迁移学习。</p>
 <p>该模型使用Transformer架构，在无标签数据上使用语言建模目标进行初始参数学习，然后使用相应的监督目标来适应目标任务。在转移过程中，使用从遍历式方法推导出的特定于任务的输入适应进行微调，以实现最小的对预训练模型架构的更改。该模型在自然语言推理、问答、语义相似性和文本分类等四个类型的语言理解任务上都获得了优异的表现。</p>
+<p>GPT的创新之处在于：</p>
+<ul>
+<li>通过Transformer架构，它实现了并行计算，提高了模型训练速度。同时，该架构还具备自回归机制，支持文本生成任务；</li>
+<li>结合预训练和微调技术，GPT可以应用于多种NLP任务，并支持零样本学习；</li>
+<li>GPT不仅支持多模态、多语言、多任务和多领域任务，而且在这些领域中表现优异。</li>
+</ul>
 <h3 id="大力出奇迹">大力出奇迹</h3>
 <p>人类的大脑神经元数量大约是1000亿个，这些神经元能产生数万亿个连接，而GPT-1模型的参数数量只有1.17亿个，这意味着GPT-1模型的参数数量只有人类大脑神经元数量的0.1%。</p>
 <p>不知道OpenAI是否受到了这个启发，于是他们在2019年提出了GPT-2模型，这是一个更大的预训练模型，它的参数数量是GPT-1模型的10倍，达到了15亿个，在2020年发布的GPT-3模型的参数数量是GPT-2模型的100倍，达到了1750亿个，从数量上来看，GPT-3模型的参数数量已经超过了人类大脑神经元的数量。</p>
@@ -639,7 +645,7 @@ $$</p>
           
           
           
-            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/d08b6361711e5f4de2a915fd0d1df4ee73003279">d08b63617</a>
+            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/29950b9ef52ee280a3d7c5f35e27ff3c939e7e46">29950b9ef</a>
           
         </div>
         
