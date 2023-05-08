@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/deep-learning/nlp-language-models/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2023-05-07T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2023-05-08T10:01:08&#43;08:00" /><meta property="og:site_name" content="BMPI" />
+<meta property="article:modified_time" content="2023-05-08T12:59:03&#43;08:00" /><meta property="og:site_name" content="BMPI" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2023-05-07T00:00:00Z",
-      "dateModified": "2023-05-08T10:01:08+08:00",
+      "dateModified": "2023-05-08T12:59:03+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -240,11 +240,11 @@
               
               
               
-              42:10
+              42:1
               
             </span>
             
-            <span class="post-word-count"> | 9277 字 | </span>
+            <span class="post-word-count"> | 9246 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -379,8 +379,8 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
 <p>如果机器能理解人类的语言，配合计算机视觉（Computer Vision），再给这个系统一套机器人的机械身体，那人类相当于可以像神一样创造新物种了。照这个方向继续发展，<q>机械飞升</q>也不是不可能。</p>
 <p>而现在，我们创造出的智能也掌握了人类自然语言，这也许是我们进入智能文明的标志。</p>
 <h2 id="从神经网络到深度学习">从神经网络到深度学习</h2>
-<p>要让机器能理解人类的语言，当然要从机器学习开始。传统的机器学习是以人工标记数据去让机器学习训练数据的特征，然后再用训练好的模型去预测新的数据，这种方法的缺点是需要大量的人工标记数据，而且人工标记数据的过程也是非常耗时的。</p>
-<p>在机器学习的路线中，有一个分支是深度学习（Deep Learning），它是一种以神经网络为基础的机器学习方法，它的特点是可以自动学习数据的特征，不需要人工标记数据，这样就可以大大减少人工标记数据的工作量。</p>
+<p>要让机器能够理解人类语言，目前常用的方法是从机器学习开始。传统的机器学习方法有先天假定，需要人工确定数据特征（即特征工程），这可能需要大量的人工工作，并且存在错误假设的可能性。</p>
+<p>在机器学习领域中，深度学习是一种基于神经网络的机器学习技术。其中的主要特点是能够自动学习数据的特征，通过将特征学习任务交给模型进行训练来实现自动学习过程。</p>
 <blockquote>
 <p>机器学习一开始有很多路线，不过逐渐人们发现深度学习的效果非常好，很多机器学习领域要解决的问题都可以用深度学习解决。</p>
 </blockquote>
@@ -569,7 +569,7 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
 </code></pre><p>在Transformer模型出现后，这种架构启发了OpenAI的研究人员，于是他们在2018年提出了GPT-1模型，这是一个基于Transformer的预训练语言模型，它使用了自回归机制来生成文本。</p>
 <h3 id="生成式预训练">生成式预训练</h3>
 <p>Generative Pre-Training (GPT) 语言模型的训练过程是半监督的，使用了无监督预训练和有监督微调的组合方法，旨在学习一个通用的表征，以便在各种任务中进行迁移学习。</p>
-<p>该模型使用Transformer架构，在无标签数据上使用语言建模目标进行初始参数学习，然后使用相应的监督目标来适应目标任务。在转移过程中，使用从遍历式方法推导出的特定于任务的输入适应进行微调，以实现最小的对预训练模型架构的更改。该模型在自然语言推理、问答、语义相似性和文本分类等四个类型的语言理解任务上都获得了优异的表现。</p>
+<p>该模型使用Transformer架构，在无标注数据上使用语言建模目标进行初始参数学习，然后使用相应的监督目标来适应目标任务（用有标注的数据训练并微调模型）。在转移过程中，使用从遍历式方法推导出的特定于任务的输入适应进行微调，以实现最小的对预训练模型架构的更改。该模型在自然语言推理、问答、语义相似性和文本分类等四个类型的语言理解任务上都获得了优异的表现。</p>
 <p>GPT的创新之处在于：</p>
 <ul>
 <li>通过Transformer架构，它实现了并行计算，提高了模型训练速度。同时，该架构还具备自回归机制，支持文本生成任务；</li>
@@ -639,7 +639,7 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
           
           
           
-            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/b0ff949ae4574cd01dbc16e117f89a0871435098">b0ff949ae</a>
+            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/b859613cc4e733240e51f314ef9fa41acf066014">b859613cc</a>
           
         </div>
         
