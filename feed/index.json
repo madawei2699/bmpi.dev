@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/dev/deep-learning/nlp-language-models/",
-        "title": "ChatGPT背后的语言模型简史",
-        "description": "ChatGPT的火爆出圈，让大家对NLP语言模型的发展历程产生了浓厚的兴趣。本文将从深度学习在NLP领域的发展历程，到大语言模型的发展历程，再到大语言模型的未来展望，带你一起了解NLP语言模型的发展历史。",
-        "publish-date": "2023-05-07 00:00:00 +0000 UTC"
+        "url": "/dev/chatgpt-development-notes/pair-programming/",
+        "title": "我与ChatGPT结对编程的体验",
+        "description": "本文分享了笔者与 ChatGPT 结对编程的体验并分享一些 Prompt Engineering 的重要技巧。",
+        "publish-date": "2023-05-21 00:00:00 +0000 UTC"
     }
 }

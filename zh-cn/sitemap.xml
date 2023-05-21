@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2023-05-10T21:33:24+08:00</lastmod>
+    <lastmod>2023-05-21T22:30:43+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,7 +19,22 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/chatgpt/</loc>
-    <lastmod>2023-05-10T21:33:24+08:00</lastmod>
+    <lastmod>2023-05-21T22:30:43+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/pair-programming/</loc>
+    <lastmod>2023-05-21T22:30:43+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/prompt-engineering/</loc>
+    <lastmod>2023-05-21T22:30:43+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/dev/chatgpt-development-notes/pair-programming/</loc>
+    <lastmod>2023-05-21T22:30:43+08:00</lastmod>
   </url>
 
   <url>
@@ -314,12 +329,12 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</loc>
-    <lastmod>2022-09-20T09:38:05+08:00</lastmod>
+    <lastmod>2023-05-21T22:30:43+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</loc>
-    <lastmod>2022-09-20T09:38:05+08:00</lastmod>
+    <lastmod>2023-05-21T22:30:43+08:00</lastmod>
   </url>
 
   <url>
@@ -414,12 +429,12 @@
 
   <url>
     <loc>https://www.bmpi.dev/dev/software-engineering-at-google/culture/</loc>
-    <lastmod>2022-08-11T12:49:31+08:00</lastmod>
+    <lastmod>2023-05-21T22:30:43+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/tech-lead/</loc>
-    <lastmod>2022-08-11T12:49:31+08:00</lastmod>
+    <lastmod>2023-05-21T22:30:43+08:00</lastmod>
   </url>
 
   <url>
