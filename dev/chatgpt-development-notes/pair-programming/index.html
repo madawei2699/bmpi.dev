@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/dev/chatgpt-development-notes/pair-programming/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2023-05-21T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2023-05-22T07:29:56&#43;08:00" /><meta property="og:site_name" content="BMPI" />
+<meta property="article:modified_time" content="2023-05-22T19:45:58&#43;08:00" /><meta property="og:site_name" content="BMPI" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2023-05-21T00:00:00Z",
-      "dateModified": "2023-05-22T07:29:56+08:00",
+      "dateModified": "2023-05-22T19:45:58+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -240,11 +240,11 @@
               
               
               
-              17:48
+              21:6
               
             </span>
             
-            <span class="post-word-count"> | 3916 字 | </span>
+            <span class="post-word-count"> | 4645 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -377,11 +377,15 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
 <p>这显然也用到了Prompt的第三个技巧：<code>Think again</code>，最终它给了我一个满意的答案。</p>
 <p>这些对话的过程中，还用到了以下的一些Prompt技巧：</p>
 <ul>
-<li>要求结构化输出：比如直接要求它输出SQL语句；</li>
+<li>要求结构化输出：比如直接要求它输出SQL语句，或绘制架构图：通过Prompt提供系统组件的关联关系，然后让ChatGPT以Mermaid格式输出时序图（Sequence Diagram）或C4图（C4 Diagrams）；</li>
 <li>翻译代码：比如将Python代码翻译成Typescript代码；</li>
 <li>总结：比如总结一下这个问题的解决方案；</li>
 </ul>
 <p>这些Prompt技巧，都是我在与ChatGPT的对话中，不断尝试的结果。最终在20多个Prompt的对话中，我与ChatGPT结对编程耗时不到两小时，完成了这个功能的开发，这是一个非常高效的过程。</p>
+<p>在上面我们介绍了如何与ChatGPT以驾驶员观察者模式的方式结对编程，我们当然也可以以乒乓模式的方式结对编程，比如我在<a href="https://gist.github.com/madawei2699/d80d35f43df478c483ce1e5ed050114b#you-38">这个对话</a>里给ChatGPT提供了我写的代码，然后让它帮我写单元测试。当然这个过程也可以反着来，这样就类似于乒乓模式的结对编程了。</p>
+<p>结对编程中，编写代码只是一部分工作，代码之外，ChatGPT还可以帮助编写文档，甚至参与架构设计的讨论。比如在<a href="https://gist.github.com/madawei2699/d80d35f43df478c483ce1e5ed050114b#you-39">这个对话</a>中，我把系统架构图的Mermaid格式的文本给了ChatGPT，让它给我一些系统架构方面的建议，通过这种方式，ChatGPT甚至能介入到系统设计的讨论中，并给我可能具备一定价值的参考意见。</p>
+<p>需要提醒的是，因为ChatGPT的局限性，目前还不能给予我们非常完美的回复，在每次的回复中，尤其是涉及到一些复杂的细节，或者是非常新的它不知道的信息，它就有可能给出一些捏造的答案。比如在某些代码中参杂了错误的语法或接口调用，这时候我们就需要自己去判断，这也是目前ChatGPT无法替代人工编程的原因之一。因为这个局限性，这也是我在本文中优先采用驾驶员观察者模式的原因，因为这样可以让我们更好地控制ChatGPT的输出，从而更好地控制我们的开发过程。</p>
+<p>当然在本文中提到的各种Prompt技巧，都是在尝试规避它的局限性，比如通过输入<code>清晰明确的指示</code>来规避它的随意性，通过<code>总结</code>来规避它输入上下文长度的限制，通过<code>迭代Prompt</code>来微调它的输出，通过<code>few-shot</code>让它更好的理解我们的意图。最后希望这些技巧能帮助你更好地与ChatGPT结对编程。</p>
 
         </div>
 
@@ -402,7 +406,7 @@ if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState
           
           
           
-            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/6b65ca9a02f6db1474bc352751458c183ac6ed00">6b65ca9a0</a>
+            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/2c9c5bf910ec495122891b2845316dca0aeab6cb">2c9c5bf91</a>
           
         </div>
         
