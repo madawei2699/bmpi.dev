@@ -2407,19 +2407,9 @@
     <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
 
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/erlang/otp/</loc>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/talk/</loc>
-    <lastmod>2023-04-19T22:57:18+08:00</lastmod>
-  </url>
-
   <url>
     <loc>https://www.bmpi.dev/about/</loc>
-    <lastmod>2023-09-15T08:41:47+08:00</lastmod>
+    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -2430,6 +2420,16 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/about/"
                 />
+  </url>
+
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/erlang/otp/</loc>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/talk/</loc>
+    <lastmod>2023-04-19T22:57:18+08:00</lastmod>
   </url>
 
   <url>
