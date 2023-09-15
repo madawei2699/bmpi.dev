@@ -1310,18 +1310,6 @@
     </item>
     
     <item>
-      <title></title>
-      
-      
-      
-      <link>https://www.bmpi.dev/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://www.bmpi.dev/about/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Talk</title>
       
       
@@ -1331,6 +1319,18 @@
       
       <guid>https://www.bmpi.dev/talk/</guid>
       <description>My talks</description>
+    </item>
+    
+    <item>
+      <title>关于我</title>
+      
+      
+      
+      <link>https://www.bmpi.dev/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/about/</guid>
+      <description>关于我</description>
     </item>
     
     <item>
