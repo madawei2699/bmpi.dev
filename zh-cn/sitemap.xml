@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2023-11-01T13:48:10+08:00</lastmod>
+    <lastmod>2023-11-12T20:50:27+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,6 +15,31 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E5%85%88%E9%94%8B%E9%A2%86%E8%88%AA/</loc>
+    <lastmod>2023-11-12T20:50:27+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/money/what-is-capital/</loc>
+    <lastmod>2023-11-12T20:50:27+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%B4%9D%E8%8E%B1%E5%BE%B7/</loc>
+    <lastmod>2023-11-12T20:50:27+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2023-11-12T20:50:27+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%B5%84%E6%9C%AC/</loc>
+    <lastmod>2023-11-12T20:50:27+08:00</lastmod>
   </url>
 
   <url>
