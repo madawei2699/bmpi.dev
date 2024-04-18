@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2024-02-03T19:32:44+08:00</lastmod>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,6 +15,21 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E5%85%A8%E7%90%83%E6%8A%95%E8%B5%84/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/money/guide-to-open-global-investment-account/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E5%A2%83%E5%A4%96%E5%BC%80%E6%88%B7/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
   </url>
 
   <url>
@@ -64,16 +79,6 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/ocbc%E5%BC%80%E6%88%B7/</loc>
-    <lastmod>2023-11-01T13:48:10+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E5%85%A8%E7%90%83%E6%8A%95%E8%B5%84/</loc>
-    <lastmod>2023-11-01T13:48:10+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E5%A2%83%E5%A4%96%E5%BC%80%E6%88%B7/</loc>
     <lastmod>2023-11-01T13:48:10+08:00</lastmod>
   </url>
 
@@ -2468,6 +2473,11 @@
   </url>
 
   <url>
+    <loc>https://www.bmpi.dev/open-account/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/talk/</loc>
     <lastmod>2023-04-19T22:57:18+08:00</lastmod>
   </url>
@@ -2503,6 +2513,11 @@
   </url>
 
   <url>
+    <loc>https://www.bmpi.dev/open-account/hk-vcltrade/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/link/</loc>
     <lastmod>2023-05-17T16:41:33+08:00</lastmod>
     <xhtml:link
@@ -2515,6 +2530,16 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/link/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/open-account/proof-of-address/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/open-account/overseas-remittances/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
   </url>
 
   <url>
@@ -2598,6 +2623,11 @@
   </url>
 
   <url>
+    <loc>https://www.bmpi.dev/open-account/sg-ocbc/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/_ad/</loc>
     <lastmod>2023-05-30T08:15:33+08:00</lastmod>
   </url>
@@ -2615,6 +2645,16 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/tags/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/open-account/pandaremit/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/open-account/sg-usmart/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
   </url>
 
   <url>
@@ -2660,6 +2700,16 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/dev/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/open-account/sg-longbridge/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/open-account/hk-longbridge/</loc>
+    <lastmod>2024-04-18T23:08:56+08:00</lastmod>
   </url>
 
   <url>
