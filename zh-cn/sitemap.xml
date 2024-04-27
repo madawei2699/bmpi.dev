@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2024-04-19T10:23:17+08:00</lastmod>
+    <lastmod>2024-04-27T08:46:09+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,7 +19,17 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%85%A8%E7%90%83%E6%8A%95%E8%B5%84/</loc>
-    <lastmod>2024-04-19T10:02:38+08:00</lastmod>
+    <lastmod>2024-04-27T08:46:09+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
+    <lastmod>2024-04-27T08:46:09+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/money/portfolios/myinvestpilot_cn_1/</loc>
+    <lastmod>2024-04-27T08:46:09+08:00</lastmod>
   </url>
 
   <url>
@@ -220,11 +230,6 @@
   <url>
     <loc>https://www.bmpi.dev/series/%E6%8A%95%E8%B5%84%E5%AE%9E%E8%AF%81/</loc>
     <lastmod>2023-06-04T12:55:14+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
-    <lastmod>2023-06-04T14:31:10+08:00</lastmod>
   </url>
 
   <url>
