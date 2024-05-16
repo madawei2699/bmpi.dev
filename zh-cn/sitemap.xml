@@ -3,13 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://www.bmpi.dev/dev/ai-driven-development-live-video/</loc>
-    <lastmod>2024-05-07T14:48:51+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2024-05-09T06:51:26+08:00</lastmod>
+    <lastmod>2024-05-16T13:51:07+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -20,6 +15,36 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E7%AD%96%E7%95%A5/</loc>
+    <lastmod>2024-05-16T13:51:07+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2024-05-16T13:51:07+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/self/thinking-in-trade/</loc>
+    <lastmod>2024-05-16T13:51:07+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
+    <lastmod>2024-05-16T13:51:07+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%B5%84%E9%87%91%E7%AD%96%E7%95%A5/</loc>
+    <lastmod>2024-05-16T13:51:07+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/dev/ai-driven-development-live-video/</loc>
+    <lastmod>2024-05-07T14:48:51+08:00</lastmod>
   </url>
 
   <url>
@@ -40,11 +65,6 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%85%A8%E7%90%83%E6%8A%95%E8%B5%84/</loc>
     <lastmod>2024-05-09T06:51:26+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/</loc>
-    <lastmod>2024-04-27T15:30:13+08:00</lastmod>
   </url>
 
   <url>
@@ -488,22 +508,12 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E7%AD%96%E7%95%A5/</loc>
-    <lastmod>2023-06-04T14:31:10+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E8%AF%84%E6%B5%8B/</loc>
     <lastmod>2023-06-04T14:31:10+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/money/invest-alchemy/</loc>
-    <lastmod>2023-06-04T14:31:10+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E8%B5%84%E9%87%91%E7%AD%96%E7%95%A5/</loc>
     <lastmod>2023-06-04T14:31:10+08:00</lastmod>
   </url>
 
@@ -2334,11 +2344,6 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E6%97%A5%E8%AE%B0/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
 
