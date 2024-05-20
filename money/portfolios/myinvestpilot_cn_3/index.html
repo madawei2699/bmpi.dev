@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/money/portfolios/myinvestpilot_cn_3/" /><meta property="article:section" content="money" />
 <meta property="article:published_time" content="2024-04-26T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2024-04-27T10:59:36&#43;08:00" /><meta property="og:site_name" content="BMPI" />
+<meta property="article:modified_time" content="2024-05-20T16:45:03&#43;08:00" /><meta property="og:site_name" content="BMPI" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2024-04-26T00:00:00Z",
-      "dateModified": "2024-04-27T10:59:36+08:00",
+      "dateModified": "2024-05-20T16:45:03+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -237,11 +237,11 @@
               
               
               
-              18:26
+              19:3
               
             </span>
             
-            <span class="post-word-count"> | 4056 字 | </span>
+            <span class="post-word-count"> | 4191 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -293,7 +293,14 @@
 <p>A股3号采用经典的双均线交易策略，利用两条不同周期的移动平均线生成买卖信号。这种方法适用于追踪市场趋势变化，当短期线超过长期线时，会产生买入信号，反之则产生卖出信号。详细的策略介绍请看这篇<a href="https://www.bmpi.dev/money/passive-income-protfolio/202008/">双均线交易策略</a>。</p>
 <h3 id="资金策略">资金策略</h3>
 <p>资金策略是指如何合理分配资金，以达到最佳的风险收益比。在策引全球投资组合中，各个投资组合的资金策略不尽相同。有的组合采用固定资金分配策略，有的采用百分比资金分配策略，还有的采用动态资金分配策略。这些策略各有优劣，投资者可以根据自己的风险偏好和资金状况选择适合自己的资金策略。</p>
-<p>A股3号采用简单百分比资金分配策略，该策略根据设定的百分比确定每次交易的资金量，每次使用5%的可用资金进行交易。</p>
+<p>A股3号采用百分比资金分配策略，这个资金分配策略的过程可以详细描述如下：</p>
+<ol>
+<li>当交易标的符合买入条件时，首先计算总资产的10%。</li>
+<li>将计算得到的10%与当前现金进行比较，取两者中较小的一个作为实际可用于购买标的的资金。</li>
+<li>将实际可用资金减去按比例计算的佣金，得到除去佣金后的可用资金。</li>
+<li>最后，根据除去佣金后的可用资金确定当前可买入标的的买入份额。</li>
+<li>如果最终可用资金少于总资产的1%，则不进行买入操作。</li>
+</ol>
 <h3 id="优化方式">优化方式</h3>
 <p>通过在不同的市场周期中测试这些策略，调整并优化移动平均线的参数，确保策略在各种市场条件下均能实现良好表现。这种方法有助于避免策略对历史数据的过度拟合，确保其未来的适应性和稳定性。</p>
 <h2 id="标的池">标的池</h2>
@@ -410,10 +417,10 @@
           
           
           
-              22天前
+              今日
           
           
-           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/5750ca70ed5ce7cf2a6b6c65a98103f71dacc0a1">5750ca70e</a>
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/d73e79b5bd4f8adc88a4c6492fda91293d261c3c">d73e79b5b</a>
         </div>
         
 
