@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2024-07-04T00:06:53+08:00</lastmod>
+    <lastmod>2024-07-08T19:34:11+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,6 +15,11 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/weeklies/20240708/</loc>
+    <lastmod>2024-07-08T19:34:11+08:00</lastmod>
   </url>
 
   <url>
