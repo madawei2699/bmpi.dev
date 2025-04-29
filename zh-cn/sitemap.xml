@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2025-03-17T18:10:58+08:00</lastmod>
+    <lastmod>2025-04-29T12:09:09+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,6 +15,46 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/etf/</loc>
+    <lastmod>2025-04-29T12:09:09+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E4%B8%8A%E7%8F%AD%E6%97%8F%E7%90%86%E8%B4%A2/</loc>
+    <lastmod>2025-04-29T12:09:09+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2025-04-29T12:09:09+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/self/my-investment-path/</loc>
+    <lastmod>2025-04-29T12:09:09+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/</loc>
+    <lastmod>2025-04-29T12:09:09+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/</loc>
+    <lastmod>2025-04-29T12:09:09+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%AE%9A%E6%8A%95/</loc>
+    <lastmod>2025-04-29T12:09:09+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93/</loc>
+    <lastmod>2025-04-29T12:09:09+08:00</lastmod>
   </url>
 
   <url>
@@ -59,11 +99,6 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E7%AD%96%E7%95%A5/</loc>
-    <lastmod>2024-05-21T11:29:31+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2024-05-21T11:29:31+08:00</lastmod>
   </url>
 
@@ -338,17 +373,7 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/etf/</loc>
-    <lastmod>2023-06-04T12:55:14+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/series/%E6%8A%95%E8%B5%84%E5%AE%9E%E8%AF%81/</loc>
-    <lastmod>2023-06-04T12:55:14+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%AE%9A%E6%8A%95/</loc>
     <lastmod>2023-06-04T12:55:14+08:00</lastmod>
   </url>
 
@@ -780,11 +805,6 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E5%AE%B6%E5%BA%AD%E8%B4%A2%E5%8A%A1/</loc>
     <lastmod>2022-02-18T09:32:20+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
 
   <url>
@@ -2198,11 +2218,6 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8C%87%E6%95%B0%E5%9F%BA%E9%87%91/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/money/why-simple-investment-strategies-make-money/</loc>
     <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
@@ -2463,17 +2478,7 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E4%B8%8A%E7%8F%AD%E6%97%8F%E7%90%86%E8%B4%A2/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/money/investment-path-for-young/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E8%82%A1%E7%A5%A8%E4%BA%A4%E6%98%93/</loc>
     <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
 
