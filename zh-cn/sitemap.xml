@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2025-09-11T07:09:39+08:00</lastmod>
+    <lastmod>2025-10-07T01:10:01+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,6 +15,31 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/self/35/</loc>
+    <lastmod>2025-10-07T01:10:01+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E7%BB%88%E8%BA%AB%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2025-10-07T01:10:01+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
+    <lastmod>2025-10-07T01:10:01+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/series/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
+    <lastmod>2025-10-07T01:10:01+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2025-10-07T01:10:01+08:00</lastmod>
   </url>
 
   <url>
@@ -328,11 +353,6 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2023-03-28T19:52:45+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/tags/database/</loc>
     <lastmod>2023-06-04T12:55:14+08:00</lastmod>
     <xhtml:link
@@ -560,11 +580,6 @@
   <url>
     <loc>https://www.bmpi.dev/self/build-leverage/</loc>
     <lastmod>2022-09-15T22:04:54+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/series/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
 
   <url>
@@ -1103,11 +1118,6 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2022-12-04T14:13:29+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/money/passive-income-protfolio/202106/</loc>
     <lastmod>2023-06-04T12:55:14+08:00</lastmod>
   </url>
@@ -1430,11 +1440,6 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2022-08-24T07:40:51+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E7%BB%88%E8%BA%AB%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
 
   <url>
