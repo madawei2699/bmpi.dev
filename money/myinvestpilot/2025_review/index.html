@@ -1,0 +1,2453 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="马大伟">
+  
+  <meta name="description" content="2025 年，面对 A 股硬科技爆发与加密币机构消化期的冰火两重天，策引（myInvestPilot）的 24 个官方策略交出了怎样的答卷？本文深度复盘了双均线策略如何捕捉 &#43;38.75% 的 A 股主升浪，动量策略为何提前满仓黄金，以及我们在加密币寒冬中的诚实反思。拒绝黑盒，不预测市场，只应对波动——这是一份关于算法、纪律与长期主义的实盘大考报告。">
+  
+  
+  
+  <meta name="keywords" content="life,dev,trade,passive income,money,developer,Self-management,IT technology,investment transactions">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="策引 2025 实盘大考：当算法跑赢人性"/>
+  <meta name="twitter:description" content="2025 年，面对 A 股硬科技爆发与加密币机构消化期的冰火两重天，策引（myInvestPilot）的 24 个官方策略交出了怎样的答卷？本文深度复盘了双均线策略如何捕捉 &#43;38.75% 的 A 股主升浪，动量策略为何提前满仓黄金，以及我们在加密币寒冬中的诚实反思。拒绝黑盒，不预测市场，只应对波动——这是一份关于算法、纪律与长期主义的实盘大考报告。"/>
+  
+  
+  <meta name="twitter:image" content="https://og.bmpi.dev/策引 2025 实盘大考：当算法跑赢人性.png">
+  
+
+  
+  <meta property="og:title" content="策引 2025 实盘大考：当算法跑赢人性" />
+<meta property="og:description" content="2025 年，面对 A 股硬科技爆发与加密币机构消化期的冰火两重天，策引（myInvestPilot）的 24 个官方策略交出了怎样的答卷？本文深度复盘了双均线策略如何捕捉 &#43;38.75% 的 A 股主升浪，动量策略为何提前满仓黄金，以及我们在加密币寒冬中的诚实反思。拒绝黑盒，不预测市场，只应对波动——这是一份关于算法、纪律与长期主义的实盘大考报告。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/money/myinvestpilot/2025_review/" /><meta property="article:section" content="money" />
+<meta property="article:published_time" content="2025-11-27T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2025-11-27T09:02:54&#43;00:00" /><meta property="og:site_name" content="BMPI" />
+
+
+  
+  <meta name="og:image" content="https://og.bmpi.dev/策引 2025 实盘大考：当算法跑赢人性.png">
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "策引 2025 实盘大考：当算法跑赢人性",
+      
+      "image": "https://www.bmpi.dev/images/logo.png",
+      
+      "datePublished": "2025-11-27T00:00:00Z",
+      "dateModified": "2025-11-27T09:02:54Z",
+      "author": {
+        "@type": "Person",
+        "name": "马大伟"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/money/myinvestpilot/2025_review/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/logo.png"
+        }
+      },
+      "description": "2025 年，面对 A 股硬科技爆发与加密币机构消化期的冰火两重天，策引（myInvestPilot）的 24 个官方策略交出了怎样的答卷？本文深度复盘了双均线策略如何捕捉 +38.75% 的 A 股主升浪，动量策略为何提前满仓黄金，以及我们在加密币寒冬中的诚实反思。拒绝黑盒，不预测市场，只应对波动——这是一份关于算法、纪律与长期主义的实盘大考报告。",
+      "keywords": ["全球投资", "投资组合", "策引年度盘点"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/money/myinvestpilot/2025_review/">
+  
+  <title>
+  策引 2025 实盘大考：当算法跑赢人性 · BMPI
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/money/myinvestpilot/2025_review/">
+  
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.93931ae707050b69c3bcbf6952e01a7b9a8f0aff2cdba79a762869af1aa23821.css" integrity="sha256-k5Ma5wcFC2nDvL9pUuAae5qPCv8s26eadihprxqiOCE="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.a2fdc25deb82b741f3a807e38508c2dea269fc900c2b37ee8af380d97ea4d7a8.css" integrity="sha256-ov3CXeuCt0HzqAfjhQjC3qJp/JAMKzfuivOA2X6k16g="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bmpi.dev/images/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bmpi.dev/images/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bmpi.dev/images/ico/favicon-16x16.png">
+  <link rel="manifest" href="https://www.bmpi.dev/images/ico/site.webmanifest">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/amp/money/myinvestpilot/2025_review/" title="BMPI" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="preload" href="https://www.bmpi.dev/scss/tagcloud.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css"></noscript>
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti.min.css">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.min.css"></noscript>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+
+  
+
+  
+
+  
+
+  <script async defer data-website-id="356d3289-e627-409c-a9d7-a272cf789f0b" src="https://umami.bmpi.dev/script.js"></script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a id="site-title" class="navigation-title" href="https://www.bmpi.dev/">
+      BMPI
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://github.com/madawei2699">GitHub</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/self/">学习</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/dev/">技术</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/money/">投资</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/en/">English</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title heti">
+          <h1 class="title">策引 2025 实盘大考：当算法跑赢人性</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2025-11-27T00:00:00Z'>
+                2025-11-27
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              26:30
+              
+            </span>
+            
+            <span class="post-word-count"> | 5832 字 | </span>
+            <span id="post-views"></span> 次阅读
+            
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E5%85%A8%E7%90%83%E6%8A%95%E8%B5%84/">全球投资</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%BB%84%E5%90%88/">投资组合</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E7%AD%96%E5%BC%95%E5%B9%B4%E5%BA%A6%E7%9B%98%E7%82%B9/">策引年度盘点</a></div>
+
+        </div>
+      </header>
+
+      <div class="brand-ad">
+        <div class="brand-content">
+          <a href="https://www.myinvestpilot.com/">
+            <span>如何做出更好的投资决策？</span>
+          </a>
+        </div>
+        <div class="brand-ad-link"><a href="https://www.bmpi.dev/_ad/" rel="nofollow">品牌赞助</a></div>
+        <div class="brand-ad-link-line"></div>
+      </div>
+
+      
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <blockquote>
+<p><strong>【写在前面】</strong></p>
+<p>在展开 2025 年的复盘之前，我们需要对策引（myInvestPilot）的 <strong>24 个官方组合</strong>做一个明确的定性：</p>
+<p>它们并非&quot;投资指导&quot;或&quot;喊单&quot;，而是我们策略引擎的<strong>技术能力演示</strong>。我们建立这些组合，旨在完全透明地展示双均线、动量轮动、Chandelier止损、AI Agent 等策略模型在真实市场环境下的运行轨迹。</p>
+<p><strong>官方组合是你观察量化逻辑的窗口，而非盲目跟投的标的。投资有风险，请理性决策。</strong></p>
+</blockquote>
+<hr>
+<h2 id="引言资金正在进行一场硬核轮动">引言：资金正在进行一场&quot;硬核&quot;轮动</h2>
+<p>2025 年的全球市场，给所有盯着美股看的人上了一课。</p>
+<p>当我们打开年度涨幅榜，映入眼帘的不是纳斯达克，而是 <strong>🇰🇷 韩国 KOSPI (+66%)</strong> 和 <strong>🇨🇳 中国创业板 (+43%)</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>指数</th>
+<th>2025 YTD</th>
+<th>背后逻辑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🇰🇷 韩国KOSPI</td>
+<td><strong>+66%</strong></td>
+<td>HBM存储芯片爆发，AI硬件周期外溢</td>
+</tr>
+<tr>
+<td>🇨🇳 创业板指</td>
+<td><strong>+43%</strong></td>
+<td>硬科技重估，全球资金再定价</td>
+</tr>
+<tr>
+<td>🇭🇰 恒生指数</td>
+<td>+30%</td>
+<td>中国资产估值修复</td>
+</tr>
+<tr>
+<td>🇯🇵 日经225</td>
+<td>+26%</td>
+<td>日元贬值+半导体设备</td>
+</tr>
+<tr>
+<td>🇺🇸 纳斯达克</td>
+<td>+20%</td>
+<td>AI龙头持续领涨</td>
+</tr>
+<tr>
+<td>🇩🇪 德国DAX</td>
+<td>+19%</td>
+<td>欧洲制造业韧性</td>
+</tr>
+<tr>
+<td>🇺🇸 标普500</td>
+<td>+16%</td>
+<td>稳健但不再领跑</td>
+</tr>
+<tr>
+<td>🇨🇳 沪深300</td>
+<td>+15%</td>
+<td>蓝筹估值修复</td>
+</tr>
+</tbody>
+</table>
+<p>这背后不仅是资金的流动，更是 <strong>AI 产业周期的深化</strong>——价值正在从美国的&quot;算法/软件层&quot;向亚洲的&quot;硬件/制造层&quot;外溢。韩国 KOSPI 的暴涨印证了 HBM 存储芯片的爆发（三星、SK海力士），A股创业板的强势，本质上是<strong>全球资金对&quot;高端制造&quot;与&quot;硬科技&quot;供应链的重新定价</strong>。</p>
+<p>与此同时，全球实际利率的下行预期，让黄金再次闪耀；而加密货币则在 ETF 通过后的高位进入了漫长的筹码交换期。</p>
+<p>在这个**&ldquo;硬科技领涨、实物资产回归、加密资产蓄势&rdquo;**的复杂年份，策引 的 24 个组合，是如何用算法穿越周期的？</p>
+<p>我们拒绝只报喜不报忧。以下是一份基于真实持仓、真实净值的完整复盘——有高光，有失误，有值得反思的教训，也有跨越周期的信心。</p>
+<hr>
+<h2 id="一年度成绩单总览">一、年度成绩单总览</h2>
+<h3 id="-2025-ytd-收益榜">🏆 2025 YTD 收益榜</h3>
+<table>
+<thead>
+<tr>
+<th>排名</th>
+<th>组合</th>
+<th>策略</th>
+<th>YTD收益</th>
+<th>回撤</th>
+<th>Calmar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🥇</td>
+<td>A股2号</td>
+<td>双均线</td>
+<td><strong>+38.75%</strong></td>
+<td>-9.14%</td>
+<td>4.24</td>
+</tr>
+<tr>
+<td>🥈</td>
+<td>美股3号</td>
+<td>Chandelier</td>
+<td><strong>+27.49%</strong></td>
+<td>-25.25%</td>
+<td>1.09</td>
+</tr>
+<tr>
+<td>🥉</td>
+<td>A股定投1号</td>
+<td>定投</td>
+<td><strong>+27.45%</strong></td>
+<td>-10.07%</td>
+<td>2.73</td>
+</tr>
+<tr>
+<td>4</td>
+<td>A股动量</td>
+<td>动量轮动</td>
+<td>+24.13%</td>
+<td>-7.45%</td>
+<td>3.24</td>
+</tr>
+<tr>
+<td>5</td>
+<td>A股定投2号</td>
+<td>定投</td>
+<td>+21.50%</td>
+<td>-10.07%</td>
+<td>2.14</td>
+</tr>
+<tr>
+<td>6</td>
+<td>A股1号</td>
+<td>双均线</td>
+<td>+21.42%</td>
+<td>-7.27%</td>
+<td>2.94</td>
+</tr>
+<tr>
+<td>7</td>
+<td>美股定投2号</td>
+<td>定投</td>
+<td>+19.90%</td>
+<td>-22.75%</td>
+<td>0.87</td>
+</tr>
+<tr>
+<td>8</td>
+<td>A股QQQ号</td>
+<td>双均线</td>
+<td>+18.25%</td>
+<td>-6.18%</td>
+<td>2.95</td>
+</tr>
+<tr>
+<td>9</td>
+<td>A股3号</td>
+<td>双均线</td>
+<td>+17.96%</td>
+<td>-10.37%</td>
+<td>1.73</td>
+</tr>
+<tr>
+<td>10</td>
+<td>美股定投1号</td>
+<td>定投</td>
+<td>+17.60%</td>
+<td>-18.74%</td>
+<td>0.94</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-市场分化一目了然">📊 市场分化一目了然</h3>
+<table>
+<thead>
+<tr>
+<th>市场</th>
+<th>组合数</th>
+<th>平均YTD</th>
+<th>表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🇨🇳 A股</td>
+<td>9个</td>
+<td><strong>+20.83%</strong></td>
+<td>全部正收益 ✅</td>
+</tr>
+<tr>
+<td>🇺🇸 美股</td>
+<td>8个</td>
+<td><strong>+13.77%</strong></td>
+<td>整体稳健 ✅</td>
+</tr>
+<tr>
+<td>🪙 加密币</td>
+<td>5个</td>
+<td><strong>-6.23%</strong></td>
+<td>集体承压 ⚠️</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="二年度之星深度解析">二、年度之星深度解析</h2>
+<h3 id="-进攻担当a股2号">🏆 进攻担当：A股2号</h3>
+<p><strong>2025核心数据</strong></p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YTD收益</td>
+<td><strong>+38.75%</strong></td>
+<td>全场最高</td>
+</tr>
+<tr>
+<td>最大回撤</td>
+<td>-9.14%</td>
+<td>控制出色</td>
+</tr>
+<tr>
+<td>Calmar</td>
+<td><strong>4.24</strong></td>
+<td>风险收益比全场第一</td>
+</tr>
+<tr>
+<td>持仓</td>
+<td>创业板ETF 100%</td>
+<td>满仓单一标的</td>
+</tr>
+</tbody>
+</table>
+<p><strong>宏观背景：AI硬件周期的亚洲红利</strong></p>
+<p>为什么今年是&quot;东升西稳&quot;？因为 AI 浪潮正在经历从&quot;美国设计&quot;到&quot;亚洲制造&quot;的价值外溢。</p>
+<p>当英伟达的 GPU 需要更多 HBM 内存，韩国三星和 SK 海力士就成了最大赢家（KOSPI +66%）。当 AI 应用需要更多硬件基础设施，中国的高端制造和硬科技供应链就迎来了重估窗口。</p>
+<p>A股创业板的强势，本质上是<strong>全球资金对中国&quot;硬科技&quot;资产的重新定价</strong>。我们的双均线策略，正是吃到了这波产业转移的红利。</p>
+<p><strong>策略归因</strong></p>
+<p>今年创业板指涨幅约 +43%，A股2号录得 +38.75%，<strong>跑输指数约 4%</strong>。</p>
+<p>这 4% 的&quot;损耗&quot;来自<strong>趋势策略的切换成本</strong>——创业板上涨途中的数次回调触发了均线死叉信号，策略短暂离场后重新入场，产生了摩擦成本。</p>
+<p>但这个代价换来的是什么？<strong>-9.14% 的年度回撤控制</strong>，以及全场最高的 <strong>4.24 Calmar 比率</strong>（每承担1%回撤换来4.24%收益）。如果你全年满仓创业板指数，中途的几次 10%+ 回调可能让你心态崩溃；而双均线策略帮你在回调时及时离场，用 4% 的收益换来了安心持有的底气。</p>
+<p><strong>投资启示</strong>：双均线策略的价值不在于&quot;跑赢指数&quot;，而在于<strong>用可接受的收益损耗，换取显著的风险控制</strong>。在产业周期的顺风中，它帮你吃到了鱼身；在回调来临时，它帮你及时离场。</p>
+<p>更重要的是：<strong>这 38.75% 的收益，全程无人值守，100% 算法执行</strong>。不需要你每天盯盘，不需要你懂宏观经济，只需要跟着信号执行。这就是量化的价值——<strong>把时间还给你</strong>。</p>
+<hr>
+<h3 id="-防守标杆美股ai策略1号">🛡️ 防守标杆：美股AI策略1号</h3>
+<p><strong>2025核心数据</strong></p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YTD收益</td>
+<td>+1.87%</td>
+<td>收益平平</td>
+</tr>
+<tr>
+<td>最大回撤</td>
+<td><strong>-5.25%</strong></td>
+<td>全场最低</td>
+</tr>
+<tr>
+<td>波动率</td>
+<td><strong>10.98%</strong></td>
+<td>全场最低</td>
+</tr>
+<tr>
+<td>持仓</td>
+<td>SMH 28% / QQQ 25% / VTI 25% / NVDU 22%</td>
+<td>分散配置</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键归因</strong></p>
+<p>AI大模型策略的核心逻辑是：综合分析多维信息，生成<strong>分散化</strong>的配置建议。</p>
+<p>从持仓可以看出，AI选择了攻守平衡的姿态：既有进攻性的半导体（SMH）和2倍英伟达（NVDU），也有防守性的全市场ETF（VTI）。</p>
+<p>结果是：收益平平，但波动率被压到全场最低的 <strong>10.98%</strong>，回撤仅 <strong>-5.25%</strong>。</p>
+<p>虽然跑输了纳指（+20%），但在市场剧烈波动时，它让持有者<strong>睡了个好觉</strong>。对于追求绝对收益的用户，这可能不是首选；但对于追求**低波动（Low Volatility）**的配置型资金，这是稳健的压舱石。</p>
+<p><strong>投资启示</strong>：分散配置必然稀释收益——这不是缺陷，而是<strong>主动选择用收益换安稳</strong>。投资没有圣杯，只有取舍。</p>
+<hr>
+<h3 id="-意外惊喜a股动量的黄金之选">⚖️ 意外惊喜：A股动量的&quot;黄金之选&quot;</h3>
+<p><strong>2025核心数据</strong></p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YTD收益</td>
+<td>+24.13%</td>
+</tr>
+<tr>
+<td>最大回撤</td>
+<td>-7.45%</td>
+</tr>
+<tr>
+<td>Calmar</td>
+<td>3.24</td>
+</tr>
+<tr>
+<td>持仓</td>
+<td><strong>黄金ETF 100%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>宏观背景：降息周期的抢跑与避险需求</strong></p>
+<p>2025 年是全球央行进入降息周期深化期的关键年份。在实际利率下行、地缘政治摩擦不断的背景下，黄金作为&quot;无主权信用资产&quot;，成为了对冲法币贬值的首选。</p>
+<p>当市场还在争论&quot;AI泡沫&quot;与&quot;科技股估值&quot;时，聪明钱已经悄悄完成了从纸面财富（股票）向实物资产（黄金）的轮动。</p>
+<p><strong>策略归因：算法听到了宏观的雷声</strong></p>
+<p>动量轮动策略的逻辑：<strong>谁强买谁，不带偏见</strong>。</p>
+<p>结果令人惊讶：一个名为&quot;A股动量&quot;的组合，最终满仓的是<strong>黄金ETF</strong>。这不仅仅是一次成功的选品，更是一次宏观的胜利。</p>
+<p>大多数 A 股投资者还沉浸在寻找下一只科技龙头的迷思中时，我们的动量模型敏锐地捕捉到了<strong>资金从&quot;权益资产&quot;向&quot;避险资产&quot;的大挪移</strong>。</p>
+<p><strong>投资启示</strong>：人类容易被情绪束缚（Home Bias），不敢在高位追进黄金。但机器没有恐惧，它只信奉趋势。<strong>当宏观风向改变时，动量策略是你最灵敏的&quot;金丝雀&quot;。</strong></p>
+<hr>
+<h2 id="三艰难时刻加密币策略的周期代价">三、艰难时刻：加密币策略的周期代价</h2>
+<table>
+<thead>
+<tr>
+<th>组合</th>
+<th>策略</th>
+<th>YTD</th>
+<th>回撤</th>
+<th>持仓</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加密币2号</td>
+<td>Chandelier</td>
+<td><strong>-0.70%</strong></td>
+<td>-14.24%</td>
+<td>BTC 100%</td>
+</tr>
+<tr>
+<td>加密币1号</td>
+<td>Chandelier</td>
+<td>-23.02%</td>
+<td>-33.84%</td>
+<td>BNB 100%</td>
+</tr>
+<tr>
+<td>加密币定投1号</td>
+<td>定投</td>
+<td>-3.17%</td>
+<td>-32.02%</td>
+<td>BTC 100%</td>
+</tr>
+<tr>
+<td>加密币定投2号</td>
+<td>定投</td>
+<td>-4.26%</td>
+<td>-32.02%</td>
+<td>BTC 100%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>宏观背景：ETF通过后的&quot;机构消化期&quot;</strong></p>
+<p>为什么 BTC 在高位滞涨？</p>
+<p>2025 年是加密资产的**&ldquo;机构消化期&rdquo;**。随着 2024 年 BTC 现货 ETF 的通过，机构资金大规模涌入。但这也意味着：早期获利盘与新进机构资金在高位进行了长达一年的充分换手。</p>
+<p>这种行情的特征就是：<strong>窄幅波动、缺乏趋势、来回画门</strong>——对趋势策略而言，这是最难熬的&quot;垃圾时间&quot;。</p>
+<p><strong>策略归因</strong></p>
+<p>Chandelier止损策略最怕的行情正是：<strong>高位宽幅震荡</strong>。</p>
+<p>价格突破时策略入场，随即回调触发止损，反复磨损。BNB 波动率（44.28%）比 BTC（32.01%）高出38%，这导致加密币1号的磨损远高于加密币2号。</p>
+<p><strong>长周期视角：在&quot;垃圾时间&quot;里寻找意义</strong></p>
+<p>但历史数据告诉我们（参考 2019 年或 2023 年上半年），这种低波动率的压缩，往往是下一轮指数级爆发的前兆。</p>
+<p>把时间拉长，画风完全不同：</p>
+<table>
+<thead>
+<tr>
+<th>组合</th>
+<th>运行时间</th>
+<th>累计收益</th>
+<th>年化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加密币2号</td>
+<td>7年331天</td>
+<td><strong>+2864.58%</strong></td>
+<td><strong>53.56%</strong></td>
+</tr>
+<tr>
+<td>加密币1号</td>
+<td>7年331天</td>
+<td><strong>+2107.11%</strong></td>
+<td><strong>47.94%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>投资启示</strong>：今年的 -0.7% 和 -23%，不是亏损，而是为了<strong>不丢失下一次主升浪入场券</strong>所支付的&quot;占位费&quot;。在量化的世界里，<strong>在场比什么都重要</strong>。</p>
+<hr>
+<h2 id="四被低估的赢家定投策略的厚积薄发">四、被低估的赢家：定投策略的厚积薄发</h2>
+<p>今年最容易被忽视的亮点：<strong>定投策略集体爆发</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>组合</th>
+<th>今年YTD</th>
+<th>历史年化</th>
+<th>超额</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A股定投1号</td>
+<td><strong>+27.45%</strong></td>
+<td>2.85%</td>
+<td><strong>+24.6%</strong></td>
+</tr>
+<tr>
+<td>A股定投2号</td>
+<td><strong>+21.50%</strong></td>
+<td>2.83%</td>
+<td><strong>+18.7%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>A股定投1号/2号今年的收益，是<strong>历史年化的 9.6 倍 / 7.6 倍</strong>！</p>
+<p>原因：这两个组合持有沪深300ETF，在过去10年的低迷期坚持定投，积累了大量低成本筹码。今年A股的反弹，是对长期坚守者的奖赏。</p>
+<p><strong>投资启示</strong>：定投的真谛是<strong>时间换空间</strong>。10年 2.85% 年化看似平庸，但一旦遇到牛市，复利的威力就会显现。</p>
+<p>在 策引 的体系里，<strong>定投是&quot;基准线&quot;（Benchmark）</strong>——它代表了最简单、最被动的投资方式。而 A股2号（双均线策略）今年跑赢定投 <strong>11 个百分点</strong>，历史年化 22.45% 也远超定投的 2.85%。这演示了<strong>量化择时在提高资金利用率方面的核心价值</strong>。</p>
+<hr>
+<h2 id="五2025-vs-历史今年是超常发挥还是回归均值">五、2025 vs 历史：今年是超常发挥还是回归均值？</h2>
+<table>
+<thead>
+<tr>
+<th>组合</th>
+<th>今年YTD</th>
+<th>历史年化</th>
+<th>对比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A股定投1号</td>
+<td>+27.45%</td>
+<td>2.85%</td>
+<td>⬆️ 超出24.6%</td>
+</tr>
+<tr>
+<td>A股定投2号</td>
+<td>+21.50%</td>
+<td>2.83%</td>
+<td>⬆️ 超出18.7%</td>
+</tr>
+<tr>
+<td>A股2号</td>
+<td>+38.75%</td>
+<td>22.45%</td>
+<td>⬆️ 超出16.3%</td>
+</tr>
+<tr>
+<td>A股1号</td>
+<td>+21.42%</td>
+<td>10.57%</td>
+<td>⬆️ 超出10.8%</td>
+</tr>
+<tr>
+<td>美股3号</td>
+<td>+27.49%</td>
+<td>33.71%</td>
+<td>⬇️ 低于6.2%</td>
+</tr>
+<tr>
+<td>加密币2号</td>
+<td>-0.70%</td>
+<td>53.56%</td>
+<td>⬇️ 低于54.3%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>统计结论</strong>：</p>
+<ul>
+<li>✅ <strong>10/22个组合</strong>（45%）跑赢自己的历史年化</li>
+<li>✅ <strong>20/22个组合</strong>（91%）今年回撤控制优于历史</li>
+</ul>
+<p>虽然不到一半的组合跑赢历史年化，但<strong>超过90%的组合在风险控制上做得更好</strong>。策略在适应市场波动，而非一味追求收益。</p>
+<hr>
+<h2 id="六数据异常说明">六、数据异常说明</h2>
+<h3 id="-美股1号--美股1号a-数据异常">⚠️ 美股1号 / 美股1号A 数据异常</h3>
+<p>这两个组合持有多只3倍杠杆ETF（FNGU、SOXL、TQQQ等），其中 FNGU 在2025年发生<strong>股票拆分</strong>（Stock Split），上游数据供应商可能未完全处理复权数据。</p>
+<p>因此 YTD 数据（-34.81% / -50.72%）<strong>仅供参考</strong>，不代表实际表现。建议参考等权重基准：</p>
+<ul>
+<li>美股1号等权重基准：累计 239.23%，年化 16.73%</li>
+<li>美股1号A等权重基准：累计 2134.74%，年化 32.99%</li>
+</ul>
+<h3 id="-杠杆etf的隐形杀手波动损耗volatility-decay">⚠️ 杠杆ETF的隐形杀手：波动损耗（Volatility Decay）</h3>
+<p><strong>为什么我们不建议绝大部分用户持有杠杆 ETF？</strong></p>
+<p>除了显而易见的<strong>巨大波动性</strong>（美股3号今年曾回撤 -25.25%），杠杆 ETF 存在致命的 <strong>&ldquo;内部损耗&rdquo;（Volatility Decay）</strong>：</p>
+<p><strong>数学原理</strong>：</p>
+<ul>
+<li>假设指数第一天涨 10%，第二天跌 10%</li>
+<li>普通指数：1.1 × 0.9 = 0.99，亏损 <strong>1%</strong></li>
+<li>3倍杠杆ETF：1.3 × 0.7 = 0.91，亏损 <strong>9%</strong></li>
+</ul>
+<p><strong>震荡市的噩梦</strong>：在震荡向上的行情中，即便指数最终上涨，杠杆 ETF 也可能因为中途的反复震荡，导致净值跑输理论倍数，甚至亏损。</p>
+<p><strong>官方组合展示这些标的的目的</strong>：是为了演示我们的 <strong>Chandelier 止损策略</strong>如何在极端波动中进行风控（例如在暴跌前切断杠杆）。<strong>但对于普通用户，杠杆ETF就是&quot;绞肉机&quot;。</strong></p>
+<blockquote>
+<p>⚠️ <strong>特别提示</strong>：杠杆 ETF（如 TQQQ/SOXL/FNGU）具有极高的波动风险和震荡损耗，<strong>不适合绝大多数投资者</strong>。请务必远离你不理解的杠杆产品。</p>
+</blockquote>
+<hr>
+<h2 id="七关键洞察总结">七、关键洞察总结</h2>
+<h3 id="-今年做对了什么">✅ 今年做对了什么</h3>
+<ol>
+<li><strong>趋势策略精准捕捉A股的产业周期红利</strong>：双均线策略吃到了 AI 硬件周期从美国外溢到亚洲的结构性行情</li>
+<li><strong>动量策略提前感知宏观风向</strong>：在降息周期深化的背景下，自动轮动到黄金，体现了数据驱动、不带偏见的量化优势</li>
+<li><strong>风控全面优化</strong>：91%组合今年回撤优于历史，策略的风控模块有效</li>
+</ol>
+<h3 id="-今年付出了什么代价">⚠️ 今年付出了什么代价</h3>
+<ol>
+<li><strong>AI策略分散配置稀释收益</strong>：在单边行情中，分散意味着跑输集中</li>
+<li><strong>加密币在&quot;机构消化期&quot;承受磨损</strong>：ETF通过后的高位换手期，趋势策略遭遇了反复的假突破</li>
+<li><strong>杠杆ETF数据问题</strong>：FNGU拆股导致净值数据异常</li>
+</ol>
+<h3 id="-风险分布">📊 风险分布</h3>
+<table>
+<thead>
+<tr>
+<th>风险等级</th>
+<th>波动率范围</th>
+<th>组合数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>极低-低风险</td>
+<td>&lt;20%</td>
+<td>11个</td>
+</tr>
+<tr>
+<td>中低风险</td>
+<td>20-35%</td>
+<td>6个</td>
+</tr>
+<tr>
+<td>中等-中高风险</td>
+<td>35%+</td>
+<td>6个</td>
+</tr>
+</tbody>
+</table>
+<p>大多数组合（17/24）处于<strong>中低风险及以下</strong>，符合&quot;稳健为主、风险可控&quot;的产品定位。</p>
+<hr>
+<h2 id="八展望-2026官方组合坚守你的战场在别处">八、展望 2026：官方组合坚守，你的战场在别处</h2>
+<p>站在 2025 年的尾巴上，我们对 2026 年有一些初步的思考方向：</p>
+<p><strong>可能的市场主题</strong>：</p>
+<ul>
+<li><strong>AI 应用层爆发</strong>：2025年硬件周期释放后，2026年可能迎来&quot;软硬切换&quot;，AI SaaS 和应用层或有机会</li>
+<li><strong>波动回归</strong>：全球降息周期深化，市场波动率可能从今年的低位回升</li>
+<li><strong>新兴市场轮动</strong>：亚洲制造业的重估是否会延续？值得持续跟踪</li>
+</ul>
+<p><strong>关于官方组合</strong>：
+策引 的官方组合<strong>不会调整标的池</strong>——它们将继续作为 <strong>&ldquo;基准锚点&rdquo;</strong>，在既定标的范围内严守纪律地执行策略，验证策略的长期有效性。</p>
+<p><strong>关于你的机会</strong>：
+作为成熟的投资者，你不应止步于&quot;观看演示&quot;。我们建议你<strong>利用 策引 平台</strong>：</p>
+<ol>
+<li><strong>建立自己的组合</strong>：选择你看好的标的池，用我们的策略引擎去回测、验证</li>
+<li><strong>提前布局研究</strong>：利用平台跟踪你感兴趣的资产（如 SaaS ETF、有色金属、能源等）</li>
+<li><strong>发现属于你的 Alpha</strong>：官方组合是&quot;教科书&quot;，策引 平台是你的&quot;实验室&quot;</li>
+</ol>
+<blockquote>
+<p><strong>投资是认知的变现。不要只做信号的接收者，要做策略的构建者。</strong></p>
+</blockquote>
+<hr>
+<h2 id="结语在透明中建立信任">结语：在透明中建立信任</h2>
+<p>策引 的核心价值观是：<strong>公开、透明、数据驱动</strong>。</p>
+<p>我们公开每个组合的持仓明细，披露每一天的净值变化，诚实面对亏损和回撤。因为我们相信：</p>
+<blockquote>
+<p><strong>只有基于真实数据的信任，才能穿越牛熊。</strong></p>
+</blockquote>
+<p>2025年不是完美的一年，但它是真实的一年。</p>
+<p>有高光（A股2号 +38.75%，精准捕捉硬科技产业周期），也有低谷（加密币1号 -23.02%，在机构消化期承受磨损）。有意外之喜（A股动量满仓黄金，提前感知降息周期），也有需要耐心等待的蓄势（加密币组合的7年 2800%+ 累计收益告诉我们，短期的磨损是长期复利的代价）。</p>
+<p>这就是量化投资的真相——<strong>没有永远有效的策略，只有适应市场的纪律，和跨越周期的信心。</strong></p>
+<hr>
+<h3 id="-黑五特惠最后的终身会员机会">📢 黑五特惠：最后的终身会员机会</h3>
+<p>如果你认可这种&quot;透明、数据驱动、长期主义&quot;的投资理念，现在是加入策引的最佳时机。</p>
+<p><strong>终身会员限时五折开放</strong>，包含：</p>
+<ul>
+<li>全部24个官方组合的实时模拟信号</li>
+<li>自定义官方组合及策略，打造你的专属组合</li>
+<li>深度分析组合来了解你的策略表现特征</li>
+<li>双均线、Chandelier、动量轮动、AI大模型策略，还支持编写自定义策略</li>
+<li>未来新增策略的永久使用权</li>
+<li>策引 AI 投资助手的永久使用权</li>
+</ul>
+<p>未来我们将全面转向订阅制，终身会员席位不再开放。<strong>这不仅仅是一个软件授权，这是一张通往&quot;理性投资世界&quot;的永久船票。</strong></p>
+<p>👉 <strong><a href="https://www.myinvestpilot.com/pricing">立即加入策引，部署你的量化未来</a></strong></p>
+<hr>
+<p><em>风险提示：</em></p>
+<ol>
+<li><em>本文数据截止 2025-11-26，历史收益不代表未来表现</em></li>
+<li><em>官方组合仅为策略模型的技术演示，不构成投资建议</em></li>
+<li><em>美股1号/1号A因FNGU拆股存在数据异常，导致组合表现大幅度失真</em></li>
+<li><em>特别提示：杠杆 ETF（如 TQQQ/SOXL/FNGU）具有极高的波动风险和震荡损耗，不适合绝大多数投资者</em></li>
+<li><em>量化策略需长期持有以平滑短期波动，投资有风险，入市需谨慎</em></li>
+</ol>
+
+        </div>
+
+        <div id="article-info">
+          
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          更新时间:
+          
+          
+          
+          
+          
+              今日
+          
+          
+           版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/d2824a92c000a20b400b6905da4112f32bb11f03">d2824a92c</a>
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可</p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_cn_1/">策引全球投资组合：A股1号</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_cn_2/">策引全球投资组合：A股2号</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_cn_3/">策引全球投资组合：A股3号</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_cn_global/">策引全球投资组合：A股全球</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_cc_1/">策引全球投资组合：加密币1号</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_cc_2/">策引全球投资组合：加密币2号</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_us_1/">策引全球投资组合：美股1号</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_us_2/">策引全球投资组合：美股2号</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_us_3/">策引全球投资组合：美股3号</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_us_4/">策引全球投资组合：美股4号</a></li>
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/portfolios/myinvestpilot_us_global/">策引全球投资组合：美股全球</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="share-twitter-container">
+  <a target="_blank" href="https://twitter.com/intent/tweet?text=2025%20%e5%b9%b4%ef%bc%8c%e9%9d%a2%e5%af%b9%20A%20%e8%82%a1%e7%a1%ac%e7%a7%91%e6%8a%80%e7%88%86%e5%8f%91%e4%b8%8e%e5%8a%a0%e5%af%86%e5%b8%81%e6%9c%ba%e6%9e%84%e6%b6%88%e5%8c%96%e6%9c%9f%e7%9a%84%e5%86%b0%e7%81%ab%e4%b8%a4%e9%87%8d%e5%a4%a9%ef%bc%8c%e7%ad%96%e5%bc%95%ef%bc%88myInvestPilot%ef%bc%89%e7%9a%84%2024%20%e4%b8%aa%e5%ae%98%e6%96%b9%e7%ad%96%e7%95%a5%e4%ba%a4%e5%87%ba%e4%ba%86%e6%80%8e%e6%a0%b7%e7%9a%84%e7%ad%94%e5%8d%b7%ef%bc%9f%e6%9c%ac%e6%96%87%e6%b7%b1%e5%ba%a6%e5%a4%8d%e7%9b%98%e4%ba%86%e5%8f%8c%e5%9d%87%e7%ba%bf%e7%ad%96%e7%95%a5%e5%a6%82%e4%bd%95%e6%8d%95%e6%8d%89%20%2b38.75%25%20%e7%9a%84%20A%20%e8%82%a1%20%e2%80%a6&amp;url=https%3a%2f%2fwww.bmpi.dev%2fmoney%2fmyinvestpilot%2f2025_review%2f&amp;via=madawei2699">Share on Twitter</a>
+  <span class="share-twitter-container-dashed">·</span>
+  <a target="_blank" href="https://twitter.com/search?q=https%3a%2f%2fwww.bmpi.dev%2fmoney%2fmyinvestpilot%2f2025_review%2f">Discuss on Twitter</a>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://giscus.app/client.js"
+        data-repo="bmpi-dev/bmpi.dev"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMjM3NTQzNDU="
+        data-category="Announcements"
+        data-category-id="DIC_kwDODVY4ac4CQdzV"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </footer>
+    </article>
+    <template><span id="control"></span></template>
+    <div id="toast"></div>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div>
+      <a href="https://www.myinvestpilot.com/"> 策引 </a>
+      ⚡️
+      <a href="https://www.i365.tech/"> i365 </a>
+      ⚡️
+      <a href="https://www.bmpi.dev/talk/"> 演讲 </a>
+      ⚡️
+      <a href= "/weeklies" > 周记 </a>
+    </div>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2025
+    
+    
+  </section>
+</footer>
+
+  </main>
+  
+  <div id="the-modal" class="modal">
+    <span class="the-modal-close">&times;</span>
+    <img class="modal-content" id="the-modal-img01">
+  </div>
+
+  
+  
+  
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti-addon.min.js"></script>
+  <script>
+    
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
+    heti.autoSpacing(); 
+    
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+  
+
+  
+
+  
+
+</body>
+
+</html>
