@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2025-12-10T13:00:28+08:00</lastmod>
+    <lastmod>2025-12-26T19:48:34+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,27 +18,42 @@
   </url>
 
   <url>
+    <loc>https://www.bmpi.dev/self/antifragile/</loc>
+    <lastmod>2025-12-26T19:48:34+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/</loc>
+    <lastmod>2025-12-26T19:48:34+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
+    <lastmod>2025-12-26T19:48:34+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/series/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
+    <lastmod>2025-12-26T19:48:34+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2025-12-26T19:48:34+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2025-12-26T19:48:34+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/self/systemic-thinking/</loc>
     <lastmod>2025-12-10T13:00:28+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E7%BB%88%E8%BA%AB%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2025-12-10T13:00:28+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2025-12-10T13:00:28+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/series/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
-    <lastmod>2025-12-10T13:00:28+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2025-12-10T13:00:28+08:00</lastmod>
   </url>
 
@@ -85,11 +100,6 @@
   <url>
     <loc>https://www.bmpi.dev/self/my-invest-pilot/</loc>
     <lastmod>2025-09-11T07:09:39+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/</loc>
-    <lastmod>2025-10-25T11:12:01+00:00</lastmod>
   </url>
 
   <url>
@@ -2494,11 +2504,6 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E8%B5%84%E4%BA%A7%E7%9B%B8%E5%85%B3%E5%BA%A6/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E9%A3%8E%E9%99%A9%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
 
