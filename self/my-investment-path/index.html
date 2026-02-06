@@ -32,7 +32,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/self/my-investment-path/" /><meta property="article:section" content="self" />
 <meta property="article:published_time" content="2025-04-29T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2025-10-25T11:12:01&#43;00:00" /><meta property="og:site_name" content="BMPI" />
+<meta property="article:modified_time" content="2026-02-06T08:13:52&#43;08:00" /><meta property="og:site_name" content="BMPI" />
 
 
   
@@ -52,7 +52,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2025-04-29T00:00:00Z",
-      "dateModified": "2025-10-25T11:12:01Z",
+      "dateModified": "2026-02-06T08:13:52+08:00",
       "author": {
         "@type": "Person",
         "name": "马大伟"
@@ -237,11 +237,11 @@
               
               
               
-              27:15
+              27:52
               
             </span>
             
-            <span class="post-word-count"> | 5997 字 | </span>
+            <span class="post-word-count"> | 6132 字 | </span>
             <span id="post-views"></span> 次阅读
             
           </div>
@@ -307,7 +307,7 @@
 <h2 id="返璞归真构建透明简单的策略系统">返璞归真：构建透明、简单的策略系统</h2>
 <p>排除了这些选项后，我回到了原点——我需要一个更透明、更简单、更容易跟随的投资方法。一个即使本金不多，也能让我安心把大部分精力放在提升主业上的方法。最终，我决定回归技术本身，自己动手构建一个程序化的交易策略系统。</p>
 <p>可能会有人质疑，程序化策略在像美股这样高效的市场中，理论上因为信息会瞬间被消化，可能已经失效了。但市场是极其复杂的。而且，A股市场与美股市场存在很大不同，A股市场的散户占比更高，相对来说更接近一个非有效市场。在这样的市场环境中，一些经过充分回测验证的简单策略，反而可能持续有效。</p>
-<p>大约在2018或2019年，我开始实践并使用最简单的双均线策略。这个策略的核心原理就是跟踪趋势。它简单到许多人可能觉得它不可能有效，但经过我反复的回测和实践，我发现它在A股指数类标的上表现是可行的，甚至收益率在指数不涨的十年里（如上证指数在1000点到3000点之间波动）也能达到年化7-10%以上。这恰恰满足了我对一个制度化、透明、可供机械跟随策略的需求。</p>
+<p>大约在2018或2019年，我开始实践并使用最简单的<a href="https://www.myinvestpilot.com/docs/strategies/dual-moving-average">双均线策略</a>。这个策略的核心原理就是跟踪趋势。它简单到许多人可能觉得它不可能有效，但经过我反复的回测和实践，我发现它在A股指数类标的上表现是可行的，甚至收益率在指数不涨的十年里（如上证指数在1000点到3000点之间波动）也能达到年化7-10%以上。这恰恰满足了我对一个制度化、透明、可供机械跟随策略的需求。</p>
 <p>在选择交易标的时，我选择了指数（如 ETF）而不是个股。这是因为在A股市场，个股在极端行情下可能遭遇流动性枯竭甚至停牌，即使我的策略发出了明确的卖出信号，也可能无法成交，导致策略失效。而像大盘指数这样的流动性极好的标的，无论何时都可以自由买卖，确保策略发出的指令能够被有效地执行。我认为，一个好的交易策略，必须在流动性充足的标的上才能真正发挥作用并被有效地执行。</p>
 <h2 id="策引的诞生从简陋脚本到ai探索的自动化之路">“策引”的诞生：从简陋脚本到AI探索的自动化之路</h2>
 <p>有了这个简单双均线策略并在实践中验证了其有效性后，我开始思考如何将其自动化，从而减少手动操作的繁琐。最初，我只是在 AWS 上部署了一个简单的 Python 脚本。这个脚本每天定时运行，计算策略信号，并将交易记录上传，最原始的方式是通过邮件列表将交易信号发送给订阅者。功能非常简陋，但出乎意料的是，居然有人对此表示了兴趣并进行了订阅。</p>
@@ -332,8 +332,16 @@
 <p>以上，就是我开发“策引”这款小工具的心路历程。它的诞生，源于一个最朴素的想法：将投资从感性驱动，转向系统化思考。</p>
 <p>如果你也对这个能将交易想法可视化、并进行回测的工具感兴趣，欢迎访问它的官网，或者直接体验它的在线策略编辑器。</p>
 <ul>
-<li><a href="https://www.myinvestpilot.com/">访问“策引”官网 (myinvestpilot.com)</a></li>
+<li><a href="https://www.myinvestpilot.com/">访问&quot;策引&quot;官网 (myinvestpilot.com)</a></li>
 <li><a href="https://www.myinvestpilot.com/primitives-editor/">在线体验策略 IDE</a></li>
+</ul>
+<h2 id="延伸阅读">延伸阅读</h2>
+<p>如果你对系统化投资感兴趣，以下文档可以帮助你深入了解：</p>
+<ul>
+<li><a href="https://www.myinvestpilot.com/docs/concepts/philosophy">策引投资哲学</a> - 为什么系统优于直觉，建立投资情绪防火墙</li>
+<li><a href="https://www.myinvestpilot.com/docs/strategies/dual-moving-average">双均线趋势策略详解</a> - 文中提到的经典趋势跟踪策略</li>
+<li><a href="https://www.myinvestpilot.com/docs/strategies/momentum-rotation">动量轮动策略</a> - 利用动量效应构建抗周期投资组合</li>
+<li><a href="https://www.myinvestpilot.com/docs/primitives/getting-started">原语策略系统入门</a> - 像搭积木一样配置你的交易系统</li>
 </ul>
 
         </div>
@@ -350,11 +358,12 @@
             
             
                 
-                  2个月前
+                  今日
                 
             
             
-              版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/812e230df0e12eff45462223a0778c9bcf8d715e">812e230df</a>
+            
+              版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/7d3de7cac9610b74e3fc163f262a46ed22c46cb7">7d3de7cac</a>
             
           </div>
         
@@ -1920,7 +1929,7 @@
   </div>
   <section class="container">
     
-     © 2019 - 2025
+     © 2019 - 2026
     
     
   </section>
