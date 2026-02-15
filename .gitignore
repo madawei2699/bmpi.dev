@@ -19,3 +19,6 @@ out/
 .clj-kondo/
 .lsp/
 .hugo_build.lock
+
+# Local Hugo binary folder
+.hugo-bin/
