@@ -3,8 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/tags/agent/</loc>
+    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/ai/</loc>
+    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2026-03-28T09:26:48+08:00</lastmod>
+    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -18,17 +28,42 @@
   </url>
 
   <url>
+    <loc>https://www.bmpi.dev/tags/discord/</loc>
+    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/openclaw/</loc>
+    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E4%BF%A1%E6%81%AF%E8%BE%93%E5%85%A5/</loc>
+    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/self/use-rss-email-read-v2/</loc>
+    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
+    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/self/my-retirement-plan/</loc>
     <lastmod>2026-02-24T00:13:08+08:00</lastmod>
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/</loc>
-    <lastmod>2026-02-24T00:13:08+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
     <lastmod>2026-02-24T00:13:08+08:00</lastmod>
   </url>
 
@@ -398,17 +433,7 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/%E4%BF%A1%E6%81%AF%E8%BE%93%E5%85%A5/</loc>
-    <lastmod>2023-03-28T19:52:45+08:00</lastmod>
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/self/my-gpt-reader/</loc>
-    <lastmod>2023-03-28T19:52:45+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2023-03-28T19:52:45+08:00</lastmod>
   </url>
 

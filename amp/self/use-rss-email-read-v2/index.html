@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>构建自己的信息简报 2.0</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/self/use-rss-email-read-v2/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "BMPI",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/self\/",
+          "name": "self"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/self\/use-rss-email-read-v2\/",
+          "name": "use-rss-email-read-v2"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>构建自己的信息简报 2.0</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2026-03-28T00:00:00Z'>
+                2026-03-28
+              </time>
+            </span>
+          </div>
+          
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/%E4%BF%A1%E6%81%AF%E8%BE%93%E5%85%A5/">信息输入</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/ai/">AI</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/agent/">Agent</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/discord/">Discord</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/openclaw/">OpenClaw</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86/">知识管理</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/">自我提升</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <blockquote>
+<p>本文由我与 OpenCode（Claude Sonnet 4.6）协作完成。</p>
+</blockquote>
+<p>几年前我写过<a href="https://www.bmpi.dev/self/use-rss-email-read/">构建自己的信息简报</a>，当时的答案是 RSS + Email：用 RSSHub 把不支持订阅的网站转成 RSS，再用 Mailbrew 聚合成一份简报定期投进邮箱。那篇文章的观点我至今认可——与其主动到处刷，不如让信息自己送过来。</p>
+<p>但用了几年之后，问题越来越明显。</p>
+<h2 id="10-的问题">1.0 的问题</h2>
+<p>Email 本身没问题，问题是内容到了邮箱之后，只是堆在那里。一周的内容混在一起，没有优先级，重要的和噪音并排放着，看起来很累。更麻烦的是，很多我最想追踪的内容根本就不在 RSS 体系里——Reddit 的帖子、Hacker News 的讨论热度、某个社区当天最活跃的话题，这些都是动态的、依赖登录态的内容，RSSHub 能做的其实有限。</p>
+<p>与此同时，Email 是静态的，看完就完了。如果某条新闻我想多问几句，或者想把几条相关的内容放在一起对比，邮箱做不到。</p>
+<p>在<a href="https://www.bmpi.dev/self/my-info-input-channel/">构建高质量的信息输入渠道</a>里我写过，提升信息输入质量的关键是砍掉低质量的渠道。1.0 做到了被动接收，但内容到了之后怎么看，还是要靠自己。</p>
+<h2 id="agent-时代的新思路">Agent 时代的新思路</h2>
+<p>从<a href="https://www.bmpi.dev/self/my-gpt-reader/">我的AI阅读助手</a>开始，我就在验证 AI 能不能接管阅读环节——读网页、总结内容、跨语言整理。结论是可以，而且效果比我预期要好。那顺着这个方向再往前一步：能不能让 AI 把抓取、理解、投递这整条链路都接管掉？</p>
+<p>后来发现这事其实很适合拿 Agent 做。我在写<a href="https://www.bmpi.dev/self/my-invest-pilot/">我的AI投资助手</a>的时候开始折腾 OpenClaw，发现它可以定时触发、进入网站、抓取内容、调用模型处理、投递结果，基本上就是把我手工做的那几步串起来自动跑。</p>
+<p>我用的工具是 <a href="https://openclaw.ai">OpenClaw</a>，一个可以在本地运行、与 Discord 深度集成的 AI Agent 控制面。</p>
+<h2 id="新的工作流">新的工作流</h2>
+<p>最关键的一步是数据获取。</p>
+<p>以前用 RSSHub 抓取，抓到的是公开的、未登录的内容。但 Reddit 给登录用户和未登录用户看到的内容是不一样的——热榜排序、社区推荐、关注板块的最新内容，这些都需要登录。同样的问题在很多平台上都存在。</p>
+<p>现在的做法是：在本地起一个专门的 Chrome profile，提前登录好 Reddit、Hacker News 等网站，然后让 OpenClaw 通过 Chrome 的远程调试协议（Chrome Remote Debug）直接控制这个浏览器。这个 Chrome 用的是我自己的登录态，抓到的内容就是我平时正常浏览时看到的那些内容，稳定可靠，也不用担心 API 限流或者反爬。</p>
+<p>OpenClaw 定时触发之后，整个流程大概是这样：</p>
+<ul>
+<li>打开 Reddit 里我关注的几个板块，抓取当天热帖标题和讨论摘要——我最感兴趣的是投资相关的话题和国际时事，这两块噪音很多但有价值的东西也不少，需要 AI 帮我先过一遍</li>
+<li>打开 Hacker News，抓取当天热榜前几十条，技术和科技创业相关的综合信息在这里质量最高</li>
+<li>把抓到的内容交给大模型，做摘要、去重、按主题分类</li>
+<li>整理好之后投递到我的 Discord 对应频道——投资相关的进一个频道，技术热点进另一个频道</li>
+</ul>
+<p>每天早上起来，打开 Discord，简报已经在那里了，按频道分好的，直接看。看到感兴趣的，还可以在频道里直接追问 OpenClaw，它会帮我进一步查找或分析。</p>
+<h2 id="简报长什么样">简报长什么样</h2>
+<p>光说架构不直观，贴两段真实输出感受一下。</p>
+<p><strong>HN 技术简报（节选）</strong></p>
+<blockquote>
+<p><strong>Hold on to Your Hardware</strong> — 554 points / 453 comments</p>
+<p>作者认为消费者硬件的&quot;黄金时代&quot;正在结束，不是周期性涨价，而是内存、SSD、GPU 的产能正被 AI 数据中心永久性地重新分配。核心问题不是&quot;硬件会不会贵&quot;，而是算力和控制权正在一起向数据中心集中，个人掌控自己计算环境的能力也在同步流失。</p>
+<p><strong>今日整体趋势</strong>：今天 HN 有三条主线——AI 正在怎样改写资源与权力边界；官僚系统如何消耗人；以及老 HN 味道的技术自主权焦虑。</p>
+<p><strong>今日最值得点开的一条</strong>：<em>Hold on to Your Hardware</em>——它把&quot;硬件会不会涨价&quot;这个表层问题，连到了&quot;个人是否还能掌控自己的计算环境&quot;这个更深的问题。</p>
+</blockquote>
+<p><strong>Reddit 投资情绪简报（节选，面向策引产品）</strong></p>
+<blockquote>
+<p><strong>本轮 Reddit 信号的底层判断</strong></p>
+<p>Reddit 现在不是极端恐慌，而是&quot;烦躁 + 自我说服 + 仍在尝试抄底&quot;。最高信号的帖子往往不是宏观预测，而是行为拆解：我是不是在 market timing？我是不是把回本执念误当成 thesis？</p>
+<p><strong>对产品最有价值的候选内容方向</strong>：《投资者最常见的两个错误，不是亏损，而是&quot;等&quot;与&quot;急&quot;》——把一直等更大 crash 和一跌就急着抄底这两类用户放在一起，核心是讲：看起来相反，其实都是被情绪驱动。</p>
+</blockquote>
+<p>两份简报格式完全不一样，因为目的本来就不同——前者是给自己消化的，后者是给产品找选题用的。HN 那个 prompt 我要求它必须选出&quot;今天最值得点开的一条&quot;并说明理由，逼着它做取舍；Reddit 那个 prompt 最后要输出候选内容方向，直接为策引的编辑工作服务。同样的流程，prompt 不同，出来的东西就完全是两回事。</p>
+<h2 id="和-10-的区别">和 1.0 的区别</h2>
+<p>邮箱版用了两年多，我基本每周都能看完，但每次打开心里都有点抵触——内容太杂，不知道从哪里看起，有时候直接标成已读了事。</p>
+<p>现在每天早上打开 Discord，频道里的简报五分钟以内扫完，感兴趣的再点进去看原帖。最大的变化不是&quot;看的信息更多了&quot;，而是&quot;我终于愿意每天打开了&quot;——这两件事听起来差不多，感受完全不一样。</p>
+<p>以前在<a href="https://www.bmpi.dev/self/build-personal-knowledge-system/">构建终身学习体系</a>里老说信息输入没做好，但说不清楚哪里没做好。现在回头看，大半时间其实在过滤噪音，不是在读。</p>
+<h2 id="还能怎么玩">还能怎么玩</h2>
+<p>现在跑的两个任务只是起点，还有几个我想试的方向。</p>
+<p><strong>垂直内容监控</strong>。给特定领域单独起一条 pipeline 就行。比如每天抓 arXiv 上 AI 相关的新 paper，让模型提取摘要和核心贡献，投进一个专门的频道；或者追踪 GitHub Trending，看每天什么新项目在冒头；又或者盯着某几个你真正在意的 Twitter/X 账号，把他们的发言每天汇总成一条摘要。只要源能抓、prompt 写好，同一套流程就能跑。</p>
+<p><strong>竞品和市场监控</strong>。对做产品的人来说，这套东西可以当情报系统用。定期去特定 subreddit 或社区抓用户反馈、抓竞品的讨论，让 AI 提炼出&quot;用户在抱怨什么&quot;、&ldquo;竞品最近在做什么&rdquo;。这种信息散落在各处，人工去收根本收不完，但对 Agent 来说只是定时任务。</p>
+<p><strong>公开社区简报频道</strong>。这是我还在推进的方向：目前的简报是私有的，只投给自己。如果开放出来，把 Discord 频道设成公开，感兴趣的人可以加入进来一起看，甚至可以按主题开不同的频道——技术热点频道、投资情绪频道、国际时事频道——让 OpenClaw 定时往对应频道推简报，社区成员可以直接在 Discord 里讨论和追问。</p>
+<p><strong>个性化 prompt 订阅</strong>。不同的人带着自己的 prompt 进来——关注的板块、摘要深度、过滤标准，都在 prompt 里定义，同一份原始内容给不同人看到的是不同的简报。有点像以前 RSS 的个人订阅，但多了一层 AI 加工。</p>
+<p>我在<a href="https://www.myinvestpilot.com/">策引</a>的 AI 策略实验室 <a href="https://www.chat2invest.com">Chat2Invest</a> 里有个叫 <a href="https://www.chat2invest.com/myfeeder">MyFeeder</a> 的功能，一直挂着 coming soon，想做的事跟这个几乎一样。结果没等我开发，OpenClaw 这套就跑起来了，需求被个人工作流提前满足了。也不知道是该高兴还是感慨。</p>
+<p>如果你也在折腾类似的东西，或者对这些有想法，欢迎来<a href="https://www.bmpi.dev/community/">社区</a>里聊。</p>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>
