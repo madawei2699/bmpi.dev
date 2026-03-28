@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/self/use-rss-email-read-v2/",
-        "title": "构建自己的信息简报 2.0",
-        "description": "在 Agent 时代，用 OpenClaw 与 Discord 打造每日 AI 信息简报。",
+        "url": "/dev/ai-native-investment-system/",
+        "title": "我是如何构建一个 AI 原生量化系统的",
+        "description": "本文记录我构建策引（MyInvestPilot）的完整历程：一个从设计之初就为 AI 而生的量化系统，从 DSL 原语引擎到混合 Agent 架构的探索与取舍。",
         "publish-date": "2026-03-28 00:00:00 +0000 UTC"
     }
 }

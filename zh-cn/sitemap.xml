@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/agent/</loc>
-    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
   </url>
 
   <url>
@@ -13,8 +13,13 @@
   </url>
 
   <url>
+    <loc>https://www.bmpi.dev/tags/ai-native/</loc>
+    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -33,6 +38,16 @@
   </url>
 
   <url>
+    <loc>https://www.bmpi.dev/tags/dsl/</loc>
+    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/llm/</loc>
+    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/tags/openclaw/</loc>
     <lastmod>2026-03-28T11:16:24+08:00</lastmod>
   </url>
@@ -40,6 +55,16 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E4%BF%A1%E6%81%AF%E8%BE%93%E5%85%A5/</loc>
     <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/dev/ai-native-investment-system/</loc>
+    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/categories/%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/</loc>
+    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
   </url>
 
   <url>
@@ -53,8 +78,18 @@
   </url>
 
   <url>
+    <loc>https://www.bmpi.dev/tags/%E7%AD%96%E5%BC%95/</loc>
+    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/tags/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/</loc>
     <lastmod>2026-03-28T11:16:24+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/</loc>
+    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
   </url>
 
   <url>
@@ -99,11 +134,6 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/%E6%8A%95%E8%B5%84%E5%BF%83%E6%B3%95/</loc>
-    <lastmod>2026-02-15T13:09:13+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/%E7%AD%96%E5%BC%95/</loc>
     <lastmod>2026-02-15T13:09:13+08:00</lastmod>
   </url>
 
@@ -2354,11 +2384,6 @@
 
   <url>
     <loc>https://www.bmpi.dev/tags/bnf/</loc>
-    <lastmod>2023-01-12T22:01:47+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/dsl/</loc>
     <lastmod>2023-01-12T22:01:47+08:00</lastmod>
   </url>
 

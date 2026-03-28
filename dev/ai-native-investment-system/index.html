@@ -1,0 +1,3756 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="马大伟">
+  
+  <meta name="description" content="本文记录我构建策引（MyInvestPilot）的完整历程：一个从设计之初就为 AI 而生的量化系统，从 DSL 原语引擎到混合 Agent 架构的探索与取舍。">
+  
+  
+  <meta name="keywords" content="AI, Native,, DSL,, 量化系统,, 原语引擎,, Agent架构">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="我是如何构建一个 AI 原生量化系统的"/>
+  <meta name="twitter:description" content="本文记录我构建策引（MyInvestPilot）的完整历程：一个从设计之初就为 AI 而生的量化系统，从 DSL 原语引擎到混合 Agent 架构的探索与取舍。"/>
+  
+  
+  <meta name="twitter:image" content="https://og.bmpi.dev/我是如何构建一个 AI 原生量化系统的.png">
+  
+
+  
+  <meta property="og:title" content="我是如何构建一个 AI 原生量化系统的" />
+<meta property="og:description" content="本文记录我构建策引（MyInvestPilot）的完整历程：一个从设计之初就为 AI 而生的量化系统，从 DSL 原语引擎到混合 Agent 架构的探索与取舍。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/dev/ai-native-investment-system/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2026-03-28T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2026-03-28T15:26:41&#43;08:00" /><meta property="og:site_name" content="BMPI" />
+
+
+  
+  <meta name="og:image" content="https://og.bmpi.dev/我是如何构建一个 AI 原生量化系统的.png">
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "我是如何构建一个 AI 原生量化系统的",
+      
+      "image": "https://www.bmpi.dev/images/logo.png",
+      
+      "datePublished": "2026-03-28T00:00:00Z",
+      "dateModified": "2026-03-28T15:26:41+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "马大伟"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/dev/ai-native-investment-system/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/logo.png"
+        }
+      },
+      "description": "本文记录我构建策引（MyInvestPilot）的完整历程：一个从设计之初就为 AI 而生的量化系统，从 DSL 原语引擎到混合 Agent 架构的探索与取舍。",
+      "keywords": ["AI Native", "LLM", "DSL", "Agent", "量化投资", "策引"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/dev/ai-native-investment-system/">
+  
+  <title>
+  我是如何构建一个 AI 原生量化系统的 · BMPI
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/dev/ai-native-investment-system/">
+  
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.93931ae707050b69c3bcbf6952e01a7b9a8f0aff2cdba79a762869af1aa23821.css" integrity="sha256-k5Ma5wcFC2nDvL9pUuAae5qPCv8s26eadihprxqiOCE="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.a2fdc25deb82b741f3a807e38508c2dea269fc900c2b37ee8af380d97ea4d7a8.css" integrity="sha256-ov3CXeuCt0HzqAfjhQjC3qJp/JAMKzfuivOA2X6k16g="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bmpi.dev/images/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bmpi.dev/images/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bmpi.dev/images/ico/favicon-16x16.png">
+  <link rel="manifest" href="https://www.bmpi.dev/images/ico/site.webmanifest">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/amp/dev/ai-native-investment-system/" title="BMPI" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="preload" href="https://www.bmpi.dev/scss/tagcloud.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css"></noscript>
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti.min.css">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.min.css"></noscript>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+
+  
+
+  
+
+  
+
+  <script async defer data-website-id="356d3289-e627-409c-a9d7-a272cf789f0b" src="https://umami.bmpi.dev/script.js"></script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a id="site-title" class="navigation-title" href="https://www.bmpi.dev/">
+      BMPI
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://github.com/madawei2699">GitHub</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/self/">学习</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/dev/">技术</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/money/">投资</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/en/">English</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title heti">
+          <h1 class="title">我是如何构建一个 AI 原生量化系统的</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2026-03-28T00:00:00Z'>
+                2026-03-28
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              37:36
+              
+            </span>
+            
+            <span class="post-word-count"> | 8274 字 | </span>
+            <span id="post-views"></span> 次阅读
+            
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/">构建与实践</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/ai-native/">AI Native</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/llm/">LLM</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/dsl/">DSL</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/agent/">Agent</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E9%87%8F%E5%8C%96%E6%8A%95%E8%B5%84/">量化投资</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E7%AD%96%E5%BC%95/">策引</a></div>
+
+        </div>
+      </header>
+
+      <div class="brand-ad">
+        <div class="brand-content">
+          <a href="https://www.i365.tech/post">
+            <span>点我在线阅读《个人产品开发指南》，教你从零到一快速开发自己的个人产品。</span>
+          </a>
+        </div>
+        <div class="brand-ad-link"><a href="https://www.bmpi.dev/_ad/" rel="nofollow">品牌赞助</a></div>
+        <div class="brand-ad-link-line"></div>
+      </div>
+
+      
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <ul>
+<li><a href="#%E4%B8%80%E4%B8%AA%E5%8F%8D%E6%96%B9%E5%90%91%E7%9A%84%E9%80%89%E6%8B%A9">一个反方向的选择</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E4%BB%A3%E7%A0%81">为什么不是代码</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF-api">为什么不是 API</a></li>
+<li><a href="#dsl%E7%BB%99-ai-%E8%AE%BE%E8%AE%A1%E4%B8%80%E5%A5%97%E4%B8%93%E5%B1%9E%E8%AF%AD%E8%A8%80">DSL：给 AI 设计一套专属语言</a>
+<ul>
+<li><a href="#%E6%AD%A3%E4%BA%A4%E7%A7%AF%E6%9C%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF">正交积木的设计思路</a></li>
+<li><a href="#schema-%E4%BE%9B%E5%BA%94%E9%93%BE%E6%96%87%E6%A1%A3%E5%8D%B3%E4%BB%A3%E7%A0%81">Schema 供应链：文档即代码</a></li>
+<li><a href="#%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E7%9A%84%E7%AD%96%E7%95%A5%E7%A4%BA%E4%BE%8B">一个真实的策略示例</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8E%9F%E8%AF%AD%E7%9A%84%E6%BC%94%E5%8C%96%E6%AD%A3%E4%BA%A4%E4%B8%8D%E6%98%AF%E7%BB%88%E7%82%B9">原语的演化：正交不是终点</a>
+<ul>
+<li><a href="#%E5%B8%A6%E7%8A%B6%E6%80%81%E7%9A%84%E7%AD%96%E7%95%A5streak-%E5%8E%9F%E8%AF%AD">带状态的策略：Streak 原语</a></li>
+<li><a href="#%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE%E6%BA%90vix-%E5%92%8C%E5%B8%82%E5%9C%BA%E6%8C%87%E6%A0%87">外部数据源：VIX 和市场指标</a></li>
+</ul>
+</li>
+<li><a href="#prompt-%E7%9A%84%E6%BC%94%E5%8C%96%E4%BB%8E%E9%AB%98%E5%A4%B1%E8%B4%A5%E7%8E%87%E5%88%B0-few-shot">Prompt 的演化：从高失败率到 few-shot</a></li>
+<li><a href="#agent-%E6%82%96%E8%AE%BA%E7%81%B5%E6%B4%BB%E6%80%A7%E4%B8%8E%E7%A1%AE%E5%AE%9A%E6%80%A7%E7%9A%84%E8%BE%B9%E7%95%8C">Agent 悖论：灵活性与确定性的边界</a>
+<ul>
+<li><a href="#%E6%B7%B7%E5%90%88%E6%9E%B6%E6%9E%84local-%E4%B8%8E-remote-%E7%9A%84%E5%88%86%E5%B7%A5">混合架构：Local 与 Remote 的分工</a></li>
+<li><a href="#%E4%BB%8E-v1-%E5%88%B0-v3-%E7%9A%84%E6%BC%94%E8%BF%9B">从 v1 到 v3 的演进</a></li>
+</ul>
+</li>
+<li><a href="#dsl-%E4%B8%8D%E6%98%AF%E9%93%B6%E5%BC%B9">DSL 不是银弹</a></li>
+<li><a href="#%E5%9B%9E%E5%A4%B4%E7%9C%8B%E8%BF%99%E4%BB%B6%E4%BA%8B">回头看这件事</a></li>
+</ul>
+<blockquote>
+<p>本文写作过程中借助了 OpenCode（Claude Sonnet 4.6）、OpenClaw、Codex、Gemini、Grok 等工具协作整理。</p>
+</blockquote>
+<p>前段时间跟随一个趋势策略，正好碰上美伊局势紧张，市场剧烈震荡。趋势策略在震荡期本来就会反复试错，我知道这没问题。但有一天开盘止损卖出，然后川普发了一条推文，市场立刻反转拉升。眼睁睁看着刚卖出的仓位涨上去，那种感觉很难受。</p>
+<p>我开始想要微操——&ldquo;这次情况特殊，手动干预一下应该没问题&rdquo;。</p>
+<p>我在那里坐了很久。我理解策略的逻辑，我知道趋势策略在震荡期就是会这样，我也知道长期来看这套系统是有效的。但真金白银放在那里，一晚上的波动可能超过一个月的收入，这种时候&quot;我知道&quot;根本不够用。你会开始怀疑策略，怀疑自己，然后做出情绪化的决策——而这些决策，往往才是真正亏损的根源。</p>
+<p>大多数投资者不是输给了市场，而是输给了自己。他们有策略，但在回撤时扛不住；他们知道要长期，但在暴涨时追进去。不是因为不懂道理，而是因为他们看不懂策略在做什么，所以在关键时刻没有足够的信任撑过去。</p>
+<p>这就是我构建 <a href="https://www.myinvestpilot.com/">策引（MyInvestPilot）</a> 的起点。</p>
+<h2 id="一个反方向的选择">一个反方向的选择</h2>
+<p>2022 年，市面上几乎所有&quot;AI + 投资&quot;产品都在做同一件事：让 AI 替用户做决策。给它喂数据，它输出买卖信号，用户跟着操作。这条路看起来很顺，但它解决不了上面那个问题——用户仍然不知道系统在做什么，仍然会在关键时刻动摇。</p>
+<p>策引选择了一条反方向的路：<strong>不是让 AI 替用户做决策，而是让用户真正理解自己在跟随什么。</strong></p>
+<p>具体来说，策引的核心判断是：AI 不应该直接生成&quot;策略结论&quot;，而应该被&quot;策略结构&quot;所引导。AI 扮演的是&quot;翻译器&quot;——把用户的自然语言意图，翻译成一段可执行、可验证、可复现的结构化策略配置。真正做决策的，是引擎，不是模型。</p>
+<p><strong>你能看懂策略在做什么，才能在回撤时不乱动。</strong> 一个透明的策略，才是一个你能信任的策略。</p>
+<h2 id="为什么不是代码">为什么不是代码</h2>
+<p>策引是给普通投资者用的，不是给程序员用的。用户不会写代码，所以策略生成必须完全由 AI 完成。这个前提决定了一切。</p>
+<p>最直觉的想法是让 AI 直接生成 Python 策略代码。我也试过，很快遇到三类问题：</p>
+<p><strong>幻觉</strong>：AI 会幻觉出不存在的库（<code>import non_existent_pkg</code>），代码跑不起来。这还是小问题，至少能立刻发现。</p>
+<p><strong>前视偏差（Look-ahead bias）</strong>：AI 会写出看起来逻辑完美、但利用了未来数据的代码。回测结果漂亮，实盘一塌糊涂。这类问题很隐蔽，在量化系统里是致命的——你不知道策略是真的有效，还是在&quot;偷看答案&quot;。</p>
+<p><strong>不可复现</strong>：代码生成的空间太大了。同一个策略意图，AI 每次生成的实现可能完全不同——变量命名不同、逻辑组织不同、状态管理方式不同。你不知道哪次生成的版本出了问题，也很难做版本对比和迭代优化。</p>
+<p>除了这三个问题，还有一个对个人产品来说很现实的约束：<strong>沙盒成本</strong>。让 AI 生成的代码在安全环境里执行，需要容器隔离、资源限制、超时处理。技术上不复杂，但运营成本和维护复杂度对一个人维护的产品来说很难接受。</p>
+<p>三个问题看起来不同，但都指向同一件事：通用代码接口太宽，AI 能做的事越多，可控性越差。问题不是&quot;写错了&quot;，而是&quot;边界没定义&quot;。</p>
+<p>还有一个问题代码解决不了：<strong>用户看不懂</strong>。Python 代码即便跑起来了，普通投资者也无法理解它在做什么、为什么发出这个信号。而看不懂，就没有信任；没有信任，就会在关键时刻乱动。这才是最根本的矛盾——系统要可执行，还要可理解。</p>
+<p>放弃代码路线之后，我考虑过另一种更&quot;工程化&quot;的方案：让 AI 直接调用 API 来表达策略逻辑。</p>
+<h2 id="为什么不是-api">为什么不是 API</h2>
+<p>搭一套 HTTP API（REST 或 GraphQL），让 AI 调用接口来表达策略逻辑，看起来是个干净的方案：类型安全、边界清晰、不需要沙盒。</p>
+<p>问题在于表达力。API 适合描述操作（增删改查），不适合描述计算图。一旦策略逻辑稍微复杂，比如&quot;QQQ 相对强度大于 101 买入，小于 99 且连续两日确认才卖出&quot;，用 API 参数来表达就会变成深度嵌套的 JSON 迷宫。再加上动态仓位、多条件组合、外部市场信号，参数结构会爆炸式膨胀。</p>
+<p>AI 要生成这种结构，token 消耗巨大，而且极容易在嵌套层级里出错。更麻烦的是，每加一种新的策略能力，都要版本化 API、维护向后兼容——这对一个不断演化的系统来说是很重的包袱。</p>
+<p>所以 Super API 路线和代码路线一样，都有一个根本性的问题：要么太自由（代码），要么太死板（API 参数），都不是让 AI 稳定生成策略逻辑的好接口。</p>
+<h2 id="dsl给-ai-设计一套专属语言">DSL：给 AI 设计一套专属语言</h2>
+<p>我需要的是一套 <strong>API 的安全性</strong> 加上 <strong>代码的表达力</strong> 的东西，这就是 DSL（Domain Specific Language）的意义。</p>
+<p>不是让 AI 写任意代码，而是让 AI 在一套预定义的积木里做组合。积木的种类由我来定义和维护，AI 只负责把用户意图翻译成积木的组合方式。</p>
+<h3 id="正交积木的设计思路">正交积木的设计思路</h3>
+<p>原语（Primitives）的设计原则是<strong>正交</strong>——每个组件只做一件事，不同组件之间可以自由组合，不要设计一个&quot;大而全&quot;的组件来覆盖多种场景。</p>
+<p>比如&quot;均线金叉买入&quot;这个策略，不需要一个专门的&quot;金叉信号&quot;原语，而是用三个正交的原语组合实现：</p>
+<pre><code>EMA(50)  →  计算快线
+EMA(200) →  计算慢线
+GreaterThan(快线, 慢线) → 判断金叉
+</code></pre><p>这种设计的好处是：同样的 <code>GreaterThan</code> 原语，可以用来比较任意两个指标，不需要为每种比较场景单独设计原语。积木数量少，但组合空间大。</p>
+<p>整个原语系统在执行层是一个 <strong>DAG（有向无环图）</strong>，不是顺序执行的代码。每个原语是图上的一个节点，依赖关系通过 <code>ref</code> 引用建立边，引擎按拓扑排序执行。这个设计对 AI 生成很友好：AI 只需要声明&quot;我需要哪些节点、它们之间的依赖关系是什么&quot;，不需要关心执行顺序。</p>
+<p><a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">llm-quickstart.txt</a> 里对这个模型有一段很直接的说明：</p>
+<pre><code>🔴 CRITICAL: This is a DEPENDENCY GRAPH system, NOT step-by-step code!
+
+❌ WRONG Mental Model: Sequential execution
+   &quot;indicators array executes first, then signals use the results&quot;
+
+✅ CORRECT Mental Model: Directed Acyclic Graph (DAG)
+   - Each primitive = NODE with unique &quot;id&quot;
+   - Dependencies = EDGES via &quot;ref&quot; in &quot;inputs&quot;
+   - Execution order = topological sort (automatic, NOT array order)
+</code></pre><h3 id="schema-供应链文档即代码">Schema 供应链：文档即代码</h3>
+<p>在策引里，Schema 是唯一的事实源。我们不手工维护 prompt，而是由同一份契约生成所有下游产物。</p>
+<pre><code class="language-mermaid" data-lang="mermaid">graph LR
+    Engine[&quot;investStrategyService&quot;] --&gt; Generator[&quot;Schema Generator&quot;]
+    Generator --&gt; CI[&quot;CI Publish Job&quot;]
+    CI --&gt; Public[&quot;R2 Public Schema URL&quot;]
+
+    Public --&gt; AIService[&quot;AI Generation Service&lt;br/&gt;(json_schema 约束)&quot;]
+    Public --&gt; WebForm[&quot;Web 策略编辑器&lt;br/&gt;(AJV 校验)&quot;]
+    Public --&gt; PromptArtifact[&quot;LLM Quickstart 文档&quot;]
+</code></pre><p>这套机制解决了一个长期困扰我的问题：<strong>AI 读的说明书和引擎跑的代码，如何保持同步？</strong></p>
+<p>传统做法是手工维护 prompt 文档，但引擎代码一旦更新，文档就可能过期。现在的做法是：引擎的 Schema 定义直接驱动 CI 生成 LLM 文档，两者永远是同一份来源，不存在漂移。</p>
+<p>分层验证也是这套机制的一部分：</p>
+<ul>
+<li><strong>前端</strong>：AJV 校验 JSON 结构，存储前就拦截格式错误</li>
+<li><strong>后端</strong>：引擎运行时做类型检查</li>
+<li><strong>语义层</strong>：定向一致性检查，比如基本面数据的时间点一致性（point-in-time）、市场依赖检查</li>
+</ul>
+<p>运行时的验证流程：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">graph TD
+    Agent[&quot;AI Agent&quot;] --&gt;|Generates| JSON[&quot;DSL JSON Fragment&quot;]
+
+    JSON --&gt; Schema[&quot;Schema Validator&quot;]
+    Schema --&gt;|Valid| Pipeline[&quot;Portfolio Pipeline&lt;br/&gt;Full portfolio_config snapshot execution&quot;]
+    Schema --&gt;|Invalid| Error[&quot;Validation Errors&quot;]
+
+    Pipeline --&gt; Logs[&quot;Execution Logs / Diagnostics&quot;]
+    Logs --&gt;|Manual or assisted iteration| Agent
+
+    Schema -.-&gt; Semantic[&quot;Semantic Validator - Roadmap&lt;br/&gt;PIT, data availability, frequency alignment&quot;]
+    Semantic -.-&gt;|Invalid| Error
+    Error -.-&gt;|Constrained Repair Loop| Agent
+</code></pre><h3 id="一个真实的策略示例">一个真实的策略示例</h3>
+<p>看一个具体例子。用户的意图是：&ldquo;用 QQQ 的相对强度判断市场趋势，RS &gt; 101 买入，RS &lt; 99 且连续 2 日确认才卖出。&rdquo;</p>
+<p>AI 生成的 DSL（JSON）如下：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;trade_strategy&#34;</span>: {
+    <span style="font-weight:bold">&#34;outputs&#34;</span>: {
+      <span style="font-weight:bold">&#34;buy_signal&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_above_101&#34;</span>,
+      <span style="font-weight:bold">&#34;indicators&#34;</span>: [
+        { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_above_101&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;buy_cond&#34;</span> },
+        { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;sell_cond_raw&#34;</span> },
+        { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_yesterday&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;sell_cond_yesterday&#34;</span> },
+        { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_confirmed&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;sell_cond_confirmed&#34;</span> }
+      ],
+      <span style="font-weight:bold">&#34;sell_signal&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_confirmed&#34;</span>,
+      <span style="font-weight:bold">&#34;market_indicators&#34;</span>: [
+        { <span style="font-weight:bold">&#34;market&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs&#34;</span>, <span style="font-weight:bold">&#34;transformer&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs_ma200&#34;</span> }
+      ]
+    },
+    <span style="font-weight:bold">&#34;signals&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_above_101&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;GreaterThan&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+          { <span style="font-weight:bold">&#34;market&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span>, <span style="font-weight:bold">&#34;transformer&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs_ma200&#34;</span> },
+          { <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;threshold_buy&#34;</span> }
+        ]
+      },
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;LessThan&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+          { <span style="font-weight:bold">&#34;market&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span>, <span style="font-weight:bold">&#34;transformer&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs_ma200&#34;</span> },
+          { <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;threshold_sell&#34;</span> }
+        ]
+      },
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_yesterday&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Lag&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [{ <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99&#34;</span> }],
+        <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;periods&#34;</span>: <span style="color:#ff0;font-weight:bold">1</span>, <span style="font-weight:bold">&#34;fill_value&#34;</span>: <span style="color:#ff0;font-weight:bold">0</span> }
+      },
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_confirmed&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;And&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+          { <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99&#34;</span> },
+          { <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_yesterday&#34;</span> }
+        ]
+      }
+    ],
+    <span style="font-weight:bold">&#34;indicators&#34;</span>: [
+      { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;threshold_buy&#34;</span>, <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Constant&#34;</span>, <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;value&#34;</span>: <span style="color:#ff0;font-weight:bold">101</span> } },
+      { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;threshold_sell&#34;</span>, <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Constant&#34;</span>, <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;value&#34;</span>: <span style="color:#ff0;font-weight:bold">99</span> } }
+    ]
+  },
+  <span style="font-weight:bold">&#34;market_indicators&#34;</span>: {
+    <span style="font-weight:bold">&#34;indicators&#34;</span>: [{ <span style="font-weight:bold">&#34;code&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span> }],
+    <span style="font-weight:bold">&#34;transformers&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs_ma200&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;RelativeStrengthTransformer&#34;</span>,
+        <span style="font-weight:bold">&#34;params&#34;</span>: {
+          <span style="font-weight:bold">&#34;field&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Close&#34;</span>,
+          <span style="font-weight:bold">&#34;window&#34;</span>: <span style="color:#ff0;font-weight:bold">200</span>,
+          <span style="font-weight:bold">&#34;indicator&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span>,
+          <span style="font-weight:bold">&#34;reference&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ma&#34;</span>
+        }
+      }
+    ]
+  }
+}
+</code></pre></div><blockquote>
+<p>可以把这段 JSON 复制到<a href="https://www.myinvestpilot.com/primitives-editor">可视化编辑器</a>里，看到策略的 DAG 图形化结构；如果想看回测效果，可以去<a href="https://www.myinvestpilot.com/community">策引社区</a>里用策略实验室做回测实验。</p>
+</blockquote>
+<p>这个策略用到了三类原语：市场外部数据（QQQ 相对强度）、逻辑比较（GreaterThan/LessThan）、时间延迟（Lag）。<code>Lag</code> 原语把昨日信号拉进来，再用 <code>And</code> 要求连续两日确认，防止假信号触发卖出。2020-2025 年的回测里，这套组合把最大回撤从 -93.83% 降到 -53.96%，同时年化收益达到 27.28%。</p>
+<p>这就是原语 DSL 的意义，不只是灵活，而是透明、约束、可复现——<strong>策略不再是一段只有 AI 自己理解的代码，而是一个可执行、可校验、可进一步解释为人类可读形式的结构化对象。</strong></p>
+<p>当然，用户最终看到的不是这段 JSON。DSL 只是中间层——在它之上，还有一层解释层，把结构化的策略逻辑翻译成人类可读的形式：在什么条件下买入、依赖哪些指标、当前信号为什么触发、仓位如何随负债率变化。DSL 的价值不只是让引擎执行，更是给策略解释、<a href="https://www.myinvestpilot.com/primitives-editor">可视化编辑器</a>和一致性校验提供稳定的中间表示。这条链路才是完整的：自然语言 → AI 翻译成 DSL → 引擎执行 → 解释层呈现给用户 → 用户建立理解与信任。</p>
+<p>完整的原语 Schema 公开在这里：<a href="https://media.i365.tech/myinvestpilot/primitives_schema.json">primitives_schema.json</a>。</p>
+<h2 id="原语的演化正交不是终点">原语的演化：正交不是终点</h2>
+<p>原语系统不是一开始就设计完整的，而是随着实际需求不断扩展的。</p>
+<p>最初只有基础的技术指标原语（EMA、RSI、MACD 等）和逻辑组合原语（GreaterThan、And、Or 等），这套组合能覆盖大部分趋势跟踪策略。但很快发现，正交设计有它覆盖不到的地方。</p>
+<h3 id="带状态的策略streak-原语">带状态的策略：Streak 原语</h3>
+<p>有一类策略需要跨 bar 记忆状态——比如&quot;连续 5 天满足条件才触发信号&quot;，或者&quot;价格连续 3 天高于均线才确认趋势&quot;。这类逻辑用无状态的声明式原语表达不了，需要引入 <code>Streak</code> 原语：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;trend_persistence&#34;</span>,
+  <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Streak&#34;</span>,
+  <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;min_length&#34;</span>: <span style="color:#ff0;font-weight:bold">5</span> }
+}
+</code></pre></div><p><code>Streak</code> 原语会记录某个条件连续满足的天数，只有达到 <code>min_length</code> 才输出真值。这是原语系统里第一个带内部状态的组件，打破了&quot;完全无状态&quot;的设计原则，但这个妥协是值得的——它解决了一类真实的策略需求，而且状态是局部的、可预期的。</p>
+<p><code>Streak</code> 原语的价值在实际案例里体现得很清楚。在<a href="https://www.myinvestpilot.com/docs/primitives/advanced/stock-bond-rotation-case">股债轮动策略的优化案例</a>里，一个基于 200 日均线的简单股债轮动策略，初始胜率只有 40%，年化收益 1.65%，7 年内交易了 60 次——这些数字来自对 2018-2024 年 A 股市场的完整回测。通过引入 <code>Streak</code> 原语要求连续 5 天满足趋势强度条件，过滤掉大量假突破信号，最终胜率提升到 81.3%，年化收益 5.42%，交易次数降到 16 次，盈亏比从 2.5 提升到 40.69。</p>
+<p>这个案例说明了一件事：原语的价值不在于单个组件有多强，而在于组合之后能产生的过滤效果。质量优于数量，精确打击胜过频繁行动。</p>
+<h3 id="外部数据源vix-和市场指标">外部数据源：VIX 和市场指标</h3>
+<p>另一个正交设计覆盖不到的场景是：<strong>交易信号不由被交易标的的行情决定，而是由第三方市场指标决定。</strong></p>
+<p>比如用 VIX（恐慌指数）来过滤市场环境——当 VIX 百分位高于 75% 时，认为市场风险过高，暂停买入。这个信号来自 VIX，不来自被交易的股票本身。</p>
+<p>为此引入了 <code>market_indicators</code> 扩展：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;market_indicators&#34;</span>: {
+    <span style="font-weight:bold">&#34;indicators&#34;</span>: [{ <span style="font-weight:bold">&#34;code&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;VIX&#34;</span> }],
+    <span style="font-weight:bold">&#34;transformers&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;vix_percentile&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;PercentileRankTransformer&#34;</span>,
+        <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;indicator&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;VIX&#34;</span>, <span style="font-weight:bold">&#34;lookback&#34;</span>: <span style="color:#ff0;font-weight:bold">252</span>, <span style="font-weight:bold">&#34;field&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Close&#34;</span> }
+      }
+    ]
+  },
+  <span style="font-weight:bold">&#34;trade_strategy&#34;</span>: {
+    <span style="font-weight:bold">&#34;signals&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;market_volatility_low&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;LessThan&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+          { <span style="font-weight:bold">&#34;market&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;VIX&#34;</span>, <span style="font-weight:bold">&#34;transformer&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;vix_percentile&#34;</span> },
+          { <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Constant&#34;</span>, <span style="font-weight:bold">&#34;value&#34;</span>: <span style="color:#ff0;font-weight:bold">75</span> }
+        ]
+      }
+    ]
+  }
+}
+</code></pre></div><p>这套扩展让策略可以引用 VIX、SPX 等外部市场数据，把宏观市场环境纳入交易决策。信号来源和交易标的可以完全解耦——用沪深 300 的趋势来过滤 A 股个股策略，用 VIX 的百分位来控制美股仓位，都是同一套机制。</p>
+<p>这些扩展都不是一开始就规划好的，而是在实际策略需求里逐步发现、逐步加入的。现在回头看，原语系统的演化路径大概是：基础技术指标 → 逻辑组合 → 基本面数据 → 带状态原语（Streak）→ 外部市场指标（VIX/SPX）→ 现金扫债券。每一步都是被真实需求推着走的，不是预先设计好的。</p>
+<h2 id="prompt-的演化从高失败率到-few-shot">Prompt 的演化：从高失败率到 few-shot</h2>
+<p>DSL 设计好了，但让 AI 稳定生成合法的 DSL 是另一个问题。</p>
+<p>早期（v1.1）的 prompt 很简单：给 AI 一份原语清单，告诉它 JSON 的基本结构，然后让它生成。失败率很高——AI 会犯各种错误，而且这些错误有一个共同特征：<strong>AI 知道&quot;要做什么&quot;，但不知道&quot;不能怎么做&quot;。</strong></p>
+<p>最典型的错误是在 <code>inputs</code> 里内联定义信号，而不是先定义再引用：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#f00">//</span> <span style="color:#f00">❌</span> <span style="color:#f00">Gemini</span> <span style="color:#f00">实际犯过的错误</span>
+{
+  <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;buy_cond&#34;</span>,
+  <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;And&#34;</span>,
+  <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+    {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;GreaterThan&#34;</span>,
+      <span style="font-weight:bold">&#34;inputs&#34;</span>: [{<span style="font-weight:bold">&#34;column&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Close&#34;</span>}, {<span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ma&#34;</span>}]
+    }
+  ]
+}
+
+<span style="color:#f00">//</span> <span style="color:#f00">✅</span> <span style="color:#f00">正确写法：先定义，再引用</span>
+{ <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;price_gt_ma&#34;</span>, <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;GreaterThan&#34;</span>, <span style="font-weight:bold">&#34;inputs&#34;</span>: [{<span style="font-weight:bold">&#34;column&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Close&#34;</span>}, {<span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ma&#34;</span>}] }<span style="color:#f00">,</span>
+{ <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;buy_cond&#34;</span>, <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;And&#34;</span>, <span style="font-weight:bold">&#34;inputs&#34;</span>: [{<span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;price_gt_ma&#34;</span>}] }
+</code></pre></div><p>另一个常见错误是把 <code>And</code> 用成三个输入——实际上 <code>And</code> 和 <code>Or</code> 严格要求两个输入，三个条件必须用嵌套结构实现。这类约束在代码里很自然，但 AI 在生成 JSON 时很容易忽略。</p>
+<p>v1.2 开始加入约束说明，但效果有限。真正让成功率大幅提升的是 v1.3 引入的两个机制：</p>
+<p><strong>ABSOLUTE PROHIBITIONS（绝对禁止项）</strong>：把 AI 最常犯的错误整理成明确的禁止规则，并附上真实的错误示例（包括 Gemini 实际生成的错误代码）和正确写法对比。不是告诉 AI&quot;应该怎么做&quot;，而是告诉它&quot;这样做是致命错误&quot;。这个思路来自一个简单的观察：AI 在&quot;正向引导&quot;下容易忽略边界，但在&quot;明确禁止&quot;下会更谨慎。</p>
+<p><strong>Few-shot 验证策略</strong>：在 prompt 里放入 12 个经过真实回测验证的策略示例，从简单到复杂分级（Level 1 是双均线交叉，Level 12 是加密货币链上指标策略）。AI 在生成新策略时，可以参照最接近的示例来模仿结构，而不是从零开始推理。</p>
+<p>现在的 <a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">llm-quickstart.txt</a> 是 74KB，包含 12 个 Level 的渐进式示例，覆盖了 97.5% 的原语。这份文档由 CI 从 Schema 自动生成，每次原语更新都会同步，不需要手工维护。</p>
+<p>除了 prompt 优化，还有一个机制对提升成功率很有帮助：<strong>把回测结果反馈给 AI</strong>。策略执行后，回测日志存储在 Cloudflare R2，AI 可以通过 API 读取这些结果，结合 prompt 上下文做迭代修正。这让 AI 从&quot;一次性生成&quot;变成了&quot;生成-验证-修正&quot;的闭环。</p>
+<h2 id="agent-悖论灵活性与确定性的边界">Agent 悖论：灵活性与确定性的边界</h2>
+<p>DSL 解决了&quot;策略怎么表达&quot;的问题，但策引毕竟是一个要真正上线的 Web 产品，还有另一个问题没解决：&ldquo;用户怎么跟系统交互&rdquo;。</p>
+<p>用户不会直接写 JSON，他们会说&quot;帮我回测一下这个策略&quot;或者&quot;为什么我的组合最近回撤变大&quot;。把这些自然语言转成结构化任务，再把结果以合理的方式呈现回来，这是另一层挑战：<strong>如何让 AI 既能理解用户的模糊意图，又能保证金融计算的确定性？</strong></p>
+<p>当我说&quot;回测这个策略&quot;时，我需要的是确定性执行；当我问&quot;为什么我的组合最近回撤变大&quot;时，我又需要它能理解用户语境。这个矛盾就是在 <a href="https://www.chat2invest.com">Chat2Invest</a> 里长期面对的 Agent 悖论。</p>
+<h3 id="混合架构local-与-remote-的分工">混合架构：Local 与 Remote 的分工</h3>
+<p>我没有做一个&quot;全能大脑&quot;，而是按工程约束把 Agent 拆成两层。这不只是性能上的分布式拆分，而是为了把&quot;用户的模糊问题&quot;和&quot;金融系统必须保证的确定性&quot;显式隔离——AI 可以参与理解和探索，但不能吞掉确定性基础设施：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">Local Agent（Orchestrator）</th>
+<th style="text-align:left">Remote Agent（Processor）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>身份</strong></td>
+<td style="text-align:left">浏览器内 React 组件</td>
+<td style="text-align:left">Worker + Python 服务</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>角色</strong></td>
+<td style="text-align:left">处理模糊意图、维护 UI 状态</td>
+<td style="text-align:left">处理确定性流水线与重计算</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>逻辑风格</strong></td>
+<td style="text-align:left">灵活 ReAct Loop</td>
+<td style="text-align:left">固定任务管道</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>数据范围</strong></td>
+<td style="text-align:left">用户交互、前端上下文</td>
+<td style="text-align:left">市场数据、计算任务、异步状态</td>
+</tr>
+</tbody>
+</table>
+<p>整体架构如下：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">C4Container
+title MyInvestPilot Hybrid Agent - Container Diagram
+
+Person(user, &quot;Investor&quot;, &quot;Uses conversational and portfolio analysis features&quot;)
+
+System_Boundary(app, &quot;MyInvestPilot Hybrid Agent&quot;) {
+  Container(local, &quot;Local Agent (ReAct)&quot;, &quot;React + TypeScript (Browser)&quot;, &quot;Intent handling, orchestration, and UI progress&quot;)
+  Container(portfolio_tool, &quot;Portfolio Analysis Tool&quot;, &quot;sql.js (Browser)&quot;, &quot;Local reads on SQLite portfolio snapshots&quot;)
+  Container(worker_api, &quot;Worker APIs&quot;, &quot;Cloudflare Workers&quot;, &quot;Authentication, task submission, task status&quot;)
+}
+
+System_Boundary(remote_side, &quot;Remote Analysis Services&quot;) {
+  Container(remote_agent, &quot;investLLMAgent&quot;, &quot;Python&quot;, &quot;Async task processing and analysis workflows&quot;)
+  Container(data_api, &quot;investDataAPI&quot;, &quot;Python/FastAPI&quot;, &quot;Market data aggregation&quot;)
+}
+
+Container_Ext(redis, &quot;Upstash Redis&quot;, &quot;Queue and task status&quot;)
+Container_Ext(r2, &quot;Cloudflare R2&quot;, &quot;Object storage for artifacts and files&quot;)
+Container_Ext(aigw, &quot;Cloudflare AI Gateway&quot;, &quot;LLM gateway to OpenAI and Gemini&quot;)
+
+Rel(user, local, &quot;Chats with&quot;)
+Rel(local, portfolio_tool, &quot;Queries local portfolio data&quot;)
+Rel(local, worker_api, &quot;POST /tasks and GET /tasks/{id}&quot;, &quot;HTTPS&quot;)
+Rel(worker_api, redis, &quot;RPUSH tasks and GET task status&quot;, &quot;Redis REST&quot;)
+Rel(remote_agent, redis, &quot;BRPOP tasks and SET task status&quot;, &quot;Redis&quot;)
+Rel(remote_agent, data_api, &quot;Fetches market data&quot;, &quot;HTTP&quot;)
+Rel(remote_agent, aigw, &quot;Runs model inference&quot;, &quot;HTTPS&quot;)
+Rel(remote_agent, r2, &quot;Persists portfolio_trading outputs&quot;, &quot;S3 API&quot;)
+</code></pre><p>远端分析流程经常超过 30 秒，不能走同步 HTTP 阻塞请求。因此采用 Redis 队列作为异步主干，前端提交任务并轮询状态。提交到队列的任务是结构化 JSON：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;job_id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;uuid-123&#34;</span>,
+  <span style="font-weight:bold">&#34;task_type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;stock_analysis&#34;</span>,
+  <span style="font-weight:bold">&#34;symbols&#34;</span>: [<span style="color:#0ff;font-weight:bold">&#34;AAPL&#34;</span>],
+  <span style="font-weight:bold">&#34;analysis_context&#34;</span>: {
+    <span style="font-weight:bold">&#34;user_query&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Is it safe to buy AAPL for me?&#34;</span>,
+    <span style="font-weight:bold">&#34;time_horizon&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;medium_term&#34;</span>,
+    <span style="font-weight:bold">&#34;focus_areas&#34;</span>: [<span style="color:#0ff;font-weight:bold">&#34;risk_assessment&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;valuation&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;entry_timing&#34;</span>]
+  }
+}
+</code></pre></div><p>这里有一个边界需要强调：<strong>队列与状态机是确定性的，模型生成的分析文本仍然是概率性的。这两层不能混淆。</strong></p>
+<h3 id="从-v1-到-v3-的演进">从 v1 到 v3 的演进</h3>
+<p>这套结构不是一开始就对的，而是踩坑迭代出来的。</p>
+<p><strong>Phase 1（早期单体）</strong>：把交互、工具编排、重分析混在一条路径上。结果是系统不稳定，职责边界模糊。常见症状是 Agent 幻觉数据库查询，甚至试图返回原始 HTML&quot;修 UI&quot;。教训：UI 关注点和重计算关注点混在一起，会放大脆弱性。</p>
+<p><strong>Phase 2（Plan-Execute）</strong>：引入了显式 planning + step execution，本地控制力明显提升。但对开放式对话来说，这种计划有时过于刚性，交互体验不够自然。</p>
+<p><strong>Phase 3（CLI Pattern）</strong>：把 Local Agent 视为浏览器里的 CLI + ReAct Loop。用户提出目标，Local Agent 判断是本地工具即可完成，还是需要委托远端；若需远端，调用 Worker API 入队并拿到 job id；Remote Processor 异步执行并更新状态；Local Agent 轮询状态并持续更新 UI。</p>
+<p>核心分工最终稳定为一句话：Local 处理模糊性（Ambiguity），Remote 处理工作量（Workload）。</p>
+<h2 id="dsl-不是银弹">DSL 不是银弹</h2>
+<p>做到这里，我以为问题基本解决了。但很快发现 DSL 有它自己的边界。</p>
+<p>有一类策略逻辑是带复杂内部状态的——比如需要跨多个时间周期协调的状态机，或者依赖历史路径的复杂条件。<code>Streak</code> 原语解决了简单的连续状态问题，但更复杂的状态逻辑用声明式 DSL 表达起来非常别扭，强行塞进去反而让 DSL 本身变得复杂，最后变成另一门需要学习的语言——这就是我想避免的 <strong>DSL Hell</strong>。</p>
+<p>所以引擎最终保留了两条路：原语 DSL 路径处理 90% 的无状态组合逻辑，Python 代码路径留给需要复杂状态的高阶场景。两条路共用同一套回测框架和数据管道，只是策略表达层不同。</p>
+<p>这个决定让我省了很多麻烦。如果当初强行用 DSL 覆盖所有场景，现在的 DSL 大概已经膨胀成一个小型编程语言了。</p>
+<h2 id="回头看这件事">回头看这件事</h2>
+<p>策引现在是约 28 个仓库、53.8 万行代码、96 篇文档的系统，由我一个人维护（这个数字来自 <code>cloc</code> 对所有仓库的统计，包含测试和配置文件）。在 <a href="https://github.com/myinvestpilot/ai-architecture">ai-architecture 系列</a>里我记录过这套开发方式：大概 60% 的时间在做对齐（定义边界、契约、验收标准），40% 的时间让 AI 执行。</p>
+<p>但这篇文章想说的不是&quot;AI 帮我写了多少代码&quot;，而是：当 AI 介入一个严肃的决策系统时，系统应该怎么设计？</p>
+<p>策引给出的答案是：</p>
+<pre><code>[ 人类策略意图 ]
+      ↓
+[ AI 推理 / 翻译 / 探索 ]
+      ↓
+[ 原语引擎（可执行、可验证） ]
+      ↓
+[ 回测 / 仿真 / 风险评估 ]
+</code></pre><p>原语引擎是整个系统的结构核心，而非 AI。AI 在这里扮演的是翻译器和探索工具，不是决策者。</p>
+<p>回到开头那个场景：我最终没有微操。不是因为意志力强，而是因为我能看懂策略在做什么，知道它为什么发出那个信号，知道在震荡期这是正常的试错成本。理解，才是信任的基础。这也是策引想做的事。</p>
+<hr>
+<p>如果你也在构建类似的 AI Native 系统，这套经历里有几条原则我觉得值得带走：</p>
+<p><strong>约束生成空间，优于修复输出。</strong> 与其让 AI 自由生成然后事后校验，不如先定义好它能用的积木（Schema、DSL），把错误拦在生成阶段。ABSOLUTE PROHIBITIONS 比&quot;你应该怎么做&quot;更有效，就是这个道理。</p>
+<p><strong>文档与执行必须同源。</strong> Schema 驱动 prompt 文档，同一份定义同时约束 AI 生成和引擎执行。一旦两者漂移，系统就会出现&quot;AI 生成的东西引擎跑不了&quot;的诡异 bug，而且很难排查。</p>
+<p><strong>确定性层和概率性层必须分离。</strong> 队列、状态机、回测计算——这些是确定性的，必须用代码实现。自然语言理解、分析文本生成——这些是概率性的，交给模型。把两层混在一起，是 Agent 系统最常见的架构错误。</p>
+<p><strong>在高风险决策场景里，系统的目标不是&quot;给出答案&quot;，而是&quot;帮助人建立一套自己能理解、能信任、也能持续执行的决策框架&quot;。</strong> 给出答案很容易，AI 一秒钟能给你十个。但用户在回撤时不乱动、在暴涨时不追高，靠的不是答案，而是对自己选择的理解和信任。这才是策引和普通 AI 投资工具最根本的分野——不是谁的模型更强，而是有人在优化答案，有人在优化纪律。</p>
+<p>如果你对原语引擎的设计有想法，欢迎来<a href="https://www.bmpi.dev/community/">社区</a>交流，或者直接去试试<a href="https://www.myinvestpilot.com/primitives-editor">可视化编辑器</a>感受一下这套设计。</p>
+<p>相关资料：</p>
+<ul>
+<li><a href="https://www.myinvestpilot.com/docs/primitives/getting-started">策引原语文档</a></li>
+<li><a href="https://media.i365.tech/myinvestpilot/primitives_schema.json">原语 Schema（公开）</a></li>
+<li><a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">LLM Quickstart Guide</a></li>
+<li><a href="https://github.com/myinvestpilot/ai-architecture">ai-architecture 系列（GitHub）</a></li>
+<li><a href="https://github.com/myinvestpilot/invest-alchemy">invest-alchemy（早期开源前身）</a></li>
+</ul>
+
+        </div>
+
+        <div id="article-info">
+          
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          
+          更新时间:
+          
+          
+          
+          
+          
+          
+              
+                今日
+              
+          
+          
+          
+            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/d4ff187a2204924608211c9bcc8dbeece6cb6a9a">d4ff187a2</a>
+          
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可</p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/self/use-rss-email-read-v2/">构建自己的信息简报 2.0</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/money/myinvestpilot/emotional_to_system/">从情绪化交易到系统化投资</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="share-twitter-container">
+  <a target="_blank" href="https://twitter.com/intent/tweet?text=%e6%9c%ac%e6%96%87%e8%ae%b0%e5%bd%95%e6%88%91%e6%9e%84%e5%bb%ba%e7%ad%96%e5%bc%95%ef%bc%88MyInvestPilot%ef%bc%89%e7%9a%84%e5%ae%8c%e6%95%b4%e5%8e%86%e7%a8%8b%ef%bc%9a%e4%b8%80%e4%b8%aa%e4%bb%8e%e8%ae%be%e8%ae%a1%e4%b9%8b%e5%88%9d%e5%b0%b1%e4%b8%ba%20AI%20%e8%80%8c%e7%94%9f%e7%9a%84%e9%87%8f%e5%8c%96%e7%b3%bb%e7%bb%9f%ef%bc%8c%e4%bb%8e%20DSL%20%e5%8e%9f%e8%af%ad%e5%bc%95%e6%93%8e%e5%88%b0%e6%b7%b7%e5%90%88%20Agent%20%e6%9e%b6%e6%9e%84%e7%9a%84%e6%8e%a2%e7%b4%a2%e4%b8%8e%e5%8f%96%e8%88%8d%e3%80%82&amp;url=https%3a%2f%2fwww.bmpi.dev%2fdev%2fai-native-investment-system%2f&amp;via=madawei2699">Share on Twitter</a>
+  <span class="share-twitter-container-dashed">·</span>
+  <a target="_blank" href="https://twitter.com/search?q=https%3a%2f%2fwww.bmpi.dev%2fdev%2fai-native-investment-system%2f">Discuss on Twitter</a>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://giscus.app/client.js"
+        data-repo="bmpi-dev/bmpi.dev"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMjM3NTQzNDU="
+        data-category="Announcements"
+        data-category-id="DIC_kwDODVY4ac4CQdzV"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </footer>
+    </article>
+    <template><span id="control"></span></template>
+    <div id="toast"></div>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div>
+      <a href="https://www.myinvestpilot.com/"> 策引 </a>
+      ⚡️
+      <a href="https://www.i365.tech/"> i365 </a>
+      ⚡️
+      <a href="https://www.bmpi.dev/talk/"> 演讲 </a>
+      ⚡️
+      <a href="https://www.bmpi.dev/community/"> 社区 </a></div>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2026
+    
+    
+  </section>
+</footer>
+
+  </main>
+  
+  <div id="the-modal" class="modal">
+    <span class="the-modal-close">&times;</span>
+    <img class="modal-content" id="the-modal-img01">
+  </div>
+
+  
+  
+  
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti-addon.min.js"></script>
+  <script>
+    
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
+    heti.autoSpacing(); 
+    
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+  
+  <script type="module">
+    import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.5.0/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <script>
+    
+    let mermaidBlocks = document.querySelectorAll('code[data-lang=mermaid]');
+    Array.prototype.forEach.call(mermaidBlocks, function(e) {
+      let text = e.textContent;
+      let mermaidDiv = document.createElement('div');
+      mermaidDiv.className = 'mermaid';
+      mermaidDiv.textContent = text;
+      e.parentElement.replaceWith(mermaidDiv);
+    });
+    window.mermaid.mermaidAPI.initialize(
+    window.mermaidOptions
+      ? window.mermaidOptions
+      : { securityLevel: "loose", theme: "base" });
+  </script>
+  
+
+  
+
+  
+
+</body>
+
+</html>
