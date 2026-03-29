@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="Dawei Ma">
+  
+  <meta name="description" content="A full account of building MyInvestPilot — an AI-native investment system designed from the ground up for AI, from constrained DSL primitives to a hybrid Agent architecture.">
+  
+  
+  <meta name="keywords" content="AI, Native,, DSL,, quantitative, system,, primitives, engine,, Agent, architecture">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="How I Built an AI-Native Quantitative Investment System"/>
+  <meta name="twitter:description" content="A full account of building MyInvestPilot — an AI-native investment system designed from the ground up for AI, from constrained DSL primitives to a hybrid Agent architecture."/>
+  
+  
+  <meta name="twitter:image" content="https://og.bmpi.dev/How I Built an AI-Native Quantitative Investment System.png">
+  
+
+  
+  <meta property="og:title" content="How I Built an AI-Native Quantitative Investment System" />
+<meta property="og:description" content="A full account of building MyInvestPilot — an AI-native investment system designed from the ground up for AI, from constrained DSL primitives to a hybrid Agent architecture." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/en/dev/ai-native-investment-system/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2026-03-28T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2026-03-29T11:39:54&#43;08:00" />
+
+
+  
+  <meta name="og:image" content="https://og.bmpi.dev/How I Built an AI-Native Quantitative Investment System.png">
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "How I Built an AI-Native Quantitative Investment System",
+      
+      "image": "https://www.bmpi.dev/images/logo.png",
+      
+      "datePublished": "2026-03-28T00:00:00Z",
+      "dateModified": "2026-03-29T11:39:54+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "Dawei Ma"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/en/dev/ai-native-investment-system/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/logo.png"
+        }
+      },
+      "description": "A full account of building MyInvestPilot — an AI-native investment system designed from the ground up for AI, from constrained DSL primitives to a hybrid Agent architecture.",
+      "keywords": ["AI Native", "LLM", "DSL", "Agent", "Quantitative Investing"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/en/dev/ai-native-investment-system/">
+  
+  <title>
+  How I Built an AI-Native Quantitative Investment System · BMPI
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/en/dev/ai-native-investment-system/">
+  
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.fdc8a9bd0b5625b807b055750cc0bf4ef2fc3fccecf12f0c17bdf31ef3f3d4dc.css" integrity="sha256-/cipvQtWJbgHsFV1DMC/TvL8P8zs8S8MF73zHvPz1Nw="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.a2fdc25deb82b741f3a807e38508c2dea269fc900c2b37ee8af380d97ea4d7a8.css" integrity="sha256-ov3CXeuCt0HzqAfjhQjC3qJp/JAMKzfuivOA2X6k16g="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bmpi.dev/images/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bmpi.dev/images/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bmpi.dev/images/ico/favicon-16x16.png">
+  <link rel="manifest" href="https://www.bmpi.dev/images/ico/site.webmanifest">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/en/amp/dev/ai-native-investment-system/" title="BMPI" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="preload" href="https://www.bmpi.dev/scss/tagcloud.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css"></noscript>
+
+  
+
+  
+  <link href='https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/en-fonts.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+
+  
+
+  
+
+  <script async defer data-website-id="356d3289-e627-409c-a9d7-a272cf789f0b" src="https://umami.bmpi.dev/script.js"></script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a id="site-title" class="navigation-title" href="https://www.bmpi.dev/en">
+      BMPI
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.linkedin.com/in/madawei2699">LinkedIn</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://github.com/madawei2699">GitHub</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/self/">Learn</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/dev/">Dev</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/">Chinese</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title heti">
+          <h1 class="title">How I Built an AI-Native Quantitative Investment System</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2026-03-28T00:00:00Z'>
+                2026-03-28
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              18:8
+              
+            </span>
+            
+            <span class="post-word-count"> | 3974 words | </span>
+            <span id="post-views"></span> views
+            
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/en/categories/building-practice/">Building &amp; Practice</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/en/tags/ai-native/">AI Native</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/llm/">LLM</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/dsl/">DSL</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/agent/">Agent</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/quantitative-investing/">Quantitative Investing</a></div>
+
+        </div>
+      </header>
+
+      <div class="brand-ad">
+        <div class="brand-content">
+          <a href="https://www.i365.tech/post">
+            <span>点我在线阅读《个人产品开发指南》，教你从零到一快速开发自己的个人产品。</span>
+          </a>
+        </div>
+        <div class="brand-ad-link"><a href="https://www.bmpi.dev/_ad/" rel="nofollow">品牌赞助</a></div>
+        <div class="brand-ad-link-line"></div>
+      </div>
+
+      
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <ul>
+<li><a href="#going-the-other-direction">Going the Other Direction</a></li>
+<li><a href="#why-not-code">Why Not Code</a></li>
+<li><a href="#why-not-an-api">Why Not an API</a></li>
+<li><a href="#dsl-a-language-designed-for-ai">DSL: A Language Designed for AI</a>
+<ul>
+<li><a href="#orthogonal-primitives">Orthogonal Primitives</a></li>
+<li><a href="#schema-supply-chain-docs-as-code">Schema Supply Chain: Docs as Code</a></li>
+<li><a href="#a-real-strategy-example">A Real Strategy Example</a></li>
+</ul>
+</li>
+<li><a href="#how-the-primitives-evolved">How the Primitives Evolved</a>
+<ul>
+<li><a href="#stateful-strategies-the-streak-primitive">Stateful Strategies: The Streak Primitive</a></li>
+<li><a href="#external-data-sources-vix-and-market-indicators">External Data Sources: VIX and Market Indicators</a></li>
+</ul>
+</li>
+<li><a href="#prompt-engineering-from-high-failure-rates-to-few-shot">Prompt Engineering: From High Failure Rates to Few-Shot</a></li>
+<li><a href="#the-agent-paradox-flexibility-vs-determinism">The Agent Paradox: Flexibility vs. Determinism</a>
+<ul>
+<li><a href="#hybrid-architecture-local-vs-remote">Hybrid Architecture: Local vs. Remote</a></li>
+<li><a href="#from-v1-to-v3">From v1 to v3</a></li>
+</ul>
+</li>
+<li><a href="#dsl-is-not-a-silver-bullet">DSL Is Not a Silver Bullet</a></li>
+<li><a href="#looking-back">Looking Back</a></li>
+</ul>
+<p>A while back I was following a trend-following strategy during a period of extreme market volatility — US-Iran tensions were escalating, and the market was swinging hard. Trend strategies are supposed to chop around in conditions like that. I knew this. But then one morning my stop-loss triggered, I got out, and Trump tweeted something. The market reversed instantly. I sat there watching positions I&rsquo;d just sold shoot back up.</p>
+<p>I wanted to override the strategy. &ldquo;This situation is different. One manual adjustment won&rsquo;t hurt.&rdquo;</p>
+<p>I sat with that feeling for a long time. I understood the logic. I knew trend-following behaves exactly like this in choppy markets. I knew the system worked over time. But when a single night&rsquo;s swing can exceed a month&rsquo;s salary, &ldquo;I know&rdquo; stops being enough. You start doubting the strategy. You start doubting yourself. And then you make an emotional decision — which is usually where the real losses come from.</p>
+<p>I&rsquo;ve seen this pattern over and over. People have strategies and still blow up — not because the strategy was bad, but because they couldn&rsquo;t hold through a rough patch. They know they should be patient but buy the breakout anyway. It&rsquo;s not a knowledge problem. It&rsquo;s that when you don&rsquo;t really understand what your strategy is doing, there&rsquo;s nothing to anchor to when things get uncomfortable.</p>
+<p>That&rsquo;s why I built <a href="https://www.myinvestpilot.com/">MyInvestPilot</a> — an AI-native quantitative investment system that grew out of Chinese market experience but supports global assets (A-shares, US equities, crypto), with an AI strategy lab called <a href="https://www.chat2invest.com">Chat2Invest</a> for the conversational interface.</p>
+<h2 id="going-the-other-direction">Going the Other Direction</h2>
+<p>By 2022, almost every &ldquo;AI + investing&rdquo; product was doing the same thing: having the AI make decisions on your behalf. Feed it data, get back buy/sell signals, follow along. Clean and simple. But that approach doesn&rsquo;t solve the problem I just described — users still don&rsquo;t know what the system is doing, and when things get uncomfortable, they&rsquo;ll still bail.</p>
+<p>MyInvestPilot took the opposite approach: <strong>not having AI replace user judgment, but helping users genuinely understand what they&rsquo;re following.</strong></p>
+<p>Concretely, the core design principle is: AI shouldn&rsquo;t generate strategy <em>conclusions</em> directly — it should be guided by strategy <em>structure</em>. AI acts as a translator, turning natural language intent into executable, verifiable, reproducible strategy configurations. The engine makes decisions. The model doesn&rsquo;t.</p>
+<p><strong>If you can see what your strategy is doing, you can hold through a drawdown.</strong> A transparent strategy is a strategy you can trust.</p>
+<h2 id="why-not-code">Why Not Code</h2>
+<p>MyInvestPilot is built for regular investors, not engineers. Users can&rsquo;t write code, so strategy generation has to happen entirely through AI. That constraint shapes everything.</p>
+<p>The obvious first move was having AI generate Python strategy code. I tried it. Three problems came up fast:</p>
+<p><strong>Hallucination.</strong> AI invents libraries that don&rsquo;t exist (<code>import non_existent_pkg</code>). The code won&rsquo;t run. This is actually the least bad failure — at least it&rsquo;s immediately visible.</p>
+<p><strong>Look-ahead bias.</strong> AI writes code that looks logically sound but uses future data. Backtests look great; live trading falls apart. This one&rsquo;s insidious. In a quant system it&rsquo;s fatal — you can&rsquo;t tell whether the strategy is genuinely effective or just cheating by peeking at the answers.</p>
+<p><strong>Non-reproducibility.</strong> The code generation space is enormous. Given the same strategy intent, AI might produce completely different implementations each time — different variable names, different control flow, different state management. When something breaks, you can&rsquo;t isolate which version caused it, and iterating is a mess.</p>
+<p>There&rsquo;s also a practical constraint for a solo product: <strong>sandbox costs</strong>. Running AI-generated code safely requires container isolation, resource limits, timeout handling. Not technically hard, but operationally expensive for a one-person operation.</p>
+<p>These problems look different but point at the same thing: the interface is too wide. The more AI can do, the less controllable the output. The problem isn&rsquo;t &ldquo;the code is wrong&rdquo; — it&rsquo;s &ldquo;the boundaries were never defined.&rdquo;</p>
+<p>There&rsquo;s one more issue code can&rsquo;t solve: <strong>users can&rsquo;t read it.</strong> Even if the Python runs correctly, a regular investor has no way to understand what it&rsquo;s doing or why it fired a signal. No understanding means no trust. No trust means overriding the strategy at the worst possible moment. The system needs to be executable <em>and</em> legible.</p>
+<p>After ruling out code generation, I considered the obvious engineering alternative: just build an API.</p>
+<h2 id="why-not-an-api">Why Not an API</h2>
+<p>A REST or GraphQL API sounds clean: type-safe, bounded, no sandbox needed.</p>
+<p>The problem is expressiveness. APIs are good at describing operations (CRUD). They&rsquo;re not good at describing computation graphs. The moment strategy logic gets at all complex — say, &ldquo;buy when QQQ relative strength &gt; 101, sell when RS &lt; 99 confirmed over two consecutive days&rdquo; — expressing that through API parameters turns into deeply nested JSON. Add dynamic position sizing, multi-condition combinations, and external market signals, and the parameter structure explodes.</p>
+<p>AI generating that structure burns enormous tokens and makes mistakes constantly on the nesting levels. And every new capability requires API versioning and backward compatibility — a heavy burden for an actively evolving system.</p>
+<p>So the Super API approach has the same fundamental problem as code generation, just flipped: code is too free, APIs are too rigid. Neither makes a good interface for AI to reliably express strategy logic.</p>
+<h2 id="dsl-a-language-designed-for-ai">DSL: A Language Designed for AI</h2>
+<p>What I needed was the <strong>safety of an API</strong> combined with the <strong>expressiveness of code</strong>. That&rsquo;s what a DSL (Domain Specific Language) provides.</p>
+<p>Instead of having AI write arbitrary code, AI works within a predefined set of building blocks. I define and maintain what blocks are available. AI&rsquo;s job is to translate user intent into combinations of those blocks.</p>
+<h3 id="orthogonal-primitives">Orthogonal Primitives</h3>
+<p>The design principle for primitives is <strong>orthogonality</strong> — each component does one thing, and components can be freely composed. No building a &ldquo;do everything&rdquo; component to cover multiple cases.</p>
+<p>Take a golden cross strategy. There&rsquo;s no need for a dedicated &ldquo;golden cross signal&rdquo; primitive. Three orthogonal primitives compose it:</p>
+<pre><code>EMA(50)  →  fast line
+EMA(200) →  slow line
+GreaterThan(fast, slow) → crossover signal
+</code></pre><p>The same <code>GreaterThan</code> primitive works for comparing any two indicators — no need to design a separate one for each comparison. Fewer blocks, larger composition space.</p>
+<p>At the execution level, the primitive system is a <strong>DAG (directed acyclic graph)</strong>, not sequential code. Each primitive is a node; dependencies are edges established through <code>ref</code> references; the engine executes in topological order. This works well for AI generation: AI only needs to declare what nodes exist and how they depend on each other. Execution order is automatic.</p>
+<p>From <a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">llm-quickstart.txt</a>:</p>
+<pre><code>🔴 CRITICAL: This is a DEPENDENCY GRAPH system, NOT step-by-step code!
+
+❌ WRONG Mental Model: Sequential execution
+   &quot;indicators array executes first, then signals use the results&quot;
+
+✅ CORRECT Mental Model: Directed Acyclic Graph (DAG)
+   - Each primitive = NODE with unique &quot;id&quot;
+   - Dependencies = EDGES via &quot;ref&quot; in &quot;inputs&quot;
+   - Execution order = topological sort (automatic, NOT array order)
+</code></pre><h3 id="schema-supply-chain-docs-as-code">Schema Supply Chain: Docs as Code</h3>
+<p>In MyInvestPilot, Schema is the single source of truth. We don&rsquo;t manually maintain prompts — everything downstream is generated from the same contract.</p>
+<pre><code class="language-mermaid" data-lang="mermaid">graph LR
+    Engine[&quot;investStrategyService&quot;] --&gt; Generator[&quot;Schema Generator&quot;]
+    Generator --&gt; CI[&quot;CI Publish Job&quot;]
+    CI --&gt; Public[&quot;R2 Public Schema URL&quot;]
+
+    Public --&gt; AIService[&quot;AI Generation Service&lt;br/&gt;(json_schema constraint)&quot;]
+    Public --&gt; WebForm[&quot;Web Strategy Editor&lt;br/&gt;(AJV validation)&quot;]
+    Public --&gt; PromptArtifact[&quot;LLM Quickstart Docs&quot;]
+</code></pre><p>This solves a problem that had been nagging at me: <strong>how do you keep the docs AI reads in sync with the code the engine runs?</strong></p>
+<p>The traditional answer is manual prompt maintenance — which means docs can go stale any time the engine changes. Now the engine&rsquo;s Schema definition drives CI to generate LLM documentation directly. Same source, always in sync, no drift.</p>
+<p>Layered validation is part of the same mechanism:</p>
+<ul>
+<li><strong>Frontend</strong>: AJV validates JSON structure before it&rsquo;s stored, catching format errors early</li>
+<li><strong>Backend</strong>: Runtime type checking in the engine</li>
+<li><strong>Semantic layer</strong>: Targeted consistency checks — point-in-time correctness for fundamental data, market dependency validation</li>
+</ul>
+<p>Runtime validation flow:</p>
+<pre><code class="language-mermaid" data-lang="mermaid">graph TD
+    Agent[&quot;AI Agent&quot;] --&gt;|Generates| JSON[&quot;DSL JSON Fragment&quot;]
+
+    JSON --&gt; Schema[&quot;Schema Validator&quot;]
+    Schema --&gt;|Valid| Pipeline[&quot;Portfolio Pipeline&lt;br/&gt;Full portfolio_config snapshot execution&quot;]
+    Schema --&gt;|Invalid| Error[&quot;Validation Errors&quot;]
+
+    Pipeline --&gt; Logs[&quot;Execution Logs / Diagnostics&quot;]
+    Logs --&gt;|Manual or assisted iteration| Agent
+
+    Schema -.-&gt; Semantic[&quot;Semantic Validator - Roadmap&lt;br/&gt;PIT, data availability, frequency alignment&quot;]
+    Semantic -.-&gt;|Invalid| Error
+    Error -.-&gt;|Constrained Repair Loop| Agent
+</code></pre><h3 id="a-real-strategy-example">A Real Strategy Example</h3>
+<p>Here&rsquo;s a concrete example. The user&rsquo;s intent: &ldquo;Use QQQ relative strength to judge market trend — buy when RS &gt; 101, sell when RS &lt; 99 confirmed over two consecutive days.&rdquo;</p>
+<p>AI-generated DSL:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;trade_strategy&#34;</span>: {
+    <span style="font-weight:bold">&#34;outputs&#34;</span>: {
+      <span style="font-weight:bold">&#34;buy_signal&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_above_101&#34;</span>,
+      <span style="font-weight:bold">&#34;indicators&#34;</span>: [
+        { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_above_101&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;buy_cond&#34;</span> },
+        { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;sell_cond_raw&#34;</span> },
+        { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_yesterday&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;sell_cond_yesterday&#34;</span> },
+        { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_confirmed&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;sell_cond_confirmed&#34;</span> }
+      ],
+      <span style="font-weight:bold">&#34;sell_signal&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_confirmed&#34;</span>,
+      <span style="font-weight:bold">&#34;market_indicators&#34;</span>: [
+        { <span style="font-weight:bold">&#34;market&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span>, <span style="font-weight:bold">&#34;output_name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs&#34;</span>, <span style="font-weight:bold">&#34;transformer&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs_ma200&#34;</span> }
+      ]
+    },
+    <span style="font-weight:bold">&#34;signals&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_above_101&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;GreaterThan&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+          { <span style="font-weight:bold">&#34;market&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span>, <span style="font-weight:bold">&#34;transformer&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs_ma200&#34;</span> },
+          { <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;threshold_buy&#34;</span> }
+        ]
+      },
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;LessThan&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+          { <span style="font-weight:bold">&#34;market&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span>, <span style="font-weight:bold">&#34;transformer&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs_ma200&#34;</span> },
+          { <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;threshold_sell&#34;</span> }
+        ]
+      },
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_yesterday&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Lag&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [{ <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99&#34;</span> }],
+        <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;periods&#34;</span>: <span style="color:#ff0;font-weight:bold">1</span>, <span style="font-weight:bold">&#34;fill_value&#34;</span>: <span style="color:#ff0;font-weight:bold">0</span> }
+      },
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_confirmed&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;And&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+          { <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99&#34;</span> },
+          { <span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;rs_below_99_yesterday&#34;</span> }
+        ]
+      }
+    ],
+    <span style="font-weight:bold">&#34;indicators&#34;</span>: [
+      { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;threshold_buy&#34;</span>, <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Constant&#34;</span>, <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;value&#34;</span>: <span style="color:#ff0;font-weight:bold">101</span> } },
+      { <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;threshold_sell&#34;</span>, <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Constant&#34;</span>, <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;value&#34;</span>: <span style="color:#ff0;font-weight:bold">99</span> } }
+    ]
+  },
+  <span style="font-weight:bold">&#34;market_indicators&#34;</span>: {
+    <span style="font-weight:bold">&#34;indicators&#34;</span>: [{ <span style="font-weight:bold">&#34;code&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span> }],
+    <span style="font-weight:bold">&#34;transformers&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;qqq_rs_ma200&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;RelativeStrengthTransformer&#34;</span>,
+        <span style="font-weight:bold">&#34;params&#34;</span>: {
+          <span style="font-weight:bold">&#34;field&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Close&#34;</span>,
+          <span style="font-weight:bold">&#34;window&#34;</span>: <span style="color:#ff0;font-weight:bold">200</span>,
+          <span style="font-weight:bold">&#34;indicator&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;QQQ&#34;</span>,
+          <span style="font-weight:bold">&#34;reference&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ma&#34;</span>
+        }
+      }
+    ]
+  }
+}
+</code></pre></div><blockquote>
+<p>Paste this JSON into the <a href="https://www.myinvestpilot.com/primitives-editor">visual editor</a> to see the DAG structure rendered as a graph. To run a backtest, head to the <a href="https://www.myinvestpilot.com/community">Chat2Invest community</a> and use the strategy lab.</p>
+</blockquote>
+<p>The strategy uses three categories of primitives: external market data (QQQ relative strength), logical comparison (GreaterThan/LessThan), and time delay (Lag). The <code>Lag</code> primitive pulls yesterday&rsquo;s signal forward; <code>And</code> then requires two consecutive days of confirmation before selling. The full methodology and numbers are in the <a href="https://www.myinvestpilot.com/docs/primitives/advanced/signal-confirmation-case">signal confirmation case study</a> — this particular example trades TQQQ (3x leveraged QQQ ETF) using QQQ as the signal source, backtested over 2010–2025 with 0.01% transaction costs included.</p>
+<p>That&rsquo;s the point of a primitive DSL — not just flexibility, but transparency, constraint, and reproducibility. <strong>Strategy logic stops being something only the model understands, and becomes a structured object that&rsquo;s executable, verifiable, and translatable into human-readable form.</strong></p>
+<p>Users don&rsquo;t see the raw JSON, of course. DSL is the intermediate layer. Above it sits an interpretation layer that renders strategy logic into plain language: what conditions trigger a buy, which indicators it depends on, why a signal fired, how position sizing shifts. The full chain: natural language → AI translates to DSL → engine executes → interpretation layer presents to user → user builds understanding and trust.</p>
+<p>The full primitive Schema is public: <a href="https://media.i365.tech/myinvestpilot/primitives_schema.json">primitives_schema.json</a>.</p>
+<h2 id="how-the-primitives-evolved">How the Primitives Evolved</h2>
+<p>The primitive system wasn&rsquo;t designed all at once. It grew with real requirements.</p>
+<p>The initial set covered basic technical indicator primitives (EMA, RSI, MACD) and logical combination primitives (GreaterThan, And, Or) — enough for most trend-following strategies. But orthogonal design has edges it can&rsquo;t reach.</p>
+<h3 id="stateful-strategies-the-streak-primitive">Stateful Strategies: The Streak Primitive</h3>
+<p>Some strategies need cross-bar state: &ldquo;signal only fires after five consecutive days of meeting the condition,&rdquo; or &ldquo;price must hold above the moving average for three days to confirm a trend.&rdquo; Stateless declarative primitives can&rsquo;t express this. Enter the <code>Streak</code> primitive:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;trend_persistence&#34;</span>,
+  <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Streak&#34;</span>,
+  <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;min_length&#34;</span>: <span style="color:#ff0;font-weight:bold">5</span> }
+}
+</code></pre></div><p><code>Streak</code> tracks how many consecutive bars a condition has been true, and only outputs true once <code>min_length</code> is reached. It&rsquo;s the first primitive in the system with internal state — a deliberate violation of the &ldquo;fully stateless&rdquo; design principle. But the tradeoff is worth it: the state is local and predictable, and it solves a real category of strategy needs.</p>
+<p>The impact shows up concretely in the <a href="https://www.myinvestpilot.com/docs/primitives/advanced/stock-bond-rotation-case">stock-bond rotation case study</a>. A simple 200-day MA rotation strategy started with a 40% win rate, 1.65% annualized return, and 60 trades over 7 years (2018–2024 A-share backtested data). After adding <code>Streak</code> to require five consecutive days of trend confirmation, filtering out false breakouts: win rate climbed to 81.3%, annualized return rose to 5.42%, trades dropped to 16, and profit factor went from 2.5 to 40.69.</p>
+<p>Sixty trades down to sixteen, with a much better win rate. The <code>Streak</code> primitive didn&rsquo;t add complexity — it added a filter. That&rsquo;s what good composition does.</p>
+<h3 id="external-data-sources-vix-and-market-indicators">External Data Sources: VIX and Market Indicators</h3>
+<p>Orthogonal design also misses a different category of strategy: <strong>where the signal comes not from the traded asset&rsquo;s own price, but from a third-party market indicator.</strong></p>
+<p>For example, using VIX (the fear index) as a market environment filter — when VIX percentile exceeds 75%, market risk is too high, stop buying. That signal comes from VIX, not from the stock being traded.</p>
+<p>The <code>market_indicators</code> extension handles this:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;market_indicators&#34;</span>: {
+    <span style="font-weight:bold">&#34;indicators&#34;</span>: [{ <span style="font-weight:bold">&#34;code&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;VIX&#34;</span> }],
+    <span style="font-weight:bold">&#34;transformers&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;name&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;vix_percentile&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;PercentileRankTransformer&#34;</span>,
+        <span style="font-weight:bold">&#34;params&#34;</span>: { <span style="font-weight:bold">&#34;indicator&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;VIX&#34;</span>, <span style="font-weight:bold">&#34;lookback&#34;</span>: <span style="color:#ff0;font-weight:bold">252</span>, <span style="font-weight:bold">&#34;field&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Close&#34;</span> }
+      }
+    ]
+  },
+  <span style="font-weight:bold">&#34;trade_strategy&#34;</span>: {
+    <span style="font-weight:bold">&#34;signals&#34;</span>: [
+      {
+        <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;market_volatility_low&#34;</span>,
+        <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;LessThan&#34;</span>,
+        <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+          { <span style="font-weight:bold">&#34;market&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;VIX&#34;</span>, <span style="font-weight:bold">&#34;transformer&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;vix_percentile&#34;</span> },
+          { <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Constant&#34;</span>, <span style="font-weight:bold">&#34;value&#34;</span>: <span style="color:#ff0;font-weight:bold">75</span> }
+        ]
+      }
+    ]
+  }
+}
+</code></pre></div><p>Signal source and traded asset are now fully decoupled. The same mechanism handles using CSI 300 trend to filter Chinese stock strategies, or VIX percentile to govern US equity exposure.</p>
+<p>None of this was planned upfront. The evolution went roughly: basic technical indicators → logical composition → fundamental data → stateful primitives (Streak) → external market indicators (VIX/SPX) → cash sweep to bonds. Each step was pushed by real strategy requirements.</p>
+<h2 id="prompt-engineering-from-high-failure-rates-to-few-shot">Prompt Engineering: From High Failure Rates to Few-Shot</h2>
+<p>Designing a good DSL is one problem. Getting AI to reliably generate valid DSL is a separate one.</p>
+<p>Early prompts (v1.1) were simple: give AI a list of primitives, explain the JSON structure, let it generate. Failure rates were high. The errors all shared a common trait: <strong>AI knew what to do, but not what it absolutely couldn&rsquo;t do.</strong></p>
+<p>The most common mistake was inlining signal definitions inside <code>inputs</code> instead of defining them first and then referencing them:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#f00">//</span> <span style="color:#f00">❌</span> <span style="color:#f00">Actual</span> <span style="color:#f00">Gemini</span> <span style="color:#f00">error</span>
+{
+  <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;buy_cond&#34;</span>,
+  <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;And&#34;</span>,
+  <span style="font-weight:bold">&#34;inputs&#34;</span>: [
+    {
+      <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;GreaterThan&#34;</span>,
+      <span style="font-weight:bold">&#34;inputs&#34;</span>: [{<span style="font-weight:bold">&#34;column&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Close&#34;</span>}, {<span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ma&#34;</span>}]
+    }
+  ]
+}
+
+<span style="color:#f00">//</span> <span style="color:#f00">✅</span> <span style="color:#f00">Correct:</span> <span style="color:#f00">define</span> <span style="color:#f00">first,</span> <span style="color:#f00">reference</span> <span style="color:#f00">later</span>
+{ <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;price_gt_ma&#34;</span>, <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;GreaterThan&#34;</span>, <span style="font-weight:bold">&#34;inputs&#34;</span>: [{<span style="font-weight:bold">&#34;column&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Close&#34;</span>}, {<span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ma&#34;</span>}] }<span style="color:#f00">,</span>
+{ <span style="font-weight:bold">&#34;id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;buy_cond&#34;</span>, <span style="font-weight:bold">&#34;type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;And&#34;</span>, <span style="font-weight:bold">&#34;inputs&#34;</span>: [{<span style="font-weight:bold">&#34;ref&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;price_gt_ma&#34;</span>}] }
+</code></pre></div><p>Another common error: using <code>And</code> with three inputs. <code>And</code> and <code>Or</code> strictly require exactly two. Three conditions require nesting. This is natural in code; AI consistently missed it when generating JSON.</p>
+<p>v1.2 added constraint descriptions, with limited improvement. What actually moved the needle was v1.3&rsquo;s two mechanisms:</p>
+<p><strong>ABSOLUTE PROHIBITIONS.</strong> Catalog the most common errors as explicit rules, each paired with a real failure example (including actual Gemini-generated broken code) and the correct alternative. Don&rsquo;t tell AI what to do — tell it what will break the system. The observation behind this: AI under positive guidance tends to ignore boundaries. Under explicit prohibition, it&rsquo;s much more careful.</p>
+<p><strong>Few-shot verified examples.</strong> Include 12 strategy examples in the prompt, graded from simple to complex (Level 1: dual moving average crossover; Level 12: crypto on-chain indicator strategy), each verified against real backtests. AI generating a new strategy can model the closest example rather than reasoning from scratch.</p>
+<p>The current <a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">llm-quickstart.txt</a> is 74KB, with 12 levels of progressive examples covering 97.5% of primitives. It&rsquo;s CI-generated from Schema — every primitive update automatically syncs it.</p>
+<p>One more mechanism worth mentioning: <strong>feeding backtest results back to AI.</strong> Strategy execution logs are stored in Cloudflare R2; AI can read them via API and iterate with full context. This turns generation from a one-shot gamble into a generate-validate-revise loop.</p>
+<h2 id="the-agent-paradox-flexibility-vs-determinism">The Agent Paradox: Flexibility vs. Determinism</h2>
+<p>DSL solved &ldquo;how to express strategy logic.&rdquo; But MyInvestPilot is a real web product, which means there&rsquo;s another layer: users need to interact with it.</p>
+<p>Users don&rsquo;t write JSON. They say &ldquo;run a backtest on this strategy&rdquo; or &ldquo;why has my portfolio&rsquo;s drawdown been increasing?&rdquo; Translating natural language into structured tasks, then presenting results coherently — that&rsquo;s a different challenge: <strong>how do you let AI understand vague user intent while guaranteeing determinism in financial computation?</strong></p>
+<p>When I say &ldquo;backtest this strategy,&rdquo; I need deterministic execution. When I ask &ldquo;why is my drawdown worse lately,&rdquo; I need contextual understanding. That tension is what I&rsquo;ve been working through in <a href="https://www.chat2invest.com">Chat2Invest</a>.</p>
+<h3 id="hybrid-architecture-local-vs-remote">Hybrid Architecture: Local vs. Remote</h3>
+<p>The solution wasn&rsquo;t a single omniscient agent. I split it into two layers based on engineering constraints — not just for performance distribution, but to explicitly isolate &ldquo;vague user problems&rdquo; from &ldquo;financial computations that must be deterministic.&rdquo; AI can participate in understanding and exploration, but it can&rsquo;t swallow the deterministic infrastructure:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Local Agent (Orchestrator)</th>
+<th style="text-align:left">Remote Agent (Processor)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Identity</strong></td>
+<td style="text-align:left">React component in browser</td>
+<td style="text-align:left">Worker + Python service</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Role</strong></td>
+<td style="text-align:left">Handle intent, maintain UI state</td>
+<td style="text-align:left">Run deterministic pipelines</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Logic style</strong></td>
+<td style="text-align:left">Flexible ReAct loop</td>
+<td style="text-align:left">Fixed task pipeline</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Data scope</strong></td>
+<td style="text-align:left">User interaction, frontend context</td>
+<td style="text-align:left">Market data, compute tasks, async state</td>
+</tr>
+</tbody>
+</table>
+<p>Full system architecture:</p>
+<pre><code class="language-mermaid" data-lang="mermaid">C4Container
+title MyInvestPilot Hybrid Agent - Container Diagram
+
+Person(user, &quot;Investor&quot;, &quot;Uses conversational and portfolio analysis features&quot;)
+
+System_Boundary(app, &quot;MyInvestPilot Hybrid Agent&quot;) {
+  Container(local, &quot;Local Agent (ReAct)&quot;, &quot;React + TypeScript (Browser)&quot;, &quot;Intent handling, orchestration, and UI progress&quot;)
+  Container(portfolio_tool, &quot;Portfolio Analysis Tool&quot;, &quot;sql.js (Browser)&quot;, &quot;Local reads on SQLite portfolio snapshots&quot;)
+  Container(worker_api, &quot;Worker APIs&quot;, &quot;Cloudflare Workers&quot;, &quot;Authentication, task submission, task status&quot;)
+}
+
+System_Boundary(remote_side, &quot;Remote Analysis Services&quot;) {
+  Container(remote_agent, &quot;investLLMAgent&quot;, &quot;Python&quot;, &quot;Async task processing and analysis workflows&quot;)
+  Container(data_api, &quot;investDataAPI&quot;, &quot;Python/FastAPI&quot;, &quot;Market data aggregation&quot;)
+}
+
+Container_Ext(redis, &quot;Upstash Redis&quot;, &quot;Queue and task status&quot;)
+Container_Ext(r2, &quot;Cloudflare R2&quot;, &quot;Object storage for artifacts and files&quot;)
+Container_Ext(aigw, &quot;Cloudflare AI Gateway&quot;, &quot;LLM gateway to OpenAI and Gemini&quot;)
+
+Rel(user, local, &quot;Chats with&quot;)
+Rel(local, portfolio_tool, &quot;Queries local portfolio data&quot;)
+Rel(local, worker_api, &quot;POST /tasks and GET /tasks/{id}&quot;, &quot;HTTPS&quot;)
+Rel(worker_api, redis, &quot;RPUSH tasks and GET task status&quot;, &quot;Redis REST&quot;)
+Rel(remote_agent, redis, &quot;BRPOP tasks and SET task status&quot;, &quot;Redis&quot;)
+Rel(remote_agent, data_api, &quot;Fetches market data&quot;, &quot;HTTP&quot;)
+Rel(remote_agent, aigw, &quot;Runs model inference&quot;, &quot;HTTPS&quot;)
+Rel(remote_agent, r2, &quot;Persists portfolio_trading outputs&quot;, &quot;S3 API&quot;)
+</code></pre><p>Remote analysis jobs often run for 30+ seconds — synchronous HTTP isn&rsquo;t viable. Redis queues handle async dispatch; the frontend submits and polls. Task payloads are structured JSON:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;job_id&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;uuid-123&#34;</span>,
+  <span style="font-weight:bold">&#34;task_type&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;stock_analysis&#34;</span>,
+  <span style="font-weight:bold">&#34;symbols&#34;</span>: [<span style="color:#0ff;font-weight:bold">&#34;AAPL&#34;</span>],
+  <span style="font-weight:bold">&#34;analysis_context&#34;</span>: {
+    <span style="font-weight:bold">&#34;user_query&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Is it safe to buy AAPL for me?&#34;</span>,
+    <span style="font-weight:bold">&#34;time_horizon&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;medium_term&#34;</span>,
+    <span style="font-weight:bold">&#34;focus_areas&#34;</span>: [<span style="color:#0ff;font-weight:bold">&#34;risk_assessment&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;valuation&#34;</span>, <span style="color:#0ff;font-weight:bold">&#34;entry_timing&#34;</span>]
+  }
+}
+</code></pre></div><p>The boundary worth being explicit about: <strong>queues and state machines are deterministic; model-generated analysis text is probabilistic. These two layers must not be conflated.</strong></p>
+<h3 id="from-v1-to-v3">From v1 to v3</h3>
+<p>This structure didn&rsquo;t arrive fully formed. It got there through iteration and failures.</p>
+<p><strong>Phase 1 (Early monolith):</strong> Interaction, tool orchestration, and heavy computation all on one path. The system was unstable, responsibilities blurry. Common symptoms: the agent hallucinating database queries, or trying to return raw HTML to &ldquo;fix the UI.&rdquo; Lesson: mixing UI concerns with computation concerns amplifies fragility.</p>
+<p><strong>Phase 2 (Plan-Execute):</strong> Explicit planning with step-by-step execution improved local control significantly. But for open-ended conversations, the planning was too rigid and the interaction felt unnatural.</p>
+<p><strong>Phase 3 (CLI Pattern):</strong> Treating the Local Agent as a browser-based CLI + ReAct loop. User states a goal; Local Agent decides whether local tools suffice or it needs to delegate; if delegating, it calls Worker API to enqueue and gets a job ID; Remote Processor executes async; Local Agent polls and updates UI.</p>
+<p>The division of labor settled into one sentence: <strong>Local handles ambiguity. Remote handles workload.</strong></p>
+<h2 id="dsl-is-not-a-silver-bullet">DSL Is Not a Silver Bullet</h2>
+<p>At this point I thought the main problems were solved. Then I hit the edges of what DSL could do.</p>
+<p>Some strategy logic has complex internal state — multi-timeframe state machines, path-dependent conditions. <code>Streak</code> handled simple consecutive-bar state, but more complex stateful logic expressed through declarative DSL gets awkward fast. Forcing it in makes the DSL itself increasingly complex, until it becomes another language users have to learn — the <strong>DSL Hell</strong> I was trying to avoid.</p>
+<p>The engine ended up with two paths: the primitive DSL path for 90% of stateless composition logic, and a Python code path for high-complexity stateful cases. Both share the same backtest framework and data pipeline; only the strategy expression layer differs.</p>
+<p>That decision saved a lot of headache. If I&rsquo;d forced DSL to cover everything, it would have swollen into a small programming language by now.</p>
+<h2 id="looking-back">Looking Back</h2>
+<p>MyInvestPilot is now roughly 28 repositories, 538k lines of code, and 96 docs, maintained by one person (numbers from <code>cloc</code> across all repos, including tests and config). In the <a href="https://github.com/myinvestpilot/ai-architecture">ai-architecture series</a> I&rsquo;ve written about the development methodology — roughly 60% of time on alignment (defining boundaries, contracts, acceptance criteria), 40% on AI execution.</p>
+<p>But this post isn&rsquo;t about &ldquo;how much code AI wrote for me.&rdquo; The real question: when AI enters a serious decision-making system, how should that system be designed?</p>
+<p>MyInvestPilot&rsquo;s answer:</p>
+<pre><code>[ Human strategy intent ]
+        ↓
+[ AI reasoning / translation / exploration ]
+        ↓
+[ Primitives engine (executable, verifiable) ]
+        ↓
+[ Backtesting / simulation / risk assessment ]
+</code></pre><p>The primitives engine is the structural core. AI is the translator and exploration tool. Not the decision-maker.</p>
+<p>Back to the opening: I didn&rsquo;t override the strategy. Not because I have exceptional self-discipline — because I could see what the strategy was doing, understood why it fired that signal, and recognized that false starts in choppy markets are normal operating cost for a trend-follower. Understanding is the foundation of trust. That&rsquo;s what MyInvestPilot is trying to build.</p>
+<hr>
+<p>If you&rsquo;re building something similar, a few principles from this experience that travel well:</p>
+<p><strong>Constrain the generation space rather than fixing the output.</strong> Define the blocks AI can use (Schema, DSL) before generation, not after. Catching errors at generation time is far cheaper than debugging them at runtime. This is also why ABSOLUTE PROHIBITIONS worked better than positive guidance — &ldquo;don&rsquo;t do X&rdquo; is easier for a model to respect than &ldquo;you should do Y.&rdquo;</p>
+<p><strong>Docs and execution must share the same source.</strong> Schema drives prompt documentation; the same definition constrains both AI generation and engine execution. Once they drift apart, you get a strange class of bug: &ldquo;the AI-generated thing won&rsquo;t run&rdquo; — and it&rsquo;s hard to trace why.</p>
+<p><strong>Separate the deterministic layer from the probabilistic layer.</strong> Queues, state machines, backtest computation — deterministic, must live in code. Natural language understanding, analysis text generation — probabilistic, belongs to the model. Mixing the two layers is the most common architectural mistake in Agent systems.</p>
+<p><strong>In high-stakes systems, the goal isn&rsquo;t producing the right answer — it&rsquo;s helping people build something they can actually follow through on.</strong> I didn&rsquo;t avoid overriding my strategy that day because I have unusual willpower. I avoided it because I could read what the strategy was doing and understood why the stop-loss made sense in context. That&rsquo;s the gap MyInvestPilot is trying to close: not better signals, but a system you can understand well enough to stick with when it&rsquo;s hard.</p>
+<p>If you have thoughts on the primitives engine design, the <a href="https://www.myinvestpilot.com/community">Chat2Invest community</a> is open, or you can try the <a href="https://www.myinvestpilot.com/primitives-editor">visual editor</a> directly to get a feel for how it works.</p>
+<p>Related resources:</p>
+<ul>
+<li><a href="https://www.myinvestpilot.com/docs/primitives/getting-started">MyInvestPilot Primitives Documentation</a></li>
+<li><a href="https://media.i365.tech/myinvestpilot/primitives_schema.json">Primitives Schema (public)</a></li>
+<li><a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">LLM Quickstart Guide</a></li>
+<li><a href="https://www.myinvestpilot.com/docs/primitives/advanced/signal-confirmation-case">Signal Confirmation Case Study</a></li>
+<li><a href="https://github.com/myinvestpilot/ai-architecture">ai-architecture series (GitHub)</a></li>
+<li><a href="https://github.com/myinvestpilot/invest-alchemy">invest-alchemy (early open-source predecessor)</a></li>
+</ul>
+<hr>
+<p><em>This article was written with assistance from OpenCode (Claude Sonnet 4.6), OpenClaw, Codex, Gemini, and Grok.</em></p>
+
+        </div>
+
+        <div id="article-info">
+          
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          
+          Update time:
+          
+          
+          
+          
+          
+          
+              
+                Today
+              
+          
+          
+          
+            Version: <a href="https://github.com/madawei2699/bmpi.dev/commit/a1ec1b828204a3a02d1ae6ee444fd0a6a9a4b3bc">a1ec1b828</a>
+          
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">CC BY-NC-ND 4.0</a></p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h3 style="border-style: none;margin: 10px 0;">Related posts recommended</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="share-twitter-container">
+  <a target="_blank" href="https://twitter.com/intent/tweet?text=A%20full%20account%20of%20building%20MyInvestPilot%20%e2%80%94%20an%20AI-native%20investment%20system%20designed%20from%20the%20ground%20%e2%80%a6&amp;url=https%3a%2f%2fwww.bmpi.dev%2fen%2fdev%2fai-native-investment-system%2f&amp;via=madawei2699">Share on Twitter</a>
+  <span class="share-twitter-container-dashed">·</span>
+  <a target="_blank" href="https://twitter.com/search?q=https%3a%2f%2fwww.bmpi.dev%2fen%2fdev%2fai-native-investment-system%2f">Discuss on Twitter</a>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://giscus.app/client.js"
+        data-repo="bmpi-dev/bmpi.dev"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMjM3NTQzNDU="
+        data-category="Announcements"
+        data-category-id="DIC_kwDODVY4ac4CQdzV"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </footer>
+    </article>
+    <template><span id="control"></span></template>
+    <div id="toast"></div>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div>
+      <a href="https://www.myinvestpilot.com/"> MyInvestPilot </a>
+      ⚡️
+      <a href="https://www.i365.tech/"> i365 </a>
+      ⚡️
+      <a href="https://www.bmpi.dev/talk/"> Talk </a>
+      ⚡️
+      <a href="https://www.bmpi.dev/community/"> Community </a></div>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2026
+    
+    
+  </section>
+</footer>
+
+  </main>
+  
+  <div id="the-modal" class="modal">
+    <span class="the-modal-close">&times;</span>
+    <img class="modal-content" id="the-modal-img01">
+  </div>
+
+  
+  
+  
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti-addon.min.js"></script>
+  <script>
+    
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
+    heti.autoSpacing(); 
+    
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+  
+  <script type="module">
+    import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.5.0/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <script>
+    
+    let mermaidBlocks = document.querySelectorAll('code[data-lang=mermaid]');
+    Array.prototype.forEach.call(mermaidBlocks, function(e) {
+      let text = e.textContent;
+      let mermaidDiv = document.createElement('div');
+      mermaidDiv.className = 'mermaid';
+      mermaidDiv.textContent = text;
+      e.parentElement.replaceWith(mermaidDiv);
+    });
+    window.mermaid.mermaidAPI.initialize(
+    window.mermaidOptions
+      ? window.mermaidOptions
+      : { securityLevel: "loose", theme: "base" });
+  </script>
+  
+
+  
+
+  
+
+</body>
+
+</html>

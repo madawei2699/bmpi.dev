@@ -3,8 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/en/tags/agent/</loc>
+    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/agent/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/agent/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/ai-native/</loc>
+    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/ai-native/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/ai-native/"
+                />
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/en/</loc>
-    <lastmod>2023-06-04T12:55:14+08:00</lastmod>
+    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -15,6 +45,61 @@
                 hreflang="en"
                 href="https://www.bmpi.dev/en/"
                 />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/categories/building-practice/</loc>
+    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/dsl/</loc>
+    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/dsl/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/dsl/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/dev/ai-native-investment-system/</loc>
+    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/dev/ai-native-investment-system/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/dev/ai-native-investment-system/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/llm/</loc>
+    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/llm/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/llm/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/quantitative-investing/</loc>
+    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
   </url>
 
   <url>

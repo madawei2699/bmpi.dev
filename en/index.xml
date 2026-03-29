@@ -6,7 +6,21 @@
     <description>Recent content on BMPI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 24 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How I Built an AI-Native Quantitative Investment System</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/en/dev/ai-native-investment-system/</link>
+      <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/en/dev/ai-native-investment-system/</guid>
+      <description>A full account of building MyInvestPilot — an AI-native investment system designed from the ground up for AI, from constrained DSL primitives to a hybrid Agent architecture.</description>
+    </item>
+    
     <item>
       <title>SQLite Renaissance</title>
       
