@@ -3,6 +3,86 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://www.bmpi.dev/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/cloudflare/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/dtls/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/durable-objects/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/elixir/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/elixir/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/elixir/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/go/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/ice/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/sfu/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/webrtc/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/dev/free4chat/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/tags/%E5%AE%9E%E6%97%B6%E9%80%9A%E4%BF%A1/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/categories/%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/</loc>
+    <lastmod>2026-05-17T18:49:40+08:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://www.bmpi.dev/tags/agent/</loc>
     <lastmod>2026-03-28T15:26:41+08:00</lastmod>
     <xhtml:link
@@ -34,21 +114,6 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/tags/ai-native/"
-                />
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/</loc>
-    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/"
                 />
   </url>
 
@@ -110,11 +175,6 @@
                 hreflang="zh-cn"
                 href="https://www.bmpi.dev/dev/ai-native-investment-system/"
                 />
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/categories/%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/</loc>
-    <lastmod>2026-03-28T15:26:41+08:00</lastmod>
   </url>
 
   <url>
@@ -658,21 +718,6 @@
   </url>
 
   <url>
-    <loc>https://www.bmpi.dev/tags/elixir/</loc>
-    <lastmod>2022-11-08T09:13:03+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://www.bmpi.dev/en/tags/elixir/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://www.bmpi.dev/tags/elixir/"
-                />
-  </url>
-
-  <url>
     <loc>https://www.bmpi.dev/tags/real-time-web/</loc>
     <lastmod>2022-11-08T09:13:03+08:00</lastmod>
   </url>
@@ -1065,11 +1110,6 @@
   <url>
     <loc>https://www.bmpi.dev/tags/%E8%AE%A4%E8%AF%81/</loc>
     <lastmod>2023-08-08T17:36:56+08:00</lastmod>
-  </url>
-
-  <url>
-    <loc>https://www.bmpi.dev/tags/webrtc/</loc>
-    <lastmod>2022-07-23T10:32:04+08:00</lastmod>
   </url>
 
   <url>

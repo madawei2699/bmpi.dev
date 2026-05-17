@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>一个 WebRTC 聊天室的三次演进</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/free4chat/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "BMPI",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/free4chat\/",
+          "name": "free4chat"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>一个 WebRTC 聊天室的三次演进</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2026-05-17T00:00:00Z'>
+                2026-05-17
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/">构建与实践</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/webrtc/">WebRTC</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/sfu/">SFU</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/ice/">ICE</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/dtls/">DTLS</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/go/">Go</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/elixir/">Elixir</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/cloudflare/">Cloudflare</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/%E5%AE%9E%E6%97%B6%E9%80%9A%E4%BF%A1/">实时通信</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/durable-objects/">Durable Objects</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <ul>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A%E8%BF%99%E4%BB%B6%E4%BA%8B">为什么要做这件事</a></li>
+<li><a href="#%E5%85%88%E6%90%9E%E6%B8%85%E6%A5%9A-webrtc-%E6%98%AF%E4%BB%80%E4%B9%88">先搞清楚 WebRTC 是什么</a>
+<ul>
+<li><a href="#%E4%BF%A1%E4%BB%A4%E4%B8%8E%E5%AA%92%E4%BD%93%E7%9A%84%E5%88%86%E7%A6%BB">信令与媒体的分离</a></li>
+<li><a href="#ice%E7%A9%BF%E8%B6%8A-nat-%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F">ICE：穿越 NAT 的三种方式</a></li>
+<li><a href="#dtls%E5%AA%92%E4%BD%93%E5%B9%B3%E9%9D%A2%E7%9A%84%E5%AE%89%E5%85%A8%E5%B1%82">DTLS：媒体平面的安全层</a></li>
+<li><a href="#sfu-vs-mcu-vs-p2p%E6%9E%B6%E6%9E%84%E7%9A%84%E6%A0%B9%E6%9C%AC%E9%80%89%E6%8B%A9">SFU vs MCU vs P2P：架构的根本选择</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%B8%80%E7%89%88go--pion%E8%87%AA%E5%BB%BA-sfu">第一版：Go + Pion，自建 SFU</a>
+<ul>
+<li><a href="#pion-%E6%98%AF%E4%BB%80%E4%B9%88">Pion 是什么</a></li>
+<li><a href="#%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%B1%80%E9%99%90">架构与局限</a></li>
+<li><a href="#%E5%AE%9E%E6%B5%8B%E6%84%9F%E5%8F%97">实测感受</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E7%89%88elixir--membrane%E9%9B%86%E7%BE%A4%E4%B8%8E%E6%96%87%E5%AD%97%E8%81%8A%E5%A4%A9">第二版：Elixir + Membrane，集群与文字聊天</a>
+<ul>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8D%A2%E5%88%B0-elixir">为什么换到 Elixir</a></li>
+<li><a href="#erlangotp-%E7%9A%84%E9%9B%86%E7%BE%A4%E9%AD%94%E6%B3%95">Erlang/OTP 的集群魔法</a></li>
+<li><a href="#%E6%96%B0%E5%A2%9E%E5%8A%9F%E8%83%BD%E6%96%87%E5%AD%97%E8%81%8A%E5%A4%A9">新增功能：文字聊天</a></li>
+<li><a href="#elixir-%E7%89%88%E7%9A%84%E8%BE%B9%E7%95%8C">Elixir 版的边界</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E7%89%88cloudflare-%E5%85%A8%E6%A0%88%E8%BF%90%E7%BB%B4%E5%BD%92%E9%9B%B6">第三版：Cloudflare 全栈，运维归零</a>
+<ul>
+<li><a href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E9%80%89%E5%9E%8B">技术栈选型</a></li>
+<li><a href="#durable-objects%E6%AF%8F%E4%B8%AA%E6%88%BF%E9%97%B4%E4%B8%80%E4%B8%AA-ai-%E4%BC%9A%E8%AF%9D">Durable Objects：每个房间一个 AI 会话</a></li>
+<li><a href="#lunaai-%E8%BF%9B%E5%85%A5%E8%81%8A%E5%A4%A9%E5%AE%A4">Luna：AI 进入聊天室</a></li>
+<li><a href="#cloudflare-%E7%89%88%E7%9A%84%E4%BB%A3%E4%BB%B7">Cloudflare 版的代价</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%87%AA%E5%BB%BA%E8%BF%99%E4%BA%9B%E6%9C%8D%E5%8A%A1">为什么不自建这些服务</a></li>
+<li><a href="#%E5%AE%9E%E6%B5%8B%E6%84%9F%E5%8F%97-1">实测感受</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89%E4%B8%AA%E7%89%88%E6%9C%AC%E6%A8%AA%E5%90%91%E5%AF%B9%E6%AF%94">三个版本横向对比</a></li>
+<li><a href="#ai-%E4%B8%8E%E5%AE%9E%E6%97%B6%E9%80%9A%E4%BF%A1%E7%9A%84%E6%9C%AA%E6%9D%A5%E6%96%B9%E5%90%91">AI 与实时通信的未来方向</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+<p>2022 年初我第一次把 <a href="https://github.com/i365dev/free4chat">free4chat</a> 发到 V2EX，标题是「搭了一个 WebRTC 语音聊天室，效果惊人」。一台 1 核 1G 的 AWS 服务器，支撑了近千人的并发访问，服务器负载几乎没动。</p>
+<p>那之后我把它重写了两次。</p>
+<p>不是因为第一版坏掉了——第一版其实一直跑得不错。而是每次重写都在问一个新问题：<strong>如果把运维成本降到零，系统边界在哪里？如果让 AI 进入房间，通信协议需要什么？</strong></p>
+<p>本文是三个版本演进的完整复盘。从 WebRTC 协议栈的基础知识，到三种技术路线的边界，再到 AI 与实时通信结合的未来方向。</p>
+<h2 id="为什么要做这件事">为什么要做这件事</h2>
+<p>最初的动机很简单：我需要一个可以随时拉人开会的工具，不需要账号，不需要下载 App，分享一个链接，打开浏览器就能聊。</p>
+<p>市面上有 Zoom、腾讯会议、Google Meet，功能都更强，但它们都需要注册。我要的是「用完即走，什么都不留」的极简体验。</p>
+<p>这是 <a href="https://free4.chat/">free4.chat</a> 的核心价值：<strong>无需注册，无需下载，分享链接即开始，关闭标签即结束。</strong></p>
+<h2 id="先搞清楚-webrtc-是什么">先搞清楚 WebRTC 是什么</h2>
+<p>在介绍三个版本之前，需要先把 WebRTC 的核心概念说清楚，因为它们直接决定了每个版本的架构选择。</p>
+<h3 id="信令与媒体的分离">信令与媒体的分离</h3>
+<p>WebRTC 本身<strong>不定义信令协议</strong>。它只负责媒体传输（音频、视频、数据），至于两端如何找到彼此、协商编解码格式，完全交给开发者自己实现，用 WebSocket、HTTP Long Polling 或任何其他方式都可以。</p>
+<p>这个设计很反直觉——一个「实时通信协议」却不管「怎么建立连接」。但这也是 WebRTC 的强大之处：信令层是可替换的，媒体层是标准化的。</p>
+<p>两端在建立连接时需要交换 <strong>SDP（Session Description Protocol）</strong> 描述符，里面包含了媒体格式、编解码能力、加密参数等信息。这个交换过程就是信令，服务器只是一个「快递员」，把 SDP 转交给对方。</p>
+<h3 id="ice穿越-nat-的三种方式">ICE：穿越 NAT 的三种方式</h3>
+<p>现实世界里，大多数用户都在 NAT 后面——家里的路由器、公司的防火墙。两端要建立直连并不容易，ICE（Interactive Connectivity Establishment）协议专门解决这个问题。</p>
+<p>ICE 会收集三种候选地址（Candidate）：</p>
+<ol>
+<li><strong>Host Candidate</strong>：本机局域网 IP。两端在同一局域网时可以直连，延迟最低。</li>
+<li><strong>Server Reflexive Candidate（srflx）</strong>：通过 STUN 服务器探测到的公网 IP + 端口。大多数 NAT 环境可以用这种方式穿透。</li>
+<li><strong>Relay Candidate（relay）</strong>：通过 TURN 服务器中转。当前两种都失败时的兜底方案，100% 成功但流量经服务器。</li>
+</ol>
+<p>STUN 服务器只做一件事：告诉你「你在公网上的地址是什么」，自己不转发数据，几乎没有带宽消耗。TURN 服务器则完全中转媒体流，是真正的带宽消耗点。</p>
+<p>实际部署中，需要同时搭 STUN 和 TURN（通常用 coturn）。对于国内网络环境，很多运营商会拦截 UDP 包，relay 模式的使用比例远高于国外。</p>
+<h3 id="dtls媒体平面的安全层">DTLS：媒体平面的安全层</h3>
+<p>WebRTC 的所有媒体流都必须加密，DTLS（Datagram TLS）是运行在 UDP 上的 TLS 变体，用来在两端建立密钥协商。DTLS 握手完成后，实际的音视频数据通过 SRTP（Secure Real-time Transport Protocol）传输。</p>
+<p>这保证了媒体流在传输链路上的加密安全——即便流量经过 TURN 服务器中转，TURN 服务器也只能看到加密后的数据包，无法解密内容。</p>
+<p>但这也带来了一个约束：<strong>服务端如果想处理媒体流（比如录制、混流、AI 分析），必须参与 DTLS 握手，成为连接的一端</strong>，而不能只是透明转发。这个约束在后面讨论 AI 语音 Bot 时会直接碰到。</p>
+<h3 id="sfu-vs-mcu-vs-p2p架构的根本选择">SFU vs MCU vs P2P：架构的根本选择</h3>
+<p>多人会议的媒体架构有三种模式：</p>
+<p><strong>P2P（Mesh）</strong>：每个参与者直接与其他所有人建立连接，发送 N-1 路流，接收 N-1 路流。连接数是 O(N²)，在人数多时客户端网络和 CPU 负载会爆炸。适合 2-4 人小会议。</p>
+<p><strong>MCU（Multipoint Control Unit）</strong>：服务器接收所有流，解码后混合成一路流再推给每个客户端。每个客户端只有一路上行和一路下行，客户端下行带宽固定且负载低。代价是服务器需要做大量解码+混流+重编码，端到端延迟是三种架构中最高的，服务器成本也最大。</p>
+<p><strong>SFU（Selective Forwarding Unit）</strong>：服务器接收每个客户端的流，选择性地转发给其他客户端，不做解码。每个客户端一路上行，多路下行（每路对应一个参与者）。服务器只转发不处理，成本低；客户端下行带宽随人数线性增长，但可以通过 Simulcast（多码率）缓解。</p>
+<p>free4chat 三个版本都用的 SFU 架构，这是语音会议的最优解。</p>
+<h2 id="第一版go--pion自建-sfu">第一版：Go + Pion，自建 SFU</h2>
+<h3 id="pion-是什么">Pion 是什么</h3>
+<p><a href="https://github.com/pion/webrtc">Pion</a> 是 Go 语言实现的 WebRTC 库，也是 Go 生态里 WebRTC 的事实标准。它实现了完整的 WebRTC 协议栈：ICE、DTLS、SRTP、SDP 协商、DataChannel 等。</p>
+<p>第一版基于 <a href="https://github.com/MixinNetwork/kraken">kraken</a>——一个用 Pion 构建的轻量 SFU，前身是 <a href="https://github.com/lyricat/mornin.fm">Mornin.fm</a> 的后端。信令走 WebSocket，媒体走 WebRTC，服务器同时扮演 STUN/TURN 和 SFU 的角色：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">graph LR
+    A[Browser A] --&gt;|WebSocket 信令| S[Go Server\nSFU + STUN/TURN]
+    B[Browser B] --&gt;|WebSocket 信令| S
+    A &lt;--&gt;|DTLS/SRTP 媒体| S
+    B &lt;--&gt;|DTLS/SRTP 媒体| S
+</code></pre><h3 id="架构与局限">架构与局限</h3>
+<p>整个后端运行在一台 AWS 单实例上，1 核 1G 内存。优势是极度轻量：SFU 不解码媒体，只转发 RTP 包，CPU 消耗极低；Go 的 goroutine 并发模型处理大量 WebSocket 连接也很高效。</p>
+<p>局限是<strong>单点</strong>。所有用户必须接入同一台服务器，没有集群扩容机制。如果这台机器挂了，所有房间都断线。</p>
+<p>另一个问题是 kraken 本身的内存泄漏（<a href="https://github.com/MixinNetwork/kraken/issues/32">#32</a>）：断开的连接被标记删除但资源没有真正释放，导致长时间运行后内存持续增长，偶尔需要手动重启。</p>
+<p>功能上也只有语音，没有文字聊天，没有文件传输。</p>
+<h3 id="实测感受">实测感受</h3>
+<p>第一版在 V2EX 发布后的那天，近千人访问，创建了上千个房间，1 核 1G 的服务器负载几乎没有变化。这让我对 SFU 架构的效率有了直观的认知——媒体转发本质上是 I/O 密集型，不是 CPU 密集型。</p>
+<p>跨国通话（新加坡服务器 ↔ 沙特阿拉伯用户）稳定聊了一小时，语音质量不输 Zoom。对于一台 5 美元/月的 VPS，这个结果让我相当惊讶。</p>
+<h2 id="第二版elixir--membrane集群与文字聊天">第二版：Elixir + Membrane，集群与文字聊天</h2>
+<h3 id="为什么换到-elixir">为什么换到 Elixir</h3>
+<p>Go 版运行稳定，但我不喜欢 Go 的语法，开发效率对我来说不够高。更重要的是，kraken 的单体架构让水平扩容变得困难。</p>
+<p>同期我在读 Elixir 和 Erlang/OTP 的资料，越读越觉得这个方向是对的：<strong>Erlang 本来就是为电信级实时通信设计的，集群、容错、进程隔离是语言和运行时的原生能力，不是事后加上去的</strong>。</p>
+<p>第二版的 WebRTC 媒体框架换成了 <a href="https://membrane.stream/">Membrane</a>——Elixir 生态里的多媒体处理框架，提供了对 WebRTC 媒体管道的高层抽象，类似 Pion 在 Go 里的角色。Membrane 可以用 Elixir 原生的进程模型来组织 ICE 协商、DTLS 握手、RTP 转发的各个环节，每一个媒体处理步骤都是一个 Erlang 进程，天然契合 OTP 的 Supervisor 树——某个媒体管道崩溃时，Supervisor 会自动重启它，不会影响其他用户的连接。</p>
+<h3 id="erlangotp-的集群魔法">Erlang/OTP 的集群魔法</h3>
+<p>在大多数语言中，「集群」意味着引入 Kubernetes、Redis Pub/Sub、消息队列等外部中间件。而在 Erlang/OTP 中，集群是开箱即用的：多个节点通过 epmd 自动发现，节点间通过 Erlang Distribution Protocol 互联，进程可以直接跨节点发送消息，本地进程和远程进程在代码层面用法完全一致。</p>
+<p>以 free4chat 的场景为例：用户 A 连接到节点 S1，用户 B 连接到节点 S2，两人加入同一个房间。房间在 Elixir 里是一个 GenServer 进程，无论它运行在哪个节点，两个用户都能通过它通信，跨节点消息传递由 OTP 透明处理，代码里完全看不出节点边界：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">graph TB
+    UA[用户 A] --&gt;|接入| S1[节点 S1]
+    UB[用户 B] --&gt;|接入| S2[节点 S2]
+    S1 &lt;--&gt;|Erlang Distribution\n自动互联| S2
+    S1 --- R1[房间 R1\nGenServer 进程]
+    S2 --- R1
+</code></pre><p>第二版上了两个节点的集群，用户随机接入任意节点，同一房间的用户可以跨节点存在。这在 Go 版里需要额外的协调层（Redis/etcd）才能做到，在 Elixir 里是自然的。</p>
+<p>Erlang VM 还有强大的运行时可观测能力：可以远程 attach 到任意节点的 REPL，查看某个进程的状态、给进程发消息、追踪进程的消息队列，这让调试实时通信问题变得直观很多。</p>
+<h3 id="新增功能文字聊天">新增功能：文字聊天</h3>
+<p>第二版用一周时间加了文字聊天，技术上是 Phoenix Channels（WebSocket 上的发布订阅机制）。每个房间是一个 Channel，消息广播给房间内所有用户。Phoenix 的 Channel 设计和 WebRTC 的信令层可以共享同一个 WebSocket 连接，不需要额外的连接管理。</p>
+<h3 id="elixir-版的边界">Elixir 版的边界</h3>
+<p>Elixir 的优势在于集群扩容和状态管理，但它依然是<strong>自建 SFU</strong>。这意味着：</p>
+<ul>
+<li>需要自己部署和维护 coturn（STUN/TURN）</li>
+<li>需要管理 AWS EC2 实例，处理系统更新、安全补丁</li>
+<li>媒体服务器的端口范围（UDP 10000-60000）需要手工配置安全组</li>
+<li>Docker 容器化部署在端口映射上有额外坑</li>
+</ul>
+<p>对于个人项目来说，这些运维工作不是致命的，但确实是持续的成本。</p>
+<h2 id="第三版cloudflare-全栈运维归零">第三版：Cloudflare 全栈，运维归零</h2>
+<p>第三版的出发点是一个问题：<strong>如果把运维成本降到零，架构是什么样的？</strong></p>
+<p>Elixir 版的两节点集群已经足够稳定，但 coturn 维护、EC2 安全补丁、偶发的内存问题让我意识到，对个人项目来说，<strong>基础设施本身才是最大的干扰</strong>。于是我开始找一条彻底的出路。</p>
+<p>答案是 Cloudflare 全栈。</p>
+<p>值得一提的是，第三版是用 <a href="https://opencode.ai/">OpenCode</a> + Claude Sonnet 4.6 以 vibe coding 的方式在一个周末内完成的，前两个版本都是人工一行行写的。同样的功能量，开发速度的差距是数量级的。这不是本文的主题，但我觉得值得记一笔——AI 辅助开发已经实质性地改变了个人项目的可行边界。</p>
+<h3 id="技术栈选型">技术栈选型</h3>
+<p>第三版完全跑在 Cloudflare 的产品体系上，每一个功能点都对应一个 Cloudflare 服务：</p>
+<pre><code class="language-mermaid" data-lang="mermaid">graph TB
+    UA[Browser A] &lt;--&gt;|WebRTC 媒体| RTK[Dyte/RTK\n托管 SFU]
+    UB[Browser B] &lt;--&gt;|WebRTC 媒体| RTK
+    UA --&gt;|请求| CF[Cloudflare Worker\nNext.js 15]
+    UB --&gt;|请求| CF
+    CF --&gt;|验证人机| TS[Turnstile\n人机验证]
+    CF --&gt;|限流状态| KV[Workers KV\n分布式 KV]
+    CF --&gt;|生成会议 Token| RTK
+    CF --&gt;|AI 对话| DO[Durable Objects\nBotSession]
+    DO --&gt;|模型推理| AIG[AI Gateway]
+    AIG --&gt; WAI[Workers AI\nGLM-4.7-flash]
+</code></pre><p>逐个介绍一下用到的 Cloudflare 服务：</p>
+<p><strong>Dyte（Realtime Kit，以下简称 RTK）</strong>：托管 SFU 服务，负责 WebRTC 媒体的路由、STUN/TURN、媒体服务器。这是第三版最核心的依赖——它把自建 SFU 的所有运维工作外包出去了。我只需要调用 API 创建会议、给用户生成 token，后面的媒体路由全部由 RTK 处理。RTK 有独立的免费额度（按会议分钟数计算），小规模个人项目基本够用。</p>
+<p><strong>Cloudflare Turnstile</strong>：防机器人的人机验证服务，类似 reCAPTCHA 但对用户更友好（大多数情况下无需点击「我不是机器人」）。用户第一次打开 free4chat 时会触发 Turnstile 验证，通过后 token 存入 sessionStorage，后续访问不再重复验证。token 在请求 <code>/api/token</code> 时带上，服务端校验通过才能加入房间，防止接口被滥用。</p>
+<p><strong>Workers KV</strong>：Cloudflare 的分布式键值存储，全球边缘节点可读，写入最终一致。free4chat 用它做 IP 维度的访问限流——每个 IP 在 60 秒内最多请求 20 次 token，超限返回 429。KV 的读延迟极低，适合这类高频的限流判断。</p>
+<p><strong>Durable Objects（DO）</strong>：Cloudflare 的有状态计算单元，每个 DO 实例全球唯一，有持久化 KV 存储，可以安全地在单实例里维护状态而不用担心并发冲突。free4chat 用 DO 实现每个房间独立的 AI 会话（BotSession），持久化对话历史（最近 20 条）和每小时调用计数，不同房间的会话完全隔离。</p>
+<p><strong>Cloudflare AI Gateway</strong>：通用 AI 请求代理层，坐在后端模型调用前面，支持代理 Workers AI、OpenAI、Anthropic 等主流模型服务，提供请求日志、缓存、限速、模型回退等能力。BotSession DO 调用 Workers AI 时走 AI Gateway 的 OpenAI 兼容端点，这样可以在 Cloudflare 控制台直接看到每次推理的 token 消耗、延迟和响应内容，调试方便很多。</p>
+<p><strong>Workers AI</strong>：Cloudflare 托管的模型推理服务，模型运行在 Cloudflare 的 GPU 节点上，调用方式兼容 OpenAI API。free4chat 用的模型是 <code>@cf/zai-org/glm-4.7-flash</code>，支持中英文对话，响应速度在可接受范围内。Workers AI 的计费是按 token 计算的，小规模使用基本在免费额度内。</p>
+<h3 id="durable-objects每个房间一个-ai-会话">Durable Objects：每个房间一个 AI 会话</h3>
+<p>DO 是这套架构里最有意思的部分，值得单独说一下它解决了什么问题。</p>
+<p>普通的 Cloudflare Worker 是无状态的，每次请求都可能路由到不同的边缘节点，没有办法在请求之间保持内存状态。如果想给每个房间维护一份对话历史，要么存数据库（引入外部依赖），要么每次请求都带上完整历史（浪费带宽）。</p>
+<p>DO 解决了这个问题：同一个房间的所有请求都路由到同一个 DO 实例，这个实例有自己的内存和持久化存储，可以安全地在内存里维护对话历史，定期 flush 到存储。每个房间对应一个 BotSession DO，持久化存储最近 20 条消息和每小时调用计数，房间之间完全隔离，不会有竞态条件。</p>
+<h3 id="lunaai-进入聊天室">Luna：AI 进入聊天室</h3>
+<p>Luna 是 free4chat 内置的 AI 助手。在房间里的文字输入框输入 <code>@luna 你的问题</code>，前端拦截这条消息，剥离 <code>@luna</code> 前缀后发送到 <code>/api/bot</code>，Worker 将其路由给对应房间的 BotSession DO，DO 经由 AI Gateway 调用 Workers AI 生成回复，最终以 <code>bot</code> 消息类型展示在聊天面板中。Luna 的回复有上下文记忆，对话历史跨请求持久化，每个房间每小时限 30 次调用。</p>
+<h3 id="cloudflare-版的代价">Cloudflare 版的代价</h3>
+<p>Cloudflare 全栈降低了运维成本，但带来了一个根本限制：<strong>无法做服务端音频注入</strong>。</p>
+<p>Luna 目前只能做文字回复。如果要让 Luna 以「语音参与者」的身份加入房间、直接说话，需要从服务端向 SFU 注入音频流——服务端必须作为一个 WebRTC 客户端完成 ICE 协商、DTLS 握手，再通过 SRTP 向 SFU 推送 AI 合成的音频。</p>
+<p>RTK 是托管 SFU，不暴露底层的 SFU App ID 或 WHIP（WebRTC-HTTP Ingestion Protocol）接口，目前无法从服务端注入音频。这是托管方案的边界：便利性和控制权之间的取舍。</p>
+<p>在 Go/Pion 或 Elixir/Membrane 版本中，由于 SFU 是自建的，可以直接让服务端进程作为一个 peer 加入房间，这个能力是完全可以实现的。</p>
+<h3 id="为什么不自建这些服务">为什么不自建这些服务</h3>
+<p>用这么多 Cloudflare 托管服务，不可避免的问题是：如果哪天 Cloudflare 涨价或者某个服务下线，迁移成本会很高。这是真实的风险。</p>
+<p>但对一个个人项目来说，现阶段的优先级是<strong>把时间花在产品本身，而不是基础设施</strong>。Turnstile 替代了自己写机器人防护，KV 替代了 Redis + 限流逻辑，AI Gateway 替代了 LLM 代理服务，Durable Objects 替代了状态服务器，Workers AI 替代了自己部署 GPU 节点——这些每一项自建都需要额外的维护成本。</p>
+<p>更重要的是，这套组合的月费用在小规模使用下接近零，大部分都有慷慨的免费额度。对个人项目来说，用托管服务换运维时间是合算的。</p>
+<h3 id="实测感受-1">实测感受</h3>
+<p>上线后的一个周末，我用屏幕共享模式直播了约两小时，房间里最多十几个人，到最后剩几个人，全程线路稳定，没有断流。对于一个完全跑在 Cloudflare 边缘、没有任何自建媒体服务器的方案，这个稳定性让我相当满意。</p>
+<p>和第一版「1 核 1G 扛住近千人并发」相比，第三版的验证维度不同：不是极限并发，而是持续时长和屏幕共享这个带宽密集型场景的稳定性。两次不同角度的实测，都印证了托管 SFU 在个人项目场景下的可靠性。</p>
+<h2 id="三个版本横向对比">三个版本横向对比</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Go + Pion（第一版）</th>
+<th>Elixir + Membrane（第二版）</th>
+<th>Cloudflare + RTK（第三版）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SFU 控制权</strong></td>
+<td>完全自建，完全控制</td>
+<td>完全自建，完全控制</td>
+<td>托管，无底层控制</td>
+</tr>
+<tr>
+<td><strong>集群扩容</strong></td>
+<td>手工实现，复杂</td>
+<td>OTP 原生，极简</td>
+<td>托管，无需关心</td>
+</tr>
+<tr>
+<td><strong>运维成本</strong></td>
+<td>中（服务器 + coturn）</td>
+<td>中高（多节点集群）</td>
+<td>极低（近零）</td>
+</tr>
+<tr>
+<td><strong>AI 语音注入</strong></td>
+<td><strong>可实现</strong></td>
+<td><strong>可实现</strong></td>
+<td>不可实现（RTK 不暴露 WHIP）</td>
+</tr>
+<tr>
+<td><strong>开发效率</strong></td>
+<td>中（Go 生态完善）</td>
+<td>高（Elixir 表达力强）</td>
+<td>高（边缘函数简单）</td>
+</tr>
+<tr>
+<td><strong>调试体验</strong></td>
+<td>一般</td>
+<td>优（LiveDashboard + remote REPL）</td>
+<td>一般（Worker 日志）</td>
+</tr>
+<tr>
+<td><strong>月成本（小规模）</strong></td>
+<td>~$5-10</td>
+<td>~$10-20（双节点）</td>
+<td>~$0-5（按量付费）</td>
+</tr>
+<tr>
+<td><strong>适合场景</strong></td>
+<td>学习 WebRTC 底层、需要定制 SFU</td>
+<td>生产集群、高并发、需要 AI 语音</td>
+<td>个人项目、零运维、快速上线</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选择建议：</strong></p>
+<ul>
+<li><strong>想理解 WebRTC 底层、需要完全控制 SFU</strong>：Go + Pion。代码量少，WebRTC 逻辑清晰，适合学习和定制。</li>
+<li><strong>要做生产级实时通信、未来需要 AI 语音 Bot</strong>：Elixir + Membrane。集群天然支持，服务端 peer 注入技术上可行，Erlang 的容错能力是最强的。</li>
+<li><strong>个人项目、快速验证、不想管服务器</strong>：Cloudflare + RTK。运维归零，边缘部署延迟低，文字 AI 助手开箱即用。</li>
+</ul>
+<h2 id="ai-与实时通信的未来方向">AI 与实时通信的未来方向</h2>
+<p>AI 与实时通信的结合正处于早期阶段，但方向已经比较清晰。</p>
+<p><strong>当前可做的（文字层）</strong>：AI 助手参与文字聊天，上下文感知，总结会议内容，回答问题，执行指令。free4chat 的 Luna 就是这个阶段。</p>
+<p><strong>近期可期的（语音层）</strong>：语音 Bot 的核心链路是 STT → LLM → TTS，最后注入 SFU。Cloudflare Workers AI 上已经有 Whisper（STT）和 TTS 模型，前三步理论上可以在 Worker 内完成。卡住的是最后一步——媒体注入，需要 RTK 开放 WHIP 接口或 Cloudflare 开放 WebRTC 媒体注入能力。截至本文写作时（2026 年 5 月），Cloudflare 的 Calls API 和 Agents SDK 中已出现了相关能力的雏形，但还未对普通开发者全面开放。</p>
+<pre><code class="language-mermaid" data-lang="mermaid">flowchart LR
+    U[用户语音] --&gt; STT[STT\nWhisper]
+    STT --&gt; LLM[LLM\n生成回复]
+    LLM --&gt; TTS[TTS\n语音合成]
+    TTS --&gt; SFU[注入 SFU\n🔒 当前瓶颈]
+    SFU --&gt; P[其他参与者]
+    style SFU fill:#c44,color:#fff
+</code></pre><p><strong>更远期的方向（多模态层）</strong>：AI 不只是房间里的一个「话筒」，而是一个真正的参与者。</p>
+<p>会议效率低的一个核心原因是信息不对称——参会者准备不足，或者讨论到某个话题时缺少相关背景知识，导致讨论浅尝辄止、无法深入。如果 AI 带着组织的内部知识库实时接入会议，在讨论卡壳时主动补充上下文、提供数据支撑、召唤相关文档，会议就不再受限于「在场人员的知识边界」。这比「会后总结」要有价值得多——它在讨论还活着的时候介入，而不是事后打扫战场。</p>
+<p>另一个方向是一对一的语音陪伴场景：心理咨询、情感支持、职业辅导。这类对话的核心需求是实时、连续、有情感响应，而不是问答式的文字交互。大模型的语言理解能力已经可以支撑这类场景，卡点同样在媒体注入和端到端延迟——需要控制在 800ms 以内，才能让对话节奏接近真人交流。</p>
+<p>实时翻译、自动生成结构化会议纪要这些功能反而是相对容易的，技术上已经可行，主要是工程整合问题。真正难的是「主动介入」——AI 判断什么时机该说话、说什么、说多少，这涉及对话状态建模，比生成一段回复复杂得多。</p>
+<h2 id="总结">总结</h2>
+<p>三个版本做下来，我对「技术选型」这件事有了更直观的理解：<strong>没有最好的技术栈，只有边界最匹配的技术栈</strong>。</p>
+<p>Go + Pion 给了我 WebRTC 最清晰的学习路径，代码少，协议直接可见。Elixir 给了我对分布式状态管理最深的理解，OTP 的集群模型是真正优雅的设计。Cloudflare 全栈让我看到了运维成本可以接近零的未来，但托管 SFU 的控制权损失是真实的代价。</p>
+<p>前两个版本人工写，第三版 vibe coding 一个周末完成——开发速度的差距是数量级的。Cloudflare 的产品体系和 AI 辅助开发加在一起，让「一个人在业余时间维护一个有实际功能的产品」这件事变得真正可持续。</p>
+<p>如果你想体验现在的版本：<a href="https://free4.chat/">https://free4.chat</a></p>
+<p>如果你对技术细节感兴趣，三个版本都在同一个仓库的不同分支：<a href="https://github.com/i365dev/free4chat">https://github.com/i365dev/free4chat</a></p>
+<ul>
+<li><code>golang</code> 分支：Go + Pion 版</li>
+<li><code>elixir</code> 分支：Elixir + Membrane 版</li>
+<li><code>cloudflare</code> 分支（默认）：当前 Cloudflare 全栈版</li>
+</ul>
+<h2 id="延伸阅读">延伸阅读</h2>
+<ul>
+<li><a href="https://www.bmpi.dev/dev/real-time-web/">Real-time Web应用开发新体验</a> — 本站关于 Elixir 实时 Web 开发的深度介绍</li>
+<li><a href="https://webrtcforthecurious.com/">WebRTC for the Curious</a> — WebRTC 协议栈的开源书，从协议层讲起，非常适合想理解底层的读者</li>
+<li><a href="https://github.com/pion/webrtc/tree/master/examples">Pion WebRTC Examples</a> — 用 Go 理解 WebRTC 各个功能的最好起点</li>
+<li><a href="https://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections">Phoenix LiveView: The Road to 2 Million Connections</a> — Elixir Phoenix 单机 200 万并发 LiveView 连接的压测报告</li>
+<li><a href="https://developers.cloudflare.com/durable-objects/">Durable Objects 官方文档</a> — 理解 DO 一致性模型和 SQL storage 迁移路径的必读参考</li>
+</ul>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>
