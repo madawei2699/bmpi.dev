@@ -131,7 +131,7 @@ graph LR
 
 第一版在 V2EX 发布后的那天，近千人访问，创建了上千个房间，1 核 1G 的服务器负载几乎没有变化。这让我对 SFU 架构的效率有了直观的认知——**纯音频、低码率场景下**，媒体转发主要是 I/O 密集型，CPU 消耗极低。
 
-需要补充说明的是：这个结论有其适用边界。Pion 作者 Sean DuBois 和 WebRTC 工程师 Murat PISAT 在[我发布这篇文章后的讨论](https://www.linkedin.com/posts/madawei2699_github-i365devfree4chat-free4chat-activity-7461732286170902528-xQzq/)中指出：SFU 在视频或高码率场景下是 CPU 密集型的（Pion 单核可处理约 100 路视频+音频，mediasoup 的 C++ 实现约 200 路）；加密和每个 peer 的包转发都有 CPU 开销，比 HLS 高。free4chat 是纯音频 + 低码率 + DTX 开启的特殊场景，所以 CPU 几乎没有压力——这不是 SFU 的普遍结论，是特定场景下的实测数据。
+> **补充**：这个结论有其适用边界。Pion 作者 Sean DuBois 和 WebRTC 工程师 Murat PISAT 在[文章发布后的讨论](https://www.linkedin.com/posts/madawei2699_github-i365devfree4chat-free4chat-activity-7461732286170902528-xQzq/)中指出：SFU 在视频或高码率场景下是 CPU 密集型的（Pion 单核可处理约 100 路视频+音频，mediasoup 的 C++ 实现约 200 路）；加密和每个 peer 的包转发都有 CPU 开销，比 HLS 高。free4chat 是纯音频 + 低码率 + DTX 开启的特殊场景——这不是 SFU 的普遍结论，是特定场景下的实测数据。
 
 跨国通话（新加坡服务器 ↔ 沙特阿拉伯用户）稳定聊了一小时，语音质量不输 Zoom。对于一台 5 美元/月的 VPS，这个结果让我相当惊讶。
 
