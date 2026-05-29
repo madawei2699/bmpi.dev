@@ -1,26 +1,34 @@
 <section class="container centered">
   <div class="about">
-    <div style="margin:0 auto;text-align:left;line-height:4rem;">
-      {{$scratch := newScratch}}
-      {{ if not (hasPrefix .RelPermalink "/en") }}
-        {{ range where .Site.RegularPages "Section" "in" (slice "self" "dev" "money") }}
-          {{$scratch.Add "postNum" 1}}
-          {{$scratch.Add "total" (countwords .Content)}}
-        {{ end }}
-      {{ else}}
-        {{ range where .Site.RegularPages "Section" "in" (slice "self" "dev") }}
-          {{$scratch.Add "postNum" 1}}
-          {{$scratch.Add "total" (countwords .Content)}}
-        {{ end }}
+    {{$scratch := newScratch}}
+    {{ if not (hasPrefix .RelPermalink "/en") }}
+      {{ range where .Site.RegularPages "Section" "in" (slice "self" "dev" "money") }}
+        {{$scratch.Add "postNum" 1}}
+        {{$scratch.Add "total" (countwords .Content)}}
       {{ end }}
-      👋 Hi, I'm Dawei Ma — an independent builder focused on AI-native systems.<br>
-      💡 Building <a href="https://www.myinvestpilot.com/">MyInvestPilot</a> — an AI-native investment operating system.<br>
-      ✍️ <span style="text-decoration:underline;">{{ $scratch.Get "postNum" }}</span> articles · <span style="text-decoration:underline;">{{ div ($scratch.Get "total") 1000 }}</span>K words · <span id="all-page-views" style="text-decoration:underline;"></span>K readers · <span id="site-run-days" style="text-decoration:underline;"></span> days.<br>
-      📈 Managing <a href="https://www.myinvestpilot.com/portfolios">rule-based ETF portfolios</a> for long-term, system-driven investing.<br>
-      🧠 Designing systems, not chasing short-term signals. <a href="{{ if not (hasPrefix .RelPermalink "/en") }}/goal/{{ else }}/en/goal/{{ end }}">See the rules</a>.<br>
-      {{ if not (hasPrefix .RelPermalink "/en") }}
-      🤝 Let's chat on <a href="https://img.bmpi.dev/improve365_cn.JPG">WeChat</a>!
+    {{ else}}
+      {{ range where .Site.RegularPages "Section" "in" (slice "self" "dev") }}
+        {{$scratch.Add "postNum" 1}}
+        {{$scratch.Add "total" (countwords .Content)}}
       {{ end }}
-      </div>
+    {{ end }}
+
+    {{ if not (hasPrefix .RelPermalink "/en") }}
+    <div style="margin:0 auto;text-align:left;max-width:680px;line-height:1.8;">
+      <p style="font-weight:600;margin-bottom:1.2rem;">你好，我是 Dawei Ma，一名软件工程师、独立开发者和系统化投资者。</p>
+      <p style="margin-bottom:1rem;">这里是我的长期写作实验室，记录软件工程、AI 原生产品、规则化投资和个人杠杆相关的思考与实践。</p>
+      <p style="margin-bottom:1rem;">我正在构建 <a href="https://www.myinvestpilot.com/">策引（MyInvestPilot）</a>：一个面向系统化决策的 AI 原生投资操作系统。</p>
+      <p style="font-style:italic;margin-bottom:1.5rem;">构建系统，减少噪音，改进决策。</p>
+      <p style="font-size:0.85rem;color:#999;">{{ $scratch.Get "postNum" }} 篇文章 · <span id="all-page-views"></span>次阅读 · 写作始于 2016</p>
+    </div>
+    {{ else }}
+    <div style="margin:0 auto;text-align:left;max-width:680px;line-height:1.8;">
+      <p style="font-weight:600;margin-bottom:1.2rem;">Hi, I'm Dawei Ma — a software engineer, independent builder, and systematic investor.</p>
+      <p style="margin-bottom:1rem;">This is my long-term lab for writing about software engineering, AI-native products, rule-based investing, and personal leverage.</p>
+      <p style="margin-bottom:1rem;">Currently building <a href="https://www.myinvestpilot.com/">MyInvestPilot</a> — an AI-native investment operating system for systematic decision-making.</p>
+      <p style="font-style:italic;margin-bottom:1.5rem;">Build systems. Reduce noise. Improve decisions.</p>
+      <p style="font-size:0.85rem;color:#999;">{{ $scratch.Get "postNum" }} articles · <span id="all-page-views"></span> reads · writing since 2016</p>
+    </div>
+    {{ end }}
   </div>
 </section>

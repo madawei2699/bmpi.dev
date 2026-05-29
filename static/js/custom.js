@@ -35,14 +35,22 @@ function httpGetAsync(theUrl, callback) {
 }
 
 function set_home_page_all_views(hit) {
-    document.getElementById("all-page-views").textContent = Math.round(hit / 1000);
+    var el = document.getElementById("all-page-views");
+    if (!el) return;
+    if (window.location.pathname === "/en" || window.location.pathname === "/en/") {
+        el.textContent = (hit / 1000000).toFixed(2) + "M";
+    } else {
+        el.textContent = Math.round(hit / 10000) + "万";
+    }
 }
 
 function set_home_page_site_run_days() {
+    var el = document.getElementById("site-run-days");
+    if (!el) return;
     var dateStart = new Date("2019-12-17");
     var dateEnd = new Date();
     var difValue = (dateEnd - dateStart) / (1000 * 60 * 60 * 24);
-    document.getElementById("site-run-days").textContent = Math.ceil(difValue);
+    el.textContent = Math.ceil(difValue);
 }
 
 let allPageViewsAPI = "https://api.bmpi.dev/page-views/bmpi-dev-all-page-views/";
