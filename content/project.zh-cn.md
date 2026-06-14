@@ -19,11 +19,10 @@ outputs = "html"
 
 | | |
 | -- | -- |
-| [我的投资助手](https://www.myinvestpilot.com/) | 投资交易助手 |
+| [我的投资助手](https://www.myinvestpilot.com/) | 一个面向系统化决策的 AI 原生投资操作系统 |
+| [MinePilot](https://github.com/i365dev/MinePilot) | 基于 CraftDAG 的 Agentic Minecraft 建造工作台，支持可视化预览、校验与迭代 |
+| [CraftDAG](https://github.com/i365dev/CraftDAG) | Agent 友好的 Minecraft 建造编译器：从 ComponentPlan 编译为三维体素，生成材料与图纸 |
 | [free4.chat](https://github.com/madawei2699/free4chat) | 匿名语音聊天室 |
-| [tg2web](https://github.com/bmpi-dev/tg2web) | 电报频道静态化工具 |
-| [awesome-seo](https://github.com/madawei2699/awesome-seo) | 我整理的关于Google SEO系统学习的收藏资源及通过流量变现的介绍 |
-| [notion-sites](https://github.com/madawei2699/notion-sites) | 我整理的Notion好站列表 |
 | [xian-IT](https://github.com/madawei2699/xian-IT) | 如果你对西安互联网公司熟悉，欢迎提交 Issue 或者PR，期待你的参与。 |
 
 ## SEO流量站
@@ -37,6 +36,9 @@ outputs = "html"
 
 | | |
 | -- | -- |
+| [tg2web](https://github.com/bmpi-dev/tg2web) | 电报频道静态化工具 |
+| [awesome-seo](https://github.com/madawei2699/awesome-seo) | 关于Google SEO系统学习的收藏资源及通过流量变现的介绍 |
+| [notion-sites](https://github.com/madawei2699/notion-sites) | Notion好站列表 |
 | [logseq.xyz](https://github.com/bmpi-dev/logseq.xyz) | Logseq 自托管版本（v0.5.5） |
 | [instaghub](https://github.com/bmpi-dev/instaghub) | Ins Viewer |
 | [一款产品的从0到1之旅](/dev/zero-to-one/) | 交易日记 iOS App |

@@ -5,14 +5,23 @@ keywords = "Self-growth, personal products, side projects, online earning projec
 outputs = "html"
 +++
 
-## GitHub Top X
+## Products & Open Source Projects
 
-[gitopx.com](https://www.gitopx.com)
+| | |
+| -- | -- |
+| [MyInvestPilot](https://www.myinvestpilot.com/) | An AI-native investment operating system for systematic decision-making |
+| [MinePilot](https://github.com/i365dev/MinePilot) | An Agentic Minecraft construction workspace with visualization, verification and iteration |
+| [CraftDAG](https://github.com/i365dev/CraftDAG) | Agent-friendly Minecraft construction compiler: compiles ComponentPlan to 3D voxel plan, materials and layers |
 
-## Web Telegram
+## SEO Traffic Sites
 
-[webtg.org](https://www.webtg.org)
+| | |
+| -- | -- |
+| [gitopx.com](https://www.gitopx.com) | GitHub Top 100 Users/Repositories Rankings |
+| [webtg.org](https://www.webtg.org) | Web Telegram client |
 
-## Ins Web Traffic Site
+## Archive
 
-<https://github.com/bmpi-dev/instaghub>
+| | |
+| -- | -- |
+| [instaghub](https://github.com/bmpi-dev/instaghub) | Instagram Web Viewer |
