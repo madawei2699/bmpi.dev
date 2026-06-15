@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/agent/</loc>
-    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -19,7 +19,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/ai-native/</loc>
-    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -34,7 +34,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/</loc>
-    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -49,12 +49,42 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/categories/building-practice/</loc>
-    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/dag/</loc>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/dag/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/dag/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/dev/agent-native-system-paradigm/</loc>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/dev/agent-native-system-paradigm/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/dev/agent-native-system-paradigm/"
+                />
   </url>
 
   <url>
     <loc>https://www.bmpi.dev/en/tags/dsl/</loc>
-    <lastmod>2026-03-29T11:39:54+08:00</lastmod>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -64,6 +94,66 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://www.bmpi.dev/en/tags/dsl/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/minepilot/</loc>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/minepilot/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/minepilot/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/myinvestpilot/</loc>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/myinvestpilot/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/myinvestpilot/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/validation/</loc>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/validation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/validation/"
+                />
+  </url>
+
+  <url>
+    <loc>https://www.bmpi.dev/en/tags/workflow/</loc>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://www.bmpi.dev/tags/workflow/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.bmpi.dev/en/tags/workflow/"
                 />
   </url>
 
@@ -935,7 +1025,7 @@
 
   <url>
     <loc>https://www.bmpi.dev/en/project/</loc>
-    <lastmod>2020-03-22T12:48:26+08:00</lastmod>
+    <lastmod>2026-06-14T12:00:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"

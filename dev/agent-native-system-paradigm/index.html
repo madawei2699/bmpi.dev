@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="马大伟">
+  
+  <meta name="description" content="把大模型塞进聊天框并不能解决复杂问题。本文通过量化投资系统与 Minecraft 建造引擎两个案例，拆解一套面向 Agent 的工作流设计范式：领域 DSL、IR/DAG、验证契约与修复循环。">
+  
+  
+  <meta name="keywords" content="Agent-friendly,, AI, Native,, DSL,, DAG,, Validation,, 编译器,, 修复循环">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="Agent 时代的软件接口"/>
+  <meta name="twitter:description" content="把大模型塞进聊天框并不能解决复杂问题。本文通过量化投资系统与 Minecraft 建造引擎两个案例，拆解一套面向 Agent 的工作流设计范式：领域 DSL、IR/DAG、验证契约与修复循环。"/>
+  
+  
+  <meta name="twitter:image" content="https://og.bmpi.dev/Agent 时代的软件接口.png">
+  
+
+  
+  <meta property="og:title" content="Agent 时代的软件接口" />
+<meta property="og:description" content="把大模型塞进聊天框并不能解决复杂问题。本文通过量化投资系统与 Minecraft 建造引擎两个案例，拆解一套面向 Agent 的工作流设计范式：领域 DSL、IR/DAG、验证契约与修复循环。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/dev/agent-native-system-paradigm/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2026-06-14T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2026-06-14T12:00:00&#43;08:00" /><meta property="og:site_name" content="BMPI" />
+
+
+  
+  <meta name="og:image" content="https://og.bmpi.dev/Agent 时代的软件接口.png">
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "Agent 时代的软件接口",
+      
+      "image": "https://www.bmpi.dev/images/logo.png",
+      
+      "datePublished": "2026-06-14T00:00:00Z",
+      "dateModified": "2026-06-14T12:00:00+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "马大伟"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/dev/agent-native-system-paradigm/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/logo.png"
+        }
+      },
+      "description": "把大模型塞进聊天框并不能解决复杂问题。本文通过量化投资系统与 Minecraft 建造引擎两个案例，拆解一套面向 Agent 的工作流设计范式：领域 DSL、IR/DAG、验证契约与修复循环。",
+      "keywords": ["AI Native", "Agent", "Workflow", "DSL", "DAG", "Validation", "MinePilot", "MyInvestPilot"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/dev/agent-native-system-paradigm/">
+  
+  <title>
+  Agent 时代的软件接口 · BMPI
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/dev/agent-native-system-paradigm/">
+  
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.fdc8a9bd0b5625b807b055750cc0bf4ef2fc3fccecf12f0c17bdf31ef3f3d4dc.css" integrity="sha256-/cipvQtWJbgHsFV1DMC/TvL8P8zs8S8MF73zHvPz1Nw="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.a2fdc25deb82b741f3a807e38508c2dea269fc900c2b37ee8af380d97ea4d7a8.css" integrity="sha256-ov3CXeuCt0HzqAfjhQjC3qJp/JAMKzfuivOA2X6k16g="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bmpi.dev/images/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bmpi.dev/images/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bmpi.dev/images/ico/favicon-16x16.png">
+  <link rel="manifest" href="https://www.bmpi.dev/images/ico/site.webmanifest">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/amp/dev/agent-native-system-paradigm/" title="BMPI" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="preload" href="https://www.bmpi.dev/scss/tagcloud.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css"></noscript>
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti.min.css">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.min.css"></noscript>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+
+  
+
+  
+
+  
+
+  <script async defer data-website-id="356d3289-e627-409c-a9d7-a272cf789f0b" src="https://umami.bmpi.dev/script.js"></script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a id="site-title" class="navigation-title" href="https://www.bmpi.dev/">
+      BMPI
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://github.com/madawei2699">GitHub</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://twitter.com/madawei2699">Twitter</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/self/">学习</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/dev/">技术</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/money/">投资</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/en/">English</a>
+            </li>
+          
+        
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title heti">
+          <h1 class="title">Agent 时代的软件接口</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2026-06-14T00:00:00Z'>
+                2026-06-14
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              25:30
+              
+            </span>
+            
+            <span class="post-word-count"> | 5612 字 | </span>
+            <span id="post-views"></span> 次阅读
+            
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/">构建与实践</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/ai-native/">AI Native</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/agent/">Agent</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/workflow/">Workflow</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/dsl/">DSL</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/dag/">DAG</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/validation/">Validation</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/minepilot/">MinePilot</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/myinvestpilot/">MyInvestPilot</a></div>
+
+        </div>
+      </header>
+
+      <div class="brand-ad">
+        <div class="brand-content">
+          <a href="https://www.i365.tech/post">
+            <span>点我在线阅读《个人产品开发指南》，教你从零到一快速开发自己的个人产品。</span>
+          </a>
+        </div>
+        <div class="brand-ad-link"><a href="https://www.bmpi.dev/_ad/" rel="nofollow">品牌赞助</a></div>
+        <div class="brand-ad-link-line"></div>
+      </div>
+
+      
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <p>前段时间，我一直在思考如何让 Agent 在复杂的虚拟环境中稳定地执行任务。当时，我偶然看到了一个名叫 <a href="https://github.com/mindcraft-bots/mindcraft">mindcraft</a> 的开源项目。这个项目能在 Minecraft 的局域网模式下，通过 harness 代理，让大模型作为一个 Bot 进入到游戏世界里。你可以直接在游戏里发消息，用自然语言给它下发命令，比如说“建一个房子”，Bot 就会真的开始动工建造。</p>
+<p>这个演示很有意思，但当我亲自尝试时，发现 Bot 的稳定性并不理想。它经常会原地卡住，即便只是建一个很小的房子，也往往做到一半就停滞。原因可能来自环境感知、动作执行、路径规划、上下文维护等多个环节，但最终暴露出的共同问题是：让大模型在游戏内实时闭环控制空间动作，稳定性很难保证。</p>
+<p>我开始研究背后的原因。如果要通过“指令式”的步骤让大模型一块一块地去放置方块，就要求模型必须精准地理解游戏内的三维空间坐标，并同时处理庞大的环境上下文。这要求模型长期维护三维空间状态、理解环境反馈、持续做精确坐标推理。对当前 LLM 来说，这类闭环控制任务非常容易累积误差。</p>
+<p>退而求其次，我开始寻找别的出路。如果在游戏内实时建造太容易卡死，那我能不能在游戏外通过大模型生成好建筑的蓝图，然后再通过一些 Mod 自动加载到游戏里？我顺藤摸瓜地发现了 WorldEdit 以及围绕 schematic 的 Minecraft 建筑工具链。于是，我的核心思路发生了一次转变：<strong>如何通过 LLM 生成可被 WorldEdit 或相关工具加载的 .schem 蓝图文件？</strong></p>
+<p>这也是我后来构建开源项目 <a href="https://github.com/i365dev/MinePilot">MinePilot</a> 的直接起点。</p>
+<p>但这依然没有解决根本问题。.schem 这类蓝图格式本质上仍然是低层的方块状态集合：每一个位置最终都要对应具体的 block state。让大模型直接生成这种低层体素数据，仍然很容易出现墙体漏风、屋顶错位、楼梯断裂等问题。</p>
+<p>这时，我想起了之前在开发量化投资系统 <a href="https://www.myinvestpilot.com/">策引（MyInvestPilot）</a> 时遇到的类似问题。正如我在<a href="https://www.bmpi.dev/dev/ai-native-investment-system/">《我是如何构建一个 AI 原生量化系统的》</a>一文中提到的，为了防止大模型写出带有前视偏差（Look-ahead bias）的 Python 交易代码，我引入了一套“策略原语引擎”的范式：放弃让大模型直接生成底层逻辑代码，转而提供一套基于 DSL 的有向无环图（DAG），从而创造一个受限的空间，让大模型在这个空间里进行架构表达。</p>
+<p>这其实是一个高度抽象的范式。它不仅能用于量化投资，也可以用来让 Agent 稳定地处理其他领域的复杂任务。这本质上是一个通用工作流，一个面向 Agent 友好的系统架构设计，也就是让 Agent 能够读取、编写、验证、执行和修复任务的 workflow surface。</p>
+<p>目前，我主要在策引与 MinePilot 这两个看起来风马牛不相及的项目上实践这套工作流。在连续重构了它们之后，我发现这套架构实际上跑在了完全相同的底层逻辑上。</p>
+<h2 id="从底层-api-到-domain-dsl-的跃迁">从底层 API 到 Domain DSL 的跃迁</h2>
+<p>很多 AI 产品的开发者在意识到“让 AI 写自由代码不可靠”之后，往往会走向另一个极端：提供极其精细的结构化 API。</p>
+<p>比如在量化投资中，一种常见做法是要求 AI 返回一个多层嵌套的 JSON 树来表示策略；在 Minecraft 中，另一种做法是要求 AI 每次只能调用 <code>placeBlock(x, y, z, type)</code> API。</p>
+<p>这种做法的扩展性很差。一旦策略稍微复杂（例如“QQQ 相对强度大于 101 买入，小于 99 且连续两日确认才卖出”），API 参数结构就会爆炸式膨胀。大模型在生成这种深层嵌套的结构时，非常容易遗漏字段或者写错类型。让大模型去手写几万个方块的放置坐标也是同理，这直接消耗了它在“空间规划”上的推理窗口，将其浪费在了底层的算术计算上。</p>
+<h3 id="收拢底层控制权">收拢底层控制权</h3>
+<p>更好的解法是：<strong>收拢 Agent 的底层控制权，为它专门设计一门领域特定语言（Domain DSL）。</strong></p>
+<p>在量化投资系统策引中，我没有让大模型写底层计算逻辑，而是抽象出了一套“策略原语”（Primitives）。这些原语包括均线（EMA）、逻辑判断（GreaterThan/LessThan）、状态延迟（Lag）和连续状态确认（Streak）。大模型只需要像搭积木一样组合这些原语。底层的 Pandas 运算、对齐、未来函数屏蔽，统统由系统封装。</p>
+<p>在 MinePilot 的底层引擎 <a href="https://github.com/i365dev/CraftDAG">CraftDAG</a> 中，我也是这么做的。我设计了一套名为 <code>ComponentPlan</code> 的 DSL。</p>
+<p>在 ComponentPlan 这一层，大模型不需要也不应该直接输出底层方块坐标。大模型只需要写高层的组件级规划。比如，大模型只需要生成这样一段 JSON 意图：</p>
+<blockquote>
+<p>“创建一个 16×12×16 的 <code>RoomShell</code>（房间壳体），在 <code>front</code>（前）墙面的 <code>offset: 3</code>（偏移 3 格）处安装一个 <code>Door</code>，在上方放置一个 <code>GableRoof</code>（人字屋顶），并设定 <code>overhang: 1</code>（屋檐延伸 1 格）。”</p>
+</blockquote>
+<h3 id="为-agent-搭建的语义脚手架">为 Agent 搭建的“语义脚手架”</h3>
+<p>通过这套 DSL，大模型不再需要去计算“这面墙的坐标是从 (10, 5, 20) 到 (10, 10, 20)”，也不需要计算“门挖掉之后要替换成空气方块”。它使用了 <code>anchor</code>（锚点）、<code>wall</code>（依附墙面）、<code>offset</code>（偏移）、<code>overhang</code>（悬空）等高层语义属性。</p>
+<p>DSL 的本质，是为大模型搭建一个“语义脚手架”。把底层的物理碰撞、数学计算、工程容错全部被下沉到引擎侧。Agent 的心智负担大大降低，它可以将有限的上下文窗口和推理预算投入到它更擅长的事情上——宏观架构与逻辑推演。</p>
+<p>这个阶段的核心原则是：<strong>Agent is the author. Engine is the compiler.</strong></p>
+<h2 id="像写编译器一样构建业务引擎">像写编译器一样构建业务引擎</h2>
+<p>既然大模型生成的是高层的 DSL（意图），那么系统要如何执行它？这就来到了整个面向 Agent 工作流中最重的一层：中间表示（IR）与编译器设计。</p>
+<p>当大模型交出了一份 <code>ComponentPlan</code>（Minecraft 建筑计划）或是一份 <code>Strategy primitives</code>（量化策略图谱），这只是人类意图和机器执行之间的中间态。它不能直接拿去盖房子，也不能直接拿去回测投资组合。</p>
+<p>你需要像写一门编程语言的编译器一样，来构建你的业务引擎。</p>
+<h3 id="分层编译管线">分层编译管线</h3>
+<p>在 CraftDAG 中，建筑生成被设计成一条相对严格的编译管线：</p>
+<ol>
+<li><strong>输入层（BuildIntent）</strong>：用户的自然语言意图。</li>
+<li><strong>领域计划层（ComponentPlan DSL）</strong>：由大模型根据意图生成的建筑组件图纸。</li>
+<li><strong>中间表示层（CraftDAG IR）</strong>：引擎接收 ComponentPlan，进行宏观和局部的依赖解析，将其展开为一张可验证、可排序的有向无环图（DAG）。在这里，高级语义被降级为确定性的几何包围盒计算和依附关系计算。</li>
+<li><strong>目标表示层（VoxelPlan）</strong>：编译器进一步向下，将 IR 计算为最终的三维体素集合（方块的绝对坐标与状态），生成蓝图导出，或者供前端/后端直接渲染。</li>
+</ol>
+<p>同样，在策引中，AI 组合的“策略原语”也会被引擎转化为一张有向无环图。它通过拓扑排序（Topological Sort）决定先计算哪些均线指标，再计算哪些比较逻辑，最后聚合为交易信号。这个可以查看<a href="https://www.myinvestpilot.com/primitives-editor">策引原语策略可视化编辑器</a>来直观的感受下。</p>
+<h3 id="为什么要走编译路线">为什么要走编译路线？</h3>
+<p>一开始，我觉得为一个应用引入“编译器”和“抽象语法树”的概念有些过度设计。但后来的迭代证明，这是支撑 Agent 系统稳定运行的有效方式。</p>
+<p>只有将意图降级为有向无环图（IR/DAG），系统才具备了强大的<strong>静态分析</strong>与<strong>确定性执行</strong>能力。</p>
+<ul>
+<li>在量化系统中，因为有了 DAG，系统可以清晰地追踪信号依赖，确保没有任何一个环节偷看了未来数据。</li>
+<li>在 Minecraft 引擎中，因为有了 IR，系统可以计算出极其精确的材料清单（Material Lists）。理论上，这种 IR 分层也为未来的局部重算提供了基础：当用户只修改屋顶材质时，系统可以只重新处理相关子图，而不必让大模型重新生成整栋建筑。</li>
+</ul>
+<p>更重要的是，有了这层编译机制，才有了下一步拦截 Agent 幻觉的可能。</p>
+<h2 id="机器可读的契约与修复循环">机器可读的契约与修复循环</h2>
+<p>我们一直被图形用户界面（GUI）的交互惯性所束缚。在传统软件中，如果用户填错了表单，系统会弹出一个红框或者 Toast 提示：“输入格式不合法”。用户看到红框，凭借生活经验重新输入。</p>
+<p>但是，如果只把一句简单的 <code>Invalid plan</code> 或者 <code>Syntax Error</code> 返回给大模型，它的修复效率会非常低。它往往只能靠猜测去重写整个 JSON，有时修复了一个错误，反而会引发新的错误。</p>
+<p>在 Agent-friendly 的系统里，<strong>报错不再是给人看的，而是系统与大模型之间的一纸强契约（Validation Contract）</strong>。</p>
+<h3 id="报错不是给人看的">报错不是给人看的</h3>
+<p>在开发 CraftDAG 时，我专门为系统设计了一套详尽的强类型错误反馈机制。如果大模型在生成 DSL 时，不小心把一个塔楼组件的坐标放到了整个建筑设定的边界之外，系统的编译器会在第一道防线将它拦下，并抛出一个精确的 JSON 报错：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;stage&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;component-validation&#34;</span>,
+  <span style="font-weight:bold">&#34;code&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ASSEMBLY_INSTANCE_OUT_OF_BOUNDS&#34;</span>,
+  <span style="font-weight:bold">&#34;path&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;instances[0].anchor&#34;</span>,
+  <span style="font-weight:bold">&#34;componentId&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;northwest_tower&#34;</span>,
+  <span style="font-weight:bold">&#34;repairHint&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Move the instance inward or increase global bounds.&#34;</span>
+}
+</code></pre></div><p>你看，这个报错完全不是给人看的。它明确告诉大模型：</p>
+<ol>
+<li><strong>stage</strong>：错误发生在组件验证阶段。</li>
+<li><strong>code</strong>：越界错误。</li>
+<li><strong>path</strong>：具体的 JSON 路径是第一个实例的锚点。</li>
+<li><strong>repairHint</strong>：直接给出具体的修复建议（向内移动锚点，或者扩大全局边界）。</li>
+</ol>
+<h3 id="llm-的协作契约与修复循环">LLM 的协作契约与修复循环</h3>
+<p>除了事后的精准报错，事前的约束同样重要。</p>
+<p>在 CraftDAG 项目里，有一份核心文件叫 <code>LLM_AUTHORING_CONTRACT.md</code>（LLM 编写契约）。这不是传统意义上给人类开发者看的 API 文档，而是一份可以被大模型或 harness agent 读取的编写契约，也可以作为 System Prompt 或 llm.txt 的一部分。</p>
+<p>同样地，在策引（MyInvestPilot）中我也做了类似的事情。为了让 Agent 能够独立开发策略原语，系统专门提供了一篇 <a href="https://www.myinvestpilot.com/docs/primitives/ai-assisted-development">机器可读的开发文档</a>，并通过 <a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">llm-quickstart.txt</a> 为大模型提供紧凑的上下文和 Few-shot 示例。此外，引擎还暴露出严格的 <a href="https://media.i365.tech/myinvestpilot/primitives_schema.json">JSON Schema</a>，让大模型在生成 DSL 时能够依循一套确定的强类型结构契约。</p>
+<p>在这些契约的设计上，我学到的一个深刻教训是：<strong>与其告诉大模型“你应该怎么做”，不如直接设定绝对禁止项（ABSOLUTE PROHIBITIONS）。</strong>
+不要试图去穷举大模型能发挥的创意，而是划定死亡红线。例如，明确禁止在组件的 <code>inputs</code> 里直接内联嵌套其他组件，必须先定义 <code>id</code> 再通过 <code>ref</code> 引用。</p>
+<p>只有当系统具备了“严格的事前契约”和“精准的事后报错”时，一个重要变化才会发生：<strong>大模型开始具备更稳定的自我修复路径。</strong></p>
+<p>当大模型收到上述的 JSON 报错后，它会立刻明白 <code>northwest_tower</code> 出了问题，接着在下一次迭代中只修正这个组件的坐标，然后再次提交编译。这就形成了一个稳定、可收敛的<strong>迭代修复循环（Repair Loop）</strong>。没有这个循环，大模型就是一个偶尔好用的玩具；有了这个循环，大模型就真正变成了可靠的生产力基建。</p>
+<h2 id="处理模糊与确定性的边界">处理模糊与确定性的边界</h2>
+<p>做好了底层引擎，最后一个问题是：用户该如何介入这套复杂的系统？</p>
+<p>用户不会写 JSON DSL，也不会看懂 DAG 图。他们依然会用自然语言提问：“帮我调整一下这个投资组合的风险”，或者“给这个城堡多加两扇大一点的窗户”。</p>
+<p>这就引出了一个核心架构矛盾：用户的意图往往是<strong>模糊的</strong>，而底层的金融计算和空间几何却是<strong>绝对确定性的</strong>。如果你试图让一个全能大模型去同时处理这两端，系统立刻就会在“发散思考”和“严谨计算”之间精神分裂。</p>
+<h3 id="本地与远端的职责切割">本地与远端的职责切割</h3>
+<p>在我对这类系统的架构设想里，比较理想的方式是采用<strong>混合 Agent 架构（Hybrid Agent Architecture）</strong>。未来 MinePilot 这样的系统可以采用这种拆分，将 Agent 的职责进行硬切割：</p>
+<ul>
+<li><strong>本地 Agent（Orchestrator/Local Agent）</strong>：运行在离用户最近的交互层（比如前端浏览器）。它本质上是一个高级的路由器和状态机。它的唯一职责是处理<strong>模糊性（Ambiguity）</strong>。它和用户聊天，猜测用户的意图，并在必要时发起明确的表单让用户确认。</li>
+<li><strong>远端处理器（Processor/Remote Engine）</strong>：运行在后端的异步任务队列中。当本地 Agent 把模糊的意图清晰化之后，将任务作为结构化的 Job 扔到远端。远端处理器接管 DSL，运行编译器图元，执行相对复杂的确定性验证、编译与计算。</li>
+</ul>
+<p>队列、状态机、编译验证，这些涉及绝对准确率的东西，必须由传统的确定性代码来实现；而意图猜测、错误文本解释、自然语言翻译，这些概率性的事情，全权交由大模型。</p>
+<p><strong>把确定性层和概率性层混在一起，是很多 Agent 系统容易犯的架构错误。</strong></p>
+<h2 id="这套范式的边界">这套范式的边界</h2>
+<p>需要强调的是，Agent-friendly workflow 并不是所有 AI 产品的通用解法。它更适合那些具备以下特征的领域：</p>
+<ol>
+<li>有明确的领域结构；</li>
+<li>可以抽象出稳定的原语或组件；</li>
+<li>中间状态可以被验证；</li>
+<li>最终结果可以被执行、编译或模拟；</li>
+<li>错误可以被定位并修复；</li>
+<li>人类仍然可以审查和决策。</li>
+</ol>
+<p>如果一个任务本身是高度开放的创意表达，或者没有明确的验证标准，过早引入 DSL 和 DAG 反而可能限制模型的表达能力。同时，DSL 也不是越多越好，真正困难的是找到足够小、足够正交、又能覆盖主要任务的领域原语集。</p>
+<p>即便在适合的领域里，Validation 也不等于真实的正确性。投资策略通过回测不代表未来有效；建筑蓝图通过编译不代表审美优秀。验证契约的价值，是把错误空间缩小到系统可以管理的范围，而不是替代人类的最终判断。Agent-friendly 并不是替代 Human-friendly，更合理的形态是 dual interface：人通过 UI 表达意图、审查结果、做决策；Agent 通过 DSL、工具和验证契约操作系统。</p>
+<h2 id="软件架构视角的反转">软件架构视角的反转</h2>
+<p>回头审视策引（MyInvestPilot）和 MinePilot 这两个项目，一个是严肃的金融投资，一个是开放的沙盒游戏。它们在业务逻辑上相隔万里，但在持续的开发重构过程中，却自然而然地收敛到了同一套系统范式上：</p>
+<p><code>意图 (Intent)</code> → <code>领域语言 (Domain DSL)</code> → <code>编译器 (IR/DAG)</code> → <code>精准契约验证 (Validation)</code> → <code>迭代修复 (Repair Loop)</code> → <code>确定性执行 (Execution)</code></p>
+<p>过去几十年里，我们设计一款软件的标准流程是：先画出供人类交互的原型界面，再设计底层的数据库表结构，最后编写中间的胶水 API 把它们连起来。</p>
+<p>但在 AI Agent 即将大面积接管复杂任务的时代，设计软件的顺序可能被彻底反转了：</p>
+<ol>
+<li>先问自己：这项复杂的业务，能不能抽象出一套对 Agent 足够克制、能收拢底层控制权的领域语言（DSL）？</li>
+<li>再问自己：系统有没有强大的编译器内核，能将 DSL 降级为确定性的有向无环图，并提供精确的机器验证契约？</li>
+<li>然后问自己：当模型犯错时，你的系统是不是能给它提供机器可读的纠错反馈，建立起闭环的修复循环？</li>
+<li>最后，才是在这套相对稳定的工作流基础之上，为人类包裹一层用来监督和确认的交互界面。</li>
+</ol>
+<p>我暂且把这种范式称为：<strong>Domain-shaped, not Domain-locked</strong> 。</p>
+<p>把复杂的专业知识重塑为对 Agent 可读、可写、可验证、可迭代的工作流，或许才是通向下一代软件架构的一把钥匙。</p>
+<hr>
+<p><strong>相关探索与资源：</strong></p>
+<ul>
+<li><a href="https://www.i365.tech/">i365.tech：我的 AI 原生系统与产品实验室</a></li>
+<li>深入了解量化系统的底层设计：<a href="https://www.bmpi.dev/dev/ai-native-investment-system/">《我是如何构建一个 AI 原生量化系统的》</a></li>
+<li><a href="https://www.myminepilot.com/">MinePilot 官方网站</a></li>
+<li><a href="https://github.com/i365dev/MinePilot">MinePilot 源码 (GitHub)</a></li>
+<li><a href="https://github.com/i365dev/CraftDAG">CraftDAG 源码 (GitHub)</a></li>
+</ul>
+
+        </div>
+
+        <div id="article-info">
+          
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          
+          更新时间:
+          
+          
+          
+          
+          
+          
+              
+                今日
+              
+          
+          
+          
+            版本: <a href="https://github.com/madawei2699/bmpi.dev/commit/40ed3567571708e8e0d2a378ed3de23b238e7038">40ed35675</a>
+          
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>本作品采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可</p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h2 style="border-style: none;margin: 10px 0;">相关文章推荐</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/dev/ai-native-investment-system/">我是如何构建一个 AI 原生量化系统的</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="share-twitter-container">
+  <a target="_blank" href="https://twitter.com/intent/tweet?text=%e6%8a%8a%e5%a4%a7%e6%a8%a1%e5%9e%8b%e5%a1%9e%e8%bf%9b%e8%81%8a%e5%a4%a9%e6%a1%86%e5%b9%b6%e4%b8%8d%e8%83%bd%e8%a7%a3%e5%86%b3%e5%a4%8d%e6%9d%82%e9%97%ae%e9%a2%98%e3%80%82%e6%9c%ac%e6%96%87%e9%80%9a%e8%bf%87%e9%87%8f%e5%8c%96%e6%8a%95%e8%b5%84%e7%b3%bb%e7%bb%9f%e4%b8%8e%20Minecraft%20%e5%bb%ba%e9%80%a0%e5%bc%95%e6%93%8e%e4%b8%a4%e4%b8%aa%e6%a1%88%e4%be%8b%ef%bc%8c%e6%8b%86%e8%a7%a3%e4%b8%80%e5%a5%97%e9%9d%a2%e5%90%91%20Agent%20%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e8%ae%be%e8%ae%a1%e8%8c%83%e5%bc%8f%ef%bc%9a%e9%a2%86%e5%9f%9f%20DSL%e3%80%81IR%2fDAG%e3%80%81%e9%aa%8c%e8%af%81%e5%a5%91%e7%ba%a6%e4%b8%8e%e4%bf%ae%e5%a4%8d%e5%be%aa%e7%8e%af%e3%80%82&amp;url=https%3a%2f%2fwww.bmpi.dev%2fdev%2fagent-native-system-paradigm%2f&amp;via=madawei2699">Share on Twitter</a>
+  <span class="share-twitter-container-dashed">·</span>
+  <a target="_blank" href="https://twitter.com/search?q=https%3a%2f%2fwww.bmpi.dev%2fdev%2fagent-native-system-paradigm%2f">Discuss on Twitter</a>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://giscus.app/client.js"
+        data-repo="bmpi-dev/bmpi.dev"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMjM3NTQzNDU="
+        data-category="Announcements"
+        data-category-id="DIC_kwDODVY4ac4CQdzV"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </footer>
+    </article>
+    <template><span id="control"></span></template>
+    <div id="toast"></div>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div>
+      <a href="https://www.myinvestpilot.com/"> 策引 </a>
+      ⚡️
+      <a href="https://www.myminepilot.com/">MinePilot</a>
+      ⚡️
+      <a href="https://www.free4.chat/"> free4chat </a>
+      ⚡️
+      <a href="https://www.i365.tech/"> i365 </a>
+      ⚡️
+      <a href="https://www.bmpi.dev/talk/"> 演讲 </a>
+      ⚡️
+      <a href="https://www.bmpi.dev/community/"> 社区 </a></div>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2026
+    
+    
+  </section>
+</footer>
+
+  </main>
+  
+  <div id="the-modal" class="modal">
+    <span class="the-modal-close">&times;</span>
+    <img class="modal-content" id="the-modal-img01">
+  </div>
+
+  
+  
+  
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti-addon.min.js"></script>
+  <script>
+    
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
+    heti.autoSpacing(); 
+    
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+  
+  <script type="module">
+    import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.5.0/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <script>
+    
+    let mermaidBlocks = document.querySelectorAll('code[data-lang=mermaid]');
+    Array.prototype.forEach.call(mermaidBlocks, function(e) {
+      let text = e.textContent;
+      let mermaidDiv = document.createElement('div');
+      mermaidDiv.className = 'mermaid';
+      mermaidDiv.textContent = text;
+      e.parentElement.replaceWith(mermaidDiv);
+    });
+    window.mermaid.mermaidAPI.initialize(
+    window.mermaidOptions
+      ? window.mermaidOptions
+      : { securityLevel: "loose", theme: "base" });
+  </script>
+  
+
+  
+
+  
+
+</body>
+
+</html>

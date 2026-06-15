@@ -1,8 +1,8 @@
 {
     "latest-post": {
-        "url": "/en/dev/ai-native-investment-system/",
-        "title": "How I Built an AI-Native Quantitative Investment System",
-        "description": "A full account of building MyInvestPilot — an AI-native investment system designed from the ground up for AI, from constrained DSL primitives to a hybrid Agent architecture.",
-        "publish-date": "2026-03-28 00:00:00 +0000 UTC"
+        "url": "/en/dev/agent-native-system-paradigm/",
+        "title": "Designing Agent-Friendly Workflows",
+        "description": "A chat box alone does not solve complex problems. Through MyInvestPilot and MinePilot, this article explores a workflow design pattern for AI agents: Domain DSLs, IR/DAG pipelines, validation contracts, and repair loops.",
+        "publish-date": "2026-06-14 00:00:00 +0000 UTC"
     }
 }

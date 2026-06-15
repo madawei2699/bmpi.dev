@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>Agent 时代的软件接口</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/dev/agent-native-system-paradigm/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "BMPI",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/amp\/dev\/agent-native-system-paradigm\/",
+          "name": "agent-native-system-paradigm"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>Agent 时代的软件接口</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2026-06-14T00:00:00Z'>
+                2026-06-14
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/categories/%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5/">构建与实践</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/tags/ai-native/">AI Native</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/agent/">Agent</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/workflow/">Workflow</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/dsl/">DSL</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/dag/">DAG</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/validation/">Validation</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/minepilot/">MinePilot</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/tags/myinvestpilot/">MyInvestPilot</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <p>前段时间，我一直在思考如何让 Agent 在复杂的虚拟环境中稳定地执行任务。当时，我偶然看到了一个名叫 <a href="https://github.com/mindcraft-bots/mindcraft">mindcraft</a> 的开源项目。这个项目能在 Minecraft 的局域网模式下，通过 harness 代理，让大模型作为一个 Bot 进入到游戏世界里。你可以直接在游戏里发消息，用自然语言给它下发命令，比如说“建一个房子”，Bot 就会真的开始动工建造。</p>
+<p>这个演示很有意思，但当我亲自尝试时，发现 Bot 的稳定性并不理想。它经常会原地卡住，即便只是建一个很小的房子，也往往做到一半就停滞。原因可能来自环境感知、动作执行、路径规划、上下文维护等多个环节，但最终暴露出的共同问题是：让大模型在游戏内实时闭环控制空间动作，稳定性很难保证。</p>
+<p>我开始研究背后的原因。如果要通过“指令式”的步骤让大模型一块一块地去放置方块，就要求模型必须精准地理解游戏内的三维空间坐标，并同时处理庞大的环境上下文。这要求模型长期维护三维空间状态、理解环境反馈、持续做精确坐标推理。对当前 LLM 来说，这类闭环控制任务非常容易累积误差。</p>
+<p>退而求其次，我开始寻找别的出路。如果在游戏内实时建造太容易卡死，那我能不能在游戏外通过大模型生成好建筑的蓝图，然后再通过一些 Mod 自动加载到游戏里？我顺藤摸瓜地发现了 WorldEdit 以及围绕 schematic 的 Minecraft 建筑工具链。于是，我的核心思路发生了一次转变：<strong>如何通过 LLM 生成可被 WorldEdit 或相关工具加载的 .schem 蓝图文件？</strong></p>
+<p>这也是我后来构建开源项目 <a href="https://github.com/i365dev/MinePilot">MinePilot</a> 的直接起点。</p>
+<p>但这依然没有解决根本问题。.schem 这类蓝图格式本质上仍然是低层的方块状态集合：每一个位置最终都要对应具体的 block state。让大模型直接生成这种低层体素数据，仍然很容易出现墙体漏风、屋顶错位、楼梯断裂等问题。</p>
+<p>这时，我想起了之前在开发量化投资系统 <a href="https://www.myinvestpilot.com/">策引（MyInvestPilot）</a> 时遇到的类似问题。正如我在<a href="https://www.bmpi.dev/dev/ai-native-investment-system/">《我是如何构建一个 AI 原生量化系统的》</a>一文中提到的，为了防止大模型写出带有前视偏差（Look-ahead bias）的 Python 交易代码，我引入了一套“策略原语引擎”的范式：放弃让大模型直接生成底层逻辑代码，转而提供一套基于 DSL 的有向无环图（DAG），从而创造一个受限的空间，让大模型在这个空间里进行架构表达。</p>
+<p>这其实是一个高度抽象的范式。它不仅能用于量化投资，也可以用来让 Agent 稳定地处理其他领域的复杂任务。这本质上是一个通用工作流，一个面向 Agent 友好的系统架构设计，也就是让 Agent 能够读取、编写、验证、执行和修复任务的 workflow surface。</p>
+<p>目前，我主要在策引与 MinePilot 这两个看起来风马牛不相及的项目上实践这套工作流。在连续重构了它们之后，我发现这套架构实际上跑在了完全相同的底层逻辑上。</p>
+<h2 id="从底层-api-到-domain-dsl-的跃迁">从底层 API 到 Domain DSL 的跃迁</h2>
+<p>很多 AI 产品的开发者在意识到“让 AI 写自由代码不可靠”之后，往往会走向另一个极端：提供极其精细的结构化 API。</p>
+<p>比如在量化投资中，一种常见做法是要求 AI 返回一个多层嵌套的 JSON 树来表示策略；在 Minecraft 中，另一种做法是要求 AI 每次只能调用 <code>placeBlock(x, y, z, type)</code> API。</p>
+<p>这种做法的扩展性很差。一旦策略稍微复杂（例如“QQQ 相对强度大于 101 买入，小于 99 且连续两日确认才卖出”），API 参数结构就会爆炸式膨胀。大模型在生成这种深层嵌套的结构时，非常容易遗漏字段或者写错类型。让大模型去手写几万个方块的放置坐标也是同理，这直接消耗了它在“空间规划”上的推理窗口，将其浪费在了底层的算术计算上。</p>
+<h3 id="收拢底层控制权">收拢底层控制权</h3>
+<p>更好的解法是：<strong>收拢 Agent 的底层控制权，为它专门设计一门领域特定语言（Domain DSL）。</strong></p>
+<p>在量化投资系统策引中，我没有让大模型写底层计算逻辑，而是抽象出了一套“策略原语”（Primitives）。这些原语包括均线（EMA）、逻辑判断（GreaterThan/LessThan）、状态延迟（Lag）和连续状态确认（Streak）。大模型只需要像搭积木一样组合这些原语。底层的 Pandas 运算、对齐、未来函数屏蔽，统统由系统封装。</p>
+<p>在 MinePilot 的底层引擎 <a href="https://github.com/i365dev/CraftDAG">CraftDAG</a> 中，我也是这么做的。我设计了一套名为 <code>ComponentPlan</code> 的 DSL。</p>
+<p>在 ComponentPlan 这一层，大模型不需要也不应该直接输出底层方块坐标。大模型只需要写高层的组件级规划。比如，大模型只需要生成这样一段 JSON 意图：</p>
+<blockquote>
+<p>“创建一个 16×12×16 的 <code>RoomShell</code>（房间壳体），在 <code>front</code>（前）墙面的 <code>offset: 3</code>（偏移 3 格）处安装一个 <code>Door</code>，在上方放置一个 <code>GableRoof</code>（人字屋顶），并设定 <code>overhang: 1</code>（屋檐延伸 1 格）。”</p>
+</blockquote>
+<h3 id="为-agent-搭建的语义脚手架">为 Agent 搭建的“语义脚手架”</h3>
+<p>通过这套 DSL，大模型不再需要去计算“这面墙的坐标是从 (10, 5, 20) 到 (10, 10, 20)”，也不需要计算“门挖掉之后要替换成空气方块”。它使用了 <code>anchor</code>（锚点）、<code>wall</code>（依附墙面）、<code>offset</code>（偏移）、<code>overhang</code>（悬空）等高层语义属性。</p>
+<p>DSL 的本质，是为大模型搭建一个“语义脚手架”。把底层的物理碰撞、数学计算、工程容错全部被下沉到引擎侧。Agent 的心智负担大大降低，它可以将有限的上下文窗口和推理预算投入到它更擅长的事情上——宏观架构与逻辑推演。</p>
+<p>这个阶段的核心原则是：<strong>Agent is the author. Engine is the compiler.</strong></p>
+<h2 id="像写编译器一样构建业务引擎">像写编译器一样构建业务引擎</h2>
+<p>既然大模型生成的是高层的 DSL（意图），那么系统要如何执行它？这就来到了整个面向 Agent 工作流中最重的一层：中间表示（IR）与编译器设计。</p>
+<p>当大模型交出了一份 <code>ComponentPlan</code>（Minecraft 建筑计划）或是一份 <code>Strategy primitives</code>（量化策略图谱），这只是人类意图和机器执行之间的中间态。它不能直接拿去盖房子，也不能直接拿去回测投资组合。</p>
+<p>你需要像写一门编程语言的编译器一样，来构建你的业务引擎。</p>
+<h3 id="分层编译管线">分层编译管线</h3>
+<p>在 CraftDAG 中，建筑生成被设计成一条相对严格的编译管线：</p>
+<ol>
+<li><strong>输入层（BuildIntent）</strong>：用户的自然语言意图。</li>
+<li><strong>领域计划层（ComponentPlan DSL）</strong>：由大模型根据意图生成的建筑组件图纸。</li>
+<li><strong>中间表示层（CraftDAG IR）</strong>：引擎接收 ComponentPlan，进行宏观和局部的依赖解析，将其展开为一张可验证、可排序的有向无环图（DAG）。在这里，高级语义被降级为确定性的几何包围盒计算和依附关系计算。</li>
+<li><strong>目标表示层（VoxelPlan）</strong>：编译器进一步向下，将 IR 计算为最终的三维体素集合（方块的绝对坐标与状态），生成蓝图导出，或者供前端/后端直接渲染。</li>
+</ol>
+<p>同样，在策引中，AI 组合的“策略原语”也会被引擎转化为一张有向无环图。它通过拓扑排序（Topological Sort）决定先计算哪些均线指标，再计算哪些比较逻辑，最后聚合为交易信号。这个可以查看<a href="https://www.myinvestpilot.com/primitives-editor">策引原语策略可视化编辑器</a>来直观的感受下。</p>
+<h3 id="为什么要走编译路线">为什么要走编译路线？</h3>
+<p>一开始，我觉得为一个应用引入“编译器”和“抽象语法树”的概念有些过度设计。但后来的迭代证明，这是支撑 Agent 系统稳定运行的有效方式。</p>
+<p>只有将意图降级为有向无环图（IR/DAG），系统才具备了强大的<strong>静态分析</strong>与<strong>确定性执行</strong>能力。</p>
+<ul>
+<li>在量化系统中，因为有了 DAG，系统可以清晰地追踪信号依赖，确保没有任何一个环节偷看了未来数据。</li>
+<li>在 Minecraft 引擎中，因为有了 IR，系统可以计算出极其精确的材料清单（Material Lists）。理论上，这种 IR 分层也为未来的局部重算提供了基础：当用户只修改屋顶材质时，系统可以只重新处理相关子图，而不必让大模型重新生成整栋建筑。</li>
+</ul>
+<p>更重要的是，有了这层编译机制，才有了下一步拦截 Agent 幻觉的可能。</p>
+<h2 id="机器可读的契约与修复循环">机器可读的契约与修复循环</h2>
+<p>我们一直被图形用户界面（GUI）的交互惯性所束缚。在传统软件中，如果用户填错了表单，系统会弹出一个红框或者 Toast 提示：“输入格式不合法”。用户看到红框，凭借生活经验重新输入。</p>
+<p>但是，如果只把一句简单的 <code>Invalid plan</code> 或者 <code>Syntax Error</code> 返回给大模型，它的修复效率会非常低。它往往只能靠猜测去重写整个 JSON，有时修复了一个错误，反而会引发新的错误。</p>
+<p>在 Agent-friendly 的系统里，<strong>报错不再是给人看的，而是系统与大模型之间的一纸强契约（Validation Contract）</strong>。</p>
+<h3 id="报错不是给人看的">报错不是给人看的</h3>
+<p>在开发 CraftDAG 时，我专门为系统设计了一套详尽的强类型错误反馈机制。如果大模型在生成 DSL 时，不小心把一个塔楼组件的坐标放到了整个建筑设定的边界之外，系统的编译器会在第一道防线将它拦下，并抛出一个精确的 JSON 报错：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;stage&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;component-validation&#34;</span>,
+  <span style="font-weight:bold">&#34;code&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ASSEMBLY_INSTANCE_OUT_OF_BOUNDS&#34;</span>,
+  <span style="font-weight:bold">&#34;path&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;instances[0].anchor&#34;</span>,
+  <span style="font-weight:bold">&#34;componentId&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;northwest_tower&#34;</span>,
+  <span style="font-weight:bold">&#34;repairHint&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Move the instance inward or increase global bounds.&#34;</span>
+}
+</code></pre></div><p>你看，这个报错完全不是给人看的。它明确告诉大模型：</p>
+<ol>
+<li><strong>stage</strong>：错误发生在组件验证阶段。</li>
+<li><strong>code</strong>：越界错误。</li>
+<li><strong>path</strong>：具体的 JSON 路径是第一个实例的锚点。</li>
+<li><strong>repairHint</strong>：直接给出具体的修复建议（向内移动锚点，或者扩大全局边界）。</li>
+</ol>
+<h3 id="llm-的协作契约与修复循环">LLM 的协作契约与修复循环</h3>
+<p>除了事后的精准报错，事前的约束同样重要。</p>
+<p>在 CraftDAG 项目里，有一份核心文件叫 <code>LLM_AUTHORING_CONTRACT.md</code>（LLM 编写契约）。这不是传统意义上给人类开发者看的 API 文档，而是一份可以被大模型或 harness agent 读取的编写契约，也可以作为 System Prompt 或 llm.txt 的一部分。</p>
+<p>同样地，在策引（MyInvestPilot）中我也做了类似的事情。为了让 Agent 能够独立开发策略原语，系统专门提供了一篇 <a href="https://www.myinvestpilot.com/docs/primitives/ai-assisted-development">机器可读的开发文档</a>，并通过 <a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">llm-quickstart.txt</a> 为大模型提供紧凑的上下文和 Few-shot 示例。此外，引擎还暴露出严格的 <a href="https://media.i365.tech/myinvestpilot/primitives_schema.json">JSON Schema</a>，让大模型在生成 DSL 时能够依循一套确定的强类型结构契约。</p>
+<p>在这些契约的设计上，我学到的一个深刻教训是：<strong>与其告诉大模型“你应该怎么做”，不如直接设定绝对禁止项（ABSOLUTE PROHIBITIONS）。</strong>
+不要试图去穷举大模型能发挥的创意，而是划定死亡红线。例如，明确禁止在组件的 <code>inputs</code> 里直接内联嵌套其他组件，必须先定义 <code>id</code> 再通过 <code>ref</code> 引用。</p>
+<p>只有当系统具备了“严格的事前契约”和“精准的事后报错”时，一个重要变化才会发生：<strong>大模型开始具备更稳定的自我修复路径。</strong></p>
+<p>当大模型收到上述的 JSON 报错后，它会立刻明白 <code>northwest_tower</code> 出了问题，接着在下一次迭代中只修正这个组件的坐标，然后再次提交编译。这就形成了一个稳定、可收敛的<strong>迭代修复循环（Repair Loop）</strong>。没有这个循环，大模型就是一个偶尔好用的玩具；有了这个循环，大模型就真正变成了可靠的生产力基建。</p>
+<h2 id="处理模糊与确定性的边界">处理模糊与确定性的边界</h2>
+<p>做好了底层引擎，最后一个问题是：用户该如何介入这套复杂的系统？</p>
+<p>用户不会写 JSON DSL，也不会看懂 DAG 图。他们依然会用自然语言提问：“帮我调整一下这个投资组合的风险”，或者“给这个城堡多加两扇大一点的窗户”。</p>
+<p>这就引出了一个核心架构矛盾：用户的意图往往是<strong>模糊的</strong>，而底层的金融计算和空间几何却是<strong>绝对确定性的</strong>。如果你试图让一个全能大模型去同时处理这两端，系统立刻就会在“发散思考”和“严谨计算”之间精神分裂。</p>
+<h3 id="本地与远端的职责切割">本地与远端的职责切割</h3>
+<p>在我对这类系统的架构设想里，比较理想的方式是采用<strong>混合 Agent 架构（Hybrid Agent Architecture）</strong>。未来 MinePilot 这样的系统可以采用这种拆分，将 Agent 的职责进行硬切割：</p>
+<ul>
+<li><strong>本地 Agent（Orchestrator/Local Agent）</strong>：运行在离用户最近的交互层（比如前端浏览器）。它本质上是一个高级的路由器和状态机。它的唯一职责是处理<strong>模糊性（Ambiguity）</strong>。它和用户聊天，猜测用户的意图，并在必要时发起明确的表单让用户确认。</li>
+<li><strong>远端处理器（Processor/Remote Engine）</strong>：运行在后端的异步任务队列中。当本地 Agent 把模糊的意图清晰化之后，将任务作为结构化的 Job 扔到远端。远端处理器接管 DSL，运行编译器图元，执行相对复杂的确定性验证、编译与计算。</li>
+</ul>
+<p>队列、状态机、编译验证，这些涉及绝对准确率的东西，必须由传统的确定性代码来实现；而意图猜测、错误文本解释、自然语言翻译，这些概率性的事情，全权交由大模型。</p>
+<p><strong>把确定性层和概率性层混在一起，是很多 Agent 系统容易犯的架构错误。</strong></p>
+<h2 id="这套范式的边界">这套范式的边界</h2>
+<p>需要强调的是，Agent-friendly workflow 并不是所有 AI 产品的通用解法。它更适合那些具备以下特征的领域：</p>
+<ol>
+<li>有明确的领域结构；</li>
+<li>可以抽象出稳定的原语或组件；</li>
+<li>中间状态可以被验证；</li>
+<li>最终结果可以被执行、编译或模拟；</li>
+<li>错误可以被定位并修复；</li>
+<li>人类仍然可以审查和决策。</li>
+</ol>
+<p>如果一个任务本身是高度开放的创意表达，或者没有明确的验证标准，过早引入 DSL 和 DAG 反而可能限制模型的表达能力。同时，DSL 也不是越多越好，真正困难的是找到足够小、足够正交、又能覆盖主要任务的领域原语集。</p>
+<p>即便在适合的领域里，Validation 也不等于真实的正确性。投资策略通过回测不代表未来有效；建筑蓝图通过编译不代表审美优秀。验证契约的价值，是把错误空间缩小到系统可以管理的范围，而不是替代人类的最终判断。Agent-friendly 并不是替代 Human-friendly，更合理的形态是 dual interface：人通过 UI 表达意图、审查结果、做决策；Agent 通过 DSL、工具和验证契约操作系统。</p>
+<h2 id="软件架构视角的反转">软件架构视角的反转</h2>
+<p>回头审视策引（MyInvestPilot）和 MinePilot 这两个项目，一个是严肃的金融投资，一个是开放的沙盒游戏。它们在业务逻辑上相隔万里，但在持续的开发重构过程中，却自然而然地收敛到了同一套系统范式上：</p>
+<p><code>意图 (Intent)</code> → <code>领域语言 (Domain DSL)</code> → <code>编译器 (IR/DAG)</code> → <code>精准契约验证 (Validation)</code> → <code>迭代修复 (Repair Loop)</code> → <code>确定性执行 (Execution)</code></p>
+<p>过去几十年里，我们设计一款软件的标准流程是：先画出供人类交互的原型界面，再设计底层的数据库表结构，最后编写中间的胶水 API 把它们连起来。</p>
+<p>但在 AI Agent 即将大面积接管复杂任务的时代，设计软件的顺序可能被彻底反转了：</p>
+<ol>
+<li>先问自己：这项复杂的业务，能不能抽象出一套对 Agent 足够克制、能收拢底层控制权的领域语言（DSL）？</li>
+<li>再问自己：系统有没有强大的编译器内核，能将 DSL 降级为确定性的有向无环图，并提供精确的机器验证契约？</li>
+<li>然后问自己：当模型犯错时，你的系统是不是能给它提供机器可读的纠错反馈，建立起闭环的修复循环？</li>
+<li>最后，才是在这套相对稳定的工作流基础之上，为人类包裹一层用来监督和确认的交互界面。</li>
+</ol>
+<p>我暂且把这种范式称为：<strong>Domain-shaped, not Domain-locked</strong> 。</p>
+<p>把复杂的专业知识重塑为对 Agent 可读、可写、可验证、可迭代的工作流，或许才是通向下一代软件架构的一把钥匙。</p>
+<hr>
+<p><strong>相关探索与资源：</strong></p>
+<ul>
+<li><a href="https://www.i365.tech/">i365.tech：我的 AI 原生系统与产品实验室</a></li>
+<li>深入了解量化系统的底层设计：<a href="https://www.bmpi.dev/dev/ai-native-investment-system/">《我是如何构建一个 AI 原生量化系统的》</a></li>
+<li><a href="https://www.myminepilot.com/">MinePilot 官方网站</a></li>
+<li><a href="https://github.com/i365dev/MinePilot">MinePilot 源码 (GitHub)</a></li>
+<li><a href="https://github.com/i365dev/CraftDAG">CraftDAG 源码 (GitHub)</a></li>
+</ul>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

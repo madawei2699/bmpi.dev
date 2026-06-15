@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <meta name="author" content="Dawei Ma">
+  
+  <meta name="description" content="A chat box alone does not solve complex problems. Through MyInvestPilot and MinePilot, this article explores a workflow design pattern for AI agents: Domain DSLs, IR/DAG pipelines, validation contracts, and repair loops.">
+  
+  
+  <meta name="keywords" content="Agent-friendly,, AI, Native,, DSL,, DAG,, Validation,, Compiler,, Repair, Loop">
+  
+
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@BMPI11">
+  <meta name="twitter:creator" content="@madawei2699">
+  <meta name="twitter:title" content="Designing Agent-Friendly Workflows"/>
+  <meta name="twitter:description" content="A chat box alone does not solve complex problems. Through MyInvestPilot and MinePilot, this article explores a workflow design pattern for AI agents: Domain DSLs, IR/DAG pipelines, validation contracts, and repair loops."/>
+  
+  
+  <meta name="twitter:image" content="https://og.bmpi.dev/Designing Agent-Friendly Workflows.png">
+  
+
+  
+  <meta property="og:title" content="Designing Agent-Friendly Workflows" />
+<meta property="og:description" content="A chat box alone does not solve complex problems. Through MyInvestPilot and MinePilot, this article explores a workflow design pattern for AI agents: Domain DSLs, IR/DAG pipelines, validation contracts, and repair loops." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bmpi.dev/en/dev/agent-native-system-paradigm/" /><meta property="article:section" content="dev" />
+<meta property="article:published_time" content="2026-06-14T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2026-06-14T12:00:00&#43;08:00" />
+
+
+  
+  <meta name="og:image" content="https://og.bmpi.dev/Designing Agent-Friendly Workflows.png">
+  
+
+  
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      
+      "@type": "BlogPosting",
+      
+      "headline": "Designing Agent-Friendly Workflows",
+      
+      "image": "https://www.bmpi.dev/images/logo.png",
+      
+      "datePublished": "2026-06-14T00:00:00Z",
+      "dateModified": "2026-06-14T12:00:00+08:00",
+      "author": {
+        "@type": "Person",
+        "name": "Dawei Ma"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.bmpi.dev/en/dev/agent-native-system-paradigm/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BMPI.dev",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.bmpi.dev/images/logo.png"
+        }
+      },
+      "description": "A chat box alone does not solve complex problems. Through MyInvestPilot and MinePilot, this article explores a workflow design pattern for AI agents: Domain DSLs, IR/DAG pipelines, validation contracts, and repair loops.",
+      "keywords": ["AI Native", "Agent", "Workflow", "DSL", "DAG", "Validation", "MinePilot", "MyInvestPilot"]
+    }
+    </script>
+
+
+
+  
+  <base href="https://www.bmpi.dev/en/dev/agent-native-system-paradigm/">
+  
+  <title>
+  Designing Agent-Friendly Workflows · BMPI
+</title>
+
+  
+  <link rel="canonical" href="https://www.bmpi.dev/en/dev/agent-native-system-paradigm/">
+  
+
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder.min.fdc8a9bd0b5625b807b055750cc0bf4ef2fc3fccecf12f0c17bdf31ef3f3d4dc.css" integrity="sha256-/cipvQtWJbgHsFV1DMC/TvL8P8zs8S8MF73zHvPz1Nw="
+    crossorigin="anonymous" media="screen" />
+  
+
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/coder-dark.min.a2fdc25deb82b741f3a807e38508c2dea269fc900c2b37ee8af380d97ea4d7a8.css" integrity="sha256-ov3CXeuCt0HzqAfjhQjC3qJp/JAMKzfuivOA2X6k16g="
+    crossorigin="anonymous" media="screen" />
+  
+  
+
+  
+
+  
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/main.css" />
+  
+
+  
+  <script src="https://www.bmpi.dev/js/lazysizes.min.js" async></script>
+  
+  <script src="https://www.bmpi.dev/js/custom.js" async></script>
+  
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.bmpi.dev/images/ico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.bmpi.dev/images/ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.bmpi.dev/images/ico/favicon-16x16.png">
+  <link rel="manifest" href="https://www.bmpi.dev/images/ico/site.webmanifest">
+
+  <link rel="amphtml" type="text/html" href="https://www.bmpi.dev/en/amp/dev/agent-native-system-paradigm/" title="BMPI" />
+  <meta name="generator" content="Hugo 0.83.1" />
+
+  <meta name="baidu-site-verification" content="TiReu51WyJ" />
+
+  
+  
+  <link rel="preload" href="https://www.bmpi.dev/scss/tagcloud.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://www.bmpi.dev/scss/tagcloud.css"></noscript>
+
+  
+
+  
+  <link href='https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap' rel='stylesheet'>
+  <link rel="stylesheet" href="https://www.bmpi.dev/css/en-fonts.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+
+  
+
+  
+
+  <script async defer data-website-id="356d3289-e627-409c-a9d7-a272cf789f0b" src="https://umami.bmpi.dev/script.js"></script>
+</head>
+
+
+
+
+
+
+<body class="colorscheme-auto">
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a id="site-title" class="navigation-title" href="https://www.bmpi.dev/en">
+      BMPI
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.linkedin.com/in/madawei2699">LinkedIn</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://github.com/madawei2699">GitHub</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/self/">Learn</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://www.bmpi.dev/en/dev/">Dev</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://www.bmpi.dev/">Chinese</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title heti">
+          <h1 class="title">Designing Agent-Friendly Workflows</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2026-06-14T00:00:00Z'>
+                2026-06-14
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              
+              13:21
+              
+            </span>
+            
+            <span class="post-word-count"> | 2795 words | </span>
+            <span id="post-views"></span> views
+            
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/en/categories/building-practice/">Building &amp; Practice</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/en/tags/ai-native/">AI Native</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/agent/">Agent</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/workflow/">Workflow</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/dsl/">DSL</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/dag/">DAG</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/validation/">Validation</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/minepilot/">MinePilot</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/myinvestpilot/">MyInvestPilot</a></div>
+
+        </div>
+      </header>
+
+      <div class="brand-ad">
+        <div class="brand-content">
+          <a href="https://www.i365.tech/post">
+            <span>点我在线阅读《个人产品开发指南》，教你从零到一快速开发自己的个人产品。</span>
+          </a>
+        </div>
+        <div class="brand-ad-link"><a href="https://www.bmpi.dev/_ad/" rel="nofollow">品牌赞助</a></div>
+        <div class="brand-ad-link-line"></div>
+      </div>
+
+      
+
+      <div class="article">
+        <div class="article-content heti" data-aos="fade-up" data-aos-duration="1500" data-aos-anchor-placement="top-bottom">
+          
+          
+          
+          
+          <p>Some time ago, I was thinking about how to enable agents to execute tasks stably in complex virtual environments. During this time, I stumbled upon an open-source project called <a href="https://github.com/mindcraft-bots/mindcraft">mindcraft</a>. The project uses a harness around Minecraft LAN mode to let an LLM-powered bot join the game world. You can issue commands to it directly in the game using natural language—for instance, &ldquo;build a house&rdquo;—and the bot will start placing blocks in the world.</p>
+<p>This demonstration was fascinating, but when I tried it myself, I found the bot&rsquo;s stability to be less than ideal. It often got stuck in place; even when building a very small house, it frequently stalled halfway through. The causes might stem from environmental perception, action execution, pathfinding, or context maintenance. But the core issue is this: relying on an LLM to perform real-time, closed-loop spatial control in a game makes stability extremely difficult to guarantee.</p>
+<p>I started researching the underlying reasons. To have an LLM place blocks piece by piece through &ldquo;imperative&rdquo; steps requires the model to precisely understand 3D spatial coordinates within the game while simultaneously processing a large amount of environmental context. This demands that the model maintain spatial state over long periods, understand environmental feedback, and continuously perform precise coordinate reasoning. For current LLMs, such closed-loop control tasks are highly susceptible to accumulating errors.</p>
+<p>So I started looking for a different approach. If real-time building in-game is too prone to freezing, could I have the LLM generate a building schematic outside the game and then automatically load it into the game via mods? Following this train of thought, I discovered WorldEdit and the Minecraft building toolchain surrounding the schematic ecosystem. Consequently, my core approach underwent a shift: <strong>How can we use LLMs to generate <code>.schem</code> schematic files that can be loaded by WorldEdit or related tools?</strong></p>
+<p>This also became the direct starting point for my open-source project, <a href="https://github.com/i365dev/MinePilot">MinePilot</a>.</p>
+<p>However, this still didn&rsquo;t solve the fundamental problem. Blueprint formats like <code>.schem</code> are essentially collections of low-level block states: every position must ultimately correspond to a specific block state. Asking an LLM to directly generate such low-level voxel data still easily results in walls with holes, misaligned roofs, and broken stairs.</p>
+<p>At this point, I recalled a similar issue I encountered while developing the quantitative investment system <a href="https://www.myinvestpilot.com/">MyInvestPilot</a>. As I mentioned in the article <a href="https://www.bmpi.dev/en/dev/ai-native-investment-system/"><em>How I Built an AI-Native Quantitative Investment System</em></a>, to prevent the LLM from writing Python trading code with look-ahead bias, I introduced a &ldquo;Strategy Primitives Engine&rdquo; paradigm. Instead of having the LLM directly generate low-level logic code, I provided a Directed Acyclic Graph (DAG) based on a Domain-Specific Language (DSL). This creates a constrained space where the LLM can express its architectural intent.</p>
+<p>The pattern turned out to be more general than investing. It can be applied to other domains where agents need to operate on complex, verifiable workflows. Essentially, it is a reusable workflow pattern for Agent-friendly systems: a workflow surface that allows an agent to read, write, validate, execute, observe, and repair tasks.</p>
+<p>Currently, I am practicing this workflow primarily on MyInvestPilot and MinePilot—two projects that seemingly have nothing in common. After continuously refactoring both, I discovered that this architecture is actually running on the exact same underlying logic.</p>
+<h2 id="the-leap-from-low-level-apis-to-domain-dsl">The Leap from Low-Level APIs to Domain DSL</h2>
+<p>Many AI product developers, upon realizing that &ldquo;letting AI write free-form code is unreliable,&rdquo; often swing to the opposite extreme: providing extremely granular, structured APIs.</p>
+<p>For example, in quantitative investing, a common approach is to require the AI to return a deeply nested JSON tree to represent a strategy; in Minecraft, another common approach is to restrict the AI to only calling a <code>placeBlock(x, y, z, type)</code> API.</p>
+<p>These approaches do not scale well. Once the strategy becomes slightly complex (e.g., &ldquo;Buy when QQQ relative strength is &gt;101, sell when &lt;99 and confirmed for two consecutive days&rdquo;), the parameter schema quickly becomes unwieldy. When generating these deeply nested structures, LLMs are very prone to omitting fields or using the wrong types. Asking an LLM to manually write the placement coordinates for tens of thousands of blocks is similar; it directly consumes its reasoning window on &ldquo;spatial planning,&rdquo; wasting it on low-level arithmetic calculations.</p>
+<h3 id="consolidating-low-level-control">Consolidating Low-Level Control</h3>
+<p>A better solution is: <strong>Consolidate the Agent&rsquo;s low-level control by designing a Domain-Specific Language (Domain DSL) specifically for it.</strong></p>
+<p>In the MyInvestPilot quantitative system, I didn&rsquo;t let the LLM write low-level calculation logic. Instead, I abstracted a set of &ldquo;Strategy Primitives.&rdquo; These primitives include moving averages (EMA), logical predicates (GreaterThan/LessThan), state delays (Lag), and consecutive state confirmations (Streak). The LLM only needs to combine these primitives like building blocks. The underlying Pandas operations, time alignment, and guardrails against look-ahead bias are all handled by the system.</p>
+<p>In MinePilot&rsquo;s underlying engine, <a href="https://github.com/i365dev/CraftDAG">CraftDAG</a>, I did the exact same thing. I designed a DSL called <code>ComponentPlan</code>.</p>
+<p>At the ComponentPlan layer, the LLM neither needs to nor should directly output low-level block coordinates. The LLM only needs to write high-level component planning. For instance, the LLM only needs to generate a JSON intent like this:</p>
+<blockquote>
+<p>&ldquo;Create a 16x12x16 <code>RoomShell</code>. On the <code>front</code> wall, at <code>offset: 3</code>, install a <code>Door</code>. Place a <code>GableRoof</code> on top, and set <code>overhang: 1</code>.&rdquo;</p>
+</blockquote>
+<h3 id="a-semantic-scaffold-for-agents">A &ldquo;Semantic Scaffold&rdquo; for Agents</h3>
+<p>Through this DSL, the LLM no longer needs to calculate &ldquo;the coordinates of this wall are from (10, 5, 20) to (10, 10, 20),&rdquo; nor does it need to compute &ldquo;after the door is carved out, it needs to be replaced with air blocks.&rdquo; It utilizes high-level semantic attributes like <code>anchor</code>, <code>wall</code>, <code>offset</code>, and <code>overhang</code>.</p>
+<p>The essence of a DSL is to build a &ldquo;semantic scaffold&rdquo; for the LLM. All low-level geometry, mathematical calculations, and engineering constraints are pushed down into the engine. The agent&rsquo;s cognitive load is vastly reduced, allowing it to invest its limited context window and reasoning budget into what it does best: high-level structure and logical reasoning.</p>
+<p>The core principle of this phase is: <strong>Agent is the author. Engine is the compiler.</strong></p>
+<h2 id="building-domain-engines-like-compilers">Building Domain Engines Like Compilers</h2>
+<p>Since the LLM generates high-level DSL (intent), how should the system execute it? This brings us to the heaviest layer of the entire Agent-friendly workflow: Intermediate Representation (IR) and compiler design.</p>
+<p>When the LLM hands over a <code>ComponentPlan</code> (Minecraft building plan) or a <code>Strategy primitives</code> map (quantitative strategy), this is merely an intermediate state between human intent and machine execution. It cannot be directly used to build a house, nor can it be directly used to backtest an investment portfolio.</p>
+<p>You need to build your domain engine much like you would build a compiler for a programming language.</p>
+<h3 id="layered-compilation-pipeline">Layered Compilation Pipeline</h3>
+<p>In CraftDAG, the building generation process is designed as a relatively strict compilation pipeline:</p>
+<ol>
+<li><strong>Input Layer (BuildIntent)</strong>: The user&rsquo;s natural language intent.</li>
+<li><strong>Domain Plan Layer (ComponentPlan DSL)</strong>: The building component blueprint generated by the LLM based on the intent.</li>
+<li><strong>Intermediate Representation Layer (CraftDAG IR)</strong>: The engine receives the ComponentPlan, parses macroscopic and local dependencies, and unfolds it into a verifiable, sortable Directed Acyclic Graph (DAG). Here, high-level semantics are lowered into deterministic bounding-box calculations and attachment relationships.</li>
+<li><strong>Target Representation Layer (VoxelPlan)</strong>: The compiler goes further down, computing the IR into the final 3D voxel collection (absolute block coordinates and states), generating a schematic export, or serving it directly for frontend/backend rendering.</li>
+</ol>
+<p>Similarly, in MyInvestPilot, the &ldquo;strategy primitives&rdquo; assembled by the AI are also converted into a DAG by the engine. Through Topological Sorting, it decides which moving average indicators to compute first, followed by which comparison logics, before finally aggregating them into a trading signal. You can intuitively experience this by checking out the <a href="https://www.myinvestpilot.com/primitives-editor">MyInvestPilot Primitives Visual Editor</a>.</p>
+<h3 id="why-take-the-compilation-route">Why Take the Compilation Route?</h3>
+<p>Initially, I felt that introducing concepts like &ldquo;compilers&rdquo; and &ldquo;abstract syntax trees&rdquo; to an application was over-engineering. However, subsequent iterations proved that this is an effective way to support the stable operation of Agent systems.</p>
+<p>Only by lowering intents into a Directed Acyclic Graph (IR/DAG) does the system gain powerful <strong>static analysis</strong> and <strong>deterministic execution</strong> capabilities.</p>
+<ul>
+<li>In quantitative systems, having a DAG allows the system to cleanly trace signal dependencies, ensuring that no single component peeks at future data.</li>
+<li>In the Minecraft engine, having an IR allows the system to calculate extremely precise Material Lists. In theory, this IR layering also lays the groundwork for future incremental recalculation: when a user only modifies the roof material, the system only needs to reprocess the relevant sub-graph instead of having the LLM regenerate the entire building.</li>
+</ul>
+<p>More importantly, having this compilation mechanism makes the next step—intercepting agent hallucinations—possible.</p>
+<h2 id="machine-readable-contracts-and-repair-loops">Machine-Readable Contracts and Repair Loops</h2>
+<p>We have long been bound by the interactive inertia of Graphical User Interfaces (GUIs). In traditional software, if a user fills out a form incorrectly, the system pops up a red box or toast saying: &ldquo;Invalid input format.&rdquo; The user sees the red box and relies on life experience to re-enter it.</p>
+<p>However, if you merely return a simple <code>Invalid plan</code> or <code>Syntax Error</code> to an LLM, its repair efficiency will be remarkably low. It often relies on guessing to rewrite the entire JSON, and sometimes fixing one error inadvertently triggers a new one.</p>
+<p>In an Agent-friendly system, <strong>errors are not merely messages for humans. They become a strict, machine-readable Validation Contract between the system and the model.</strong></p>
+<h3 id="errors-are-not-for-humans">Errors Are Not for Humans</h3>
+<p>While developing CraftDAG, I specifically designed a comprehensive, strongly-typed error feedback mechanism for the system. If the LLM, while generating the DSL, accidentally places a tower component&rsquo;s coordinates outside the global boundaries set for the building, the system&rsquo;s compiler will intercept it at the first line of defense and throw a precise JSON error:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;stage&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;component-validation&#34;</span>,
+  <span style="font-weight:bold">&#34;code&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ASSEMBLY_INSTANCE_OUT_OF_BOUNDS&#34;</span>,
+  <span style="font-weight:bold">&#34;path&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;instances[0].anchor&#34;</span>,
+  <span style="font-weight:bold">&#34;componentId&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;northwest_tower&#34;</span>,
+  <span style="font-weight:bold">&#34;repairHint&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Move the instance inward or increase global bounds.&#34;</span>
+}
+</code></pre></div><p>As you can see, this error is absolutely not meant for a human to read. It explicitly tells the LLM:</p>
+<ol>
+<li><strong>stage</strong>: The error occurred during component validation.</li>
+<li><strong>code</strong>: An out-of-bounds error.</li>
+<li><strong>path</strong>: The specific JSON path is the anchor of the first instance.</li>
+<li><strong>repairHint</strong>: Directly provides specific repair suggestions (move the anchor inward, or enlarge the global bounds).</li>
+</ol>
+<h3 id="the-llm-collaboration-contract-and-repair-loop">The LLM Collaboration Contract and Repair Loop</h3>
+<p>Besides precise post-validation errors, pre-authoring constraints are equally important.</p>
+<p>In the CraftDAG project, there is a core file named <code>LLM_AUTHORING_CONTRACT.md</code>. This is not an API document for human developers in the traditional sense; rather, it is an authoring contract that can be read by LLMs or harness agents, and can also serve as part of a System Prompt or <code>llm.txt</code>.</p>
+<p>Coincidentally, I did something similar in MyInvestPilot. To allow the Agent to independently develop strategy primitives, the system specifically provides a <a href="https://www.myinvestpilot.com/docs/primitives/ai-assisted-development">machine-readable development document</a>, and uses <a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">llm-quickstart.txt</a> to provide the LLM with compact context and Few-shot examples. Furthermore, the engine exposes a strict <a href="https://media.i365.tech/myinvestpilot/primitives_schema.json">JSON Schema</a>, allowing the LLM to adhere to a deterministic, strongly-typed structural contract when generating the DSL.</p>
+<p>In designing these contracts, a profound lesson I learned is: <strong>Instead of telling the LLM &ldquo;what you should do,&rdquo; it is better to directly set ABSOLUTE PROHIBITIONS.</strong>
+Do not attempt to exhaust all the creative possibilities an LLM might exercise; instead, draw absolute red lines. For instance, explicitly forbid inline nesting of other components within the <code>inputs</code> of a component; one must define the <code>id</code> first and reference it via <code>ref</code>.</p>
+<p>Only when a system possesses both &ldquo;strict pre-contracts&rdquo; and &ldquo;precise post-errors&rdquo; does a crucial change occur: <strong>The LLM begins to possess a much more stable self-repair path.</strong></p>
+<p>When the LLM receives the aforementioned JSON error, it will instantly understand that something went wrong with <code>northwest_tower</code>. In the next iteration, it will only correct the coordinates of that specific component, and then submit it for compilation again. This forms a stable, convergent <strong>Repair Loop</strong>. Without this loop, an LLM is merely an occasionally useful toy; with this loop, the LLM becomes part of a more reliable production workflow.</p>
+<h2 id="handling-the-boundary-between-ambiguity-and-determinism">Handling the Boundary Between Ambiguity and Determinism</h2>
+<p>Having built the underlying engine, the final question remains: How should the user interact with this complex system?</p>
+<p>Users won&rsquo;t write JSON DSLs, nor will they understand DAG diagrams. They will continue to ask natural language questions: &ldquo;Help me adjust the risk of this portfolio,&rdquo; or &ldquo;Add two larger windows to this castle.&rdquo;</p>
+<p>This highlights a core architectural contradiction: user intents are often <strong>ambiguous</strong>, while the underlying financial calculations and spatial geometry are <strong>deterministic and correctness-sensitive</strong>. If you try to make an LLM handle both ends simultaneously, the system is quickly pulled in two incompatible directions: open-ended reasoning and rigorous computation.</p>
+<h3 id="separating-duties-between-local-and-remote">Separating Duties Between Local and Remote</h3>
+<p>In my architectural vision for such systems, the ideal approach is a <strong>Hybrid Agent Architecture</strong>. Future systems like MinePilot could adopt this split, enacting a hard separation of Agent duties:</p>
+<ul>
+<li><strong>Orchestrator/Local Agent</strong>: Runs on the interaction layer closest to the user (e.g., frontend browser). It is essentially an advanced router and state machine. Its sole responsibility is handling <strong>Ambiguity</strong>. It chats with the user, infers user intent, and triggers explicit forms for user confirmation when necessary.</li>
+<li><strong>Processor/Remote Engine</strong>: Runs in the backend asynchronous task queue. After the Local Agent clarifies the ambiguous intent, it sends the task to the remote engine as a structured job. The remote processor takes over the DSL, runs the compiler primitives, and executes the relatively complex deterministic validation, compilation, and calculation.</li>
+</ul>
+<p>Queues, state machines, and compilation validations—things involving deterministic precision—must be implemented via traditional code. Conversely, intent guessing, error text explanation, and natural language translation—probabilistic tasks—should be fully delegated to LLMs.</p>
+<p><strong>Mixing the deterministic layer with the probabilistic layer is an architectural mistake that many Agent systems are prone to making.</strong></p>
+<h2 id="the-boundaries-of-this-paradigm">The Boundaries of This Paradigm</h2>
+<p>It must be emphasized that the Agent-friendly workflow is not a universal solution for all AI products. It is better suited for domains with the following characteristics:</p>
+<ol>
+<li>Clear domain structures;</li>
+<li>Stable primitives or components that can be abstracted;</li>
+<li>Intermediate states that can be validated;</li>
+<li>Final results that can be executed, compiled, or simulated;</li>
+<li>Errors that can be localized and repaired;</li>
+<li>Human oversight and decision-making is still possible.</li>
+</ol>
+<p>If a task is inherently highly open-ended creative expression or lacks clear validation standards, prematurely introducing a DSL and DAG might inadvertently restrict the model&rsquo;s expressive capabilities. At the same time, more DSLs are not necessarily better; the real difficulty lies in finding a set of domain primitives that is small enough, orthogonal enough, yet capable of covering the primary tasks.</p>
+<p>Even in suitable domains, Validation does not equate to correctness. An investment strategy passing a backtest does not mean it will be profitable in the future; a building blueprint passing compilation does not mean it is aesthetically pleasing. The value of a validation contract is narrowing the error space down to a manageable scope for the system, rather than replacing ultimate human judgment. Agent-friendly is not a substitute for Human-friendly; the more rational form is a dual interface: humans express intent, review results, and make decisions via UI; agents operate the system via DSL, tools, and validation contracts.</p>
+<h2 id="inverting-the-software-architecture-perspective">Inverting the Software Architecture Perspective</h2>
+<p>Looking back at MyInvestPilot and MinePilot, one is serious financial investment, the other an open sandbox game. They are worlds apart in business logic, yet during the continuous process of development and refactoring, they naturally converged onto the exact same system paradigm:</p>
+<p><code>Intent</code> → <code>Domain DSL</code> → <code>Compiler (IR/DAG)</code> → <code>Validation Contract</code> → <code>Repair Loop</code> → <code>Execution</code></p>
+<p>Over the past few decades, the standard process for designing software has been: first draw the prototype interface for human interaction, then design the underlying database table structures, and finally write the intermediate glue APIs to connect them.</p>
+<p>However, as AI agents begin to participate in more complex tasks, the order of software design may need to be rethought:</p>
+<ol>
+<li>Ask yourself first: Can this complex business be abstracted into a Domain DSL that is sufficiently restrained toward agents and can consolidate low-level control?</li>
+<li>Then ask yourself: Does the system have a robust compiler core capable of lowering the DSL into deterministic Directed Acyclic Graphs, providing precise machine-validation contracts?</li>
+<li>Next ask yourself: When the model makes a mistake, can your system provide machine-readable error feedback to establish a closed-loop repair cycle?</li>
+<li>Finally: It is only upon the foundation of this relatively stable workflow that we wrap a layer of interactive interfaces for human supervision and confirmation.</li>
+</ol>
+<p>For now, I refer to this paradigm as: <strong>Domain-shaped, not Domain-locked</strong>.</p>
+<p>Reshaping complex domain expertise into workflows that are readable, writable, verifiable, and iterable for agents might just be the key to the next generation of software architecture.</p>
+<hr>
+<p><strong>Related Explorations &amp; Resources:</strong></p>
+<ul>
+<li><a href="https://www.i365.tech/">i365.tech: My AI-Native Systems and Product Laboratory</a></li>
+<li>Deep dive into the underlying design of the quantitative system: <a href="https://www.bmpi.dev/en/dev/ai-native-investment-system/"><em>How I Built an AI-Native Quantitative Investment System</em></a></li>
+<li><a href="https://www.myminepilot.com/">MinePilot Official Website</a></li>
+<li><a href="https://github.com/i365dev/MinePilot">MinePilot Source Code (GitHub)</a></li>
+<li><a href="https://github.com/i365dev/CraftDAG">CraftDAG Source Code (GitHub)</a></li>
+</ul>
+
+        </div>
+
+        <div id="article-info">
+          
+        <div style="color: #5c7080;font-size: small;font-style: italic;">
+          
+          Update time:
+          
+          
+          
+          
+          
+          
+              
+                Today
+              
+          
+          
+          
+            Version: <a href="https://github.com/madawei2699/bmpi.dev/commit/40ed3567571708e8e0d2a378ed3de23b238e7038">40ed35675</a>
+          
+        </div>
+        
+
+        <div style="text-align: center;color: darkgray;">
+          
+          <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" style="color: darkgray;">CC BY-NC-ND 4.0</a></p>
+          
+        </div>
+
+        <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 0 auto;"></div>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+  
+  <h3 style="border-style: none;margin: 10px 0;">Related posts recommended</h2>
+  
+  <div style="padding-left: 10px;">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li style="list-style: none;"><a href="https://www.bmpi.dev/en/dev/ai-native-investment-system/">How I Built an AI-Native Quantitative Investment System</a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+  </div>
+  <div style="border-bottom-style: dashed;border-bottom-style: inset;border-bottom-width: 2px;width: 50%;margin: 20px auto;"></div>
+</div>
+
+        <div class="share-twitter-container">
+  <a target="_blank" href="https://twitter.com/intent/tweet?text=A%20chat%20box%20alone%20does%20not%20solve%20complex%20problems.%20Through%20MyInvestPilot%20and%20MinePilot%2c%20this%20article%20%e2%80%a6&amp;url=https%3a%2f%2fwww.bmpi.dev%2fen%2fdev%2fagent-native-system-paradigm%2f&amp;via=madawei2699">Share on Twitter</a>
+  <span class="share-twitter-container-dashed">·</span>
+  <a target="_blank" href="https://twitter.com/search?q=https%3a%2f%2fwww.bmpi.dev%2fen%2fdev%2fagent-native-system-paradigm%2f">Discuss on Twitter</a>
+</div>
+
+        
+
+
+        
+        
+        <script src="https://giscus.app/client.js"
+        data-repo="bmpi-dev/bmpi.dev"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMjM3NTQzNDU="
+        data-category="Announcements"
+        data-category-id="DIC_kwDODVY4ac4CQdzV"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+      </footer>
+    </article>
+    <template><span id="control"></span></template>
+    <div id="toast"></div>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <div class="footer-taxonomy">
+    <div>
+      <a href="https://www.myinvestpilot.com/"> MyInvestPilot </a>
+      ⚡️
+      <a href="https://www.myminepilot.com/">MinePilot</a>
+      ⚡️
+      <a href="https://www.free4.chat/"> free4chat </a>
+      ⚡️
+      <a href="https://www.i365.tech/"> i365 </a>
+      ⚡️
+      <a href="https://www.bmpi.dev/talk/"> Talk </a>
+      ⚡️
+      <a href="https://www.bmpi.dev/community/"> Community </a></div>
+  </div>
+  <section class="container">
+    
+     © 2019 - 2026
+    
+    
+  </section>
+</footer>
+
+  </main>
+  
+  <div id="the-modal" class="modal">
+    <span class="the-modal-close">&times;</span>
+    <img class="modal-content" id="the-modal-img01">
+  </div>
+
+  
+  
+  
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti-addon.min.js"></script>
+  <script>
+    
+    const heti = new Heti('.heti p, li, a, h1, h2, h3, h4, h5, h6, .title');
+    heti.autoSpacing(); 
+    
+    AOS.init({
+      disable: 'mobile'
+    });
+  </script>
+  
+
+  
+  <script type="module">
+    import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.5.0/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  <script>
+    
+    let mermaidBlocks = document.querySelectorAll('code[data-lang=mermaid]');
+    Array.prototype.forEach.call(mermaidBlocks, function(e) {
+      let text = e.textContent;
+      let mermaidDiv = document.createElement('div');
+      mermaidDiv.className = 'mermaid';
+      mermaidDiv.textContent = text;
+      e.parentElement.replaceWith(mermaidDiv);
+    });
+    window.mermaid.mermaidAPI.initialize(
+    window.mermaidOptions
+      ? window.mermaidOptions
+      : { securityLevel: "loose", theme: "base" });
+  </script>
+  
+
+  
+
+  
+
+</body>
+
+</html>

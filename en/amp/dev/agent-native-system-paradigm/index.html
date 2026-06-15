@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+
+
+
+<html amp lang="zh-cn" class="no-js">
+<head>
+  <title>Designing Agent-Friendly Workflows</title>
+  <meta charset="utf-8">
+
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    
+
+
+
+
+  <link rel="canonical" href="https://www.bmpi.dev/en/dev/agent-native-system-paradigm/">
+
+  <link rel="icon" href="https://www.bmpi.dev/favicon.png" type="image/png" sizes="144x144">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <meta name="theme-color" content="#000000" />
+
+  
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "BMPI",
+    
+    "url": "https:\/\/www.bmpi.dev"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/www.bmpi.dev"
+  
+  
+  
+  
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/",
+          "name": "en"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/",
+          "name": "amp"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/dev\/",
+          "name": "dev"
+        }
+    },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https:\/\/www.bmpi.dev\/en\/amp\/dev\/agent-native-system-paradigm\/",
+          "name": "agent-native-system-paradigm"
+        }
+    }]
+}
+</script>
+
+
+
+
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+        /**
+* stylesheet.html
+* ---------------
+* This is the stylesheet that gets injected as a fallback if no layouts/partials/stylesheet.html file is available
+* in your project file.
+*
+* For further details, please have a look at:
+* https://gohugo-amp.gohugohq.com/install/
+*
+**/
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px
+dotted}b,strong{font-weight:700}dfn{font-style:italic}h1{font-size:2em;margin:.67em
+0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em
+40px}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html
+input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html
+input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px
+solid silver;margin:0 2px;padding:.35em .625em
+.75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}td,th{padding:0}*{box-sizing:border-box}button,input,select,textarea{font:13px/1.4
+Helvetica,arial,freesans,clean,sans-serif}a{color:#4183c4;text-decoration:none}a:active,a:focus,a:hover{text-decoration:underline}.rule,hr{height:0;margin:15px
+0;overflow:hidden;background:transparent;border:0;border-bottom:1px solid
+#ddd}.rule:after,.rule:before,hr:after,hr:before{display:table;content:""}.rule:after,hr:after{clear:both}fieldset{padding:0;margin:0;border:0}label{font-size:13px;font-weight:700}#adv_code_search
+.search-page-label,input[type=email],input[type=number],input[type=password],input[type=tel],input[type=text],input[type=url],textarea{min-height:34px;padding:7px
+8px;font-size:13px;color:#333;vertical-align:middle;background-color:#fff;background-repeat:no-repeat;background-position:100%;border:1px
+solid #ccc;border-radius:3px;outline:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.075)}#adv_code_search
+.focus.search-page-label,#adv_code_search .search-page-label:focus,.focused
+.drag-and-drop,input[type=email].focus,input[type=email]:focus,input[type=number].focus,input[type=number]:focus,input[type=password].focus,input[type=password]:focus,input[type=tel].focus,input[type=tel]:focus,input[type=text].focus,input[type=text]:focus,input[type=url].focus,input[type=url]:focus,textarea.focus,textarea:focus{border-color:#51a7e8;box-shadow:inset
+0 1px 2px rgba(0,0,0,.075),0 0 5px
+rgba(81,167,232,.5)}.input-contrast,input.input-contrast{background-color:#fafafa}.input-contrast:focus,input.input-contrast:focus{background-color:#fff}:-moz-placeholder,::-webkit-input-placeholder{color:#aaa}::-webkit-validation-bubble-message{font-size:12px;color:#fff;background:#9c2400;border:0;border-radius:3px;-webkit-box-shadow:1px
+1px 1px
+rgba(0,0,0,.1)}input::-webkit-validation-bubble-icon{display:none}::-webkit-validation-bubble-arrow{background-color:#9c2400;border:1px
+solid #9c2400;-webkit-box-shadow:1px 1px 1px
+rgba(0,0,0,.1)}.absent{color:#c00}.anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.anchor:focus{outline:none}h1,h2,h3,h4,h5,h6{position:relative;margin-top:1em;margin-bottom:16px;font-weight:700;line-height:1.4}h1
+.octicon-link,h2 .octicon-link,h3 .octicon-link,h4 .octicon-link,h5 .octicon-link,h6
+.octicon-link{display:none;color:#000;vertical-align:middle}h1:hover .anchor,h2:hover .anchor,h3:hover .anchor,h4:hover
+.anchor,h5:hover .anchor,h6:hover
+.anchor{height:1em;padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}h1:hover .anchor
+.octicon-link,h2:hover .anchor .octicon-link,h3:hover .anchor .octicon-link,h4:hover .anchor .octicon-link,h5:hover
+.anchor .octicon-link,h6:hover .anchor .octicon-link{display:inline-block}h1 code,h1 tt,h2 code,h2 tt,h3 code,h3 tt,h4
+code,h4 tt,h5 code,h5 tt,h6 code,h6
+tt{font-size:inherit}h1{font-size:2.25em;line-height:1.2}h1,h2{padding-bottom:.3em;border-bottom:1px solid
+#eee}h2{font-size:1.75em;line-height:1.225}h3{font-size:1.5em;line-height:1.43}h4{font-size:1.25em}h5,h6{font-size:1em}h6{color:#777}blockquote,dl,ol,p,pre,table,ul{margin-top:0;margin-bottom:16px}hr{height:4px;padding:0;margin:16px
+0;background-color:#e7e7e7;border:0 none}ol,ul{padding-left:2em}ol.no-list,ul.no-list{padding:0;list-style-type:none}ol
+ol,ol ul,ul ol,ul ul{margin-top:0;margin-bottom:0}li>p{margin-top:16px}dl,dl dt{padding:0}dl
+dt{margin-top:16px;font-size:1em;font-style:italic;font-weight:700}dl dd{padding:0
+16px;margin-bottom:16px}blockquote{padding:0 15px;color:#777;border-left:4px solid
+#ddd}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}table
+th{font-weight:700}table td,table th{padding:6px 13px;border:1px solid #ddd}table
+tr{background-color:#fff;border-top:1px solid #ccc}table
+tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%;box-sizing:border-box}span.frame,span.frame>span{display:block;overflow:hidden}span.frame>span{float:left;width:auto;padding:7px;margin:13px
+0 0;border:1px solid #ddd}span.frame span img{display:block;float:left}span.frame span span{display:block;padding:5px 0
+0;clear:both;color:#333}span.align-center{display:block;overflow:hidden;clear:both}span.align-center>span{display:block;margin:13px
+auto 0;overflow:hidden;text-align:center}span.align-center span img{margin:0
+auto;text-align:center}span.align-right{display:block;overflow:hidden;clear:both}span.align-right>span{display:block;margin:13px
+0 0;overflow:hidden;text-align:right}span.align-right span
+img{margin:0;text-align:right}span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}span.float-left
+span{margin:13px 0
+0}span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}span.float-right>span{display:block;margin:13px
+auto
+0;overflow:hidden;text-align:right}code,tt{padding:0;padding-top:.2em;padding-bottom:.2em;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}code:after,code:before,tt:after,tt:before{letter-spacing:-.2em;content:"\00a0"}code
+br,tt br{display:none}del
+code{text-decoration:inherit;vertical-align:text-top}pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.highlight{margin-bottom:16px}.highlight
+pre,pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.highlight
+pre{margin-bottom:0;word-break:normal}pre,pre code,pre tt{word-wrap:normal}pre code,pre
+tt{display:inline;max-width:none;padding:0;margin:0;overflow:initial;line-height:inherit;background-color:transparent;border:0}pre
+code:after,pre code:before,pre tt:after,pre
+tt:before{content:normal}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav
+ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}ins{text-decoration:none}ins,mark{background-color:#ff9;color:#000}mark{font-style:italic;font-weight:700}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px
+dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px
+solid #ccc;margin:1em
+0;padding:0}input,select{vertical-align:middle}body{background-color:#fff;color:#123;font-size:14px;font-family:Helvetica
+Neue,Helvetica,Segoe UI,Arial,freesans,sans-serif}main{max-width:1180px;padding:30px;margin:0 auto}@media
+(min-width:900px){main h1+p{font-size:2em}}h1{font-weight:300;font-size:2em;line-height:1.4em;margin:.5em
+0;font-family:Georgia,serif;-webkit-transition:color .4s;transition:color
+.4s}h2{font-size:2em}h2,h3{font-weight:300;margin:30px
+0}h3{font-size:1.8em}h4{font-size:1.6em}h4,h5{font-weight:300}h5{font-size:1.2em}h6{font-weight:300;font-size:1em}p{line-height:1.4em;font-size:1.2em;margin:15px
+0}blockquote{border-left:5px solid
+#ff1d55;background-color:#ffe9ee;padding:1em;margin-bottom:1em}.lightbox{background-color:rgba(3,121,196,.4);min-height:100vh;min-width:100vw;padding:30px}code{font:12px
+Consolas,Liberation Mono,Menlo,Courier,monospace}p>code{color:#ff1d55}pre
+code{display:block;background-color:#f7f7f7;padding:15px;overflow:auto;color:#123;line-height:1.4em}a{color:#ff1d55;text-decoration:none;-webkit-transition:color
+.4s,background .4s;transition:color .4s,background .4s}a:hover{color:#e9003a}ol,ul{margin:7.5px;padding:7.5px 15px}ol
+li,ul li{margin:7.5px 15px}.doc-parameters{list-style-type:none;padding:0}.doc-parameters
+li{display:block;margin:0;margin-bottom:15px}.doc-parameters .example,.doc-parameters blockquote{border-left:5px solid
+#0379c4;background-color:#96d5fd;color:#123;line-height:1em;font-size:1em;padding:1em;margin:0}.doc-parameters
+.example{background-color:#c8e9fe}.doc-parameters
+.parameter{display:block;padding:1em;background-color:#0379c4;color:#fff;margin:0}.doc-parameters .parameter
+strong{display:inline-block;padding:0
+.5em;border-radius:.25em;line-height:2em;background-color:#025a92}hr{height:.25em;padding:0;margin:24px
+0;background-color:#f7f7f7;border:0}.teaser{display:-webkit-box;display:-ms-flexbox;display:flex;text-align:left;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.teaser
+aside{-ms-flex-preferred-size:60%;flex-basis:60%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;padding:30px}@media
+(max-width:700px){.teaser aside{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content{-ms-flex-preferred-size:40%;flex-basis:40%;-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center;color:dimgray;font-size:12px}@media
+(max-width:700px){.teaser .content{-ms-flex-preferred-size:100%;flex-basis:100%}}.teaser
+.content.content-full{-ms-flex-preferred-size:100%;flex-basis:100%}.teaser .content
+h3{font-size:14px;text-transform:uppercase;font-weight:600;color:#123}.main-index{text-align:center}.main-index
+amp-img{margin:15px auto;width:50%}@media (min-width:900px){.main-index
+p{font-size:2em}}.breadcrumbs{padding:1em;background-color:#f7f7f7}.breadcrumbs
+ul{display:block;margin:0;padding:0}.breadcrumbs ul li{display:inline-block;margin:0 .5em}.breadcrumbs ul
+li:before{content:' / ';position:relative;margin-left:-.5em;color:dimgray}.breadcrumbs ul li
+a{color:dimgray}.breadcrumbs ul li:last-child
+a{color:#ff1d55}header{background-color:#000000;color:#fff;padding:30px;position:relative}header
+.brand{display:inline-block;position:absolute;left:30px;top:20px;line-height:15px;text-transform:uppercase;padding:7.5px;font-size:1.4em}header
+.brand:hover{background-color:#ff1d55;color:#fff}header
+a{color:#fff;text-decoration:none;border-radius:7.5px;padding:7.5px}header
+a:hover{text-decoration:none;background-color:#fff;color:#ff1d55}header nav
+ul{padding:0;margin:0;display:block;text-align:right}header nav ul li{padding:0;margin:0
+7.5px;display:inline-block}header nav ul li.hamburger{display:none}header nav ul li.hamburger
+button{position:absolute;right:30px;top:20px;border:0;background-color:#fff;color:#ff1d55;font-weight:700;border-radius:50%;width:30px;height:30px;overflow:hidden;text-align:center;padding:0;margin:0}@media
+(max-width:900px){header nav ul li{display:none}header nav ul
+li.hamburger{display:inline-block}}.sidebarNavigation{width:210px;max-width:95%}.sidebarNavigation
+ul{padding:0;margin:0}.sidebarNavigation ul li{display:block}.sidebarNavigation ul li
+a{display:block;line-height:1.4em;padding:7.5px}footer{margin:60px
+auto;display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;max-width:1180px;padding:30px;font-size:12px}footer
+a:hover{text-decoration:none}footer strong{text-transform:uppercase;margin-bottom:15px;display:block}footer strong
+a{color:#1d1d1d}footer ul{display:block;padding:0;margin:0}footer ul li{display:block;line-height:1.4em;padding:7.5px
+0;margin:0}footer ul li a{color:dimgray}footer
+.quarter-section{margin-bottom:30px;-ms-flex-preferred-size:25%;flex-basis:25%}@media (max-width:900px){footer
+.quarter-section{-ms-flex-preferred-size:33%;flex-basis:33%}}@media (max-width:700px){footer
+.quarter-section{-ms-flex-preferred-size:50%;flex-basis:50%}}@media (max-width:500px){footer
+.quarter-section{-ms-flex-preferred-size:100%;flex-basis:100%}}.boxes{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;font-size:12px}.boxes
+.box{-ms-flex-preferred-size:30%;flex-basis:30%;background-color:#f7f7f7;padding:30px;margin:7.5px
+0;text-align:left;font-size:12px}.boxes .box h3{font-size:12px;line-height:1em;padding:0;margin:0}.boxes .box
+a{padding:0;color:#ff1d55}.boxes .box p{color:dimgray;font-size:12px;margin:7.5px 0}@media (max-width:900px){.boxes
+.box{-ms-flex-preferred-size:45%;flex-basis:45%}}@media (max-width:500px){.boxes
+.box{-ms-flex-preferred-size:100%;flex-basis:100%}}
+
+.fixed-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin: auto;
+}
+
+amp-img.contain img {
+  object-fit: contain;
+}
+
+.footnotes {
+  overflow-wrap: break-word;
+}
+
+    </style>
+
+
+</head>
+
+<body>
+
+<main>
+  
+  <section>
+    <article>
+      <header>
+        <div>
+          <h1>Designing Agent-Friendly Workflows</h1>
+        </div>
+        <div>
+          <div style="margin: 10px auto;">
+            <span>
+              <time datetime='2026-06-14T00:00:00Z'>
+                2026-06-14
+              </time>
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://www.bmpi.dev/en/categories/building-practice/">Building &amp; Practice</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://www.bmpi.dev/en/tags/ai-native/">AI Native</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/agent/">Agent</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/workflow/">Workflow</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/dsl/">DSL</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/dag/">DAG</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/validation/">Validation</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/minepilot/">MinePilot</a>
+      <span class="separator">•</span>
+    <a href="https://www.bmpi.dev/en/tags/myinvestpilot/">MyInvestPilot</a></div>
+
+        </div>
+      </header>
+      <div>
+        
+        
+        
+        
+        <p>Some time ago, I was thinking about how to enable agents to execute tasks stably in complex virtual environments. During this time, I stumbled upon an open-source project called <a href="https://github.com/mindcraft-bots/mindcraft">mindcraft</a>. The project uses a harness around Minecraft LAN mode to let an LLM-powered bot join the game world. You can issue commands to it directly in the game using natural language—for instance, &ldquo;build a house&rdquo;—and the bot will start placing blocks in the world.</p>
+<p>This demonstration was fascinating, but when I tried it myself, I found the bot&rsquo;s stability to be less than ideal. It often got stuck in place; even when building a very small house, it frequently stalled halfway through. The causes might stem from environmental perception, action execution, pathfinding, or context maintenance. But the core issue is this: relying on an LLM to perform real-time, closed-loop spatial control in a game makes stability extremely difficult to guarantee.</p>
+<p>I started researching the underlying reasons. To have an LLM place blocks piece by piece through &ldquo;imperative&rdquo; steps requires the model to precisely understand 3D spatial coordinates within the game while simultaneously processing a large amount of environmental context. This demands that the model maintain spatial state over long periods, understand environmental feedback, and continuously perform precise coordinate reasoning. For current LLMs, such closed-loop control tasks are highly susceptible to accumulating errors.</p>
+<p>So I started looking for a different approach. If real-time building in-game is too prone to freezing, could I have the LLM generate a building schematic outside the game and then automatically load it into the game via mods? Following this train of thought, I discovered WorldEdit and the Minecraft building toolchain surrounding the schematic ecosystem. Consequently, my core approach underwent a shift: <strong>How can we use LLMs to generate <code>.schem</code> schematic files that can be loaded by WorldEdit or related tools?</strong></p>
+<p>This also became the direct starting point for my open-source project, <a href="https://github.com/i365dev/MinePilot">MinePilot</a>.</p>
+<p>However, this still didn&rsquo;t solve the fundamental problem. Blueprint formats like <code>.schem</code> are essentially collections of low-level block states: every position must ultimately correspond to a specific block state. Asking an LLM to directly generate such low-level voxel data still easily results in walls with holes, misaligned roofs, and broken stairs.</p>
+<p>At this point, I recalled a similar issue I encountered while developing the quantitative investment system <a href="https://www.myinvestpilot.com/">MyInvestPilot</a>. As I mentioned in the article <a href="https://www.bmpi.dev/en/dev/ai-native-investment-system/"><em>How I Built an AI-Native Quantitative Investment System</em></a>, to prevent the LLM from writing Python trading code with look-ahead bias, I introduced a &ldquo;Strategy Primitives Engine&rdquo; paradigm. Instead of having the LLM directly generate low-level logic code, I provided a Directed Acyclic Graph (DAG) based on a Domain-Specific Language (DSL). This creates a constrained space where the LLM can express its architectural intent.</p>
+<p>The pattern turned out to be more general than investing. It can be applied to other domains where agents need to operate on complex, verifiable workflows. Essentially, it is a reusable workflow pattern for Agent-friendly systems: a workflow surface that allows an agent to read, write, validate, execute, observe, and repair tasks.</p>
+<p>Currently, I am practicing this workflow primarily on MyInvestPilot and MinePilot—two projects that seemingly have nothing in common. After continuously refactoring both, I discovered that this architecture is actually running on the exact same underlying logic.</p>
+<h2 id="the-leap-from-low-level-apis-to-domain-dsl">The Leap from Low-Level APIs to Domain DSL</h2>
+<p>Many AI product developers, upon realizing that &ldquo;letting AI write free-form code is unreliable,&rdquo; often swing to the opposite extreme: providing extremely granular, structured APIs.</p>
+<p>For example, in quantitative investing, a common approach is to require the AI to return a deeply nested JSON tree to represent a strategy; in Minecraft, another common approach is to restrict the AI to only calling a <code>placeBlock(x, y, z, type)</code> API.</p>
+<p>These approaches do not scale well. Once the strategy becomes slightly complex (e.g., &ldquo;Buy when QQQ relative strength is &gt;101, sell when &lt;99 and confirmed for two consecutive days&rdquo;), the parameter schema quickly becomes unwieldy. When generating these deeply nested structures, LLMs are very prone to omitting fields or using the wrong types. Asking an LLM to manually write the placement coordinates for tens of thousands of blocks is similar; it directly consumes its reasoning window on &ldquo;spatial planning,&rdquo; wasting it on low-level arithmetic calculations.</p>
+<h3 id="consolidating-low-level-control">Consolidating Low-Level Control</h3>
+<p>A better solution is: <strong>Consolidate the Agent&rsquo;s low-level control by designing a Domain-Specific Language (Domain DSL) specifically for it.</strong></p>
+<p>In the MyInvestPilot quantitative system, I didn&rsquo;t let the LLM write low-level calculation logic. Instead, I abstracted a set of &ldquo;Strategy Primitives.&rdquo; These primitives include moving averages (EMA), logical predicates (GreaterThan/LessThan), state delays (Lag), and consecutive state confirmations (Streak). The LLM only needs to combine these primitives like building blocks. The underlying Pandas operations, time alignment, and guardrails against look-ahead bias are all handled by the system.</p>
+<p>In MinePilot&rsquo;s underlying engine, <a href="https://github.com/i365dev/CraftDAG">CraftDAG</a>, I did the exact same thing. I designed a DSL called <code>ComponentPlan</code>.</p>
+<p>At the ComponentPlan layer, the LLM neither needs to nor should directly output low-level block coordinates. The LLM only needs to write high-level component planning. For instance, the LLM only needs to generate a JSON intent like this:</p>
+<blockquote>
+<p>&ldquo;Create a 16x12x16 <code>RoomShell</code>. On the <code>front</code> wall, at <code>offset: 3</code>, install a <code>Door</code>. Place a <code>GableRoof</code> on top, and set <code>overhang: 1</code>.&rdquo;</p>
+</blockquote>
+<h3 id="a-semantic-scaffold-for-agents">A &ldquo;Semantic Scaffold&rdquo; for Agents</h3>
+<p>Through this DSL, the LLM no longer needs to calculate &ldquo;the coordinates of this wall are from (10, 5, 20) to (10, 10, 20),&rdquo; nor does it need to compute &ldquo;after the door is carved out, it needs to be replaced with air blocks.&rdquo; It utilizes high-level semantic attributes like <code>anchor</code>, <code>wall</code>, <code>offset</code>, and <code>overhang</code>.</p>
+<p>The essence of a DSL is to build a &ldquo;semantic scaffold&rdquo; for the LLM. All low-level geometry, mathematical calculations, and engineering constraints are pushed down into the engine. The agent&rsquo;s cognitive load is vastly reduced, allowing it to invest its limited context window and reasoning budget into what it does best: high-level structure and logical reasoning.</p>
+<p>The core principle of this phase is: <strong>Agent is the author. Engine is the compiler.</strong></p>
+<h2 id="building-domain-engines-like-compilers">Building Domain Engines Like Compilers</h2>
+<p>Since the LLM generates high-level DSL (intent), how should the system execute it? This brings us to the heaviest layer of the entire Agent-friendly workflow: Intermediate Representation (IR) and compiler design.</p>
+<p>When the LLM hands over a <code>ComponentPlan</code> (Minecraft building plan) or a <code>Strategy primitives</code> map (quantitative strategy), this is merely an intermediate state between human intent and machine execution. It cannot be directly used to build a house, nor can it be directly used to backtest an investment portfolio.</p>
+<p>You need to build your domain engine much like you would build a compiler for a programming language.</p>
+<h3 id="layered-compilation-pipeline">Layered Compilation Pipeline</h3>
+<p>In CraftDAG, the building generation process is designed as a relatively strict compilation pipeline:</p>
+<ol>
+<li><strong>Input Layer (BuildIntent)</strong>: The user&rsquo;s natural language intent.</li>
+<li><strong>Domain Plan Layer (ComponentPlan DSL)</strong>: The building component blueprint generated by the LLM based on the intent.</li>
+<li><strong>Intermediate Representation Layer (CraftDAG IR)</strong>: The engine receives the ComponentPlan, parses macroscopic and local dependencies, and unfolds it into a verifiable, sortable Directed Acyclic Graph (DAG). Here, high-level semantics are lowered into deterministic bounding-box calculations and attachment relationships.</li>
+<li><strong>Target Representation Layer (VoxelPlan)</strong>: The compiler goes further down, computing the IR into the final 3D voxel collection (absolute block coordinates and states), generating a schematic export, or serving it directly for frontend/backend rendering.</li>
+</ol>
+<p>Similarly, in MyInvestPilot, the &ldquo;strategy primitives&rdquo; assembled by the AI are also converted into a DAG by the engine. Through Topological Sorting, it decides which moving average indicators to compute first, followed by which comparison logics, before finally aggregating them into a trading signal. You can intuitively experience this by checking out the <a href="https://www.myinvestpilot.com/primitives-editor">MyInvestPilot Primitives Visual Editor</a>.</p>
+<h3 id="why-take-the-compilation-route">Why Take the Compilation Route?</h3>
+<p>Initially, I felt that introducing concepts like &ldquo;compilers&rdquo; and &ldquo;abstract syntax trees&rdquo; to an application was over-engineering. However, subsequent iterations proved that this is an effective way to support the stable operation of Agent systems.</p>
+<p>Only by lowering intents into a Directed Acyclic Graph (IR/DAG) does the system gain powerful <strong>static analysis</strong> and <strong>deterministic execution</strong> capabilities.</p>
+<ul>
+<li>In quantitative systems, having a DAG allows the system to cleanly trace signal dependencies, ensuring that no single component peeks at future data.</li>
+<li>In the Minecraft engine, having an IR allows the system to calculate extremely precise Material Lists. In theory, this IR layering also lays the groundwork for future incremental recalculation: when a user only modifies the roof material, the system only needs to reprocess the relevant sub-graph instead of having the LLM regenerate the entire building.</li>
+</ul>
+<p>More importantly, having this compilation mechanism makes the next step—intercepting agent hallucinations—possible.</p>
+<h2 id="machine-readable-contracts-and-repair-loops">Machine-Readable Contracts and Repair Loops</h2>
+<p>We have long been bound by the interactive inertia of Graphical User Interfaces (GUIs). In traditional software, if a user fills out a form incorrectly, the system pops up a red box or toast saying: &ldquo;Invalid input format.&rdquo; The user sees the red box and relies on life experience to re-enter it.</p>
+<p>However, if you merely return a simple <code>Invalid plan</code> or <code>Syntax Error</code> to an LLM, its repair efficiency will be remarkably low. It often relies on guessing to rewrite the entire JSON, and sometimes fixing one error inadvertently triggers a new one.</p>
+<p>In an Agent-friendly system, <strong>errors are not merely messages for humans. They become a strict, machine-readable Validation Contract between the system and the model.</strong></p>
+<h3 id="errors-are-not-for-humans">Errors Are Not for Humans</h3>
+<p>While developing CraftDAG, I specifically designed a comprehensive, strongly-typed error feedback mechanism for the system. If the LLM, while generating the DSL, accidentally places a tower component&rsquo;s coordinates outside the global boundaries set for the building, the system&rsquo;s compiler will intercept it at the first line of defense and throw a precise JSON error:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="font-weight:bold">&#34;stage&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;component-validation&#34;</span>,
+  <span style="font-weight:bold">&#34;code&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;ASSEMBLY_INSTANCE_OUT_OF_BOUNDS&#34;</span>,
+  <span style="font-weight:bold">&#34;path&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;instances[0].anchor&#34;</span>,
+  <span style="font-weight:bold">&#34;componentId&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;northwest_tower&#34;</span>,
+  <span style="font-weight:bold">&#34;repairHint&#34;</span>: <span style="color:#0ff;font-weight:bold">&#34;Move the instance inward or increase global bounds.&#34;</span>
+}
+</code></pre></div><p>As you can see, this error is absolutely not meant for a human to read. It explicitly tells the LLM:</p>
+<ol>
+<li><strong>stage</strong>: The error occurred during component validation.</li>
+<li><strong>code</strong>: An out-of-bounds error.</li>
+<li><strong>path</strong>: The specific JSON path is the anchor of the first instance.</li>
+<li><strong>repairHint</strong>: Directly provides specific repair suggestions (move the anchor inward, or enlarge the global bounds).</li>
+</ol>
+<h3 id="the-llm-collaboration-contract-and-repair-loop">The LLM Collaboration Contract and Repair Loop</h3>
+<p>Besides precise post-validation errors, pre-authoring constraints are equally important.</p>
+<p>In the CraftDAG project, there is a core file named <code>LLM_AUTHORING_CONTRACT.md</code>. This is not an API document for human developers in the traditional sense; rather, it is an authoring contract that can be read by LLMs or harness agents, and can also serve as part of a System Prompt or <code>llm.txt</code>.</p>
+<p>Coincidentally, I did something similar in MyInvestPilot. To allow the Agent to independently develop strategy primitives, the system specifically provides a <a href="https://www.myinvestpilot.com/docs/primitives/ai-assisted-development">machine-readable development document</a>, and uses <a href="https://www.myinvestpilot.com/docs/primitives/_llm/llm-quickstart.txt">llm-quickstart.txt</a> to provide the LLM with compact context and Few-shot examples. Furthermore, the engine exposes a strict <a href="https://media.i365.tech/myinvestpilot/primitives_schema.json">JSON Schema</a>, allowing the LLM to adhere to a deterministic, strongly-typed structural contract when generating the DSL.</p>
+<p>In designing these contracts, a profound lesson I learned is: <strong>Instead of telling the LLM &ldquo;what you should do,&rdquo; it is better to directly set ABSOLUTE PROHIBITIONS.</strong>
+Do not attempt to exhaust all the creative possibilities an LLM might exercise; instead, draw absolute red lines. For instance, explicitly forbid inline nesting of other components within the <code>inputs</code> of a component; one must define the <code>id</code> first and reference it via <code>ref</code>.</p>
+<p>Only when a system possesses both &ldquo;strict pre-contracts&rdquo; and &ldquo;precise post-errors&rdquo; does a crucial change occur: <strong>The LLM begins to possess a much more stable self-repair path.</strong></p>
+<p>When the LLM receives the aforementioned JSON error, it will instantly understand that something went wrong with <code>northwest_tower</code>. In the next iteration, it will only correct the coordinates of that specific component, and then submit it for compilation again. This forms a stable, convergent <strong>Repair Loop</strong>. Without this loop, an LLM is merely an occasionally useful toy; with this loop, the LLM becomes part of a more reliable production workflow.</p>
+<h2 id="handling-the-boundary-between-ambiguity-and-determinism">Handling the Boundary Between Ambiguity and Determinism</h2>
+<p>Having built the underlying engine, the final question remains: How should the user interact with this complex system?</p>
+<p>Users won&rsquo;t write JSON DSLs, nor will they understand DAG diagrams. They will continue to ask natural language questions: &ldquo;Help me adjust the risk of this portfolio,&rdquo; or &ldquo;Add two larger windows to this castle.&rdquo;</p>
+<p>This highlights a core architectural contradiction: user intents are often <strong>ambiguous</strong>, while the underlying financial calculations and spatial geometry are <strong>deterministic and correctness-sensitive</strong>. If you try to make an LLM handle both ends simultaneously, the system is quickly pulled in two incompatible directions: open-ended reasoning and rigorous computation.</p>
+<h3 id="separating-duties-between-local-and-remote">Separating Duties Between Local and Remote</h3>
+<p>In my architectural vision for such systems, the ideal approach is a <strong>Hybrid Agent Architecture</strong>. Future systems like MinePilot could adopt this split, enacting a hard separation of Agent duties:</p>
+<ul>
+<li><strong>Orchestrator/Local Agent</strong>: Runs on the interaction layer closest to the user (e.g., frontend browser). It is essentially an advanced router and state machine. Its sole responsibility is handling <strong>Ambiguity</strong>. It chats with the user, infers user intent, and triggers explicit forms for user confirmation when necessary.</li>
+<li><strong>Processor/Remote Engine</strong>: Runs in the backend asynchronous task queue. After the Local Agent clarifies the ambiguous intent, it sends the task to the remote engine as a structured job. The remote processor takes over the DSL, runs the compiler primitives, and executes the relatively complex deterministic validation, compilation, and calculation.</li>
+</ul>
+<p>Queues, state machines, and compilation validations—things involving deterministic precision—must be implemented via traditional code. Conversely, intent guessing, error text explanation, and natural language translation—probabilistic tasks—should be fully delegated to LLMs.</p>
+<p><strong>Mixing the deterministic layer with the probabilistic layer is an architectural mistake that many Agent systems are prone to making.</strong></p>
+<h2 id="the-boundaries-of-this-paradigm">The Boundaries of This Paradigm</h2>
+<p>It must be emphasized that the Agent-friendly workflow is not a universal solution for all AI products. It is better suited for domains with the following characteristics:</p>
+<ol>
+<li>Clear domain structures;</li>
+<li>Stable primitives or components that can be abstracted;</li>
+<li>Intermediate states that can be validated;</li>
+<li>Final results that can be executed, compiled, or simulated;</li>
+<li>Errors that can be localized and repaired;</li>
+<li>Human oversight and decision-making is still possible.</li>
+</ol>
+<p>If a task is inherently highly open-ended creative expression or lacks clear validation standards, prematurely introducing a DSL and DAG might inadvertently restrict the model&rsquo;s expressive capabilities. At the same time, more DSLs are not necessarily better; the real difficulty lies in finding a set of domain primitives that is small enough, orthogonal enough, yet capable of covering the primary tasks.</p>
+<p>Even in suitable domains, Validation does not equate to correctness. An investment strategy passing a backtest does not mean it will be profitable in the future; a building blueprint passing compilation does not mean it is aesthetically pleasing. The value of a validation contract is narrowing the error space down to a manageable scope for the system, rather than replacing ultimate human judgment. Agent-friendly is not a substitute for Human-friendly; the more rational form is a dual interface: humans express intent, review results, and make decisions via UI; agents operate the system via DSL, tools, and validation contracts.</p>
+<h2 id="inverting-the-software-architecture-perspective">Inverting the Software Architecture Perspective</h2>
+<p>Looking back at MyInvestPilot and MinePilot, one is serious financial investment, the other an open sandbox game. They are worlds apart in business logic, yet during the continuous process of development and refactoring, they naturally converged onto the exact same system paradigm:</p>
+<p><code>Intent</code> → <code>Domain DSL</code> → <code>Compiler (IR/DAG)</code> → <code>Validation Contract</code> → <code>Repair Loop</code> → <code>Execution</code></p>
+<p>Over the past few decades, the standard process for designing software has been: first draw the prototype interface for human interaction, then design the underlying database table structures, and finally write the intermediate glue APIs to connect them.</p>
+<p>However, as AI agents begin to participate in more complex tasks, the order of software design may need to be rethought:</p>
+<ol>
+<li>Ask yourself first: Can this complex business be abstracted into a Domain DSL that is sufficiently restrained toward agents and can consolidate low-level control?</li>
+<li>Then ask yourself: Does the system have a robust compiler core capable of lowering the DSL into deterministic Directed Acyclic Graphs, providing precise machine-validation contracts?</li>
+<li>Next ask yourself: When the model makes a mistake, can your system provide machine-readable error feedback to establish a closed-loop repair cycle?</li>
+<li>Finally: It is only upon the foundation of this relatively stable workflow that we wrap a layer of interactive interfaces for human supervision and confirmation.</li>
+</ol>
+<p>For now, I refer to this paradigm as: <strong>Domain-shaped, not Domain-locked</strong>.</p>
+<p>Reshaping complex domain expertise into workflows that are readable, writable, verifiable, and iterable for agents might just be the key to the next generation of software architecture.</p>
+<hr>
+<p><strong>Related Explorations &amp; Resources:</strong></p>
+<ul>
+<li><a href="https://www.i365.tech/">i365.tech: My AI-Native Systems and Product Laboratory</a></li>
+<li>Deep dive into the underlying design of the quantitative system: <a href="https://www.bmpi.dev/en/dev/ai-native-investment-system/"><em>How I Built an AI-Native Quantitative Investment System</em></a></li>
+<li><a href="https://www.myminepilot.com/">MinePilot Official Website</a></li>
+<li><a href="https://github.com/i365dev/MinePilot">MinePilot Source Code (GitHub)</a></li>
+<li><a href="https://github.com/i365dev/CraftDAG">CraftDAG Source Code (GitHub)</a></li>
+</ul>
+
+      </div>
+    </article>
+
+  </section>
+
+</main>
+
+<amp-analytics type="googleanalytics">
+    <script type="application/json">
+        {
+            "vars": {
+                "account": "UA-154678195-1"
+            },
+            "triggers": {"trackEvent":{"on":"click","request":"event","selector":"body","vars":{"eventAction":"click","eventCategory":"body-click"}},"trackPageview":{"on":"visible","request":"pageview"}}
+        }
+    </script>
+</amp-analytics>
+
+</body>
+
+</html>

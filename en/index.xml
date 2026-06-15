@@ -6,7 +6,21 @@
     <description>Recent content on BMPI</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/en/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://www.bmpi.dev/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Designing Agent-Friendly Workflows</title>
+      
+      <category>Full-Stack Developer</category>
+      
+      
+      
+      <link>https://www.bmpi.dev/en/dev/agent-native-system-paradigm/</link>
+      <pubDate>Sun, 14 Jun 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.bmpi.dev/en/dev/agent-native-system-paradigm/</guid>
+      <description>A chat box alone does not solve complex problems. Through MyInvestPilot and MinePilot, this article explores a workflow design pattern for AI agents: Domain DSLs, IR/DAG pipelines, validation contracts, and repair loops.</description>
+    </item>
+    
     <item>
       <title>How I Built an AI-Native Quantitative Investment System</title>
       
