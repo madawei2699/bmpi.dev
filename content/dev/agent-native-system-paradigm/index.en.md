@@ -19,7 +19,7 @@ I started researching the underlying reasons. To have an LLM place blocks piece 
 
 So I started looking for a different approach. If real-time building in-game is too prone to freezing, could I have the LLM generate a building schematic outside the game and then automatically load it into the game via mods? Following this train of thought, I discovered WorldEdit and the Minecraft building toolchain surrounding the schematic ecosystem. Consequently, my core approach underwent a shift: **How can we use LLMs to generate `.schem` schematic files that can be loaded by WorldEdit or related tools?**
 
-This also became the direct starting point for my open-source project, [MinePilot](https://github.com/i365dev/MinePilot).
+This also became the direct starting point for my side project, [MinePilot](https://www.myminepilot.com/).
 
 However, this still didn't solve the fundamental problem. Blueprint formats like `.schem` are essentially collections of low-level block states: every position must ultimately correspond to a specific block state. Asking an LLM to directly generate such low-level voxel data still easily results in walls with holes, misaligned roofs, and broken stairs.
 
@@ -184,5 +184,4 @@ Reshaping complex domain expertise into workflows that are readable, writable, v
 - [i365.tech: My AI-Native Systems and Product Laboratory](https://www.i365.tech/)
 - Deep dive into the underlying design of the quantitative system: [*How I Built an AI-Native Quantitative Investment System*](/en/dev/ai-native-investment-system/)
 - [MinePilot Official Website](https://www.myminepilot.com/)
-- [MinePilot Source Code (GitHub)](https://github.com/i365dev/MinePilot)
 - [CraftDAG Source Code (GitHub)](https://github.com/i365dev/CraftDAG)
