@@ -317,7 +317,7 @@ amp-img.contain img {
 <p>这个演示很有意思，但当我亲自尝试时，发现 Bot 的稳定性并不理想。它经常会原地卡住，即便只是建一个很小的房子，也往往做到一半就停滞。原因可能来自环境感知、动作执行、路径规划、上下文维护等多个环节，但最终暴露出的共同问题是：让大模型在游戏内实时闭环控制空间动作，稳定性很难保证。</p>
 <p>我开始研究背后的原因。如果要通过“指令式”的步骤让大模型一块一块地去放置方块，就要求模型必须精准地理解游戏内的三维空间坐标，并同时处理庞大的环境上下文。这要求模型长期维护三维空间状态、理解环境反馈、持续做精确坐标推理。对当前 LLM 来说，这类闭环控制任务非常容易累积误差。</p>
 <p>退而求其次，我开始寻找别的出路。如果在游戏内实时建造太容易卡死，那我能不能在游戏外通过大模型生成好建筑的蓝图，然后再通过一些 Mod 自动加载到游戏里？我顺藤摸瓜地发现了 WorldEdit 以及围绕 schematic 的 Minecraft 建筑工具链。于是，我的核心思路发生了一次转变：<strong>如何通过 LLM 生成可被 WorldEdit 或相关工具加载的 .schem 蓝图文件？</strong></p>
-<p>这也是我后来构建开源项目 <a href="https://github.com/i365dev/MinePilot">MinePilot</a> 的直接起点。</p>
+<p>这也是我后来构建 <a href="https://www.myminepilot.com/">MinePilot</a> 的直接起点。</p>
 <p>但这依然没有解决根本问题。.schem 这类蓝图格式本质上仍然是低层的方块状态集合：每一个位置最终都要对应具体的 block state。让大模型直接生成这种低层体素数据，仍然很容易出现墙体漏风、屋顶错位、楼梯断裂等问题。</p>
 <p>这时，我想起了之前在开发量化投资系统 <a href="https://www.myinvestpilot.com/">策引（MyInvestPilot）</a> 时遇到的类似问题。正如我在<a href="https://www.bmpi.dev/dev/ai-native-investment-system/">《我是如何构建一个 AI 原生量化系统的》</a>一文中提到的，为了防止大模型写出带有前视偏差（Look-ahead bias）的 Python 交易代码，我引入了一套“策略原语引擎”的范式：放弃让大模型直接生成底层逻辑代码，转而提供一套基于 DSL 的有向无环图（DAG），从而创造一个受限的空间，让大模型在这个空间里进行架构表达。</p>
 <p>这其实是一个高度抽象的范式。它不仅能用于量化投资，也可以用来让 Agent 稳定地处理其他领域的复杂任务。这本质上是一个通用工作流，一个面向 Agent 友好的系统架构设计，也就是让 Agent 能够读取、编写、验证、执行和修复任务的 workflow surface。</p>
@@ -430,7 +430,6 @@ amp-img.contain img {
 <li><a href="https://www.i365.tech/">i365.tech：我的 AI 原生系统与产品实验室</a></li>
 <li>深入了解量化系统的底层设计：<a href="https://www.bmpi.dev/dev/ai-native-investment-system/">《我是如何构建一个 AI 原生量化系统的》</a></li>
 <li><a href="https://www.myminepilot.com/">MinePilot 官方网站</a></li>
-<li><a href="https://github.com/i365dev/MinePilot">MinePilot 源码 (GitHub)</a></li>
 <li><a href="https://github.com/i365dev/CraftDAG">CraftDAG 源码 (GitHub)</a></li>
 </ul>
 

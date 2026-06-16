@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.bmpi.dev/en/dev/agent-native-system-paradigm/" /><meta property="article:section" content="dev" />
 <meta property="article:published_time" content="2026-06-14T00:00:00&#43;00:00" />
-<meta property="article:modified_time" content="2026-06-14T12:00:00&#43;08:00" />
+<meta property="article:modified_time" content="2026-06-16T20:58:20&#43;08:00" />
 
 
   
@@ -51,7 +51,7 @@
       "image": "https://www.bmpi.dev/images/logo.png",
       
       "datePublished": "2026-06-14T00:00:00Z",
-      "dateModified": "2026-06-14T12:00:00+08:00",
+      "dateModified": "2026-06-16T20:58:20+08:00",
       "author": {
         "@type": "Person",
         "name": "Dawei Ma"
@@ -231,11 +231,11 @@
               
               
               
-              13:21
+              13:19
               
             </span>
             
-            <span class="post-word-count"> | 2795 words | </span>
+            <span class="post-word-count"> | 2791 words | </span>
             <span id="post-views"></span> views
             
           </div>
@@ -286,7 +286,7 @@
 <p>This demonstration was fascinating, but when I tried it myself, I found the bot&rsquo;s stability to be less than ideal. It often got stuck in place; even when building a very small house, it frequently stalled halfway through. The causes might stem from environmental perception, action execution, pathfinding, or context maintenance. But the core issue is this: relying on an LLM to perform real-time, closed-loop spatial control in a game makes stability extremely difficult to guarantee.</p>
 <p>I started researching the underlying reasons. To have an LLM place blocks piece by piece through &ldquo;imperative&rdquo; steps requires the model to precisely understand 3D spatial coordinates within the game while simultaneously processing a large amount of environmental context. This demands that the model maintain spatial state over long periods, understand environmental feedback, and continuously perform precise coordinate reasoning. For current LLMs, such closed-loop control tasks are highly susceptible to accumulating errors.</p>
 <p>So I started looking for a different approach. If real-time building in-game is too prone to freezing, could I have the LLM generate a building schematic outside the game and then automatically load it into the game via mods? Following this train of thought, I discovered WorldEdit and the Minecraft building toolchain surrounding the schematic ecosystem. Consequently, my core approach underwent a shift: <strong>How can we use LLMs to generate <code>.schem</code> schematic files that can be loaded by WorldEdit or related tools?</strong></p>
-<p>This also became the direct starting point for my open-source project, <a href="https://github.com/i365dev/MinePilot">MinePilot</a>.</p>
+<p>This also became the direct starting point for my side project, <a href="https://www.myminepilot.com/">MinePilot</a>.</p>
 <p>However, this still didn&rsquo;t solve the fundamental problem. Blueprint formats like <code>.schem</code> are essentially collections of low-level block states: every position must ultimately correspond to a specific block state. Asking an LLM to directly generate such low-level voxel data still easily results in walls with holes, misaligned roofs, and broken stairs.</p>
 <p>At this point, I recalled a similar issue I encountered while developing the quantitative investment system <a href="https://www.myinvestpilot.com/">MyInvestPilot</a>. As I mentioned in the article <a href="https://www.bmpi.dev/en/dev/ai-native-investment-system/"><em>How I Built an AI-Native Quantitative Investment System</em></a>, to prevent the LLM from writing Python trading code with look-ahead bias, I introduced a &ldquo;Strategy Primitives Engine&rdquo; paradigm. Instead of having the LLM directly generate low-level logic code, I provided a Directed Acyclic Graph (DAG) based on a Domain-Specific Language (DSL). This creates a constrained space where the LLM can express its architectural intent.</p>
 <p>The pattern turned out to be more general than investing. It can be applied to other domains where agents need to operate on complex, verifiable workflows. Essentially, it is a reusable workflow pattern for Agent-friendly systems: a workflow surface that allows an agent to read, write, validate, execute, observe, and repair tasks.</p>
@@ -399,7 +399,6 @@ Do not attempt to exhaust all the creative possibilities an LLM might exercise; 
 <li><a href="https://www.i365.tech/">i365.tech: My AI-Native Systems and Product Laboratory</a></li>
 <li>Deep dive into the underlying design of the quantitative system: <a href="https://www.bmpi.dev/en/dev/ai-native-investment-system/"><em>How I Built an AI-Native Quantitative Investment System</em></a></li>
 <li><a href="https://www.myminepilot.com/">MinePilot Official Website</a></li>
-<li><a href="https://github.com/i365dev/MinePilot">MinePilot Source Code (GitHub)</a></li>
 <li><a href="https://github.com/i365dev/CraftDAG">CraftDAG Source Code (GitHub)</a></li>
 </ul>
 
@@ -422,7 +421,7 @@ Do not attempt to exhaust all the creative possibilities an LLM might exercise; 
           
           
           
-            Version: <a href="https://github.com/madawei2699/bmpi.dev/commit/40ed3567571708e8e0d2a378ed3de23b238e7038">40ed35675</a>
+            Version: <a href="https://github.com/madawei2699/bmpi.dev/commit/571097a8b45e3e11fdde0b565f9e73a31a60aa53">571097a8b</a>
           
         </div>
         
